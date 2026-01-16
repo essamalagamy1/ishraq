@@ -1,0 +1,337 @@
+    /* ========== COLOR SYSTEM ========== */
+    /* Colors are loaded from config/colors.php - edit that file to change colors site-wide */
+
+/* Font setup */
+body {
+    font-family: 'Cairo', 'Inter', sans-serif;
+}
+
+
+/* ========== ANIMATIONS ========== */
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Slide In from Right (for RTL) */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Pulse Glow Animation */
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: var(--shadow-primary);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: var(--shadow-primary-strong);
+        transform: scale(1.02);
+    }
+}
+
+/* Scale In Animation */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Shimmer Animation for backgrounds */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* ========== ANIMATION CLASSES ========== */
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.6s ease-out forwards;
+}
+
+.animate-bounce {
+    animation: bounce 2s ease-in-out infinite;
+}
+
+/* Delay Classes */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+
+/* Initial state for animated elements */
+.animate-on-load {
+    opacity: 0;
+}
+
+/* Reveal on Scroll Classes */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-on-scroll.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Card Hover Animations */
+.card-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon Animation on Hover */
+.icon-hover {
+    transition: all 0.3s ease;
+}
+
+.icon-hover:hover i {
+    transform: scale(1.2);
+}
+
+.icon-hover i {
+    transition: transform 0.3s ease;
+}
+
+/* Number Counter Animation */
+.counter-number {
+    display: inline-block;
+}
+
+/* Navbar Link Animation */
+.nav-link-animated {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link-animated::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+.nav-link-animated:hover::after {
+    width: 100%;
+}
+
+/* Button Shine Effect */
+.btn-shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-shine:hover::before {
+    left: 100%;
+}
+
+/* Gradient Text Animation */
+.gradient-text-animated {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light), var(--color-primary));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+}
+
+/* ========== SWIPER CUSTOMIZATION ========== */
+
+/* Swiper RTL customization */
+.swiper-button-next, .swiper-button-prev {
+    color: white !important;
+    z-index: 50 !important;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 18px !important;
+    font-weight: 900 !important;
+}
+
+.swiper-pagination {
+    z-index: 50 !important;
+}
+
+.swiper-pagination-bullet {
+    background: var(--color-primary-light) !important;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1 !important;
+    background: var(--gradient-primary) !important;
+    transform: scale(1.2);
+}
+
+/* Equal height for testimonial cards */
+.testimonials-swiper .swiper-slide {
+    height: auto !important;
+    display: flex !important;
+}
+
+.testimonials-swiper .swiper-slide > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Equal height for project cards */
+.projects-swiper .swiper-slide {
+    height: auto !important;
+    display: flex !important;
+}
+
+.projects-swiper .swiper-slide > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Equal height for service cards */
+.services-swiper .swiper-slide {
+    height: auto !important;
+    display: flex !important;
+}
+
+.services-swiper .swiper-slide > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Equal height for article cards */
+.articles-swiper .swiper-slide {
+    height: auto !important;
+    display: flex !important;
+}
+
+.articles-swiper .swiper-slide > article {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========== SCROLLBAR ========== */
+
+/* Custom Scrollbar Styling */
+/* For Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 10px;
+    border: 2px solid #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--color-primary-dark), var(--color-primary));
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary-light) #f1f5f9;
+}
