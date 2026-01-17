@@ -20,13 +20,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- SEO Meta Tags -->
-    <title>{{ $seo->meta_title ?? 'E-DATA 360 | شركة تطوير مواقع وتطبيقات احترافية' }}</title>
-    <meta name="description" content="{{ $seo->meta_description ?? 'E-DATA 360 شريكك في التحول الرقمي. نطور مواقع ويب، تطبيقات جوال، وحلول برمجية متكاملة باستخدام أحدث التقنيات. +200 مشروع منجز.' }}">
-    <meta name="keywords" content="تطوير مواقع, تطبيقات جوال, برمجة, Laravel, React, تصميم UI UX, شركة برمجة, السعودية, E-DATA 360">
-    <meta name="author" content="E-DATA 360">
+    <title>{{ $seo->meta_title ?? 'إشراق | شركة تطوير مواقع وتطبيقات احترافية' }}</title>
+    <meta name="description" content="{{ $seo->meta_description ?? 'إشراق شريكك في التحول الرقمي. نطور مواقع ويب، تطبيقات جوال، وحلول برمجية متكاملة باستخدام أحدث التقنيات. +30 مشروع منجز.' }}">
+    <meta name="keywords" content="تطوير مواقع, تطبيقات جوال, برمجة, Laravel, React, تصميم UI UX, شركة برمجة, السعودية, إشراق">
+    <meta name="author" content="إشراق">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="{{ $seo->meta_title ?? 'E-DATA 360 | شركة تطوير مواقع وتطبيقات' }}">
+    <meta property="og:title" content="{{ $seo->meta_title ?? 'إشراق | شركة تطوير مواقع وتطبيقات' }}">
     <meta property="og:description" content="{{ $seo->meta_description ?? 'شريكك في التحول الرقمي - تطوير مواقع وتطبيقات احترافية' }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">

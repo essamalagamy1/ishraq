@@ -13,7 +13,7 @@
                         <span style="color: {{ config('colors.primary_light') }};">المدونة</span>
                     </div>
                     <h1 class="text-4xl md:text-5xl font-black text-white hero-animate animate-fade-in-up" style="animation-delay: 0.2s;">
-                        مدونة <span class="gradient-text-animated">E-DATA 360</span>
+                        مدونة <span class="gradient-text-animated">إشراق</span>
                     </h1>
                     <p class="text-gray-400 mt-2 hero-animate animate-fade-in-up" style="animation-delay: 0.3s;">مقالات ونصائح في عالم التقنية والتطوير</p>
                 </div>

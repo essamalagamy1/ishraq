@@ -28,7 +28,6 @@
                             </div>
                             <div class="flex flex-col">
                                 <span class="text-3xl font-black text-white drop-shadow-lg">إشراق</span>
-                                <span class="text-xs text-yellow-100 font-semibold tracking-wider">ISHRAQ</span>
                             </div>
                         </div>
                     @endif

@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" fill="none">
+  <!-- Dark Background -->
+  <rect width="420" height="100" fill="#1A1B26"/>
+
+  <defs>
+    <!-- Primary radiance gradient - light emerging -->
+    <linearGradient id="radianceGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="50%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#FFD93D"/>
+    </linearGradient>
+
+    <!-- Glow gradient for the light source -->
+    <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD93D" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#FF6B35" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FF6B35" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Accent gradient -->
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#6BCF9E"/>
+    </linearGradient>
+
+    <!-- Soft glow filter -->
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Outer glow for icon -->
+    <filter id="outerGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#FF6B35" flood-opacity="0.4"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- === ICON MARK === -->
+  <!-- Abstract rising light / radiance symbol - geometric, minimal -->
+  <g transform="translate(30, 50)">
+
+    <!-- Horizon line - the base from which light emerges -->
+    <line x1="0" y1="28" x2="55" y2="28" stroke="url(#accentGradient)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+
+    <!-- Core light source - abstract diamond/gem shape rising -->
+    <g filter="url(#outerGlow)">
+      <!-- Main rising shape - abstract light beam -->
+      <path
+        d="M27.5 -15 L40 15 L27.5 25 L15 15 Z"
+        fill="url(#radianceGradient)"
+      />
+
+      <!-- Inner highlight - the bright core -->
+      <path
+        d="M27.5 -5 L34 12 L27.5 18 L21 12 Z"
+        fill="#FFD93D"
+        opacity="0.9"
+      />
+    </g>
+
+    <!-- Light rays emanating upward - subtle, geometric -->
+    <g opacity="0.7">
+      <!-- Left ray -->
+      <path d="M17 -8 L12 -20 L15 -18 L10 -28" stroke="url(#radianceGradient)" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <!-- Right ray -->
+      <path d="M38 -8 L43 -20 L40 -18 L45 -28" stroke="url(#radianceGradient)" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <!-- Center ray -->
+      <line x1="27.5" y1="-18" x2="27.5" y2="-32" stroke="#FFD93D" stroke-width="2.5" stroke-linecap="round" filter="url(#softGlow)"/>
+    </g>
+
+    <!-- Subtle reflection below horizon -->
+    <path
+      d="M20 32 L27.5 28 L35 32 L27.5 38 Z"
+      fill="url(#radianceGradient)"
+      opacity="0.15"
+    />
+  </g>
+
+  <!-- === ARABIC WORDMARK === -->
+  <!-- إشراق - Main brand name -->
+  <text
+    x="105"
+    y="62"
+    font-family="'Cairo', 'Tajawal', 'Noto Kufi Arabic', sans-serif"
+    font-size="38"
+    font-weight="700"
+    fill="#FFFFFF"
+    letter-spacing="2"
+  >إشراق</text>
+
+  <!-- Subtle accent underline for wordmark -->
+  <line x1="105" y1="72" x2="195" y2="72" stroke="url(#radianceGradient)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- === ENGLISH SECONDARY MARK === -->
+  <text
+    x="215"
+    y="58"
+    font-family="'Inter', 'SF Pro Display', 'Segoe UI', sans-serif"
+    font-size="11"
+    font-weight="500"
+    fill="#6BCF9E"
+    letter-spacing="4"
+    text-transform="uppercase"
+  >ISHRAQ</text>
+
+  <!-- Tagline -->
+  <text
+    x="215"
+    y="72"
+    font-family="'Inter', 'SF Pro Display', 'Segoe UI', sans-serif"
+    font-size="9"
+    font-weight="400"
+    fill="#FFFFFF"
+    opacity="0.5"
+    letter-spacing="2"
+  >DIGITAL SOLUTIONS</text>
+
+  <!-- === DECORATIVE TECH ELEMENTS === -->
+  <!-- Subtle geometric accent - top right -->
+  <g transform="translate(370, 20)" opacity="0.12">
+    <circle cx="0" cy="0" r="15" stroke="#FF6B35" stroke-width="1" fill="none"/>
+    <circle cx="0" cy="0" r="8" stroke="#FFD93D" stroke-width="0.5" fill="none"/>
+    <line x1="-15" y1="0" x2="15" y2="0" stroke="#10B981" stroke-width="0.5"/>
+    <line x1="0" y1="-15" x2="0" y2="15" stroke="#10B981" stroke-width="0.5"/>
+  </g>
+
+  <!-- Subtle dot pattern - bottom right corner -->
+  <g opacity="0.08">
+    <circle cx="390" cy="80" r="1.5" fill="#FF6B35"/>
+    <circle cx="400" cy="80" r="1.5" fill="#FF6B35"/>
+    <circle cx="410" cy="80" r="1.5" fill="#FF6B35"/>
+    <circle cx="390" cy="88" r="1.5" fill="#FFD93D"/>
+    <circle cx="400" cy="88" r="1.5" fill="#FFD93D"/>
+    <circle cx="410" cy="88" r="1.5" fill="#FFD93D"/>
+  </g>
+</svg>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ $seo->meta_title ?? config('app.name', 'E-DATA 360') }}</title>
+    <title>{{ $seo->meta_title ?? config('app.name', 'إشراق') }}</title>
     <meta name="description" content="{{ $seo->meta_description ?? '' }}">
 
     <!-- Fonts: Cairo + Inter -->

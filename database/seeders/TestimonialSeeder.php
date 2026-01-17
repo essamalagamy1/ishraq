@@ -71,7 +71,7 @@ class TestimonialSeeder extends Seeder
                 'client_position' => 'مديرة التسويق',
                 'client_company' => 'وكالة تسويق',
                 'rating' => 5,
-                'testimonial' => 'موقعنا الجديد رفع معدل التحويل 3 أضعاف! التصميم عصري واحترافي، والسرعة فائقة. شكراً لفريق E-DATA 360 على الإبداع.',
+                'testimonial' => 'موقعنا الجديد رفع معدل التحويل 3 أضعاف! التصميم عصري واحترافي، والسرعة فائقة. شكراً لفريق إشراق على الإبداع.',
                 'badge_text' => 'عميلة راضية',
                 'badge_color_from' => 'indigo-600',
                 'badge_color_to' => 'blue-500',
