@@ -107,6 +107,36 @@
         </main>
 
         <x-footer />
+
+        {{-- Floating WhatsApp Button --}}
+        @php
+            $companySettings = \App\Models\CompanySetting::first();
+            $whatsappNumber = $companySettings->whatsapp_number ?? '';
+            $cleanNumber = preg_replace('/[^0-9]/', '', $whatsappNumber);
+        @endphp
+        @if($cleanNumber)
+        <a href="https://wa.me/{{ $cleanNumber }}" 
+           target="_blank"
+           rel="noopener noreferrer"
+           class="whatsapp-float group"
+           aria-label="تواصل معنا عبر واتساب">
+            {{-- Pulse Animation Ring --}}
+            <span class="whatsapp-pulse"></span>
+            <span class="whatsapp-pulse" style="animation-delay: 0.5s;"></span>
+            
+            {{-- Icon Container --}}
+            <span class="whatsapp-icon">
+                <i class="fab fa-whatsapp"></i>
+            </span>
+            
+            {{-- Tooltip --}}
+            <span class="whatsapp-tooltip">
+                تواصل معنا
+            </span>
+        </a>
+        
+       
+        @endif
     </div>
     
     <!-- Swiper JS -->
