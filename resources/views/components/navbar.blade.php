@@ -17,23 +17,20 @@
                 <a href="{{ route('home') }}" class="flex items-center group relative">
                     @if(isset($companySettings) && $companySettings->logo_path)
                         {{-- Dynamic logo from database --}}
-                        <img class="h-12 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(255,211,61,0.8)] filter brightness-110"
+                        <img class="h-15 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(255,211,61,0.8)] filter brightness-110"
                              src="{{ Storage::url($companySettings->logo_path) }}"
                              alt="{{ $companySettings->company_name ?? 'إشراق' }}">
                     @else
                         {{-- Fallback logo مُشرق --}}
                         <div class="flex items-center gap-3 group-hover:gap-4 transition-all duration-500">
                             <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br from-yellow-300 to-orange-400 shadow-xl group-hover:shadow-[0_0_30px_rgba(255,211,61,0.8)] transition-all duration-500 group-hover:rotate-12">
-                                <i class="fas fa-sun text-white text-xl group-hover:text-2xl transition-all duration-500 animate-pulse"></i>
+                                <i class="fas fa-sun text-white text-xl group-hover:text-2xl transition-all duration-500"></i>
                             </div>
                             <div class="flex flex-col">
                                 <span class="text-3xl font-black text-white drop-shadow-lg">إشراق</span>
                             </div>
                         </div>
                     @endif
-
-                    <!-- Sparkle effect on hover -->
-                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-yellow-300 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-ping"></div>
                 </a>
             </div>
 
@@ -117,7 +114,7 @@
                     <div class="absolute inset-0 bg-gradient-to-r from-yellow-300 via-orange-300 to-yellow-300 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                     <i class="fas fa-rocket text-lg relative z-10 group-hover:translate-x-2 transition-transform duration-500"></i>
                     <span class="relative z-10">ابدأ مشروعك</span>
-                    <div class="absolute top-1 right-1 w-2 h-2 bg-yellow-400 rounded-full animate-ping"></div>
+                    <div class="absolute top-1 right-1 w-2 h-2 bg-yellow-400 rounded-full"></div>
                 </a>
             </div>
 

@@ -1,20 +1,20 @@
 <x-layouts.app>
     {{-- Hero Section - Modern Split Design with 3D Cards --}}
     <section class="min-h-screen flex items-center relative overflow-hidden" style="background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);">
-        {{-- Animated Mesh Gradient Background --}}
+        {{-- Static Mesh Gradient Background --}}
         <div class="absolute inset-0 opacity-30">
-            <div class="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl animate-pulse-soft" style="background: {{ config('colors.primary') }};"></div>
-            <div class="absolute bottom-0 right-0 w-80 h-80 rounded-full blur-3xl animate-pulse-soft" style="background: {{ config('colors.accent_blue') }}; animation-delay: 1s;"></div>
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-3xl animate-pulse-soft" style="background: {{ config('colors.primary_light') }}; animation-delay: 2s;"></div>
+            <div class="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl" style="background: {{ config('colors.primary') }};"></div>
+            <div class="absolute bottom-0 right-0 w-80 h-80 rounded-full blur-3xl" style="background: {{ config('colors.accent_blue') }};"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-3xl" style="background: {{ config('colors.primary_light') }};"></div>
         </div>
         
         {{-- Grid Pattern Overlay --}}
         <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
         
-        {{-- Floating Particles --}}
+        {{-- Floating Particles - Reduced for performance --}}
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            @for($i = 0; $i < 6; $i++)
-            <div class="absolute w-2 h-2 rounded-full animate-float opacity-40" style="background: {{ config('colors.primary_light') }}; left: {{ rand(10, 90) }}%; top: {{ rand(10, 90) }}%; animation-delay: {{ $i * 0.5 }}s;"></div>
+            @for($i = 0; $i < 3; $i++)
+            <div class="absolute w-2 h-2 rounded-full opacity-40" style="background: {{ config('colors.primary_light') }}; left: {{ rand(10, 90) }}%; top: {{ rand(10, 90) }}%;"></div>
             @endfor
         </div>
         
@@ -104,18 +104,18 @@
                             </div>
                         </div>
                         
-                        {{-- Floating Mini Cards --}}
-                        <div class="absolute -top-8 -right-8 w-32 h-32 rounded-2xl glass-accent p-4 flex flex-col items-center justify-center animate-float z-30" style="animation-delay: 0.5s;">
+                        {{-- Floating Mini Cards - Static for better performance --}}
+                        <div class="absolute -top-8 -right-8 w-32 h-32 rounded-2xl glass-accent p-4 flex flex-col items-center justify-center z-30 hover:scale-105 transition-transform duration-300">
                             <i class="fas fa-mobile-alt text-3xl mb-2" style="color: {{ config('colors.primary_light') }};"></i>
                             <span class="text-white text-xs font-semibold">تطبيقات</span>
                         </div>
                         
-                        <div class="absolute -bottom-6 -left-6 w-36 h-28 rounded-2xl glass-accent p-4 flex flex-col items-center justify-center animate-float z-30" style="animation-delay: 1s;">
+                        <div class="absolute -bottom-6 -left-6 w-36 h-28 rounded-2xl glass-accent p-4 flex flex-col items-center justify-center z-30 hover:scale-105 transition-transform duration-300">
                             <i class="fas fa-chart-line text-2xl mb-2" style="color: {{ config('colors.accent_yellow') }};"></i>
                             <span class="text-white text-xs font-semibold">نمو الأعمال</span>
                         </div>
                         
-                        <div class="absolute top-1/3 -left-12 w-28 h-28 rounded-2xl glass-accent p-4 flex flex-col items-center justify-center animate-float z-10" style="animation-delay: 1.5s;">
+                        <div class="absolute top-1/3 -left-12 w-28 h-28 rounded-2xl glass-accent p-4 flex flex-col items-center justify-center z-10 hover:scale-105 transition-transform duration-300">
                             <i class="fas fa-shield-alt text-2xl mb-2" style="color: {{ config('colors.accent_green') }};"></i>
                             <span class="text-white text-xs font-semibold">آمان</span>
                         </div>
@@ -127,9 +127,9 @@
         </div>
         
         {{-- Scroll Indicator --}}
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
             <div class="w-8 h-12 rounded-full border-2 border-white/30 flex items-start justify-center p-2">
-                <div class="w-1.5 h-3 rounded-full bg-white/50 animate-pulse"></div>
+                <div class="w-1.5 h-3 rounded-full bg-white/50"></div>
             </div>
         </div>
     </section>
@@ -201,10 +201,10 @@
     {{-- Featured Projects - Modern Showcase --}}
     @if(isset($featuredProjects) && count($featuredProjects) > 0)
     <section class="py-28 relative overflow-hidden" style="background: {{ config('colors.bg_dark') }};">
-        {{-- Animated Background --}}
+        {{-- Static Background --}}
         <div class="absolute inset-0">
-            <div class="absolute top-20 right-20 w-72 h-72 rounded-full opacity-10 animate-pulse-soft" style="background: {{ config('colors.primary') }}; filter: blur(80px);"></div>
-            <div class="absolute bottom-20 left-20 w-64 h-64 rounded-full opacity-10 animate-pulse-soft" style="background: {{ config('colors.accent_blue') }}; filter: blur(80px); animation-delay: 1s;"></div>
+            <div class="absolute top-20 right-20 w-72 h-72 rounded-full opacity-10" style="background: {{ config('colors.primary') }}; filter: blur(80px);"></div>
+            <div class="absolute bottom-20 left-20 w-64 h-64 rounded-full opacity-10" style="background: {{ config('colors.accent_blue') }}; filter: blur(80px);"></div>
         </div>
         
         <div class="container mx-auto px-6 relative z-10">
@@ -456,10 +456,10 @@
         {{-- Grid Pattern --}}
         <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
         
-        {{-- Floating Particles --}}
+        {{-- Static Particles --}}
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            @for($i = 0; $i < 8; $i++)
-            <div class="absolute w-3 h-3 rounded-full animate-float opacity-30" style="background: {{ config('colors.primary_light') }}; left: {{ rand(5, 95) }}%; top: {{ rand(5, 95) }}%; animation-delay: {{ $i * 0.7 }}s;"></div>
+            @for($i = 0; $i < 4; $i++)
+            <div class="absolute w-3 h-3 rounded-full opacity-30" style="background: {{ config('colors.primary_light') }}; left: {{ rand(5, 95) }}%; top: {{ rand(5, 95) }}%;"></div>
             @endfor
         </div>
         
@@ -559,32 +559,44 @@
                 }
             });
 
-            // Intersection Observer for Reveal Animations
+            // Intersection Observer for Reveal Animations - Optimized
             const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+                threshold: 0.15,
+                rootMargin: '0px 0px -100px 0px'
             };
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('revealed');
+                        // Unobserve after revealing to save resources
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
-            document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-                observer.observe(el);
-            });
+            // Use requestIdleCallback for non-critical initialization
+            const initObserver = () => {
+                document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+                    observer.observe(el);
+                });
+            };
+
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(initObserver);
+            } else {
+                setTimeout(initObserver, 100);
+            }
         });
     </script>
 
     <style>
-        /* Reveal Animation Styles */
+        /* Reveal Animation Styles - Optimized */
         .reveal-on-scroll {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            will-change: opacity, transform;
         }
         
         .reveal-on-scroll.revealed {

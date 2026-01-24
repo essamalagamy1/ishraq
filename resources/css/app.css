@@ -1,3 +1,6 @@
+/* Premium Arabic Font - Tajawal */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+
 @import 'tailwindcss';
 @import './custom.css';
 
@@ -7,22 +10,21 @@
 @source '../**/*.js';
 
 /* ============================================
-   TYPOGRAPHY - Inter + Cairo
+   TYPOGRAPHY THEME
    ============================================ */
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @theme {
-    --font-sans: 'Cairo', 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Tajawal', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 /* ============================================
-   ANIMATIONS
+   ANIMATIONS - Optimized for Performance
    ============================================ */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
@@ -33,7 +35,7 @@
 @keyframes fadeInDown {
     from {
         opacity: 0;
-        transform: translateY(-30px);
+        transform: translateY(-20px);
     }
     to {
         opacity: 1;
@@ -44,7 +46,7 @@
 @keyframes slideInRight {
     from {
         opacity: 0;
-        transform: translateX(-50px);
+        transform: translateX(-30px);
     }
     to {
         opacity: 1;
@@ -55,7 +57,7 @@
 @keyframes scaleIn {
     from {
         opacity: 0;
-        transform: scale(0.8);
+        transform: scale(0.9);
     }
     to {
         opacity: 1;
@@ -63,60 +65,38 @@
     }
 }
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-}
-
-@keyframes glow {
-    0%, 100% {
-        box-shadow: 0 0 20px rgba(13, 148, 136, 0.5);
-    }
-    50% {
-        box-shadow: 0 0 40px rgba(13, 148, 136, 0.8);
-    }
-}
-
-@keyframes pulse-soft {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.7;
-    }
-}
-
-/* Animation Classes */
+/* Animation Classes - Optimized */
 .animate-fade-in-up {
-    animation: fadeInUp 0.8s ease-out;
+    animation: fadeInUp 0.6s ease-out forwards;
+    will-change: opacity, transform;
 }
 
 .animate-fade-in-down {
-    animation: fadeInDown 0.8s ease-out;
+    animation: fadeInDown 0.6s ease-out forwards;
+    will-change: opacity, transform;
 }
 
 .animate-slide-in-right {
-    animation: slideInRight 0.8s ease-out;
+    animation: slideInRight 0.6s ease-out forwards;
+    will-change: opacity, transform;
 }
 
 .animate-scale-in {
-    animation: scaleIn 0.6s ease-out;
+    animation: scaleIn 0.5s ease-out forwards;
+    will-change: opacity, transform;
 }
 
+/* Removed continuous animations for better performance */
 .animate-float {
-    animation: float 3s ease-in-out infinite;
+    /* Animation disabled for performance - use hover effects instead */
 }
 
 .animate-glow {
-    animation: glow 2s ease-in-out infinite;
+    /* Animation disabled for performance */
 }
 
 .animate-pulse-soft {
-    animation: pulse-soft 2s ease-in-out infinite;
+    /* Animation disabled for performance */
 }
 
 /* ============================================
@@ -163,7 +143,7 @@ html {
    GLOBAL BODY STYLES
    ============================================ */
 body {
-    font-family: 'Cairo', 'Inter', sans-serif;
+    font-family: 'Tajawal', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

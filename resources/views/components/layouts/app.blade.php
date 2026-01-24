@@ -33,18 +33,32 @@
     
     <!-- Favicon -->
     @if(isset($companySettings) && $companySettings->favicon_path)
-        <link rel="icon" type="image/x-icon" href="{{ Storage::url($companySettings->favicon_path) }}">
-        <link rel="shortcut icon" type="image/x-icon" href="{{ Storage::url($companySettings->favicon_path) }}">
-        <link rel="apple-touch-icon" href="{{ Storage::url($companySettings->favicon_path) }}">
+        @php
+            $faviconUrl = Storage::url($companySettings->favicon_path);
+            $faviconExtension = pathinfo($companySettings->favicon_path, PATHINFO_EXTENSION);
+            $faviconMime = match(strtolower($faviconExtension)) {
+                'svg' => 'image/svg+xml',
+                'png' => 'image/png',
+                'jpg', 'jpeg' => 'image/jpeg',
+                'gif' => 'image/gif',
+                'webp' => 'image/webp',
+                default => 'image/x-icon',
+            };
+        @endphp
+        <link rel="icon" type="{{ $faviconMime }}" href="{{ $faviconUrl }}" sizes="any">
+        <link rel="icon" type="{{ $faviconMime }}" href="{{ $faviconUrl }}" sizes="32x32">
+        <link rel="icon" type="{{ $faviconMime }}" href="{{ $faviconUrl }}" sizes="16x16">
+        <link rel="apple-touch-icon" href="{{ $faviconUrl }}" sizes="180x180">
     @else
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
     @endif
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts - Tajawal (Premium Arabic Font) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -94,10 +108,14 @@
         }
     </style>
     <link rel="stylesheet" href="{{ asset('css/css.css') }}">
-
+<script>
+    window.ANALYTICS_SITE_KEY = 'CGfufSmMiGkvcXEAQyUiwpJMoSGTMZCO';
+    window.ANALYTICS_API_URL = 'https://analytics.test/api/analytics/track';
+</script>
+<script async src="https://analytics.test/js/analytics.js"></script>
     {{-- {!! CookieConsent::styles() !!} --}}
 </head>
-<body class="font-sans antialiased" dir="rtl">
+<body class="font-sans antialiased" dir="rtl" style="font-family: 'Tajawal', sans-serif;">
     <div class="min-h-screen bg-gray-50">
         <x-navbar />
 
@@ -133,9 +151,7 @@
             <span class="whatsapp-tooltip">
                 تواصل معنا
             </span>
-        </a>
-        
-       
+        </a>       
         @endif
     </div>
     

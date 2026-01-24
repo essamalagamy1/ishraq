@@ -53,7 +53,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="absolute -bottom-6 -left-6 w-24 h-24 rounded-2xl -z-10 animate-float" style="background: {{ config('colors.primary') }};"></div>
                 </div>
             </div>
         </div>

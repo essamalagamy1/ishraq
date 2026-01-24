@@ -14,11 +14,11 @@ class CompanySettingSeeder extends Seeder
     {
         CompanySetting::create([
             'company_name' => 'إشراق',
-            'main_email' => 'info@ishraq.sa',
-            'secondary_email' => 'support@ishraq.sa',
-            'phone_primary' => '+966 50 123 4567',
-            'phone_secondary' => '+966 50 765 4321',
-            'whatsapp_number' => '+966 50 123 4567',
+            'main_email' => 'info@ishraq.com',
+            'secondary_email' => 'info@ishraq.com',
+            'phone_primary' => '+20 15 54468657',
+            'phone_secondary' => '+20 15 54468657',
+            'whatsapp_number' => '+20 15 54468657',
             'location_text' => 'مصر , دمياط الجديدة',
             'about_short' => 'نُضيء طريق نجاحك الرقمي. نحن إشراق، شريكك المبدع في تطوير حلول برمجية مشرقة ومبتكرة. نحول أفكارك إلى منتجات رقمية متميزة تشع بالاحترافية والإبداع، من مواقع الويب الحديثة إلى تطبيقات الجوال الذكية.',
             'logo_path' => null,

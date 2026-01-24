@@ -1,9 +1,9 @@
     /* ========== COLOR SYSTEM ========== */
     /* Colors are loaded from config/colors.php - edit that file to change colors site-wide */
 
-/* Font setup */
+/* Font setup - Tajawal Premium Arabic Font */
 body {
-    font-family: 'Cairo', 'Inter', sans-serif;
+    font-family: 'Tajawal', sans-serif;
 }
 
 
