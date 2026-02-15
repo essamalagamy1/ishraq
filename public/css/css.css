@@ -221,12 +221,15 @@ body {
 
 /* Gradient Text Animation */
 .gradient-text-animated {
+    display: inline-block;
     background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light), var(--color-primary));
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: shimmer 3s linear infinite;
+    line-height: 1.2;
+    padding: 0.1em 0;
 }
 
 /* ========== SWIPER CUSTOMIZATION ========== */
