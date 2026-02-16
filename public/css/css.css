@@ -229,7 +229,7 @@ body {
     background-clip: text;
     animation: shimmer 3s linear infinite;
     line-height: 1.2;
-    padding: 0.1em 0;
+    padding: 0.2em 0;
 }
 
 /* ========== SWIPER CUSTOMIZATION ========== */
