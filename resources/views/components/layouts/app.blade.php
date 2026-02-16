@@ -19,6 +19,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <!-- Preconnect to CDN origins -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
     <!-- SEO Meta Tags -->
     <title>{{ $seo->meta_title ?? 'إشراق | تطوير مواقع وتطبيقات احترافية - حلول برمجية متكاملة' }}</title>
     <meta name="description" content="{{ $seo->meta_description ?? 'إشراق شريكك في التحول الرقمي. نطور مواقع ويب وتطبيقات جوال احترافية بأحدث التقنيات. أكثر من 200 مشروع منجز، حلول برمجية متكاملة، ودعم فني متواصل. ابدأ مشروعك الآن.' }}">

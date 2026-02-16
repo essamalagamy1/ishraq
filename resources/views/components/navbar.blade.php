@@ -19,7 +19,8 @@
                         {{-- Dynamic logo from database --}}
                         <img class="h-15 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(255,211,61,0.8)] filter brightness-110"
                              src="{{ Storage::url($companySettings->logo_path) }}"
-                             alt="{{ $companySettings->company_name ?? 'إشراق' }}">
+                             alt="{{ $companySettings->company_name ?? 'إشراق' }}"
+                             width="150" height="60">
                     @else
                         {{-- Fallback logo مُشرق --}}
                         <div class="flex items-center gap-3 group-hover:gap-4 transition-all duration-500">
@@ -119,7 +120,7 @@
             </div>
 
             {{-- Mobile Menu Button مُشرق --}}
-            <button id="mobile-menu-button" class="lg:hidden text-white hover:text-yellow-200 p-3 rounded-xl hover:bg-white/10 transition-all duration-300 group" data-aos="fade-right">
+            <button id="mobile-menu-button" aria-label="فتح القائمة" class="lg:hidden text-white hover:text-yellow-200 p-3 rounded-xl hover:bg-white/10 transition-all duration-300 group" data-aos="fade-right">
                 <i class="fas fa-bars text-2xl group-hover:rotate-180 transition-transform duration-500"></i>
             </button>
         </div>

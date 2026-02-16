@@ -29,11 +29,13 @@
                     @if(isset($companySettings) && $companySettings->logo_2_path)
                         <img class="h-12 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(255,107,53,0.5)]"
                              src="{{ Storage::url($companySettings->logo_2_path) }}"
-                             alt="{{ $companySettings->company_name ?? 'إشراق' }}">
+                             alt="{{ $companySettings->company_name ?? 'إشراق' }}"
+                             width="120" height="48">
                     @elseif(isset($companySettings) && $companySettings->logo_path)
                         <img class="h-12 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(255,107,53,0.5)]"
                              src="{{ Storage::url($companySettings->logo_path) }}"
-                             alt="{{ $companySettings->company_name ?? 'إشراق' }}">
+                             alt="{{ $companySettings->company_name ?? 'إشراق' }}"
+                             width="120" height="48">
                     @else
                         <div class="flex items-center gap-2">
                             <div class="w-10 h-10 rounded-lg flex items-center justify-center relative overflow-hidden group"
