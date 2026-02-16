@@ -57,10 +57,10 @@
 
             {{-- Quick Links with Animated Icons --}}
             <div data-aos="fade-up" data-aos-delay="100">
-                <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                <h4 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
                     <span class="w-1 h-6 rounded-full animate-pulse" style="background: linear-gradient(180deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }});"></span>
                     روابط سريعة
-                </h3>
+                </h4>
                 <ul class="space-y-3">
                     <li>
                         <a href="{{ route('home') }}" class="group flex items-center gap-2 text-gray-400 hover:text-white transition-all duration-300">
@@ -116,10 +116,10 @@
 
             {{-- Services - Dynamic --}}
             <div data-aos="fade-up" data-aos-delay="200">
-                <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                <h4 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
                     <span class="w-1 h-6 rounded-full animate-pulse" style="background: linear-gradient(180deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }}); animation-delay: 0.5s;"></span>
                     خدماتنا
-                </h3>
+                </h4>
                 <ul class="space-y-3">
                     @if(isset($footerServices) && $footerServices->count() > 0)
                         @foreach($footerServices as $service)
@@ -156,10 +156,10 @@
 
             {{-- Contact Info - Dynamic --}}
             <div data-aos="fade-up" data-aos-delay="300">
-                <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                <h4 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
                     <span class="w-1 h-6 rounded-full animate-pulse" style="background: linear-gradient(180deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }}); animation-delay: 1s;"></span>
                     تواصل معنا
-                </h3>
+                </h4>
                 <ul class="space-y-4">
                     @if(isset($companySettings) && $companySettings->main_email)
                     <li>
@@ -191,13 +191,13 @@
                 {{-- Social Links - Dynamic with Glow Effects --}}
                 @if(isset($socialLinks) && count($socialLinks) > 0)
                 <div class="mt-6">
-                    <h4 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                    <h5 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
                         <i class="fas fa-heart animate-pulse" style="color: {{ config('colors.accent_yellow') }};"></i>
                         تابعنا
-                    </h4>
+                    </h5>
                     <div class="flex gap-3 flex-wrap">
                         @foreach($socialLinks as $link)
-                        <a href="{{ $link->url }}" target="_blank"
+                        <a href="{{ $link->url }}" target="_blank" rel="noopener noreferrer"
                            class="group w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-500 relative overflow-hidden hover:scale-110 hover:-rotate-6"
                            style="background: {{ config('colors.white_10') }};">
                             {{-- Glow Effect on Hover --}}
@@ -264,6 +264,7 @@
 
     {{-- Scroll to Top Button --}}
     <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+            aria-label="العودة للأعلى"
             class="fixed bottom-8 left-8 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110 z-50 group shadow-2xl"
             style="background: linear-gradient(135deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }});">
         <i class="fas fa-arrow-up text-white group-hover:animate-bounce"></i>

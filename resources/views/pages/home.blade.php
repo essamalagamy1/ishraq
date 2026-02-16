@@ -84,7 +84,7 @@
                             <div class="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto" style="background: linear-gradient(135deg, {{ config('colors.primary') }}, {{ config('colors.primary_light') }});">
                                 <i class="fas fa-laptop-code text-4xl text-white"></i>
                             </div>
-                            <h3 class="text-2xl font-bold text-white text-center mb-3">حلول تقنية متكاملة</h3>
+                            <p class="text-2xl font-bold text-white text-center mb-3">حلول تقنية متكاملة</p>
                             <p class="text-gray-300 text-center">نحول أفكارك إلى منتجات رقمية مبتكرة</p>
                             
                             {{-- Tech Stack Icons --}}
@@ -351,7 +351,7 @@
                                         {{ mb_substr($testimonial->client_name, 0, 1) }}
                                     </div>
                                     <div>
-                                        <h4 class="font-bold text-gray-900 text-lg">{{ $testimonial->client_name }}</h4>
+                                        <p class="font-bold text-gray-900 text-lg">{{ $testimonial->client_name }}</p>
                                         @if($testimonial->client_position)
                                         <p class="text-gray-500 text-sm">{{ $testimonial->client_position }}</p>
                                         @endif
@@ -503,7 +503,7 @@
                         <div class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500 group-hover:scale-110" style="background: {{ config('colors.primary_20') }};">
                             <i class="fas fa-envelope text-2xl" style="color: {{ config('colors.primary_light') }};"></i>
                         </div>
-                        <h4 class="font-bold text-lg mb-3">البريد الإلكتروني</h4>
+                        <h3 class="font-bold text-lg mb-3">البريد الإلكتروني</h3>
                         <a href="mailto:{{ $companySettings->main_email }}" class="text-gray-400 text-sm hover:text-white transition-colors break-all">{{ $companySettings->main_email }}</a>
                     </div>
                     @endif
@@ -513,7 +513,7 @@
                         <div class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500 group-hover:scale-110 bg-green-500/20">
                             <i class="fab fa-whatsapp text-2xl text-green-400"></i>
                         </div>
-                        <h4 class="font-bold text-lg mb-3">واتساب</h4>
+                        <h3 class="font-bold text-lg mb-3">واتساب</h3>
                         <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companySettings->whatsapp_number) }}" class="text-gray-400 text-sm hover:text-green-400 transition-colors">تواصل مباشر</a>
                     </div>
                     @endif
@@ -523,7 +523,7 @@
                         <div class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500 group-hover:scale-110" style="background: {{ config('colors.primary_20') }};">
                             <i class="fas fa-phone text-2xl" style="color: {{ config('colors.primary_light') }};"></i>
                         </div>
-                        <h4 class="font-bold text-lg mb-3">الهاتف</h4>
+                        <h3 class="font-bold text-lg mb-3">الهاتف</h3>
                         <a href="tel:{{ $companySettings->phone_primary }}" class="text-gray-400 text-sm hover:text-white transition-colors" dir="ltr">{{ $companySettings->phone_primary }}</a>
                     </div>
                     @endif

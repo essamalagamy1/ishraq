@@ -16,29 +16,29 @@ class SeoSettingsSeeder extends Seeder
             // Home Page
             [
                 'page' => 'home',
-                'meta_title' => 'EDATA 360 - تحليل البيانات الاحترافي | لوحات تحكم Excel و Power BI',
-                'meta_description' => 'شركة EDATA 360 متخصصة في تحليل البيانات وإنشاء لوحات التحكم الاحترافية باستخدام Excel و Power BI. أكثر من 150 عميل راضٍ و 200 لوحة تحكم تم تسليمها بنجاح.',
-                'meta_keywords' => 'تحليل البيانات,لوحات تحكم,Excel,Power BI,KPI,تقارير تفاعلية,Business Intelligence,داشبورد,السعودية,EDATA 360',
-                'og_title' => 'EDATA 360 - خبراء تحليل البيانات ولوحات التحكم',
-                'og_description' => 'نحول بياناتك إلى رؤى قابلة للتنفيذ من خلال لوحات تحكم احترافية ومخصصة',
+                'meta_title' => 'إشراق | تطوير مواقع وتطبيقات احترافية - حلول برمجية متكاملة',
+                'meta_description' => 'إشراق شريكك في التحول الرقمي. نطور مواقع ويب وتطبيقات جوال احترافية بأحدث التقنيات. أكثر من 200 مشروع منجز، حلول برمجية متكاملة، ودعم فني متواصل. ابدأ مشروعك الآن.',
+                'meta_keywords' => 'تطوير مواقع,تطبيقات جوال,إشراق,شركة برمجة,حلول برمجية,تصميم مواقع,React,Laravel,Flutter,تطوير تطبيقات,السعودية,مصر',
+                'og_title' => 'إشراق | حلول تطوير مواقع وتطبيقات احترافية',
+                'og_description' => 'شريكك في التحول الرقمي - نطور مواقع ويب وتطبيقات جوال احترافية بأحدث التقنيات. ابدأ مشروعك الآن مع إشراق.',
                 'og_type' => 'website',
                 'twitter_card' => 'summary_large_image',
-                'twitter_site' => '@edata360',
+                'twitter_site' => '@ishraq_tech',
                 'robots' => 'index,follow',
-                'ga4_measurement_id' => 'G-XXXXXXXXXX', // Replace with actual ID
-                'gsc_verification_code' => 'google-site-verification-code-here', // Replace with actual code
-                'gtm_container_id' => 'GTM-XXXXXXX', // Replace with actual ID
+                'ga4_measurement_id' => env('GA_MEASUREMENT_ID'),
+                'gsc_verification_code' => env('GSC_VERIFICATION_CODE'),
+                'gtm_container_id' => env('GTM_CONTAINER_ID'),
                 'is_active' => true,
             ],
 
             // About Page
             [
                 'page' => 'about',
-                'meta_title' => 'من نحن - EDATA 360 | خبراء تحليل البيانات في السعودية',
-                'meta_description' => 'تعرف على EDATA 360، فريق من الخبراء المتخصصين في تحليل البيانات وإنشاء لوحات التحكم الاحترافية. نساعد الشركات على اتخاذ قرارات مبنية على البيانات.',
-                'meta_keywords' => 'عن EDATA 360,فريق تحليل البيانات,خبراء Power BI,محللي بيانات,السعودية,من نحن',
-                'og_title' => 'من نحن - EDATA 360',
-                'og_description' => 'فريق متخصص في تحويل البيانات المعقدة إلى رؤى واضحة وقابلة للتنفيذ',
+                'meta_title' => 'من نحن - إشراق | فريق تطوير مواقع وتطبيقات محترف',
+                'meta_description' => 'تعرف على فريق إشراق - مطورون ومصممون محترفون بخبرة تزيد عن 5 سنوات في تطوير المواقع والتطبيقات. نحول أفكارك إلى حلول رقمية ناجحة بأحدث التقنيات والإبداع.',
+                'meta_keywords' => 'فريق إشراق,شركة تطوير برمجيات,مطورون محترفون,خبرة تطوير,من نحن',
+                'og_title' => 'من نحن - إشراق | فريق تطوير محترف',
+                'og_description' => 'فريق شغوف من المبدعين والمطورين، نحول أفكارك إلى منتجات رقمية ناجحة',
                 'og_type' => 'website',
                 'twitter_card' => 'summary_large_image',
                 'robots' => 'index,follow',
@@ -48,11 +48,11 @@ class SeoSettingsSeeder extends Seeder
             // Services Page
             [
                 'page' => 'services',
-                'meta_title' => 'خدماتنا - EDATA 360 | تحليل البيانات ولوحات التحكم الاحترافية',
-                'meta_description' => 'نقدم خدمات متكاملة في تحليل البيانات، إنشاء لوحات تحكم Power BI و Excel، تصميم KPIs، تقارير تفاعلية، واستشارات Business Intelligence للشركات والمؤسسات.',
-                'meta_keywords' => 'خدمات تحليل البيانات,لوحات تحكم Power BI,تقارير Excel,KPI Dashboard,Business Intelligence,استشارات البيانات,تحليل الأعمال',
-                'og_title' => 'خدماتنا - حلول تحليل البيانات المتكاملة',
-                'og_description' => 'من تحليل البيانات إلى لوحات التحكم التفاعلية - نوفر حلول شاملة لاحتياجاتك',
+                'meta_title' => 'خدماتنا - إشراق | تطوير مواقع وتطبيقات وحلول برمجية متكاملة',
+                'meta_description' => 'خدمات تطوير برمجية متكاملة من إشراق: تطوير مواقع ويب، تطبيقات جوال iOS وAndroid، تصميم UI/UX، استضافة وDevOps، متاجر إلكترونية، وأنظمة إدارة محتوى. ابدأ مشروعك الآن.',
+                'meta_keywords' => 'خدمات تطوير,مواقع ويب,تطبيقات جوال,تصميم UI/UX,متاجر إلكترونية,استضافة,DevOps,حلول برمجية',
+                'og_title' => 'خدماتنا - حلول تطوير برمجية متكاملة من إشراق',
+                'og_description' => 'من تطوير المواقع والتطبيقات إلى التصميم والاستضافة - حلول شاملة لاحتياجاتك التقنية',
                 'og_type' => 'website',
                 'twitter_card' => 'summary_large_image',
                 'robots' => 'index,follow',
@@ -62,11 +62,11 @@ class SeoSettingsSeeder extends Seeder
             // Portfolio Page
             [
                 'page' => 'portfolio',
-                'meta_title' => 'معرض الأعمال - EDATA 360 | لوحات تحكم ومشاريع سابقة',
-                'meta_description' => 'استعرض معرض أعمالنا من لوحات التحكم الاحترافية والمشاريع المنجزة. أكثر من 200 مشروع ناجح في تحليل البيانات و Power BI و Excel لعملاء في مختلف القطاعات.',
-                'meta_keywords' => 'معرض الأعمال,مشاريع سابقة,لوحات تحكم سابقة,Power BI projects,Excel dashboards,أمثلة لوحات تحكم,نماذج أعمال',
-                'og_title' => 'معرض أعمالنا - مشاريع ناجحة في تحليل البيانات',
-                'og_description' => 'شاهد أمثلة حية من مشاريعنا الناجحة ولوحات التحكم الاحترافية',
+                'meta_title' => 'أعمالنا - إشراق | معرض مشاريع تطوير مواقع وتطبيقات ناجحة',
+                'meta_description' => 'استعرض معرض أعمال إشراق: متاجر إلكترونية، تطبيقات توصيل، أنظمة إدارة، منصات تعليمية، ومواقع شركات احترافية. أكثر من 200 مشروع ناجح مع عملاء سعداء.',
+                'meta_keywords' => 'معرض أعمال,مشاريع ناجحة,تطوير متاجر,تطبيقات جوال,مواقع شركات,نماذج أعمال',
+                'og_title' => 'أعمالنا - مشاريع تطوير ناجحة من إشراق',
+                'og_description' => 'شاهد أمثلة حية من مشاريعنا الناجحة في تطوير المواقع والتطبيقات',
                 'og_type' => 'website',
                 'twitter_card' => 'summary_large_image',
                 'robots' => 'index,follow',
@@ -76,11 +76,11 @@ class SeoSettingsSeeder extends Seeder
             // Contact Page
             [
                 'page' => 'contact',
-                'meta_title' => 'تواصل معنا - EDATA 360 | احصل على استشارة مجانية',
-                'meta_description' => 'تواصل مع فريق EDATA 360 للحصول على استشارة مجانية في تحليل البيانات ولوحات التحكم. نحن هنا لمساعدتك في تحويل بياناتك إلى قرارات ذكية.',
-                'meta_keywords' => 'تواصل معنا,اتصل بنا,استشارة مجانية,خدمة العملاء,EDATA 360 السعودية,طلب عرض سعر',
-                'og_title' => 'تواصل معنا - EDATA 360',
-                'og_description' => 'احصل على استشارة مجانية وابدأ رحلتك في تحليل البيانات معنا',
+                'meta_title' => 'تواصل معنا - إشراق | استشارة مجانية لمشروعك البرمجي',
+                'meta_description' => 'تواصل مع فريق إشراق للحصول على استشارة مجانية في تطوير المواقع والتطبيقات. نحن هنا لمساعدتك في تحويل فكرتك إلى مشروع رقمي ناجح. عروض أسعار سريعة ودعم فني متواصل.',
+                'meta_keywords' => 'تواصل معنا,استشارة مجانية,طلب عرض سعر,خدمة العملاء,إشراق',
+                'og_title' => 'تواصل معنا - إشراق',
+                'og_description' => 'احصل على استشارة مجانية وابدأ مشروعك الرقمي مع إشراق',
                 'og_type' => 'website',
                 'twitter_card' => 'summary',
                 'robots' => 'index,follow',
@@ -90,11 +90,11 @@ class SeoSettingsSeeder extends Seeder
             // Request Design Page
             [
                 'page' => 'request_design',
-                'meta_title' => 'اطلب تصميم لوحة تحكم - EDATA 360 | خدمة سريعة واحترافية',
-                'meta_description' => 'اطلب تصميم لوحة تحكم مخصصة لعملك. نوفر حلول Power BI و Excel احترافية مصممة خصيصاً لاحتياجاتك. تسليم سريع وجودة عالية مضمونة.',
-                'meta_keywords' => 'طلب تصميم,تصميم لوحة تحكم,طلب داشبورد,Power BI مخصص,Excel dashboard,تصميم KPI,طلب عرض سعر',
-                'og_title' => 'اطلب تصميم لوحة تحكم مخصصة',
-                'og_description' => 'احصل على لوحة تحكم احترافية مصممة خصيصاً لاحتياجات عملك',
+                'meta_title' => 'اطلب مشروعك الآن - إشراق | تطوير مواقع وتطبيقات احترافية',
+                'meta_description' => 'أرسل طلبك الآن واحصل على عرض سعر مخصص لمشروعك البرمجي من إشراق. موقع ويب، تطبيق جوال، أو نظام متكامل - فريقنا جاهز لتحويل فكرتك إلى واقع رقمي مشرق.',
+                'meta_keywords' => 'طلب تطوير,طلب مشروع,عرض سعر,تطوير موقع,تطوير تطبيق,إشراق',
+                'og_title' => 'اطلب مشروعك الآن من إشراق',
+                'og_description' => 'احصل على عرض سعر مخصص لمشروعك البرمجي - تسليم سريع وجودة عالية',
                 'og_type' => 'website',
                 'twitter_card' => 'summary_large_image',
                 'robots' => 'index,follow',
@@ -109,6 +109,6 @@ class SeoSettingsSeeder extends Seeder
             );
         }
 
-        $this->command->info('✅ تم إنشاء إعدادات SEO لجميع الصفحات (6 صفحات)');
+        $this->command->info('✅ تم تحديث إعدادات SEO لجميع الصفحات (6 صفحات)');
     }
 }

@@ -14,8 +14,8 @@ class CompanySettingSeeder extends Seeder
     {
         CompanySetting::create([
             'company_name' => 'إشراق',
-            'main_email' => 'info@ishraq.com',
-            'secondary_email' => 'info@ishraq.com',
+            'main_email' => 'info@ishraq.tech',
+            'secondary_email' => 'info@ishraq.tech',
             'phone_primary' => '+20 15 54468657',
             'phone_secondary' => '+20 15 54468657',
             'whatsapp_number' => '+20 15 54468657',

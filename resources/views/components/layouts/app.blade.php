@@ -20,16 +20,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- SEO Meta Tags -->
-    <title>{{ $seo->meta_title ?? 'إشراق | شركة تطوير مواقع وتطبيقات احترافية' }}</title>
-    <meta name="description" content="{{ $seo->meta_description ?? 'إشراق شريكك في التحول الرقمي. نطور مواقع ويب، تطبيقات جوال، وحلول برمجية متكاملة باستخدام أحدث التقنيات. +30 مشروع منجز.' }}">
-    <meta name="keywords" content="تطوير مواقع, تطبيقات جوال, برمجة, Laravel, React, تصميم UI UX, شركة برمجة, السعودية, إشراق">
+    <title>{{ $seo->meta_title ?? 'إشراق | تطوير مواقع وتطبيقات احترافية - حلول برمجية متكاملة' }}</title>
+    <meta name="description" content="{{ $seo->meta_description ?? 'إشراق شريكك في التحول الرقمي. نطور مواقع ويب وتطبيقات جوال احترافية بأحدث التقنيات. أكثر من 200 مشروع منجز، حلول برمجية متكاملة، ودعم فني متواصل. ابدأ مشروعك الآن.' }}">
+    <meta name="keywords" content="تطوير مواقع, تطبيقات جوال, إشراق, حلول برمجية, شركة برمجة, تصميم مواقع, React, Laravel, Flutter, تطوير تطبيقات">
     <meta name="author" content="إشراق">
+    <link rel="canonical" href="{{ url()->current() }}">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="{{ $seo->meta_title ?? 'إشراق | شركة تطوير مواقع وتطبيقات' }}">
-    <meta property="og:description" content="{{ $seo->meta_description ?? 'شريكك في التحول الرقمي - تطوير مواقع وتطبيقات احترافية' }}">
+    <meta property="og:title" content="{{ $seo->og_title ?? $seo->meta_title ?? 'إشراق | تطوير مواقع وتطبيقات احترافية - حلول برمجية متكاملة' }}">
+    <meta property="og:description" content="{{ $seo->og_description ?? $seo->meta_description ?? 'شريكك في التحول الرقمي - نطور مواقع ويب وتطبيقات جوال احترافية بأحدث التقنيات. ابدأ مشروعك الآن.' }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="إشراق">
     
     <!-- Favicon -->
     @if(isset($companySettings) && $companySettings->favicon_path)
@@ -108,11 +110,34 @@
         }
     </style>
     <link rel="stylesheet" href="{{ asset('css/css.css') }}">
-<script>
-    window.ANALYTICS_SITE_KEY = 'CGfufSmMiGkvcXEAQyUiwpJMoSGTMZCO';
-    window.ANALYTICS_API_URL = 'https://analytics.test/api/analytics/track';
-</script>
-<script async src="https://analytics.test/js/analytics.js"></script>
+
+    <!-- JSON-LD Structured Data -->
+    @php
+        $jsonLd = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            'name' => isset($companySettings) ? $companySettings->company_name : 'إشراق',
+            'url' => config('app.url', 'https://ishraq.tech'),
+            'logo' => isset($companySettings) && $companySettings->logo_path ? Storage::url($companySettings->logo_path) : asset('favicon.svg'),
+            'description' => $seo->meta_description ?? 'إشراق شريكك في التحول الرقمي. نطور مواقع ويب وتطبيقات جوال احترافية بأحدث التقنيات.',
+            'contactPoint' => [
+                '@type' => 'ContactPoint',
+                'telephone' => isset($companySettings) ? $companySettings->phone_primary : '',
+                'contactType' => 'customer service',
+                'availableLanguage' => ['Arabic', 'English'],
+            ],
+            'sameAs' => isset($socialLinks) ? $socialLinks->pluck('url')->toArray() : [],
+        ];
+    @endphp
+    <script type="application/ld+json">{!! json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}</script>
+
+    @if(app()->environment('local'))
+    <script>
+        window.ANALYTICS_SITE_KEY = 'CGfufSmMiGkvcXEAQyUiwpJMoSGTMZCO';
+        window.ANALYTICS_API_URL = 'https://analytics.test/api/analytics/track';
+    </script>
+    <script async src="https://analytics.test/js/analytics.js"></script>
+    @endif
     {{-- {!! CookieConsent::styles() !!} --}}
 </head>
 <body class="font-sans antialiased" dir="rtl" style="font-family: 'Tajawal', sans-serif;">
