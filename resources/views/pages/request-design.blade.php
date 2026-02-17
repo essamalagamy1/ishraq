@@ -45,7 +45,7 @@
                     <div class="p-8 space-y-8">
                         {{-- Personal Info --}}
                         <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <h3 class="text-lg font-bold text-gray-700 mb-4 flex items-center gap-2">
                                 <i class="fas fa-user" style="color: {{ config('colors.primary') }};"></i>
                                 المعلومات الشخصية
                             </h3>
@@ -79,7 +79,7 @@
 
                         {{-- Project Details --}}
                         <div class="p-6 rounded-xl" style="background: {{ config('colors.primary_05') }};">
-                            <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <h3 class="text-lg font-bold text-gray-700 mb-4 flex items-center gap-2">
                                 <i class="fas fa-layer-group" style="color: {{ config('colors.primary') }};"></i>
                                 تفاصيل المشروع
                             </h3>
@@ -149,28 +149,28 @@
                         <div class="w-12 h-12 mx-auto rounded-xl flex items-center justify-center mb-3" style="background: {{ config('colors.primary_10') }};">
                             <i class="fas fa-clock" style="color: {{ config('colors.primary') }};"></i>
                         </div>
-                        <h4 class="font-bold text-gray-900 text-sm">رد سريع</h4>
+                        <h4 class="font-bold text-gray-700 text-sm">رد سريع</h4>
                         <p class="text-gray-500 text-xs">خلال 24 ساعة</p>
                     </div>
                     <div class="text-center p-4">
                         <div class="w-12 h-12 mx-auto rounded-xl flex items-center justify-center mb-3" style="background: rgba(34, 197, 94, 0.1);">
                             <i class="fas fa-gift text-green-500"></i>
                         </div>
-                        <h4 class="font-bold text-gray-900 text-sm">عرض مجاني</h4>
+                        <h4 class="font-bold text-gray-700 text-sm">عرض مجاني</h4>
                         <p class="text-gray-500 text-xs">بدون التزام</p>
                     </div>
                     <div class="text-center p-4">
                         <div class="w-12 h-12 mx-auto rounded-xl flex items-center justify-center mb-3" style="background: rgba(168, 85, 247, 0.1);">
                             <i class="fas fa-shield-alt text-purple-500"></i>
                         </div>
-                        <h4 class="font-bold text-gray-900 text-sm">ضمان الجودة</h4>
+                        <h4 class="font-bold text-gray-700 text-sm">ضمان الجودة</h4>
                         <p class="text-gray-500 text-xs">مراجعات مجانية</p>
                     </div>
                     <div class="text-center p-4">
                         <div class="w-12 h-12 mx-auto rounded-xl flex items-center justify-center mb-3" style="background: rgba(239, 68, 68, 0.1);">
                             <i class="fas fa-headset text-red-500"></i>
                         </div>
-                        <h4 class="font-bold text-gray-900 text-sm">دعم مستمر</h4>
+                        <h4 class="font-bold text-gray-700 text-sm">دعم مستمر</h4>
                         <p class="text-gray-500 text-xs">متاحون دائماً</p>
                     </div>
                 </div>
