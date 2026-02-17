@@ -58,7 +58,7 @@
     </section>
 
     {{-- Main Image --}}
-    <section class="py-12 bg-gray-50">
+    <section class="py-12" style="background: #0f1419;">
         <div class="container mx-auto px-6">
             <div class="max-w-5xl mx-auto">
                 <a href="{{ Storage::url($project->main_image) }}" 
@@ -74,7 +74,7 @@
     </section>
 
     {{-- Content Section --}}
-    <section class="py-16 bg-white">
+    <section class="py-16" style="background: #0f1419;">
         <div class="container mx-auto px-6">
             <div class="max-w-6xl mx-auto">
                 <div class="grid lg:grid-cols-3 gap-12">
@@ -82,11 +82,11 @@
                     <div class="lg:col-span-2 space-y-12">
                         {{-- Description --}}
                         <div>
-                            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                                 <div class="w-1 h-8 rounded-full" style="background: {{ config('colors.primary') }};"></div>
                                 تفاصيل المشروع
                             </h2>
-                            <div class="prose prose-lg max-w-none bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                            <div class="prose prose-lg max-w-none prose-invert rounded-2xl p-8" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                                 {!! $project->description !!}
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                         {{-- Image Gallery --}}
                         @if($project->projectImages && $project->projectImages->count() > 0)
                         <div>
-                            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                                 <div class="w-1 h-8 rounded-full" style="background: {{ config('colors.primary') }};"></div>
                                 معرض الصور
                             </h2>
@@ -120,7 +120,7 @@
                         {{-- Video Section --}}
                         @if($project->video_url)
                         <div>
-                            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                                 <div class="w-1 h-8 rounded-full" style="background: {{ config('colors.primary') }};"></div>
                                 فيديو المشروع
                             </h2>
@@ -141,21 +141,21 @@
                         <div class="sticky top-24 space-y-6">
                             {{-- Purchase Card --}}
                             @if($project->is_available_for_purchase && $companySettings && $companySettings->whatsapp_number)
-                            <div class="bg-green-50 rounded-2xl p-6 border border-green-200">
+                            <div class="rounded-2xl p-6" style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.15);">
                                 <div class="flex items-center gap-3 mb-4">
-                                    <div class="w-12 h-12 rounded-xl bg-green-500 flex items-center justify-center">
-                                        <i class="fas fa-shopping-cart text-white text-xl"></i>
+                                    <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
+                                        <i class="fas fa-shopping-cart text-green-500 text-xl"></i>
                                     </div>
                                     <div>
-                                        <h3 class="text-lg font-bold text-gray-900">متاح للشراء</h3>
-                                        <p class="text-sm text-gray-600">يمكنك شراء هذا المشروع</p>
+                                        <h3 class="text-lg font-bold text-white">متاح للشراء</h3>
+                                        <p class="text-sm text-gray-400">يمكنك شراء هذا المشروع</p>
                                     </div>
                                 </div>
 
                                 @if($project->price)
-                                <div class="bg-white rounded-xl p-4 mb-4 border border-green-200 text-center">
-                                    <span class="text-3xl font-black text-green-600">{{ number_format($project->price, 2) }}</span>
-                                    <span class="text-gray-600 font-semibold">ر.س</span>
+                                <div class="rounded-xl p-4 mb-4 text-center" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(34, 197, 94, 0.2);">
+                                    <span class="text-3xl font-black text-green-500">{{ number_format($project->price, 2) }}</span>
+                                    <span class="text-gray-400 font-semibold">ر.س</span>
                                 </div>
                                 @endif
 
@@ -169,8 +169,8 @@
                             @endif
 
                             {{-- Request Similar --}}
-                            <div class="rounded-2xl p-6 border border-gray-100" style="background: {{ config('colors.primary_05') }};">
-                                <h3 class="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                            <div class="rounded-2xl p-6" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
+                                <h3 class="text-lg font-bold text-white mb-3 flex items-center gap-2">
                                     <i class="fas fa-rocket" style="color: {{ config('colors.primary') }};"></i>
                                     هل أعجبك المشروع؟
                                 </h3>
@@ -185,7 +185,7 @@
                                         <span>اطلب تصميم مشابه</span>
                                     </a>
                                     <a href="{{ route('portfolio') }}"
-                                       class="flex items-center justify-center gap-2 w-full bg-white text-gray-700 font-semibold py-3 px-6 rounded-xl border border-gray-200 hover:border-gray-300 transition-colors">
+                                       class="flex items-center justify-center gap-2 w-full text-gray-300 font-semibold py-3 px-6 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">
                                         <i class="fas fa-th-large"></i>
                                         <span>عودة للمعرض</span>
                                     </a>
@@ -193,8 +193,8 @@
                             </div>
 
                             {{-- Share --}}
-                            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-                                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <div class="rounded-2xl p-6" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
+                                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
                                     <i class="fas fa-share-alt" style="color: {{ config('colors.primary') }};"></i>
                                     شارك المشروع
                                 </h3>

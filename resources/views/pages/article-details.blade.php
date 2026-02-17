@@ -47,7 +47,7 @@
 
     {{-- Featured Image --}}
     @if($article->featured_image)
-    <section class="py-12 bg-gray-50">
+    <section class="py-12" style="background: #0f1419;">
         <div class="container mx-auto px-6">
             <div class="max-w-5xl mx-auto">
                 <div class="rounded-2xl overflow-hidden shadow-xl">
@@ -61,12 +61,12 @@
     @endif
 
     {{-- Article Content --}}
-    <section class="py-16 bg-white">
+    <section class="py-16" style="background: #0f1419;">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto">
                 {{-- Share Buttons --}}
-                <div class="flex items-center justify-between mb-12 pb-8 border-b border-gray-200">
-                    <span class="text-gray-600 font-bold">شارك المقال:</span>
+                <div class="flex items-center justify-between mb-12 pb-8 border-b border-white/10">
+                    <span class="text-white font-bold">شارك المقال:</span>
                     <div class="flex items-center gap-2">
                         <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('articles.show', $article)) }}&text={{ urlencode($article->title) }}" 
                            target="_blank"
@@ -96,16 +96,16 @@
                 </div>
 
                 {{-- Article Body --}}
-                <article class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-teal-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-lg">
+                <article class="prose prose-lg max-w-none prose-invert prose-headings:text-white prose-headings:font-bold prose-p:text-gray-300 prose-p:leading-relaxed prose-a:text-teal-400 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-lg">
                     {!! $article->content !!}
                 </article>
 
                 {{-- Share Bottom --}}
-                <div class="mt-12 pt-8 border-t border-gray-200">
+                <div class="mt-12 pt-8 border-t border-white/10">
                     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
                         <div>
-                            <p class="text-gray-900 font-bold">هل أعجبك هذا المقال؟</p>
-                            <p class="text-gray-500 text-sm">شاركه مع أصدقائك!</p>
+                            <p class="text-white font-bold">هل أعجبك هذا المقال؟</p>
+                            <p class="text-gray-400 text-sm">شاركه مع أصدقائك!</p>
                         </div>
                         <div class="flex items-center gap-3">
                             <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('articles.show', $article)) }}&text={{ urlencode($article->title) }}" 
@@ -129,16 +129,16 @@
 
     {{-- Related Articles --}}
     @if($relatedArticles && $relatedArticles->count() > 0)
-    <section class="py-20 bg-gray-50">
+    <section class="py-20" style="background: #0a0d14;">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
                 <span class="text-sm font-bold uppercase tracking-wider" style="color: {{ config('colors.primary') }};">مقالات ذات صلة</span>
-                <h2 class="text-3xl md:text-4xl font-black text-gray-900 mt-2">اقرأ المزيد</h2>
+                <h2 class="text-3xl md:text-4xl font-black text-white mt-2">اقرأ المزيد</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 @foreach($relatedArticles as $related)
-                <article class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all">
+                <article class="group rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                     <div class="relative aspect-video overflow-hidden">
                         @if($related->featured_image)
                         <img src="{{ Storage::url($related->featured_image) }}" 
@@ -155,7 +155,7 @@
                         <div class="text-sm text-gray-500 mb-2">
                             {{ $related->published_at->format('Y/m/d') }}
                         </div>
-                        <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-gray-600 transition-colors">
+                        <h3 class="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-gray-300 transition-colors">
                             <a href="{{ route('articles.show', $related) }}">{{ $related->title }}</a>
                         </h3>
                         <a href="{{ route('articles.show', $related) }}" class="inline-flex items-center gap-2 text-sm font-semibold" style="color: {{ config('colors.primary') }};">
