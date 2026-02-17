@@ -45,10 +45,10 @@
                     </div>
                 </div>
                 <div class="relative reveal-scale">
-                    <div class="rounded-2xl overflow-hidden shadow-2xl animate-pulse-glow">
+                    <div class="rounded-2xl overflow-hidden shadow-2xl">
                         <div class="aspect-video flex items-center justify-center" style="background: {{ config('colors.bg_dark') }};">
                             <div class="text-center text-white">
-                                <i class="fas fa-code text-8xl mb-4 animate-bounce" style="color: {{ config('colors.primary_light') }};"></i>
+                                <i class="fas fa-code text-8xl mb-4" style="color: {{ config('colors.primary_light') }};"></i>
                                 <h3 class="text-2xl font-bold">نبني المستقبل الرقمي</h3>
                             </div>
                         </div>
