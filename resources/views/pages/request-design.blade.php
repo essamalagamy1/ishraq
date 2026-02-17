@@ -45,7 +45,7 @@
                     <div class="p-8 space-y-8">
                         {{-- Personal Info --}}
                         <div>
-                            <h3 class="text-lg font-bold text-gray-700 mb-4 flex items-center gap-2">
+                            <h3 class="text-lg font-bold  mb-4 flex items-center gap-2">
                                 <i class="fas fa-user" style="color: {{ config('colors.primary') }};"></i>
                                 المعلومات الشخصية
                             </h3>
@@ -79,7 +79,7 @@
 
                         {{-- Project Details --}}
                         <div class="p-6 rounded-xl" style="background: {{ config('colors.primary_05') }};">
-                            <h3 class="text-lg font-bold text-gray-700 mb-4 flex items-center gap-2">
+                            <h3 class="text-lg font-bold  mb-4 flex items-center gap-2">
                                 <i class="fas fa-layer-group" style="color: {{ config('colors.primary') }};"></i>
                                 تفاصيل المشروع
                             </h3>
