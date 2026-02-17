@@ -197,14 +197,15 @@
     <!-- AOS (Animate On Scroll) JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- Initialize AOS with Light Settings -->
+    <!-- Initialize AOS with Optimized Settings -->
     <script>
         AOS.init({
-            duration: 600, // Reduced from 1000 for snappier feel
+            duration: 400, // Very fast for performance
             easing: 'ease-out',
             once: true,
             offset: 50,
-            disable: window.innerWidth < 768, // Disable on mobile for performance
+            // Instead of fully disabling, we just make it instant on mobile
+            duration: window.innerWidth < 768 ? 0 : 400, 
         });
     </script>
     
@@ -222,18 +223,19 @@
             }
         });
         
-        // ultra-light reveal using Intersection Observer (Native & Fastest)
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
+        // Universal Light Reveal using Intersection Observer
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                    observer.unobserve(entry.target); // Stop watching after reveal
+                    entry.target.classList.add('revealed', 'active', 'aos-animate');
+                    revealObserver.unobserve(entry.target); 
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        document.querySelectorAll('.reveal-light').forEach(el => observer.observe(el));
+        // Watch all animation classes and AOS elements
+        const selectors = '.reveal, .reveal-on-scroll, .reveal-scale, .reveal-light, [data-aos]';
+        document.querySelectorAll(selectors).forEach(el => revealObserver.observe(el));
         
         // Counter Animation for Statistics
         function animateCounters() {
