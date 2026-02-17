@@ -490,35 +490,37 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','{{ $analyticsSettings->gtm_container_id }}');
         @endif
+    </script>
+
     <script>
-        // High-Performance Loader Hider
-        window.addEventListener('load', function() {
+        // Use a more robust and faster way to hide the loader
+        function hideLoader() {
             const loader = document.getElementById('page-loader');
             const content = document.getElementById('app-content');
             
-            if (loader) {
+            if (loader && loader.style.display !== 'none') {
                 loader.style.opacity = '0';
                 if (content) content.style.opacity = '1';
                 
                 setTimeout(() => {
                     loader.style.display = 'none';
-                    document.body.style.overflow = 'auto'; // Restore scroll
-                }, 600);
-            }
-        });
-
-        // Safety timeout (Force reveal after 4s icons or assets fail)
-        setTimeout(() => {
-            const loader = document.getElementById('page-loader');
-            if (loader && loader.style.display !== 'none') {
-                loader.style.opacity = '0';
-                document.getElementById('app-content').style.opacity = '1';
-                setTimeout(() => {
-                    loader.style.display = 'none';
                     document.body.style.overflow = 'auto';
                 }, 600);
             }
-        }, 4000);
+        }
+
+        // Hide when DOM is ready (Faster than window.onload)
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', hideLoader);
+        } else {
+            hideLoader();
+        }
+
+        // Final fallback for slow assets
+        window.addEventListener('load', hideLoader);
+        
+        // Safety absolute timeout
+        setTimeout(hideLoader, 3000);
     </script>
 </body>
 </html>
