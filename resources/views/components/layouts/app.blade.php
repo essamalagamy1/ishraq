@@ -16,6 +16,23 @@
     @endif
 
 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- SEO Meta Tags -->
+    <title>{{ $seo->meta_title ?? 'إشراق | تطوير مواقع وتطبيقات احترافية - حلول برمجية متكاملة' }}</title>
+    <meta name="description" content="{{ $seo->meta_description ?? 'إشراق شريكك في التحول الرقمي. نطور مواقع ويب وتطبيقات جوال احترافية بأحدث التقنيات.' }}">
+    <meta name="keywords" content="تطوير مواقع, تطبيقات جوال, إشراق, حلول برمجية">
+    <link rel="canonical" href="{{ url()->current() }}">
+    
+    <!-- Favicon -->
+    @if(isset($companySettings) && $companySettings->favicon_path)
+        <link rel="icon" href="{{ Storage::url($companySettings->favicon_path) }}">
+    @else
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    @endif
+
     <!-- Preconnect to critical origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
