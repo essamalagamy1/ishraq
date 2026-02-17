@@ -67,17 +67,19 @@
     </style>
 
     <!-- Post-load CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" media="print" onload="this.media='all'">
+    <!-- Core UI Resources (Non-blocking but faster) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
+    <!-- Core Local CSS (Critical for Dark Mode & Layout) -->
     <link rel="stylesheet" href="{{ asset('css/css.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dark-mode-override.css') }}">
     <link rel="stylesheet" href="{{ asset('css/light-animations.css') }}">
 
-    <!-- Non-blocking Tailwind -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+    <!-- External Secondary CSS (Deferred) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" media="print" onload="this.media='all'">
 
     <style>
         :root {

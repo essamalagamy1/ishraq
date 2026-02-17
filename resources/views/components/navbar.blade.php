@@ -13,7 +13,7 @@
     <div class="container mx-auto px-6 py-4 relative z-10">
         <div class="flex items-center justify-between">
             {{-- Logo المُشرق --}}
-            <div class="flex items-center" data-aos="fade-left">
+            <div class="flex items-center">
                 <a href="{{ route('home') }}" class="flex items-center group relative">
                     @if(isset($companySettings) && $companySettings->logo_path)
                         {{-- Dynamic logo from database --}}
@@ -36,7 +36,7 @@
             </div>
 
             {{-- Desktop Navigation مع تأثيرات مُشرقة --}}
-            <div class="hidden lg:flex lg:items-center lg:gap-2" data-aos="fade-down" data-aos-delay="100">
+            <div class="hidden lg:flex lg:items-center lg:gap-2">
                 <a href="{{ route('home') }}"
                    class="nav-link-glowing relative font-bold transition-all duration-500 px-5 py-2.5 rounded-xl group overflow-hidden
                           {{ request()->routeIs('home') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
@@ -127,7 +127,7 @@
             </div>
 
             {{-- Mobile Menu Button مُشرق --}}
-            <button id="mobile-menu-button" aria-label="فتح القائمة" class="lg:hidden text-white hover:text-yellow-200 p-3 rounded-xl hover:bg-white/10 transition-all duration-300 group" data-aos="fade-right">
+            <button id="mobile-menu-button" aria-label="فتح القائمة" class="lg:hidden text-white hover:text-yellow-200 p-3 rounded-xl hover:bg-white/10 transition-all duration-300 group">
                 <i class="fas fa-bars text-2xl group-hover:rotate-180 transition-transform duration-500"></i>
             </button>
         </div>
