@@ -163,7 +163,7 @@
     <div id="page-loader">
         <div class="flex flex-col items-center gap-4">
             <div class="spinner"></div>
-            <div class="text-[#FF6B35] font-bold tracking-widest text-xs uppercase animate-pulse">Loading</div>
+            <div class="text-[#FF6B35] font-bold tracking-widest text-xs uppercase animate-pulse">جاري التحميل...</div>
         </div>
     </div>
 
