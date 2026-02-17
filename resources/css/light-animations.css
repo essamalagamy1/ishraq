@@ -1,0 +1,35 @@
+/* ============================================
+   ULTRA-LIGHT ANIMATIONS (PERFORMANCE FOCUS)
+   ============================================ */
+
+/* Simple Fade Up - Minimal CSS */
+.reveal-light {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform; /* Optimization for GPU */
+}
+
+.reveal-light.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Base Fade In */
+.fade-in-light {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.fade-in-light.revealed {
+    opacity: 1;
+}
+
+/* Reduced Motion Support for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .reveal-light, .fade-in-light {
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

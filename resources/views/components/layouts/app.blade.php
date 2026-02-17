@@ -117,6 +117,7 @@
     </style>
     <link rel="stylesheet" href="{{ asset('css/css.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dark-mode-override.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/light-animations.css') }}">
 
     <!-- JSON-LD Structured Data -->
     @php
@@ -196,14 +197,14 @@
     <!-- AOS (Animate On Scroll) JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- Initialize AOS -->
+    <!-- Initialize AOS with Light Settings -->
     <script>
         AOS.init({
-            duration: 1000,
-            easing: 'ease-out-cubic',
+            duration: 600, // Reduced from 1000 for snappier feel
+            easing: 'ease-out',
             once: true,
-            offset: 100,
-            delay: 50,
+            offset: 50,
+            disable: window.innerWidth < 768, // Disable on mobile for performance
         });
     </script>
     
@@ -221,37 +222,18 @@
             }
         });
         
-        // Enhanced Reveal on Scroll
-        function revealOnScroll() {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(element => {
-                const windowHeight = window.innerHeight;
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < windowHeight - elementVisible) {
-                    element.classList.add('active');
+        // ultra-light reveal using Intersection Observer (Native & Fastest)
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target); // Stop watching after reveal
                 }
             });
-            
-            // Reveal on scroll elements
-            const scrollReveals = document.querySelectorAll('.reveal-on-scroll, .reveal-scale');
-            scrollReveals.forEach((element, index) => {
-                const windowHeight = window.innerHeight;
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 100;
-                
-                if (elementTop < windowHeight - elementVisible) {
-                    // Add staggered delay based on index within visible viewport
-                    setTimeout(() => {
-                        element.classList.add('revealed');
-                    }, (index % 4) * 100);
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); // Initial check
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-light').forEach(el => observer.observe(el));
         
         // Counter Animation for Statistics
         function animateCounters() {
