@@ -44,8 +44,9 @@
         <link rel="preload" as="image" href="{{ Storage::url($companySettings->logo_path) }}" fetchpriority="high">
     @endif
 
-    <!-- Google Fonts with display=swap -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- Google Fonts with explicit preload and swap -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet" display="swap">
     
     <!-- Critical CSS (Inlined for speed) -->
     <style>
@@ -66,17 +67,24 @@
         body input, body textarea, body select { background-color: rgba(255,255,255,0.05) !important; color: white !important; }
     </style>
 
-    <!-- Post-load CSS -->
-    <!-- Core UI Resources (Non-blocking but faster) -->
+    <!-- Post-load CSS (Essential Inlined) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
-    <!-- Core Local CSS (Critical for Dark Mode & Layout) -->
-    <link rel="stylesheet" href="{{ asset('css/css.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/dark-mode-override.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/light-animations.css') }}">
+    <style>
+        /* INLINED CSS FOR PERFORMANCE & ZERO CLS */
+        @php 
+            echo file_get_contents(public_path('css/css.css'));
+            echo file_get_contents(public_path('css/dark-mode-override.css'));
+            echo file_get_contents(public_path('css/light-animations.css'));
+        @endphp
+        
+        /* Layout Shift Prevention */
+        .navbar-modern { min-height: 80px; }
+        .logo-img { width: 150px; height: 60px; object-fit: contain; }
+        #app-content { min-height: 100vh; }
+    </style>
 
-    <!-- External Secondary CSS (Deferred) -->
+    <!-- Deferred External CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" media="print" onload="this.media='all'">
@@ -114,9 +122,7 @@
             --color-primary-30: {{ config('colors.primary_30') }};
         }
     </style>
-    <link rel="stylesheet" href="{{ asset('css/css.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/dark-mode-override.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/light-animations.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
 
     <!-- JSON-LD Structured Data -->
     @php
