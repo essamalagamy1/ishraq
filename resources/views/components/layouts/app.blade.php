@@ -145,18 +145,35 @@
     </script>
     <script async src="https://analytics.test/js/analytics.js"></script>
     @endif
-    {{-- {!! CookieConsent::styles() !!} --}}
+    <style>
+        #page-loader { background: #0a0d14; position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease-out; }
+        .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.05); border-top: 4px solid #FF6B35; border-radius: 50%; animation: spin 0.8s linear infinite; box-shadow: 0 0 15px rgba(255,107,53,0.2); }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #app-content { opacity: 0; transition: opacity 0.8s ease-in-out; }
+    </style>
 </head>
-<body class="font-sans antialiased text-white" dir="rtl" style="font-family: 'Tajawal', sans-serif; background: #0a0d14;">
-    <div class="min-h-screen" style="background: #0a0d14;">
-        <x-navbar />
+<body class="font-sans antialiased text-white" dir="rtl" style="font-family: 'Tajawal', sans-serif; background: #0a0d14; overflow: hidden;">
+    <!-- Premium Loader -->
+    <div id="page-loader">
+        <div class="flex flex-col items-center gap-4">
+            <div class="spinner"></div>
+            <div class="text-[#FF6B35] font-bold tracking-widest text-xs uppercase animate-pulse">Loading</div>
+        </div>
+    </div>
 
-        <!-- Page Content -->
-        <main class="mt-12">
-            {{ $slot }}
-        </main>
+    <!-- Main Content Wrapper -->
+    <div id="app-content">
+        <div class="min-h-screen" style="background: #0a0d14;">
+            <x-navbar />
 
-        <x-footer />
+            <!-- Page Content -->
+            <main class="mt-12">
+                {{ $slot }}
+            </main>
+
+            <x-footer />
+        </div>
+    </div>
 
         {{-- Floating WhatsApp Button --}}
         @php
@@ -467,8 +484,35 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','{{ $analyticsSettings->gtm_container_id }}');
         @endif
+    <script>
+        // High-Performance Loader Hider
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('page-loader');
+            const content = document.getElementById('app-content');
+            
+            if (loader) {
+                loader.style.opacity = '0';
+                if (content) content.style.opacity = '1';
+                
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    document.body.style.overflow = 'auto'; // Restore scroll
+                }, 600);
+            }
+        });
+
+        // Safety timeout (Force reveal after 4s icons or assets fail)
+        setTimeout(() => {
+            const loader = document.getElementById('page-loader');
+            if (loader && loader.style.display !== 'none') {
+                loader.style.opacity = '0';
+                document.getElementById('app-content').style.opacity = '1';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 600);
+            }
+        }, 4000);
     </script>
-    
-    {{-- {!! CookieConsent::scripts() !!} --}}
 </body>
 </html>
