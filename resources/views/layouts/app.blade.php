@@ -21,7 +21,7 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-gray-50">
+<body class="font-sans antialiased" style="background: #0a0d14;">
     <div class="min-h-screen">
         <!-- Dynamic data passed to navbar component -->
         <x-navbar />

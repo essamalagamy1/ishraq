@@ -30,7 +30,7 @@
     </section>
 
     {{-- Main Contact Section --}}
-    <section class="py-20 bg-gray-50">
+    <section class="py-20" style="background: #0f1419;">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
                 
@@ -38,21 +38,21 @@
                 <div class="lg:col-span-2 space-y-6">
                     <div>
                         <span class="text-sm font-bold tracking-wider uppercase" style="color: {{ config('colors.primary') }};">معلومات التواصل</span>
-                        <h2 class="text-3xl font-black text-gray-900 mt-2">كيف يمكننا مساعدتك؟</h2>
+                        <h2 class="text-3xl font-black text-white mt-2">كيف يمكننا مساعدتك؟</h2>
                     </div>
 
                     {{-- Contact Cards - Dynamic from $companySettings --}}
                     <div class="space-y-4">
                         @if($companySettings && $companySettings->main_email)
-                        <div class="bg-white rounded-xl p-5 border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all">
+                        <div class="rounded-xl p-5 hover:shadow-md transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                             <div class="flex items-start gap-4">
                                 <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style="background: {{ config('colors.primary_10') }};">
                                     <i class="fas fa-envelope" style="color: {{ config('colors.primary') }};"></i>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-gray-900 mb-1">البريد الإلكتروني</h3>
+                                    <h3 class="font-bold text-white mb-1">البريد الإلكتروني</h3>
                                     {{-- Dynamic email from database --}}
-                                    <a href="mailto:{{ $companySettings->main_email }}" class="text-gray-600 hover:underline">
+                                    <a href="mailto:{{ $companySettings->main_email }}" class="text-gray-300 hover:underline">
                                         {{ $companySettings->main_email }}
                                     </a>
                                 </div>
@@ -61,15 +61,15 @@
                         @endif
 
                         @if($companySettings && $companySettings->whatsapp_number)
-                        <div class="bg-white rounded-xl p-5 border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all">
+                        <div class="rounded-xl p-5 hover:shadow-md transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                             <div class="flex items-start gap-4">
                                 <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style="background: rgba(34, 197, 94, 0.1);">
                                     <i class="fab fa-whatsapp text-green-500"></i>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-gray-900 mb-1">واتساب</h3>
+                                    <h3 class="font-bold text-white mb-1">واتساب</h3>
                                     {{-- Dynamic WhatsApp from database --}}
-                                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companySettings->whatsapp_number) }}" class="text-gray-600 hover:underline">
+                                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companySettings->whatsapp_number) }}" class="text-gray-300 hover:underline">
                                         <span dir="ltr">{{ $companySettings->whatsapp_number }}</span>
                                     </a>
                                 </div>
@@ -78,15 +78,15 @@
                         @endif
 
                         @if($companySettings && $companySettings->location_text)
-                        <div class="bg-white rounded-xl p-5 border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all">
+                        <div class="rounded-xl p-5 hover:shadow-md transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                             <div class="flex items-start gap-4">
                                 <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style="background: rgba(239, 68, 68, 0.1);">
                                     <i class="fas fa-map-marker-alt text-red-500"></i>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-gray-900 mb-1">الموقع</h3>
+                                    <h3 class="font-bold text-white mb-1">الموقع</h3>
                                     {{-- Dynamic location from database --}}
-                                    <p class="text-gray-600">{{ $companySettings->location_text }}</p>
+                                    <p class="text-gray-300">{{ $companySettings->location_text }}</p>
                                 </div>
                             </div>
                         </div>
@@ -96,12 +96,12 @@
                     {{-- Social Links - Dynamic from $socialLinks --}}
                     @if($socialLinks && $socialLinks->count() > 0)
                     <div class="pt-6">
-                        <h3 class="font-bold text-gray-900 mb-4">تابعنا</h3>
+                        <h3 class="font-bold text-white mb-4">تابعنا</h3>
                         <div class="flex gap-3">
                             @foreach($socialLinks as $link)
-                            <a href="{{ $link->url }}" target="_blank" class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all">
+                            <a href="{{ $link->url }}" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center transition-all" style="background: rgba(255, 255, 255, 0.05); hover:background: rgba(255, 255, 255, 0.1);">
                                 @if(str_contains(strtolower($link->platform), 'twitter') || str_contains(strtolower($link->platform), 'x'))
-                                    <i class="fab fa-x-twitter text-gray-600"></i>
+                                    <i class="fab fa-x-twitter text-gray-300"></i>
                                 @elseif(str_contains(strtolower($link->platform), 'facebook'))
                                     <i class="fab fa-facebook-f text-gray-600"></i>
                                 @elseif(str_contains(strtolower($link->platform), 'instagram'))
@@ -134,20 +134,20 @@
                     </div>
                     @endif
 
-                    <form action="{{ route('contact.store') }}" method="POST" class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                    <form action="{{ route('contact.store') }}" method="POST" class="rounded-2xl p-8 shadow-sm" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                         @csrf
-                        <h3 class="text-2xl font-bold text-gray-900 mb-6">أرسل رسالتك</h3>
+                        <h3 class="text-2xl font-bold text-white mb-6">أرسل رسالتك</h3>
                         
                         <div class="space-y-5">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
-                                    <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">الاسم الكامل</label>
+                                    <label for="name" class="block text-sm font-semibold text-gray-300 mb-2">الاسم الكامل</label>
                                     <input type="text" name="name" id="name" required
                                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-100 focus:outline-none transition-all"
                                            placeholder="اسمك الكامل">
                                 </div>
                                 <div>
-                                    <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">البريد الإلكتروني</label>
+                                    <label for="email" class="block text-sm font-semibold text-gray-300 mb-2">البريد الإلكتروني</label>
                                     <input type="email" name="email" id="email" required
                                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-100 focus:outline-none transition-all"
                                            placeholder="example@email.com">
@@ -155,14 +155,14 @@
                             </div>
                             
                             <div>
-                                <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">رقم الجوال <span class="text-gray-400 font-normal">(اختياري)</span></label>
+                                <label for="phone" class="block text-sm font-semibold text-gray-300 mb-2">رقم الجوال <span class="text-gray-400 font-normal">(اختياري)</span></label>
                                 <input type="tel" name="phone" id="phone"
                                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-100 focus:outline-none transition-all"
                                        placeholder="+966 XX XXX XXXX">
                             </div>
                             
                             <div>
-                                <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">الرسالة</label>
+                                <label for="message" class="block text-sm font-semibold text-gray-300 mb-2">الرسالة</label>
                                 <textarea name="message" id="message" rows="5" required
                                           class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-100 focus:outline-none transition-all resize-none"
                                           placeholder="اكتب رسالتك هنا..."></textarea>

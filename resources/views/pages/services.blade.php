@@ -34,17 +34,17 @@
     </section>
 
     {{-- Services Grid - Bento Style --}}
-    <section class="py-24 bg-gray-50">
+    <section class="py-24" style="background: #0f1419;">
         <div class="container mx-auto px-6">
             {{-- Section Header --}}
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
                 <div>
                     <span class="text-sm font-bold tracking-wider uppercase" style="color: {{ config('colors.primary') }};">ما نقدمه</span>
-                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 mt-2">
+                    <h2 class="text-4xl md:text-5xl font-black text-white mt-2">
                         خدمات متخصصة
                     </h2>
                 </div>
-                <p class="text-gray-600 max-w-md text-lg">
+                <p class="text-gray-300 max-w-md text-lg">
                     نقدم مجموعة شاملة من الحلول التقنية المصممة خصيصاً لتلبية احتياجات عملك
                 </p>
             </div>
@@ -53,7 +53,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($services as $index => $service)
                 {{-- Service Card - Dynamic from database --}}
-                <div class="group relative bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-transparent hover:shadow-2xl transition-all duration-500 ">
+                <div class="group relative rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                     {{-- Top Accent Line --}}
                     <div class="absolute top-0 left-0 right-0 h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" style="background: linear-gradient(to right, {{ config('colors.primary') }}, {{ config('colors.primary_light') }});"></div>
                     
@@ -65,12 +65,12 @@
                         </div>
 
                         {{-- Dynamic title from database --}}
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-gray-700 transition-colors">
+                        <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-gray-300 transition-colors">
                             {{ $service->title }}
                         </h3>
 
                         {{-- Dynamic description from database --}}
-                        <p class="text-gray-600 leading-relaxed mb-6">
+                        <p class="text-gray-300 leading-relaxed mb-6">
                             {!! Str::limit(strip_tags($service->description), 120) !!}
                         </p>
 
@@ -78,7 +78,7 @@
                         @if($service->features->count() > 0)
                         <ul class="space-y-2 mb-8">
                             @foreach($service->features->take($index === 0 ? 5 : 3) as $feature)
-                            <li class="flex items-center text-gray-700 text-sm">
+                            <li class="flex items-center text-gray-400 text-sm">
                                 <span class="w-1.5 h-1.5 rounded-full mr-3" style="background: {{ config('colors.primary') }};"></span>
                                 {{ $feature->feature_text }}
                             </li>
@@ -100,11 +100,11 @@
     </section>
 
     {{-- Process Section - Timeline Style --}}
-    <section class="py-24 bg-white">
+    <section class="py-24" style="background: #16213e;">
         <div class="container mx-auto px-6">
             <div class="text-center mb-20">
                 <span class="text-sm font-bold tracking-wider uppercase" style="color: {{ config('colors.primary') }};">كيف نعمل</span>
-                <h2 class="text-4xl md:text-5xl font-black text-gray-900 mt-2">
+                <h2 class="text-4xl md:text-5xl font-black text-white mt-2">
                     خطوات بسيطة نحو النجاح
                 </h2>
             </div>
@@ -121,8 +121,8 @@
                         <div class="w-12 h-12 rounded-full mx-auto mb-6 flex items-center justify-center text-white font-bold text-lg relative z-10" style="background: {{ config('colors.primary') }};">
                             1
                         </div>
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">التواصل</h3>
-                        <p class="text-gray-600 text-sm">تواصل معنا واخبرنا عن مشروعك</p>
+                        <h3 class="text-lg font-bold text-white mb-2">التواصل</h3>
+                        <p class="text-gray-300 text-sm">تواصل معنا واخبرنا عن مشروعك</p>
                     </div>
 
                     {{-- Step 2 --}}
@@ -130,8 +130,8 @@
                         <div class="w-12 h-12 rounded-full mx-auto mb-6 flex items-center justify-center text-white font-bold text-lg relative z-10" style="background: {{ config('colors.primary') }};">
                             2
                         </div>
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">الدراسة</h3>
-                        <p class="text-gray-600 text-sm">ندرس احتياجاتك ونضع خطة عمل</p>
+                        <h3 class="text-lg font-bold text-white mb-2">الدراسة</h3>
+                        <p class="text-gray-300 text-sm">ندرس احتياجاتك ونضع خطة عمل</p>
                     </div>
 
                     {{-- Step 3 --}}
@@ -139,8 +139,8 @@
                         <div class="w-12 h-12 rounded-full mx-auto mb-6 flex items-center justify-center text-white font-bold text-lg relative z-10" style="background: {{ config('colors.primary') }};">
                             3
                         </div>
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">التنفيذ</h3>
-                        <p class="text-gray-600 text-sm">نبدأ العمل مع تحديثات مستمرة</p>
+                        <h3 class="text-lg font-bold text-white mb-2">التنفيذ</h3>
+                        <p class="text-gray-300 text-sm">نبدأ العمل مع تحديثات مستمرة</p>
                     </div>
 
                     {{-- Step 4 --}}
@@ -148,8 +148,8 @@
                         <div class="w-12 h-12 rounded-full mx-auto mb-6 flex items-center justify-center text-white font-bold text-lg relative z-10" style="background: {{ config('colors.primary') }};">
                             4
                         </div>
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">التسليم</h3>
-                        <p class="text-gray-600 text-sm">نسلمك المشروع جاهزاً مع الدعم</p>
+                        <h3 class="text-lg font-bold text-white mb-2">التسليم</h3>
+                        <p class="text-gray-300 text-sm">نسلمك المشروع جاهزاً مع الدعم</p>
                     </div>
                 </div>
             </div>

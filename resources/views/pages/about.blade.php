@@ -30,15 +30,15 @@
     </section>
 
     {{-- Our Story Section with Animations --}}
-    <section class="py-24 bg-white">
+    <section class="py-24" style="background: #0f1419;">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="reveal-on-scroll">
                     <span class="text-sm font-bold uppercase tracking-wider" style="color: {{ config('colors.primary') }};">قصتنا</span>
-                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 mt-2 mb-6">
+                    <h2 class="text-4xl md:text-5xl font-black text-white mt-2 mb-6">
                         رحلة نحو التميز التقني
                     </h2>
-                    <div class="space-y-6 text-gray-600 text-lg leading-relaxed">
+                    <div class="space-y-6 text-gray-300 text-lg leading-relaxed">
                         <p>انطلقت رحلتنا من شغف حقيقي بعالم التقنية والبرمجيات.</p>
                         <p>اليوم، أصبحنا فريقاً متكاملاً من المبدعين والمطورين.</p>
                         <p>نؤمن بأن النجاح الحقيقي يُقاس بنجاح عملائنا.</p>
@@ -59,30 +59,30 @@
     </section>
 
     {{-- Mission & Vision --}}
-    <section class="py-24 bg-gray-50">
+    <section class="py-24" style="background: #16213e;">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <span class="text-sm font-bold uppercase tracking-wider" style="color: {{ config('colors.primary') }};">رسالتنا ورؤيتنا</span>
-                <h2 class="text-4xl md:text-5xl font-black text-gray-900 mt-2">ما يحركنا</h2>
+                <h2 class="text-4xl md:text-5xl font-black text-white mt-2">ما يحركنا</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                <div class="rounded-2xl p-8 shadow-lg" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);">
                     <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
                         <i class="fas fa-bullseye text-2xl" style="color: {{ config('colors.primary') }};"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">رسالتنا</h3>
-                    <p class="text-gray-600 leading-relaxed">
+                    <h3 class="text-2xl font-bold text-white mb-4">رسالتنا</h3>
+                    <p class="text-gray-300 leading-relaxed">
                         تمكين الشركات والأفراد من تحقيق أهدافهم الرقمية من خلال تقديم حلول برمجية مبتكرة وعالية الجودة، مع الالتزام بأعلى معايير الاحترافية والشفافية.
                     </p>
                 </div>
 
-                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                <div class="rounded-2xl p-8 shadow-lg" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);">
                     <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
                         <i class="fas fa-eye text-2xl" style="color: {{ config('colors.primary') }};"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">رؤيتنا</h3>
-                    <p class="text-gray-600 leading-relaxed">
+                    <h3 class="text-2xl font-bold text-white mb-4">رؤيتنا</h3>
+                    <p class="text-gray-300 leading-relaxed">
                         أن نكون الشريك التقني الأول والأكثر ثقة في المنطقة العربية، ونساهم في بناء مستقبل رقمي أفضل من خلال الابتكار والتميز في كل ما نقدمه.
                     </p>
                 </div>
@@ -91,44 +91,44 @@
     </section>
 
     {{-- Core Values --}}
-    <section class="py-24 bg-white">
+    <section class="py-24" style="background: #0f1419;">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <span class="text-sm font-bold uppercase tracking-wider" style="color: {{ config('colors.primary') }};">قيمنا</span>
-                <h2 class="text-4xl md:text-5xl font-black text-gray-900 mt-2">ما يميزنا</h2>
+                <h2 class="text-4xl md:text-5xl font-black text-white mt-2">ما يميزنا</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-lg transition-all">
+                <div class="text-center p-8 rounded-2xl hover:shadow-lg transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                     <div class="w-16 h-16 mx-auto rounded-xl flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
                         <i class="fas fa-lightbulb text-2xl" style="color: {{ config('colors.primary') }};"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">الابتكار</h3>
-                    <p class="text-gray-600 text-sm">نسعى دائماً لإيجاد حلول إبداعية ومبتكرة</p>
+                    <h3 class="text-xl font-bold text-white mb-3">الابتكار</h3>
+                    <p class="text-gray-400 text-sm">نسعى دائماً لإيجاد حلول إبداعية ومبتكرة</p>
                 </div>
 
-                <div class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-lg transition-all">
+                <div class="text-center p-8 rounded-2xl hover:shadow-lg transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                     <div class="w-16 h-16 mx-auto rounded-xl flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
                         <i class="fas fa-gem text-2xl" style="color: {{ config('colors.primary') }};"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">الجودة</h3>
-                    <p class="text-gray-600 text-sm">لا نقبل بأقل من الأفضل في كل مشروع</p>
+                    <h3 class="text-xl font-bold text-white mb-3">الجودة</h3>
+                    <p class="text-gray-400 text-sm">لا نقبل بأقل من الأفضل في كل مشروع</p>
                 </div>
 
-                <div class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-lg transition-all">
+                <div class="text-center p-8 rounded-2xl hover:shadow-lg transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                     <div class="w-16 h-16 mx-auto rounded-xl flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
                         <i class="fas fa-handshake text-2xl" style="color: {{ config('colors.primary') }};"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">الشفافية</h3>
-                    <p class="text-gray-600 text-sm">نبني علاقات قائمة على الثقة والوضوح</p>
+                    <h3 class="text-xl font-bold text-white mb-3">الشفافية</h3>
+                    <p class="text-gray-400 text-sm">نبني علاقات قائمة على الثقة والوضوح</p>
                 </div>
 
-                <div class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-lg transition-all">
+                <div class="text-center p-8 rounded-2xl hover:shadow-lg transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                     <div class="w-16 h-16 mx-auto rounded-xl flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
                         <i class="fas fa-clock text-2xl" style="color: {{ config('colors.primary') }};"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">الالتزام</h3>
-                    <p class="text-gray-600 text-sm">نحترم المواعيد ونلتزم بما نعد به</p>
+                    <h3 class="text-xl font-bold text-white mb-3">الالتزام</h3>
+                    <p class="text-gray-400 text-sm">نحترم المواعيد ونلتزم بما نعد به</p>
                 </div>
             </div>
         </div>

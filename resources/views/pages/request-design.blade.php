@@ -20,7 +20,7 @@
     </section>
 
     {{-- Form Section --}}
-    <section class="py-20 bg-gray-50">
+    <section class="py-20" style="background: #0f1419;">
         <div class="container mx-auto px-6">
             <div class="max-w-3xl mx-auto">
                 @if(session('success'))
@@ -33,13 +33,13 @@
                 </div>
                 @endif
 
-                <form action="{{ route('request-design.store') }}" method="POST" enctype="multipart/form-data" class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <form action="{{ route('request-design.store') }}" method="POST" enctype="multipart/form-data" class="rounded-2xl shadow-sm overflow-hidden" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                     @csrf
                     
                     {{-- Form Header --}}
-                    <div class="p-8 border-b border-gray-100">
-                        <h2 class="text-2xl font-bold text-gray-900">معلومات المشروع</h2>
-                        <p class="text-gray-600 mt-1">أكمل جميع الحقول المطلوبة</p>
+                    <div class="p-8" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                        <h2 class="text-2xl font-bold text-white">معلومات المشروع</h2>
+                        <p class="text-gray-400 mt-1">أكمل جميع الحقول المطلوبة</p>
                     </div>
 
                     <div class="p-8 space-y-8">
@@ -51,7 +51,7 @@
                             </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">الاسم الكامل <span class="text-red-500">*</span></label>
+                                    <label class="block text-sm font-semibold text-gray-300 mb-2">الاسم الكامل <span class="text-red-500">*</span></label>
                                     <input type="text" name="full_name" required
                                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-100 focus:outline-none transition-all"
                                            placeholder="اسمك الكامل">
@@ -131,7 +131,7 @@
                     </div>
 
                     {{-- Submit --}}
-                    <div class="p-8 bg-gray-50 border-t border-gray-100">
+                    <div class="p-8" style="background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.1);">
                         <button type="submit" class="cursor-pointer w-full text-white font-bold py-4 px-6 rounded-xl hover:opacity-90 transition-all flex items-center justify-center gap-2 text-lg" style="background: {{ config('colors.primary') }};">
                             <i class="fas fa-paper-plane"></i>
                             <span>إرسال الطلب</span>

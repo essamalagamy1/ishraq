@@ -3,6 +3,7 @@
 
 @import 'tailwindcss';
 @import './custom.css';
+@import './dark-mode.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -107,36 +108,36 @@ html {
 }
 
 /* ============================================
-   CUSTOM SCROLLBAR - Teal Theme
+   CUSTOM SCROLLBAR - Dark Theme with #FF6B35
    ============================================ */
 ::-webkit-scrollbar {
     width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #0A1628;
+    background: #0a0d14;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #0D9488, #14B8A6);
+    background: linear-gradient(180deg, #FF6B35, #ff8c5a);
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #0F766E, #0D9488);
+    background: linear-gradient(180deg, #ff5722, #FF6B35);
 }
 
 /* ============================================
-   SELECTION COLOR - Teal
+   SELECTION COLOR - #FF6B35
    ============================================ */
 ::selection {
-    background: rgba(13, 148, 136, 0.3);
-    color: #0A1628;
+    background: rgba(255, 107, 53, 0.4);
+    color: #ffffff;
 }
 
 ::-moz-selection {
-    background: rgba(13, 148, 136, 0.3);
-    color: #0A1628;
+    background: rgba(255, 107, 53, 0.4);
+    color: #ffffff;
 }
 
 /* ============================================
@@ -152,7 +153,7 @@ body {
    FOCUS STYLES - Accessibility
    ============================================ */
 :focus-visible {
-    outline: 2px solid #0D9488;
+    outline: 2px solid #FF6B35;
     outline-offset: 2px;
 }
 

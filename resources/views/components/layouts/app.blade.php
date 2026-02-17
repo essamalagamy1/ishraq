@@ -116,6 +116,7 @@
         }
     </style>
     <link rel="stylesheet" href="{{ asset('css/css.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dark-mode-override.css') }}">
 
     <!-- JSON-LD Structured Data -->
     @php
@@ -146,8 +147,8 @@
     @endif
     {{-- {!! CookieConsent::styles() !!} --}}
 </head>
-<body class="font-sans antialiased" dir="rtl" style="font-family: 'Tajawal', sans-serif;">
-    <div class="min-h-screen bg-gray-50">
+<body class="font-sans antialiased text-white" dir="rtl" style="font-family: 'Tajawal', sans-serif; background: #0a0d14;">
+    <div class="min-h-screen" style="background: #0a0d14;">
         <x-navbar />
 
         <!-- Page Content -->

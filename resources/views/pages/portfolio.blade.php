@@ -43,21 +43,21 @@
 
     {{-- Filter Bar - Dynamic from $projectTypes --}}
     @if(isset($projectTypes) && $projectTypes->count() > 0)
-    <section class="py-6 bg-white border-b border-gray-100 sticky top-20 z-40">
+    <section class="py-6 border-b sticky top-20 z-40" style="background: #0f1419; border-color: rgba(255, 255, 255, 0.1);">
         <div class="container mx-auto px-6">
             <div class="flex flex-wrap items-center gap-3 justify-center">
                 {{-- All Projects - Dynamic filter --}}
                 <a href="{{ route('portfolio') }}" 
-                   class="px-5 py-2.5 rounded-full font-semibold text-sm transition-all {{ !$selectedType ? 'text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}"
-                   style="{{ !$selectedType ? 'background: ' . config('colors.primary') . ';' : '' }}">
+                   class="px-5 py-2.5 rounded-full font-semibold text-sm transition-all {{ !$selectedType ? 'text-white' : 'text-gray-300 hover:text-white' }}"
+                   style="{{ !$selectedType ? 'background: ' . config('colors.primary') . ';' : 'background: rgba(255, 255, 255, 0.05);' }}">
                     الكل
                 </a>
                 
                 {{-- Type Filters - Dynamic from database --}}
                 @foreach($projectTypes as $type)
                 <a href="{{ route('portfolio', ['type' => $type->slug]) }}" 
-                   class="px-5 py-2.5 rounded-full font-semibold text-sm transition-all {{ $selectedType === $type->slug ? 'text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}"
-                   style="{{ $selectedType === $type->slug ? 'background: ' . $type->color . ';' : '' }}">
+                   class="px-5 py-2.5 rounded-full font-semibold text-sm transition-all {{ $selectedType === $type->slug ? 'text-white' : 'text-gray-300 hover:text-white' }}"
+                   style="{{ $selectedType === $type->slug ? 'background: ' . $type->color . ';' : 'background: rgba(255, 255, 255, 0.05);' }}">
                     @if($type->icon)<i class="{{ $type->icon }} ml-1 text-xs"></i>@endif
                     {{ $type->name }}
                 </a>
@@ -68,14 +68,14 @@
     @endif
 
     {{-- Projects Masonry Grid - Dynamic from $projects --}}
-    <section class="py-16 bg-gray-50">
+    <section class="py-16" style="background: #0f1419;">
         <div class="container mx-auto px-6">
             @if(isset($projects) && count($projects) > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($projects as $index => $project)
                 {{-- Project Card - Dynamic from database --}}
                 <a href="{{ route('projects.show', $project) }}" 
-                   class="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+                   class="group block rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                     {{-- Image - Dynamic from database --}}
                     <div class="relative overflow-hidden">
                         <img src="{{ Storage::url($project->main_image) }}" 
@@ -107,13 +107,13 @@
                     {{-- Content --}}
                     <div class="p-6">
                         {{-- Dynamic title from database --}}
-                        <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-gray-600 transition-colors">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-gray-300 transition-colors">
                             {{ $project->title }}
                         </h3>
                         {{-- Dynamic description from database --}}
-                        <p class="text-gray-500 text-sm line-clamp-2">{{ $project->short_description }}</p>
+                        <p class="text-gray-400 text-sm line-clamp-2">{{ $project->short_description }}</p>
                         
-                        <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+                        <div class="flex items-center justify-between mt-4 pt-4" style="border-top: 1px solid rgba(255, 255, 255, 0.1);">
                             <span class="text-xs text-gray-400">
                                 {{ $project->created_at->format('Y/m/d') }}
                             </span>
@@ -137,8 +137,8 @@
                 <div class="w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
                     <i class="fas fa-folder-open text-4xl" style="color: {{ config('colors.primary') }};"></i>
                 </div>
-                <h3 class="text-2xl font-bold text-gray-900 mb-2">لا توجد مشاريع</h3>
-                <p class="text-gray-600">لم نعثر على مشاريع تطابق بحثك</p>
+                <h3 class="text-2xl font-bold text-white mb-2">لا توجد مشاريع</h3>
+                <p class="text-gray-400">لم نعثر على مشاريع تطابق بحثك</p>
             </div>
             @endif
         </div>

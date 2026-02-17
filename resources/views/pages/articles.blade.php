@@ -22,12 +22,12 @@
     </section>
 
     {{-- Articles Grid with Animations --}}
-    <section class="py-16 bg-gray-50">
+    <section class="py-16" style="background: #0f1419;">
         <div class="container mx-auto px-6">
             @if(isset($articles) && $articles->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($articles as $article)
-                <article class="reveal-scale group bg-white rounded-2xl overflow-hidden card-hover border border-gray-100">
+                <article class="reveal-scale group rounded-2xl overflow-hidden card-hover" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                     <div class="relative aspect-[16/10] overflow-hidden">
                         @if($article->featured_image)
                         <img src="{{ Storage::url($article->featured_image) }}" 
@@ -62,13 +62,13 @@
                         </div>
 
                         {{-- Dynamic title from database --}}
-                        <h2 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-gray-700 transition-colors">
+                        <h2 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-gray-300 transition-colors">
                             <a href="{{ route('articles.show', $article) }}">{{ $article->title }}</a>
                         </h2>
 
                         {{-- Dynamic excerpt from database --}}
                         @if($article->excerpt)
-                        <p class="text-gray-600 text-sm line-clamp-2 mb-4">{{ $article->excerpt }}</p>
+                        <p class="text-gray-400 text-sm line-clamp-2 mb-4">{{ $article->excerpt }}</p>
                         @endif
 
                         <a href="{{ route('articles.show', $article) }}" class="inline-flex items-center gap-2 font-semibold text-sm transition-all group-hover:gap-3" style="color: {{ config('colors.primary') }};">
@@ -92,8 +92,8 @@
                 <div class="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4" style="background: {{ config('colors.primary_10') }};">
                     <i class="fas fa-newspaper text-3xl" style="color: {{ config('colors.primary') }};"></i>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">لا توجد مقالات حالياً</h3>
-                <p class="text-gray-600">عد قريباً لقراءة مقالات جديدة</p>
+                <h3 class="text-xl font-bold text-white mb-2">لا توجد مقالات حالياً</h3>
+                <p class="text-gray-400">عد قريباً لقراءة مقالات جديدة</p>
             </div>
             @endif
         </div>

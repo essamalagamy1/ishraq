@@ -132,22 +132,22 @@
 
     {{-- Services Section - Enhanced Bento Grid --}}
     @if(isset($services) && count($services) > 0)
-    <section class="services-section py-28 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+    <section class="services-section py-28 relative overflow-hidden" style="background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 100%);">
         {{-- Animated Background Decoration --}}
-        <div class="absolute top-0 right-0 w-96 h-96 rounded-full opacity-5 animate-blob" style="background: {{ config('colors.primary') }}; filter: blur(100px);"></div>
-        <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-5 animate-blob animation-delay-2000" style="background: {{ config('colors.accent_blue') }}; filter: blur(100px);"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10 animate-blob" style="background: {{ config('colors.primary') }}; filter: blur(100px);"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-10 animate-blob animation-delay-2000" style="background: {{ config('colors.accent_blue') }}; filter: blur(100px);"></div>
         
         <div class="container mx-auto px-6 relative z-10">
             {{-- Section Header --}}
             <div class="text-center mb-20 reveal-on-scroll">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: {{ config('colors.primary_10') }};">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(255, 107, 53, 0.15);">
                     <div class="w-2 h-2 rounded-full" style="background: {{ config('colors.primary') }};"></div>
                     <span class="text-sm font-bold" style="color: {{ config('colors.primary') }};">خدماتنا المميزة</span>
                 </div>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
                     حلول <span style="color: {{ config('colors.primary') }};">تقنية</span> متخصصة
                 </h2>
-                <p class="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+                <p class="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
                     نقدم مجموعة شاملة من الخدمات التقنية لتحويل أفكارك إلى منتجات رقمية ناجحة
                 </p>
             </div>
@@ -155,9 +155,9 @@
             {{-- Bento Grid with Enhanced Animations --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-on-scroll">
                 @foreach($services as $index => $service)
-                <div class="service-card group relative bg-white rounded-3xl p-8 border border-gray-100 overflow-hidden {{ $index === 0 ? 'md:col-span-2 lg:col-span-1' : '' }}" style="animation-delay: {{ $index * 0.1 }}s;">
+                <div class="service-card group relative rounded-3xl p-8 border overflow-hidden {{ $index === 0 ? 'md:col-span-2 lg:col-span-1' : '' }}" style="background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.08); animation-delay: {{ $index * 0.1 }}s;">
                     {{-- Animated Gradient Overlay --}}
-                    <div class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" style="background: linear-gradient(135deg, {{ config('colors.primary_05') }}, {{ config('colors.primary_10') }});"></div>
+                    <div class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(255, 107, 53, 0.15));"></div>
 
                     {{-- Shine Effect --}}
                     <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
@@ -171,8 +171,8 @@
                         </div>
 
                         {{-- Content --}}
-                        <h3 class="text-xl font-bold text-gray-900 mb-4 transition-colors duration-300">{{ $service->title }}</h3>
-                        <p class="text-gray-600 mb-6 line-clamp-3 leading-relaxed">{!! Str::limit(strip_tags($service->description), 120) !!}</p>
+                        <h3 class="text-xl font-bold text-white mb-4 transition-colors duration-300">{{ $service->title }}</h3>
+                        <p class="text-gray-300 mb-6 line-clamp-3 leading-relaxed">{!! Str::limit(strip_tags($service->description), 120) !!}</p>
 
                         {{-- CTA Link with Arrow Animation --}}
                         <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companySettings->whatsapp_number ?? '') }}"
@@ -273,18 +273,18 @@
     @endif
 
     {{-- Why Choose Us - Horizontal Cards --}}
-    <section class="py-28 bg-white relative overflow-hidden">
+    <section class="py-28 relative overflow-hidden" style="background: #0f1419;">
         {{-- Background Pattern --}}
         <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient({{ config('colors.primary') }} 1px, transparent 1px); background-size: 40px 40px;"></div>
         
         <div class="container mx-auto px-6 relative z-10">
             {{-- Section Header --}}
             <div class="text-center mb-20 reveal-on-scroll">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: {{ config('colors.primary_10') }};">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(255, 107, 53, 0.15);">
                     <i class="fas fa-star text-sm" style="color: {{ config('colors.primary') }};"></i>
                     <span class="text-sm font-bold" style="color: {{ config('colors.primary') }};">لماذا نحن</span>
                 </div>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
                     لماذا تختار <span style="color: {{ config('colors.primary') }};">{{ $companySettings->name ?? 'إشراق' }}</span>
                 </h2>
             </div>
@@ -292,16 +292,16 @@
             {{-- Features Grid --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto reveal-on-scroll">
                 @foreach($features as $index => $feature)
-                <div class="feature-card group flex items-start gap-6 p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:bg-white hover:border-transparent" style="animation-delay: {{ $index * 0.1 }}s;">
+                <div class="feature-card group flex items-start gap-6 p-8 rounded-3xl border hover:border-transparent" style="background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.08); animation-delay: {{ $index * 0.1 }}s;">
                     {{-- Icon --}}
                     <div class="feature-icon flex-shrink-0 w-16 h-16 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, {{ config('colors.primary') }}, {{ config('colors.primary_light') }});">
                         <i class="{{ $feature->icon }} text-2xl text-white"></i>
                     </div>
-                    
+
                     {{-- Content --}}
                     <div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $feature->title }}</h3>
-                        <p class="text-gray-600 leading-relaxed">{{ $feature->description }}</p>
+                        <h3 class="text-xl font-bold text-white mb-2">{{ $feature->title }}</h3>
+                        <p class="text-gray-300 leading-relaxed">{{ $feature->description }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -311,15 +311,15 @@
 
     {{-- Testimonials - Modern Cards --}}
     @if(isset($testimonials) && count($testimonials) > 0)
-    <section class="py-28 relative overflow-hidden" style="background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);">
+    <section class="py-28 relative overflow-hidden" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
         <div class="container mx-auto px-6 relative z-10">
             {{-- Section Header --}}
             <div class="text-center mb-20 reveal-on-scroll">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: {{ config('colors.primary_10') }};">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(255, 107, 53, 0.15);">
                     <i class="fas fa-quote-right text-sm" style="color: {{ config('colors.primary') }};"></i>
                     <span class="text-sm font-bold" style="color: {{ config('colors.primary') }};">آراء عملائنا</span>
                 </div>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
                     ماذا يقول <span style="color: {{ config('colors.primary') }};">عملاؤنا</span>
                 </h2>
             </div>
@@ -330,31 +330,31 @@
                     <div class="swiper-wrapper pb-4">
                         @foreach($testimonials as $testimonial)
                         <div class="swiper-slide">
-                            <div class="testimonial-card bg-white rounded-3xl p-8 border border-gray-100 h-full shadow-lg">
+                            <div class="testimonial-card rounded-3xl p-8 border h-full shadow-lg" style="background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.08);">
                                 {{-- Quote Icon --}}
-                                <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
+                                <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background: rgba(255, 107, 53, 0.15);">
                                     <i class="fas fa-quote-right text-xl" style="color: {{ config('colors.primary') }};"></i>
                                 </div>
-                                
+
                                 {{-- Stars --}}
                                 <div class="flex gap-1 mb-6">
                                     @for($i = 1; $i <= 5; $i++)
                                     <i class="fas fa-star text-lg {{ $i <= $testimonial->rating ? '' : 'opacity-30' }}" style="color: {{ config('colors.accent_yellow') }};"></i>
                                     @endfor
                                 </div>
-                                
+
                                 {{-- Content --}}
-                                <p class="text-gray-700 mb-8 leading-relaxed text-lg">{{ $testimonial->testimonial }}</p>
-                                
+                                <p class="text-gray-300 mb-8 leading-relaxed text-lg">{{ $testimonial->testimonial }}</p>
+
                                 {{-- Author --}}
-                                <div class="flex items-center gap-4 pt-6 border-t border-gray-100">
+                                <div class="flex items-center gap-4 pt-6 border-t" style="border-color: rgba(255, 255, 255, 0.1);">
                                     <div class="w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-lg" style="background: linear-gradient(135deg, {{ config('colors.primary') }}, {{ config('colors.primary_light') }});">
                                         {{ mb_substr($testimonial->client_name, 0, 1) }}
                                     </div>
                                     <div>
-                                        <p class="font-bold text-gray-900 text-lg">{{ $testimonial->client_name }}</p>
+                                        <p class="font-bold text-white text-lg">{{ $testimonial->client_name }}</p>
                                         @if($testimonial->client_position)
-                                        <p class="text-gray-500 text-sm">{{ $testimonial->client_position }}</p>
+                                        <p class="text-gray-400 text-sm">{{ $testimonial->client_position }}</p>
                                         @endif
                                     </div>
                                 </div>
@@ -387,16 +387,16 @@
 
     {{-- Latest Articles - Magazine Style --}}
     @if(isset($latestArticles) && $latestArticles->count() > 0)
-    <section class="py-28 bg-white relative overflow-hidden">
+    <section class="py-28 relative overflow-hidden" style="background: #0f1419;">
         <div class="container mx-auto px-6 relative z-10">
             {{-- Section Header --}}
             <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16 reveal-on-scroll">
                 <div>
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: {{ config('colors.primary_10') }};">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(255, 107, 53, 0.15);">
                         <i class="fas fa-newspaper text-sm" style="color: {{ config('colors.primary') }};"></i>
                         <span class="text-sm font-bold" style="color: {{ config('colors.primary') }};">المدونة</span>
                     </div>
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900">
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white">
                         أحدث <span style="color: {{ config('colors.primary') }};">المقالات</span>
                     </h2>
                 </div>
@@ -409,7 +409,7 @@
             {{-- Articles Grid --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal-on-scroll">
                 @foreach($latestArticles as $index => $article)
-                <article class="article-card group bg-gray-50 rounded-3xl overflow-hidden {{ $index === 0 ? 'md:col-span-2 lg:col-span-1' : '' }}">
+                <article class="article-card group rounded-3xl overflow-hidden border {{ $index === 0 ? 'md:col-span-2 lg:col-span-1' : '' }}" style="background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.08);">
                     {{-- Image --}}
                     <div class="aspect-video overflow-hidden relative">
                         @if($article->featured_image)
@@ -417,23 +417,23 @@
                              alt="{{ $article->title }}"
                              class="article-image w-full h-full object-cover">
                         @else
-                        <div class="w-full h-full flex items-center justify-center" style="background: {{ config('colors.bg_dark') }};">
+                        <div class="w-full h-full flex items-center justify-center" style="background: rgba(0, 0, 0, 0.3);">
                             <i class="fas fa-file-alt text-5xl text-white/30"></i>
                         </div>
                         @endif
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     </div>
-                    
+
                     {{-- Content --}}
                     <div class="p-8">
-                        <div class="flex items-center gap-3 text-sm text-gray-500 mb-4">
+                        <div class="flex items-center gap-3 text-sm text-gray-400 mb-4">
                             <i class="fas fa-calendar-alt"></i>
                             <span>{{ $article->published_at->format('Y/m/d') }}</span>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4 line-clamp-2 group-hover:text-opacity-80 transition-colors">
+                        <h3 class="text-xl font-bold text-white mb-4 line-clamp-2 group-hover:text-opacity-80 transition-colors">
                             <a href="{{ route('articles.show', $article) }}">{{ $article->title }}</a>
                         </h3>
-                        <a href="{{ route('articles.show', $article) }}" 
+                        <a href="{{ route('articles.show', $article) }}"
                            class="inline-flex items-center gap-2 font-semibold transition-all duration-300 group-hover:gap-4" style="color: {{ config('colors.primary') }};">
                             <span>اقرأ المزيد</span>
                             <i class="fas fa-arrow-left text-sm"></i>

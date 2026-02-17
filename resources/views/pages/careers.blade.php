@@ -19,7 +19,7 @@
     </section>
 
     {{-- Application Form --}}
-    <section class="py-16 bg-gray-50">
+    <section class="py-16" style="background: #0f1419;">
         <div class="container mx-auto px-6">
             <div class="max-w-3xl mx-auto">
                 {{-- Success Message --}}
@@ -33,7 +33,7 @@
                 @endif
 
                 {{-- Form Card --}}
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <div class="rounded-2xl shadow-xl overflow-hidden" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                     <div class="p-8 border-b border-gray-100" style="background: linear-gradient(135deg, {{ config('colors.primary') }} 0%, {{ config('colors.primary_light') }} 100%);">
                         <h2 class="text-3xl font-bold text-white mb-2">قدّم طلبك الآن</h2>
                         <p class="text-teal-50">املأ النموذج أدناه وسنتواصل معك في أقرب وقت</p>
@@ -45,7 +45,7 @@
                         <div class="grid md:grid-cols-2 gap-6 mb-6">
                             {{-- Name --}}
                             <div>
-                                <label for="name" class="block text-gray-700 font-semibold mb-2">
+                                <label for="name" class="block text-gray-300 font-semibold mb-2">
                                     <i class="fas fa-user text-teal-600 ml-2"></i>
                                     الاسم الكامل
                                 </label>
@@ -173,28 +173,28 @@
 
                 {{-- Info Section --}}
                 <div class="mt-12 grid md:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="p-6 rounded-xl shadow-md text-center" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                         <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-users text-teal-600 text-2xl"></i>
                         </div>
-                        <h3 class="font-bold text-gray-900 mb-2">فريق متميز</h3>
-                        <p class="text-gray-600 text-sm">انضم لفريق من المحترفين المبدعين</p>
+                        <h3 class="font-bold text-white mb-2">فريق متميز</h3>
+                        <p class="text-gray-400 text-sm">انضم لفريق من المحترفين المبدعين</p>
                     </div>
 
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="p-6 rounded-xl shadow-md text-center" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                         <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-rocket text-teal-600 text-2xl"></i>
                         </div>
-                        <h3 class="font-bold text-gray-900 mb-2">مشاريع مبتكرة</h3>
-                        <p class="text-gray-600 text-sm">اعمل على مشاريع تقنية متطورة</p>
+                        <h3 class="font-bold text-white mb-2">مشاريع مبتكرة</h3>
+                        <p class="text-gray-400 text-sm">اعمل على مشاريع تقنية متطورة</p>
                     </div>
 
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="p-6 rounded-xl shadow-md text-center" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                         <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-chart-line text-teal-600 text-2xl"></i>
                         </div>
-                        <h3 class="font-bold text-gray-900 mb-2">تطوير مستمر</h3>
-                        <p class="text-gray-600 text-sm">فرص للنمو والتعلم المستمر</p>
+                        <h3 class="font-bold text-white mb-2">تطوير مستمر</h3>
+                        <p class="text-gray-400 text-sm">فرص للنمو والتعلم المستمر</p>
                     </div>
                 </div>
             </div>
