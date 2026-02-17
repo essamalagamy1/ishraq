@@ -16,71 +16,51 @@
     @endif
 
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-
-    <!-- Preconnect to CDN origins -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://unpkg.com" crossorigin>
-
-    <!-- SEO Meta Tags -->
-    <title>{{ $seo->meta_title ?? 'إشراق | تطوير مواقع وتطبيقات احترافية - حلول برمجية متكاملة' }}</title>
-    <meta name="description" content="{{ $seo->meta_description ?? 'إشراق شريكك في التحول الرقمي. نطور مواقع ويب وتطبيقات جوال احترافية بأحدث التقنيات. أكثر من 200 مشروع منجز، حلول برمجية متكاملة، ودعم فني متواصل. ابدأ مشروعك الآن.' }}">
-    <meta name="keywords" content="تطوير مواقع, تطبيقات جوال, إشراق, حلول برمجية, شركة برمجة, تصميم مواقع, React, Laravel, Flutter, تطوير تطبيقات">
-    <meta name="author" content="إشراق">
-    <link rel="canonical" href="{{ url()->current() }}">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="{{ $seo->og_title ?? $seo->meta_title ?? 'إشراق | تطوير مواقع وتطبيقات احترافية - حلول برمجية متكاملة' }}">
-    <meta property="og:description" content="{{ $seo->og_description ?? $seo->meta_description ?? 'شريكك في التحول الرقمي - نطور مواقع ويب وتطبيقات جوال احترافية بأحدث التقنيات. ابدأ مشروعك الآن.' }}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:site_name" content="إشراق">
-    
-    <!-- Favicon -->
-    @if(isset($companySettings) && $companySettings->favicon_path)
-        @php
-            $faviconUrl = Storage::url($companySettings->favicon_path);
-            $faviconExtension = pathinfo($companySettings->favicon_path, PATHINFO_EXTENSION);
-            $faviconMime = match(strtolower($faviconExtension)) {
-                'svg' => 'image/svg+xml',
-                'png' => 'image/png',
-                'jpg', 'jpeg' => 'image/jpeg',
-                'gif' => 'image/gif',
-                'webp' => 'image/webp',
-                default => 'image/x-icon',
-            };
-        @endphp
-        <link rel="icon" type="{{ $faviconMime }}" href="{{ $faviconUrl }}" sizes="any">
-        <link rel="icon" type="{{ $faviconMime }}" href="{{ $faviconUrl }}" sizes="32x32">
-        <link rel="icon" type="{{ $faviconMime }}" href="{{ $faviconUrl }}" sizes="16x16">
-        <link rel="apple-touch-icon" href="{{ $faviconUrl }}" sizes="180x180">
-    @else
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-        <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    @endif
-    
-    <!-- Google Fonts - Tajawal (Premium Arabic Font) -->
+    <!-- Preconnect to critical origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Preload LCP Image (Logo) -->
+    @if(isset($companySettings) && $companySettings->logo_path)
+        <link rel="preload" as="image" href="{{ Storage::url($companySettings->logo_path) }}" fetchpriority="high">
+    @endif
+
+    <!-- Google Fonts with display=swap -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Critical CSS (Inlined for speed) -->
+    <style>
+        :root {
+            --color-primary: {{ config('colors.primary') }};
+            --color-primary-light: {{ config('colors.primary_light') }};
+            --color-bg-dark: #0a0d14;
+        }
+        body { 
+            background-color: #0a0d14; 
+            color: white; 
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .min-h-screen { min-height: 100vh; }
+        /* Inline critical dark mode styles */
+        body input, body textarea, body select { background-color: rgba(255,255,255,0.05) !important; color: white !important; }
+    </style>
 
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Post-load CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" media="print" onload="this.media='all'">
+    
+    <link rel="stylesheet" href="{{ asset('css/css.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dark-mode-override.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/light-animations.css') }}">
 
-    <!-- Fancybox CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" />
-
-    <!-- AOS (Animate On Scroll) CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Non-blocking Tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
 
     <style>
         :root {
@@ -188,14 +168,10 @@
         @endif
     </div>
     
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    <!-- Fancybox JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js"></script>
-
-    <!-- AOS (Animate On Scroll) JS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- External Scripts - All Deferred -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
 
     <!-- Initialize AOS with Optimized Settings -->
     <script>
