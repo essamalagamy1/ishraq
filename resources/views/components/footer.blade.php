@@ -4,9 +4,9 @@
 <footer class="relative overflow-hidden text-white" style="background: {{ config('colors.bg_dark') }};">
     {{-- Animated Background Glow --}}
     <div class="absolute inset-0 opacity-30">
-        <div class="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
+        <div class="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl "
              style="background: radial-gradient(circle, {{ config('colors.primary_30') }}, transparent);"></div>
-        <div class="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl "
              style="background: radial-gradient(circle, {{ config('colors.accent_yellow') }}33, transparent); animation-delay: 1s;"></div>
     </div>
 
@@ -60,7 +60,7 @@
             {{-- Quick Links with Animated Icons --}}
             <div data-aos="fade-up" data-aos-delay="100">
                 <h4 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                    <span class="w-1 h-6 rounded-full animate-pulse" style="background: linear-gradient(180deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }});"></span>
+                    <span class="w-1 h-6 rounded-full " style="background: linear-gradient(180deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }});"></span>
                     روابط سريعة
                 </h4>
                 <ul class="space-y-3">
@@ -119,15 +119,15 @@
             {{-- Services - Dynamic --}}
             <div data-aos="fade-up" data-aos-delay="200">
                 <h4 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                    <span class="w-1 h-6 rounded-full animate-pulse" style="background: linear-gradient(180deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }}); animation-delay: 0.5s;"></span>
+                    <span class="w-1 h-6 rounded-full " style="background: linear-gradient(180deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }}); animation-delay: 0.5s;"></span>
                     خدماتنا
                 </h4>
                 <ul class="space-y-3">
                     @if(isset($footerServices) && $footerServices->count() > 0)
                         @foreach($footerServices as $service)
-                        <li class="flex items-center gap-2 text-gray-400 group">
-                            <i class="fas fa-sparkles text-xs transition-all duration-300 group-hover:text-yellow-400 group-hover:animate-pulse"
-                               style="color: {{ config('colors.primary_light') }};"></i>
+                        <li class="group flex items-center gap-2 text-gray-400 hover:text-white transition-all duration-300">
+                            <i class="fas fa-chevron-left text-xs opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+                               style="color: {{ config('colors.accent_yellow') }};"></i>
                             <span class="group-hover:text-white transition-colors duration-300">{{ $service->title }}</span>
                         </li>
                         @endforeach
@@ -159,7 +159,7 @@
             {{-- Contact Info - Dynamic --}}
             <div data-aos="fade-up" data-aos-delay="300">
                 <h4 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                    <span class="w-1 h-6 rounded-full animate-pulse" style="background: linear-gradient(180deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }}); animation-delay: 1s;"></span>
+                    <span class="w-1 h-6 rounded-full " style="background: linear-gradient(180deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }}); animation-delay: 1s;"></span>
                     تواصل معنا
                 </h4>
                 <ul class="space-y-4">
@@ -194,7 +194,7 @@
                 @if(isset($socialLinks) && count($socialLinks) > 0)
                 <div class="mt-6">
                     <h5 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                        <i class="fas fa-heart animate-pulse" style="color: {{ config('colors.accent_yellow') }};"></i>
+                        <i class="fas fa-heart " style="color: {{ config('colors.accent_yellow') }};"></i>
                         تابعنا
                     </h5>
                     <div class="flex gap-3 flex-wrap">

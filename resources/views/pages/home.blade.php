@@ -1,4 +1,485 @@
 <x-layouts.app>
+    <style>
+        /* ============================================
+           HERO SECTION - ULTRA SMOOTH ANIMATIONS
+           ============================================ */
+
+        /* Gradient Orbs - GPU Accelerated */
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: float 20s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .gradient-orb-1 {
+            width: 500px;
+            height: 500px;
+            background: {{ config('colors.primary') }};
+            top: -10%;
+            right: -5%;
+            animation-delay: 0s;
+        }
+
+        .gradient-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: {{ config('colors.accent_blue') }};
+            bottom: -10%;
+            left: -5%;
+            animation-delay: 5s;
+        }
+
+        .gradient-orb-3 {
+            width: 350px;
+            height: 350px;
+            background: {{ config('colors.primary_light') }};
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(20px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, -20px) scale(0.9); }
+            75% { transform: translate(30px, 20px) scale(1.05); }
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: {{ config('colors.primary_light') }};
+            opacity: 0.3;
+            animation: float-gentle 8s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        /* Hero Badge Animation */
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .pulse-icon {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(255, 107, 53, 0); }
+        }
+
+        /* Hero Title Animation */
+        .hero-title {
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .gradient-text {
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Hero Subtitle Animation */
+        .hero-subtitle {
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        /* Hero CTA Animation */
+        .hero-cta {
+            animation: fadeInUp 0.8s ease-out 0.6s forwards;
+            opacity: 0;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, {{ config('colors.primary') }}, {{ config('colors.primary_dark') }});
+            box-shadow: 0 10px 30px -5px rgba(255, 107, 53, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .cta-primary:hover::before {
+            transform: translateX(100%);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -5px rgba(255, 107, 53, 0.5);
+        }
+
+        /* Hero Visual Animations */
+        .hero-visual {
+            animation: fadeInRight 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+
+        .main-card {
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            transform-style: preserve-3d;
+        }
+
+        .main-card:hover {
+            transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8);
+        }
+
+        .card-icon {
+            animation: icon-bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes icon-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .tech-icon {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* Floating Cards - Smooth 3D Animation */
+        .floating-card {
+            animation: float-card 6s ease-in-out infinite;
+            transition: all 0.3s ease;
+            will-change: transform;
+        }
+
+        .floating-card:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .floating-card-1 {
+            animation-delay: 0s;
+        }
+
+        .floating-card-2 {
+            animation-delay: 2s;
+        }
+
+        .floating-card-3 {
+            animation-delay: 4s;
+        }
+
+        @keyframes float-card {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            animation: fadeIn 1s ease-out 1s forwards;
+            opacity: 0;
+        }
+
+        .scroll-dot {
+            animation: scroll-down 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll-down {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(16px); opacity: 0; }
+        }
+
+        /* ============================================
+           REVEAL ON SCROLL - OPTIMIZED
+           ============================================ */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+            transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Blob Animation for Backgrounds */
+        @keyframes blob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(20px, -20px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.9); }
+            75% { transform: translate(20px, 10px) scale(1.05); }
+        }
+
+        .animate-blob {
+            animation: blob 20s infinite ease-in-out;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        /* ============================================
+           KEYFRAME DEFINITIONS
+           ============================================ */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ============================================
+           SWIPER CUSTOMIZATION
+           ============================================ */
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: #cbd5e1;
+            opacity: 1;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .swiper-pagination-bullet-active {
+            background: {{ config('colors.primary') }};
+            width: 32px;
+            border-radius: 6px;
+        }
+
+        /* ============================================
+           UTILITY CLASSES
+           ============================================ */
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Performance Optimization */
+        .hero-section,
+        .services-section,
+        .main-card,
+        .floating-card,
+        .gradient-orb {
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ============================================
+           SERVICE CARDS - PREMIUM INTERACTIONS
+           ============================================ */
+        .service-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border-color: transparent;
+        }
+
+        .service-icon {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-icon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .service-card:hover .service-icon::after {
+            transform: translateX(100%);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 10px 25px -5px rgba(255, 107, 53, 0.4);
+        }
+
+        /* ============================================
+           PROJECT CARDS - ADVANCED HOVER EFFECTS
+           ============================================ */
+        .project-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        .project-image {
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.15) rotate(2deg);
+        }
+
+        /* ============================================
+           FEATURE CARDS - MAGNETIC EFFECT
+           ============================================ */
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.15) rotate(-8deg);
+            box-shadow: 0 8px 20px -4px rgba(255, 107, 53, 0.4);
+        }
+
+        .feature-icon {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ============================================
+           TESTIMONIAL CARDS - SMOOTH LIFT
+           ============================================ */
+        .testimonial-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ============================================
+           CTA SECTION - PULSING EFFECT
+           ============================================ */
+        .cta-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cta-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-icon {
+            animation: icon-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes icon-pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        /* ============================================
+           ARTICLE CARDS - ELEGANT TRANSITIONS
+           ============================================ */
+        .article-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-image {
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .article-card:hover .article-image {
+            transform: scale(1.1) rotate(1deg);
+        }
+
+        /* ============================================
+           PARALLAX SCROLL EFFECT (LIGHTWEIGHT)
+           ============================================ */
+        @supports (transform: translateZ(0)) {
+            .parallax-light {
+                will-change: transform;
+                transition: transform 0.3s ease-out;
+            }
+        }
+
+        /* Reduce Motion for Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+
     {{-- Hero Section - Ultra Professional Design --}}
     <section class="min-h-screen flex items-center relative overflow-hidden hero-section" style="background: linear-gradient(145deg, #0a0a1f 0%, #161637 50%, #1a1a3e 100%);">
         {{-- Animated Gradient Orbs - GPU Accelerated --}}
@@ -22,16 +503,16 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 {{-- Content Side --}}
                 <div class="text-white order-2 lg:order-1">
-                    @if($heroSection && $heroSection->badge_text)
-                    <div class="hero-badge inline-flex items-center gap-3 px-5 py-2.5 rounded-full mb-8" style="animation-delay: 0.1s;">
-                        @if($heroSection->badge_icon)
-                        <div class="w-8 h-8 rounded-full flex items-center justify-center pulse-icon" style="background: {{ config('colors.primary') }};">
-                            <i class="{{ $heroSection->badge_icon }} text-white text-sm"></i>
-                        </div>
-                        @endif
-                        <span class="text-sm font-bold tracking-wide" style="color: {{ config('colors.primary_lighter') }};">{{ $heroSection->badge_text }}</span>
-                    </div>
-                    @endif
+{{--                    @if($heroSection && $heroSection->badge_text)--}}
+{{--                    <div class="hero-badge inline-flex items-center gap-3 px-5 py-2.5 rounded-full mb-8" style="animation-delay: 0.1s;">--}}
+{{--                        @if($heroSection->badge_icon)--}}
+{{--                        <div class="w-8 h-8 rounded-full flex items-center justify-center pulse-icon" style="background: {{ config('colors.primary') }};">--}}
+{{--                            <i class="{{ $heroSection->badge_icon }} text-white text-sm"></i>--}}
+{{--                        </div>--}}
+{{--                        @endif--}}
+{{--                        <span class="text-sm font-bold tracking-wide" style="color: {{ config('colors.primary_lighter') }};">{{ $heroSection->badge_text }}</span>--}}
+{{--                    </div>--}}
+{{--                    @endif--}}
 
                     @if($heroSection)
                     <h1 class="hero-title text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-8 leading-[1.1]" style="animation-delay: 0.2s;">
@@ -492,7 +973,7 @@
                     <a href="{{ route('contact') }}" 
                        class="group inline-flex items-center justify-center gap-3 text-white font-bold py-5 px-10 rounded-2xl border-2 border-white/20 hover:border-white/50 hover:bg-white/10 transition-all duration-300">
                         <i class="fas fa-comments"></i>
-                        <span>تحدث مع خبير</span>
+                        <span>تواصل معنا</span>
                     </a>
                 </div>
 
@@ -591,484 +1072,4 @@
         });
     </script>
 
-    <style>
-        /* ============================================
-           HERO SECTION - ULTRA SMOOTH ANIMATIONS
-           ============================================ */
-
-        /* Gradient Orbs - GPU Accelerated */
-        .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            animation: float 20s ease-in-out infinite;
-            will-change: transform;
-        }
-
-        .gradient-orb-1 {
-            width: 500px;
-            height: 500px;
-            background: {{ config('colors.primary') }};
-            top: -10%;
-            right: -5%;
-            animation-delay: 0s;
-        }
-
-        .gradient-orb-2 {
-            width: 400px;
-            height: 400px;
-            background: {{ config('colors.accent_blue') }};
-            bottom: -10%;
-            left: -5%;
-            animation-delay: 5s;
-        }
-
-        .gradient-orb-3 {
-            width: 350px;
-            height: 350px;
-            background: {{ config('colors.primary_light') }};
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation-delay: 10s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(20px, -30px) scale(1.1); }
-            50% { transform: translate(-20px, -20px) scale(0.9); }
-            75% { transform: translate(30px, 20px) scale(1.05); }
-        }
-
-        /* Floating Elements */
-        .floating-element {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: {{ config('colors.primary_light') }};
-            opacity: 0.3;
-            animation: float-gentle 8s ease-in-out infinite;
-            will-change: transform;
-        }
-
-        @keyframes float-gentle {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-30px); }
-        }
-
-        /* Hero Badge Animation */
-        .hero-badge {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            animation: fadeInUp 0.6s ease-out forwards;
-            opacity: 0;
-        }
-
-        .pulse-icon {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7); }
-            50% { box-shadow: 0 0 0 10px rgba(255, 107, 53, 0); }
-        }
-
-        /* Hero Title Animation */
-        .hero-title {
-            animation: fadeInUp 0.8s ease-out 0.2s forwards;
-            opacity: 0;
-        }
-
-        .gradient-text {
-            animation: gradient-shift 3s ease infinite;
-        }
-
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Hero Subtitle Animation */
-        .hero-subtitle {
-            animation: fadeInUp 0.8s ease-out 0.4s forwards;
-            opacity: 0;
-        }
-
-        /* Hero CTA Animation */
-        .hero-cta {
-            animation: fadeInUp 0.8s ease-out 0.6s forwards;
-            opacity: 0;
-        }
-
-        .cta-primary {
-            background: linear-gradient(135deg, {{ config('colors.primary') }}, {{ config('colors.primary_dark') }});
-            box-shadow: 0 10px 30px -5px rgba(255, 107, 53, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-primary::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-
-        .cta-primary:hover::before {
-            transform: translateX(100%);
-        }
-
-        .cta-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px -5px rgba(255, 107, 53, 0.5);
-        }
-
-        /* Hero Visual Animations */
-        .hero-visual {
-            animation: fadeInRight 1s ease-out 0.5s forwards;
-            opacity: 0;
-        }
-
-        .main-card {
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            transform-style: preserve-3d;
-        }
-
-        .main-card:hover {
-            transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
-            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8);
-        }
-
-        .card-icon {
-            animation: icon-bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes icon-bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .tech-icon {
-            animation: fadeInUp 0.6s ease-out forwards;
-            opacity: 0;
-        }
-
-        /* Floating Cards - Smooth 3D Animation */
-        .floating-card {
-            animation: float-card 6s ease-in-out infinite;
-            transition: all 0.3s ease;
-            will-change: transform;
-        }
-
-        .floating-card:hover {
-            transform: scale(1.1) translateY(-5px);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-        }
-
-        .floating-card-1 {
-            animation-delay: 0s;
-        }
-
-        .floating-card-2 {
-            animation-delay: 2s;
-        }
-
-        .floating-card-3 {
-            animation-delay: 4s;
-        }
-
-        @keyframes float-card {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-        }
-
-        /* Scroll Indicator */
-        .scroll-indicator {
-            animation: fadeIn 1s ease-out 1s forwards;
-            opacity: 0;
-        }
-
-        .scroll-dot {
-            animation: scroll-down 2s ease-in-out infinite;
-        }
-
-        @keyframes scroll-down {
-            0% { transform: translateY(0); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(16px); opacity: 0; }
-        }
-
-        /* ============================================
-           REVEAL ON SCROLL - OPTIMIZED
-           ============================================ */
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: opacity, transform;
-        }
-
-        .reveal-on-scroll.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Blob Animation for Backgrounds */
-        @keyframes blob {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(20px, -20px) scale(1.1); }
-            50% { transform: translate(-20px, 20px) scale(0.9); }
-            75% { transform: translate(20px, 10px) scale(1.05); }
-        }
-
-        .animate-blob {
-            animation: blob 20s infinite ease-in-out;
-        }
-
-        .animation-delay-2000 {
-            animation-delay: 2s;
-        }
-
-        /* ============================================
-           KEYFRAME DEFINITIONS
-           ============================================ */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* ============================================
-           SWIPER CUSTOMIZATION
-           ============================================ */
-        .swiper-pagination-bullet {
-            width: 12px;
-            height: 12px;
-            background: #cbd5e1;
-            opacity: 1;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .swiper-pagination-bullet-active {
-            background: {{ config('colors.primary') }};
-            width: 32px;
-            border-radius: 6px;
-        }
-
-        /* ============================================
-           UTILITY CLASSES
-           ============================================ */
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* Performance Optimization */
-        .hero-section,
-        .services-section,
-        .main-card,
-        .floating-card,
-        .gradient-orb {
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
-
-        /* Smooth Scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* ============================================
-           SERVICE CARDS - PREMIUM INTERACTIONS
-           ============================================ */
-        .service-card {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(0);
-        }
-
-        .service-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-            border-color: transparent;
-        }
-
-        .service-icon {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-icon::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-
-        .service-card:hover .service-icon::after {
-            transform: translateX(100%);
-        }
-
-        .service-card:hover .service-icon {
-            transform: scale(1.1) rotate(-5deg);
-            box-shadow: 0 10px 25px -5px rgba(255, 107, 53, 0.4);
-        }
-
-        /* ============================================
-           PROJECT CARDS - ADVANCED HOVER EFFECTS
-           ============================================ */
-        .project-card {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px) scale(1.02);
-        }
-
-        .project-image {
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .project-card:hover .project-image {
-            transform: scale(1.15) rotate(2deg);
-        }
-
-        /* ============================================
-           FEATURE CARDS - MAGNETIC EFFECT
-           ============================================ */
-        .feature-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
-        }
-
-        .feature-card:hover .feature-icon {
-            transform: scale(1.15) rotate(-8deg);
-            box-shadow: 0 8px 20px -4px rgba(255, 107, 53, 0.4);
-        }
-
-        .feature-icon {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* ============================================
-           TESTIMONIAL CARDS - SMOOTH LIFT
-           ============================================ */
-        .testimonial-card {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* ============================================
-           CTA SECTION - PULSING EFFECT
-           ============================================ */
-        .cta-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .cta-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
-        }
-
-        .cta-icon {
-            animation: icon-pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes icon-pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 0.8;
-            }
-        }
-
-        /* ============================================
-           ARTICLE CARDS - ELEGANT TRANSITIONS
-           ============================================ */
-        .article-card {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .article-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-        }
-
-        .article-image {
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .article-card:hover .article-image {
-            transform: scale(1.1) rotate(1deg);
-        }
-
-        /* ============================================
-           PARALLAX SCROLL EFFECT (LIGHTWEIGHT)
-           ============================================ */
-        @supports (transform: translateZ(0)) {
-            .parallax-light {
-                will-change: transform;
-                transition: transform 0.3s ease-out;
-            }
-        }
-
-        /* Reduce Motion for Accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
 </x-layouts.app>

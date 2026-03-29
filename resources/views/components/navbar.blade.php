@@ -42,7 +42,6 @@
                           {{ request()->routeIs('home') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('home') ? 'background: rgba(255, 107, 53, 0.2); border: 1px solid rgba(255, 107, 53, 0.3);' : '' }}">
                     <span class="relative z-10 flex items-center gap-2">
-                        <i class="fas fa-home text-sm group-hover:rotate-12 transition-transform duration-300"></i>
                         الرئيسية
                     </span>
                     @if(!request()->routeIs('home'))
@@ -55,7 +54,6 @@
                           {{ request()->routeIs('about') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('about') ? 'background: rgba(255, 107, 53, 0.2); border: 1px solid rgba(255, 107, 53, 0.3);' : '' }}">
                     <span class="relative z-10 flex items-center gap-2">
-                        <i class="fas fa-lightbulb text-sm group-hover:scale-125 transition-transform duration-300"></i>
                         من نحن
                     </span>
                     @if(!request()->routeIs('about'))
@@ -68,7 +66,6 @@
                           {{ request()->routeIs('services') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('services') ? 'background: rgba(255, 107, 53, 0.2); border: 1px solid rgba(255, 107, 53, 0.3);' : '' }}">
                     <span class="relative z-10 flex items-center gap-2">
-                        <i class="fas fa-star text-sm group-hover:rotate-180 transition-transform duration-500"></i>
                         خدماتنا
                     </span>
                     @if(!request()->routeIs('services'))
@@ -81,7 +78,6 @@
                           {{ request()->routeIs('portfolio') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('portfolio') ? 'background: rgba(255, 107, 53, 0.2); border: 1px solid rgba(255, 107, 53, 0.3);' : '' }}">
                     <span class="relative z-10 flex items-center gap-2">
-                        <i class="fas fa-trophy text-sm group-hover:scale-125 transition-transform duration-300"></i>
                         أعمالنا
                     </span>
                     @if(!request()->routeIs('portfolio'))
@@ -94,7 +90,6 @@
                           {{ request()->routeIs('articles*') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('articles*') ? 'background: rgba(255, 107, 53, 0.2); border: 1px solid rgba(255, 107, 53, 0.3);' : '' }}">
                     <span class="relative z-10 flex items-center gap-2">
-                        <i class="fas fa-newspaper text-sm group-hover:scale-110 transition-transform duration-300"></i>
                         المدونة
                     </span>
                     @if(!request()->routeIs('articles*'))
@@ -107,7 +102,6 @@
                           {{ request()->routeIs('contact') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('contact') ? 'background: rgba(255, 107, 53, 0.2); border: 1px solid rgba(255, 107, 53, 0.3);' : '' }}">
                     <span class="relative z-10 flex items-center gap-2">
-                        <i class="fas fa-comments text-sm group-hover:rotate-12 transition-transform duration-300"></i>
                         تواصل معنا
                     </span>
                     @if(!request()->routeIs('contact'))
@@ -122,7 +116,6 @@
                     <div class="absolute inset-0 bg-gradient-to-r from-orange-400 via-orange-300 to-orange-400 opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
                     <i class="fas fa-rocket text-lg relative z-10 group-hover:translate-x-2 transition-transform duration-500"></i>
                     <span class="relative z-10">ابدأ مشروعك</span>
-                    <div class="absolute top-1 right-1 w-2 h-2 bg-orange-300 rounded-full"></div>
                 </a>
             </div>
 
@@ -138,13 +131,11 @@
                 <a href="{{ route('home') }}"
                    class="font-bold py-3.5 px-5 rounded-xl transition-all duration-300 flex items-center gap-3 {{ request()->routeIs('home') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('home') ? 'background: rgba(255, 107, 53, 0.2);' : '' }}">
-                    <i class="fas fa-home"></i>
                     <span>الرئيسية</span>
                 </a>
                 <a href="{{ route('about') }}"
                    class="font-bold py-3.5 px-5 rounded-xl transition-all duration-300 flex items-center gap-3 {{ request()->routeIs('about') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('about') ? 'background: rgba(255, 107, 53, 0.2);' : '' }}">
-                    <i class="fas fa-lightbulb"></i>
                     <span>من نحن</span>
                 </a>
                 <a href="{{ route('services') }}"
@@ -156,26 +147,22 @@
                 <a href="{{ route('portfolio') }}"
                    class="font-bold py-3.5 px-5 rounded-xl transition-all duration-300 flex items-center gap-3 {{ request()->routeIs('portfolio') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('portfolio') ? 'background: rgba(255, 107, 53, 0.2);' : '' }}">
-                    <i class="fas fa-trophy"></i>
                     <span>أعمالنا</span>
                 </a>
                 <a href="{{ route('articles') }}"
                    class="font-bold py-3.5 px-5 rounded-xl transition-all duration-300 flex items-center gap-3 {{ request()->routeIs('articles*') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('articles*') ? 'background: rgba(255, 107, 53, 0.2);' : '' }}">
-                    <i class="fas fa-newspaper"></i>
                     <span>المدونة</span>
                 </a>
                 <a href="{{ route('contact') }}"
                    class="font-bold py-3.5 px-5 rounded-xl transition-all duration-300 flex items-center gap-3 {{ request()->routeIs('contact') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('contact') ? 'background: rgba(255, 107, 53, 0.2);' : '' }}">
-                    <i class="fas fa-comments"></i>
                     <span>تواصل معنا</span>
                 </a>
                 <div class="h-px my-2" style="background: rgba(255, 107, 53, 0.2);"></div>
                 <a href="{{ route('request-design.create') }}"
                    class="text-white font-black py-4 px-5 rounded-xl text-center hover:scale-105 transition-all duration-300 shadow-xl flex items-center justify-center gap-3"
                    style="background: linear-gradient(135deg, #FF6B35, #ff8c5a);">
-                    <i class="fas fa-rocket text-lg"></i>
                     <span>ابدأ مشروعك الآن</span>
                 </a>
             </div>

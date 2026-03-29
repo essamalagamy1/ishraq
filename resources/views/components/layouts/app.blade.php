@@ -153,17 +153,21 @@
     @endif
     <style>
         #page-loader { background: #0a0d14; position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease-out; }
+        .page-loader-content { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
         .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.05); border-top: 4px solid #FF6B35; border-radius: 50%; animation: spin 0.8s linear infinite; box-shadow: 0 0 15px rgba(255,107,53,0.2); }
+        .page-loader-text { color: #FF6B35; font-weight: 700; letter-spacing: 0.25em; font-size: 0.75rem; line-height: 1; text-transform: uppercase; animation: pulse 1.5s ease-in-out infinite; display: block; margin: 0; padding: 0; border: 0 !important; outline: 0 !important; background: transparent !important; box-shadow: none !important; font-family: 'Tajawal', 'Segoe UI', Tahoma, Arial, sans-serif; }
+        html[lang^="ar"] .page-loader-text { letter-spacing: normal; text-transform: none; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         #app-content { opacity: 0; transition: opacity 0.8s ease-in-out; }
     </style>
 </head>
 <body class="font-sans antialiased text-white" dir="rtl" style="font-family: 'Tajawal', sans-serif; background: #0a0d14; overflow: hidden;">
     <!-- Premium Loader -->
     <div id="page-loader">
-        <div class="flex flex-col items-center gap-4">
+        <div class="page-loader-content">
             <div class="spinner"></div>
-            <div class="text-[#FF6B35] font-bold tracking-widest text-xs uppercase animate-pulse">جاري التحميل...</div>
+            <div class="page-loader-text">جاري التحميل...</div>
         </div>
     </div>
 
