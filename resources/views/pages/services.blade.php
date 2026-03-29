@@ -30,7 +30,6 @@
                 @endif
             </div>
         </div>
-        <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-32 rounded-full animate-pulse" style="background: linear-gradient(to bottom, transparent, {{ config('colors.primary_light') }}, transparent);"></div>
     </section>
 
     {{-- Services Grid - Bento Style --}}
