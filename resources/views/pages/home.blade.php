@@ -110,8 +110,8 @@
         }
 
         .cta-primary {
-            background: linear-gradient(135deg, #0D9488, #10B981);
-            box-shadow: 0 10px 30px -5px rgba(13, 148, 136, 0.1);
+            background: linear-gradient(135deg, {{ config('colors.primary') }}, {{ config('colors.primary_dark') }});
+            box-shadow: 0 10px 30px -5px rgba(255, 107, 53, 0.1);
             position: relative;
             overflow: hidden;
         }
@@ -131,7 +131,7 @@
 
         .cta-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 20px 40px -5px rgba(13, 148, 136, 0.15);
+            box-shadow: 0 20px 40px -5px rgba(255, 107, 53, 0.15);
         }
 
         /* Hero Visual Animations */

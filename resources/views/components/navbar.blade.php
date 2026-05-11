@@ -162,7 +162,7 @@
                 <div class="h-px my-2" style="background: rgba(255, 107, 53, 0.2);"></div>
                 <a href="{{ route('request-design.create') }}"
                    class="text-white font-black py-4 px-5 rounded-xl text-center hover:scale-105 transition-all duration-300 shadow-xl flex items-center justify-center gap-3"
-                   style="background: linear-gradient(135deg, #0D9488, #10B981);">
+                   style="background: linear-gradient(135deg, #FF6B35, #ff8c5a);">
                     <span>ابدأ مشروعك الآن</span>
                 </a>
             </div>
