@@ -85,13 +85,13 @@
                             <span class="group-hover:translate-x-1 transition-transform duration-300">خدماتنا</span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('portfolio') }}" class="group flex items-center gap-2 text-gray-400 hover:text-white transition-all duration-300">
                             <i class="fas fa-chevron-left text-xs opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
                                style="color: {{ config('colors.accent_yellow') }};"></i>
                             <span class="group-hover:translate-x-1 transition-transform duration-300">أعمالنا</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a href="{{ route('contact') }}" class="group flex items-center gap-2 text-gray-400 hover:text-white transition-all duration-300">
                             <i class="fas fa-chevron-left text-xs opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"

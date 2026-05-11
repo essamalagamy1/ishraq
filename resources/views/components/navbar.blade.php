@@ -10,7 +10,7 @@
     <!-- Glowing line at bottom -->
     <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent opacity-0 transition-opacity duration-500" id="navbar-glow"></div>
 
-    <div class="container mx-auto px-6 py-4 relative z-10">
+    <div class="container mx-auto px-4 py-1 relative z-10">
         <div class="flex items-center justify-between">
             {{-- Logo المُشرق --}}
             <div class="flex items-center">
@@ -20,7 +20,7 @@
                         <img class="h-15 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(255,211,61,0.8)] filter brightness-110"
                              src="{{ Storage::url($companySettings->logo_path) }}"
                              alt="{{ $companySettings->company_name ?? 'إشراق' }}"
-                             width="150" height="60">
+                             width="140" height="60">
                     @else
                         {{-- Fallback logo مُشرق --}}
                         <div class="flex items-center gap-3 group-hover:gap-4 transition-all duration-500">
@@ -73,7 +73,7 @@
                     @endif
                 </a>
 
-                <a href="{{ route('portfolio') }}"
+                {{-- <a href="{{ route('portfolio') }}"
                    class="nav-link-glowing relative font-bold transition-all duration-500 px-5 py-2.5 rounded-xl group overflow-hidden
                           {{ request()->routeIs('portfolio') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('portfolio') ? 'background: rgba(255, 107, 53, 0.2); border: 1px solid rgba(255, 107, 53, 0.3);' : '' }}">
@@ -83,7 +83,7 @@
                     @if(!request()->routeIs('portfolio'))
                     <div class="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" style="background: rgba(255, 107, 53, 0.1);"></div>
                     @endif
-                </a>
+                </a> --}}
 
                 <a href="{{ route('articles') }}"
                    class="nav-link-glowing relative font-bold transition-all duration-500 px-5 py-2.5 rounded-xl group overflow-hidden
@@ -109,13 +109,13 @@
                     @endif
                 </a>
 
-                {{-- CTA Button مُشرق مع تأثير خاص --}}
+             {{-- CTA Button مُشرق مع تأثير خاص --}}
                 <a href="{{ route('request-design.create') }}"
                    class="mr-4 relative text-white font-black py-3 px-8 rounded-2xl hover:scale-110 transition-all duration-500 flex items-center gap-3 group overflow-hidden shadow-2xl"
                    style="background: linear-gradient(135deg, #FF6B35, #ff8c5a); box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);">
                     <div class="absolute inset-0 bg-gradient-to-r from-orange-400 via-orange-300 to-orange-400 opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
-                    <i class="fas fa-rocket text-lg relative z-10 group-hover:translate-x-2 transition-transform duration-500"></i>
-                    <span class="relative z-10">ابدأ مشروعك</span>
+                    <i class="fas fa-rocket text-lg relative z-10 group-hover:translate-x-2 transition-transform duration-500 text-white"></i>
+                    <span class="relative z-10 text-white">ابدأ مشروعك</span>
                 </a>
             </div>
 
@@ -144,11 +144,11 @@
                     <i class="fas fa-star"></i>
                     <span>خدماتنا</span>
                 </a>
-                <a href="{{ route('portfolio') }}"
+                {{-- <a href="{{ route('portfolio') }}"
                    class="font-bold py-3.5 px-5 rounded-xl transition-all duration-300 flex items-center gap-3 {{ request()->routeIs('portfolio') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('portfolio') ? 'background: rgba(255, 107, 53, 0.2);' : '' }}">
                     <span>أعمالنا</span>
-                </a>
+                </a> --}}
                 <a href="{{ route('articles') }}"
                    class="font-bold py-3.5 px-5 rounded-xl transition-all duration-300 flex items-center gap-3 {{ request()->routeIs('articles*') ? 'text-white shadow-lg' : 'text-gray-300 hover:text-white' }}"
                    style="{{ request()->routeIs('articles*') ? 'background: rgba(255, 107, 53, 0.2);' : '' }}">
@@ -162,7 +162,7 @@
                 <div class="h-px my-2" style="background: rgba(255, 107, 53, 0.2);"></div>
                 <a href="{{ route('request-design.create') }}"
                    class="text-white font-black py-4 px-5 rounded-xl text-center hover:scale-105 transition-all duration-300 shadow-xl flex items-center justify-center gap-3"
-                   style="background: linear-gradient(135deg, #FF6B35, #ff8c5a);">
+                   style="background: linear-gradient(135deg, #0D9488, #10B981);">
                     <span>ابدأ مشروعك الآن</span>
                 </a>
             </div>

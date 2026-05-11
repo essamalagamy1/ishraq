@@ -4,6 +4,8 @@
 @import 'tailwindcss';
 @import './custom.css';
 @import './dark-mode.css';
+@import './dark-mode-override.css';
+@import './light-animations.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -17,6 +19,18 @@
 @theme {
     --font-sans: 'Tajawal', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+        
+    /* Explicitly defining gray scale to ensure recognition */
+    --color-gray-50: #f9fafb;
+    --color-gray-100: #f3f4f6;
+    --color-gray-200: #e5e7eb;
+    --color-gray-300: #d1d5db;
+    --color-gray-400: #9ca3af;
+    --color-gray-500: #6b7280;
+    --color-gray-600: #4b5563;
+    --color-gray-700: #374151;
+    --color-gray-800: #1f2937;
+    --color-gray-900: #111827;
 }
 
 /* ============================================
@@ -158,8 +172,92 @@ body {
 }
 
 /* ============================================
-   LINK STYLES
+   GLOBAL UTILITIES & FIXES
    ============================================ */
+
+/* Fix for buttons with absolute overlays (ensures text/icons stay on top) */
+.group.relative.overflow-hidden > span,
+.group.relative.overflow-hidden > i {
+    position: relative !important;
+    z-index: 20 !important; /* Increased to ensure it's on top */
+}
+
+/* Floating WhatsApp Button Styling */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    text-decoration: none;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.whatsapp-icon {
+    width: 100%;
+    height: 100%;
+    background: #25d366;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+    position: relative;
+    z-index: 2;
+}
+.text-gray-400 {
+    color: #374151;
+}
+
+.whatsapp-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #25d366;
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0.7;
+    animation: whatsapp-pulse 2s infinite;
+}
+
+@keyframes whatsapp-pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+.whatsapp-tooltip {
+    position: absolute;
+    right: 75px;
+    background: #fff;
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.whatsapp-float:hover .whatsapp-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
 a {
     transition: color 0.3s ease;
 }

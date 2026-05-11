@@ -78,9 +78,15 @@
                    class="group block rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
                     {{-- Image - Dynamic from database --}}
                     <div class="relative overflow-hidden">
-                        <img src="{{ Storage::url($project->main_image) }}" 
-                             alt="{{ $project->title }}" 
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        @if($project->main_image)
+                            <img src="{{ Storage::url($project->main_image) }}" 
+                                 alt="{{ $project->title }}" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        @else
+                            <div class="w-full h-full min-h-[200px] flex items-center justify-center bg-white/5">
+                                <i class="fas fa-image text-4xl text-white/10"></i>
+                            </div>
+                        @endif
                         
                         {{-- Overlay --}}
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">

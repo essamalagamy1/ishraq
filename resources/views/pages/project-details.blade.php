@@ -61,14 +61,16 @@
     <section class="py-12" style="background: #0f1419;">
         <div class="container mx-auto px-6">
             <div class="max-w-5xl mx-auto">
-                <a href="{{ Storage::url($project->main_image) }}" 
-                   data-fancybox="project-gallery" 
-                   data-caption="{{ $project->title }}"
-                   class="block rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow cursor-pointer">
-                    <img src="{{ Storage::url($project->main_image) }}"
-                         alt="{{ $project->title }}"
-                         class="w-full h-auto object-cover">
-                </a>
+                @if($project->main_image)
+                    <a href="{{ Storage::url($project->main_image) }}" 
+                       data-fancybox="project-gallery" 
+                       data-caption="{{ $project->title }}"
+                       class="block rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow cursor-pointer">
+                        <img src="{{ Storage::url($project->main_image) }}"
+                             alt="{{ $project->title }}"
+                             class="w-full h-auto object-cover">
+                    </a>
+                @endif
             </div>
         </div>
     </section>
@@ -101,17 +103,19 @@
 
                             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                                 @foreach($project->projectImages as $image)
-                                <a href="{{ Storage::url($image->image_path) }}" 
-                                   data-fancybox="project-gallery" 
-                                   data-caption="{{ $image->caption ?? $project->title }}"
-                                   class="group relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all aspect-square cursor-pointer">
-                                    <img src="{{ Storage::url($image->image_path) }}"
-                                         alt="{{ $image->caption }}"
-                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                        <i class="fas fa-search-plus text-white text-2xl"></i>
-                                    </div>
-                                </a>
+                                    @if($image->image_path)
+                                        <a href="{{ Storage::url($image->image_path) }}" 
+                                           data-fancybox="project-gallery" 
+                                           data-caption="{{ $image->caption ?? $project->title }}"
+                                           class="group relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all aspect-square cursor-pointer">
+                                            <img src="{{ Storage::url($image->image_path) }}"
+                                                 alt="{{ $image->caption }}"
+                                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                <i class="fas fa-search-plus text-white text-2xl"></i>
+                                            </div>
+                                        </a>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
@@ -127,7 +131,9 @@
                             <div class="rounded-2xl overflow-hidden shadow-xl">
                                 <div class="aspect-video">
                                     <video controls class="w-full h-full">
-                                        <source src="{{ Storage::url($project->video_url) }}" type="video/mp4">
+                                        @if($project->video_url)
+                                            <source src="{{ Storage::url($project->video_url) }}" type="video/mp4">
+                                        @endif
                                         متصفحك لا يدعم تشغيل الفيديو.
                                     </video>
                                 </div>

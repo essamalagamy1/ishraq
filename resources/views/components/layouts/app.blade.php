@@ -44,11 +44,10 @@
         <link rel="preload" as="image" href="{{ Storage::url($companySettings->logo_path) }}" fetchpriority="high">
     @endif
 
-    <!-- Google Fonts with explicit preload and swap -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet" display="swap">
+    <!-- Vite Assets (CSS & JS) - Critical for eliminating FOUC -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     
-    <!-- Critical CSS (Inlined for speed) -->
+    <!-- Critical Inline Styles for Loader & Layout Shift Prevention -->
     <style>
         :root {
             --color-primary: {{ config('colors.primary') }};
@@ -63,27 +62,16 @@
             overflow-x: hidden;
         }
         .min-h-screen { min-height: 100vh; }
-        /* Inline critical dark mode styles */
-        body input, body textarea, body select { background-color: rgba(255,255,255,0.05) !important; color: white !important; }
+        #page-loader { background: #0a0d14; position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease-out; }
+        .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.05); border-top: 4px solid #FF6B35; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #app-content { opacity: 0; transition: opacity 0.8s ease-in-out; }
+        .navbar-modern { min-height: 80px; }
     </style>
 
-    <!-- Post-load CSS (Essential Inlined) -->
+    <!-- Post-load External CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <style>
-        /* INLINED CSS FOR PERFORMANCE & ZERO CLS */
-        @php 
-            echo file_get_contents(public_path('css/css.css'));
-            echo file_get_contents(public_path('css/dark-mode-override.css'));
-            echo file_get_contents(public_path('css/light-animations.css'));
-        @endphp
-        
-        /* Layout Shift Prevention */
-        .navbar-modern { min-height: 80px; }
-        .logo-img { width: 150px; height: 60px; object-fit: contain; }
-        #app-content { min-height: 100vh; }
-    </style>
-
     <!-- Deferred External CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" media="print" onload="this.media='all'">
@@ -122,7 +110,6 @@
             --color-primary-30: {{ config('colors.primary_30') }};
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
 
     <!-- JSON-LD Structured Data -->
     @php
@@ -151,25 +138,16 @@
     </script>
     <script async src="https://analytics.test/js/analytics.js"></script>
     @endif
-    <style>
-        #page-loader { background: #0a0d14; position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease-out; }
-        .page-loader-content { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-        .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.05); border-top: 4px solid #FF6B35; border-radius: 50%; animation: spin 0.8s linear infinite; box-shadow: 0 0 15px rgba(255,107,53,0.2); }
-        .page-loader-text { color: #FF6B35; font-weight: 700; letter-spacing: 0.25em; font-size: 0.75rem; line-height: 1; text-transform: uppercase; animation: pulse 1.5s ease-in-out infinite; display: block; margin: 0; padding: 0; border: 0 !important; outline: 0 !important; background: transparent !important; box-shadow: none !important; font-family: 'Tajawal', 'Segoe UI', Tahoma, Arial, sans-serif; }
-        html[lang^="ar"] .page-loader-text { letter-spacing: normal; text-transform: none; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        #app-content { opacity: 0; transition: opacity 0.8s ease-in-out; }
-    </style>
 </head>
 <body class="font-sans antialiased text-white" dir="rtl" style="font-family: 'Tajawal', sans-serif; background: #0a0d14; overflow: hidden;">
     <!-- Premium Loader -->
     <div id="page-loader">
-        <div class="page-loader-content">
+        <div class="page-loader-content" style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
             <div class="spinner"></div>
-            <div class="page-loader-text">جاري التحميل...</div>
+            <div class="page-loader-text" style="color: #FF6B35; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; animation: pulse 1.5s ease-in-out infinite;">جاري التحميل...</div>
         </div>
     </div>
+    <style>@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }</style>
 
     <!-- Main Content Wrapper -->
     <div id="app-content">
@@ -212,27 +190,46 @@
             </span>
         </a>       
         @endif
-    </div>
     
     <!-- External Scripts - All Deferred -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js" defer></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
 
-    <!-- Initialize AOS with Optimized Settings -->
+    <!-- Initialize AOS and other scripts -->
     <script>
-        AOS.init({
-            duration: 400, // Very fast for performance
-            easing: 'ease-out',
-            once: true,
-            offset: 50,
-            // Instead of fully disabling, we just make it instant on mobile
-            duration: window.innerWidth < 768 ? 0 : 400, 
-        });
-    </script>
-    
-    <!-- Scroll Reveal & Animation Script -->
-    <script>
+        // Use a more robust and faster way to hide the loader
+        function hideLoader() {
+            const loader = document.getElementById('page-loader');
+            const content = document.getElementById('app-content');
+            
+            if (loader && loader.style.display !== 'none') {
+                loader.style.opacity = '0';
+                if (content) content.style.opacity = '1';
+                
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    
+                    // Refresh AOS after content becomes visible to ensure elements are revealed correctly
+                    if (typeof AOS !== 'undefined') {
+                        AOS.refresh();
+                    }
+                }, 600);
+            }
+        }
+
+        // Hide when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', hideLoader);
+        } else {
+            hideLoader();
+        }
+
+        // Final fallback
+        window.addEventListener('load', hideLoader);
+        setTimeout(hideLoader, 3000);
+
         // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.querySelector('.navbar-modern');
@@ -245,220 +242,17 @@
             }
         });
         
-        // Universal Light Reveal using Intersection Observer
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed', 'active', 'aos-animate');
-                    revealObserver.unobserve(entry.target); 
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-        // Watch all animation classes and AOS elements
-        const selectors = '.reveal, .reveal-on-scroll, .reveal-scale, .reveal-light, [data-aos]';
-        document.querySelectorAll(selectors).forEach(el => revealObserver.observe(el));
-        
-        // Counter Animation for Statistics
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter-number');
-            const speed = 200;
-            
-            counters.forEach(counter => {
-                if (counter.dataset.animated === 'true') return;
-                
-                const rect = counter.getBoundingClientRect();
-                const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
-                
-                if (isVisible) {
-                    counter.dataset.animated = 'true';
-                    const target = counter.innerText;
-                    const numericPart = parseFloat(target.replace(/[^0-9.]/g, ''));
-                    const suffix = target.replace(/[0-9.]/g, '');
-                    
-                    if (isNaN(numericPart)) return;
-                    
-                    const duration = 2000;
-                    const startTime = performance.now();
-                    
-                    function updateCounter(currentTime) {
-                        const elapsed = currentTime - startTime;
-                        const progress = Math.min(elapsed / duration, 1);
-                        
-                        // Easing function for smooth animation
-                        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-                        const currentValue = Math.floor(numericPart * easeOutQuart);
-                        
-                        counter.innerText = currentValue + suffix;
-                        
-                        if (progress < 1) {
-                            requestAnimationFrame(updateCounter);
-                        } else {
-                            counter.innerText = target;
-                        }
-                    }
-                    
-                    requestAnimationFrame(updateCounter);
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', animateCounters);
-        
-        // Initialize animations on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add fade-in animation to hero elements
-            const heroElements = document.querySelectorAll('.hero-animate');
-            heroElements.forEach((el, index) => {
-                el.style.opacity = '0';
-                setTimeout(() => {
-                    el.style.animation = `fadeInUp 0.8s ease-out forwards`;
-                    el.style.animationDelay = `${index * 0.15}s`;
-                }, 100);
-            });
-            
-            // Initialize counter animation
-            setTimeout(animateCounters, 500);
-        });
-        
-        // Initialize Swiper for Testimonials
+        // Initialize AOS
         window.addEventListener('load', function() {
-            setTimeout(function() {
-                if (document.querySelector('.testimonials-swiper')) {
-                    // Count number of slides
-                    const slidesCount = document.querySelectorAll('.testimonials-swiper .swiper-slide').length;
-                    
-                    const swiper = new Swiper('.testimonials-swiper', {
-                        slidesPerView: 1,
-                        spaceBetween: 30,
-                        loop: slidesCount > 3, // Only enable loop if we have more than 3 slides
-                        autoplay: {
-                            delay: 5000,
-                            disableOnInteraction: false,
-                        },
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: '.testimonials-swiper-button-next',
-                            prevEl: '.testimonials-swiper-button-prev',
-                        },
-                        breakpoints: {
-                            640: {
-                                slidesPerView: 1,
-                                spaceBetween: 20,
-                            },
-                            768: {
-                                slidesPerView: 2,
-                                spaceBetween: 30,
-                            },
-                            1024: {
-                                slidesPerView: 3,
-                                spaceBetween: 30,
-                            },
-                        },
-                        // RTL support
-                        rtl: true,
-                        dir: 'rtl',
-                        // Observer to update on DOM changes
-                        observer: true,
-                        observeParents: true,
-                        observeSlideChildren: true,
-                    });
-                    
-                    // Manual event listeners for navigation buttons
-                    const nextButton = document.querySelector('.testimonials-swiper-button-next');
-                    const prevButton = document.querySelector('.testimonials-swiper-button-prev');
-                    
-                    if (nextButton) {
-                        nextButton.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            swiper.slideNext();
-                        });
-                    }
-                    
-                    if (prevButton) {
-                        prevButton.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            swiper.slidePrev();
-                        });
-                    }
-                    
-                    // Force update after initialization
-                    setTimeout(() => {
-                        swiper.update();
-                    }, 100);
-                }
-                
-                // Initialize Swiper for Projects
-                if (document.querySelector('.projects-swiper')) {
-                    // Count number of slides
-                    const projectSlidesCount = document.querySelectorAll('.projects-swiper .swiper-slide').length;
-                    
-                    const projectsSwiper = new Swiper('.projects-swiper', {
-                        slidesPerView: 1,
-                        spaceBetween: 30,
-                        loop: projectSlidesCount > 3, // Only enable loop if we have more than 3 slides
-                        autoplay: {
-                            delay: 4000,
-                            disableOnInteraction: false,
-                        },
-                        pagination: {
-                            el: '.projects-swiper .swiper-pagination',
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: '.projects-swiper-button-next',
-                            prevEl: '.projects-swiper-button-prev',
-                        },
-                        breakpoints: {
-                            640: {
-                                slidesPerView: 1,
-                                spaceBetween: 20,
-                            },
-                            768: {
-                                slidesPerView: 2,
-                                spaceBetween: 30,
-                            },
-                            1024: {
-                                slidesPerView: 4,
-                                spaceBetween: 30,
-                            },
-                        },
-                        // RTL support
-                        rtl: true,
-                        dir: 'rtl',
-                        // Observer to update on DOM changes
-                        observer: true,
-                        observeParents: true,
-                        observeSlideChildren: true,
-                    });
-                    
-                    // Manual event listeners for navigation buttons
-                    const projectNextButton = document.querySelector('.projects-swiper-button-next');
-                    const projectPrevButton = document.querySelector('.projects-swiper-button-prev');
-                    
-                    if (projectNextButton) {
-                        projectNextButton.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            projectsSwiper.slideNext();
-                        });
-                    }
-                    
-                    if (projectPrevButton) {
-                        projectPrevButton.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            projectsSwiper.slidePrev();
-                        });
-                    }
-                    
-                    // Force update after initialization
-                    setTimeout(() => {
-                        projectsSwiper.update();
-                    }, 100);
-                }
-            }, 100);
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    easing: 'ease-out-cubic',
+                    once: true,
+                    offset: 50,
+                    delay: 0,
+                });
+            }
         });
     </script>
     
@@ -481,12 +275,9 @@
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '{{ $analyticsSettings->fb_pixel_id }}');
             fbq('track', 'PageView');
-            
-            console.log('Facebook Pixel loaded');
             @endif
         }
         
-        // Load Google Tag Manager when user consents
         @if($analyticsSettings && $analyticsSettings->gtm_enabled && $analyticsSettings->gtm_container_id)
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -494,37 +285,6 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','{{ $analyticsSettings->gtm_container_id }}');
         @endif
-    </script>
-
-    <script>
-        // Use a more robust and faster way to hide the loader
-        function hideLoader() {
-            const loader = document.getElementById('page-loader');
-            const content = document.getElementById('app-content');
-            
-            if (loader && loader.style.display !== 'none') {
-                loader.style.opacity = '0';
-                if (content) content.style.opacity = '1';
-                
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }, 600);
-            }
-        }
-
-        // Hide when DOM is ready (Faster than window.onload)
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', hideLoader);
-        } else {
-            hideLoader();
-        }
-
-        // Final fallback for slow assets
-        window.addEventListener('load', hideLoader);
-        
-        // Safety absolute timeout
-        setTimeout(hideLoader, 3000);
     </script>
 </body>
 </html>

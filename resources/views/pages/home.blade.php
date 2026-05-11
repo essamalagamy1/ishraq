@@ -78,8 +78,8 @@
         }
 
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7); }
-            50% { box-shadow: 0 0 0 10px rgba(255, 107, 53, 0); }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(13, 148, 136, 0); }
         }
 
         /* Hero Title Animation */
@@ -110,8 +110,8 @@
         }
 
         .cta-primary {
-            background: linear-gradient(135deg, {{ config('colors.primary') }}, {{ config('colors.primary_dark') }});
-            box-shadow: 0 10px 30px -5px rgba(255, 107, 53, 0.4);
+            background: linear-gradient(135deg, #0D9488, #10B981);
+            box-shadow: 0 10px 30px -5px rgba(13, 148, 136, 0.4);
             position: relative;
             overflow: hidden;
         }
@@ -131,7 +131,7 @@
 
         .cta-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 20px 40px -5px rgba(255, 107, 53, 0.5);
+            box-shadow: 0 20px 40px -5px rgba(13, 148, 136, 0.5);
         }
 
         /* Hero Visual Animations */
@@ -681,7 +681,7 @@
     @endif
 
     {{-- Featured Projects - Modern Showcase --}}
-    @if(isset($featuredProjects) && count($featuredProjects) > 0)
+    @if(false)
     <section class="py-28 relative overflow-hidden" style="background: {{ config('colors.bg_dark') }};">
         {{-- Static Background --}}
         <div class="absolute inset-0">
@@ -715,9 +715,15 @@
                    style="background: {{ config('colors.bg_dark_lighter') }};">
                     {{-- Image Container --}}
                     <div class="relative aspect-[4/3] overflow-hidden">
-                        <img src="{{ Storage::url($project->main_image) }}"
-                             alt="{{ $project->title }}"
-                             class="project-image w-full h-full object-cover">
+                        @if($project->main_image)
+                            <img src="{{ Storage::url($project->main_image) }}"
+                                 alt="{{ $project->title }}"
+                                 class="project-image w-full h-full object-cover">
+                        @else
+                            <div class="w-full h-full flex items-center justify-center bg-white/5">
+                                <i class="fas fa-image text-4xl text-white/10"></i>
+                            </div>
+                        @endif
                         
                         {{-- Gradient Overlay --}}
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
@@ -894,13 +900,13 @@
                     {{-- Image --}}
                     <div class="aspect-video overflow-hidden relative">
                         @if($article->featured_image)
-                        <img src="{{ Storage::url($article->featured_image) }}"
-                             alt="{{ $article->title }}"
-                             class="article-image w-full h-full object-cover">
+                            <img src="{{ Storage::url($article->featured_image) }}"
+                                 alt="{{ $article->title }}"
+                                 class="article-image w-full h-full object-cover">
                         @else
-                        <div class="w-full h-full flex items-center justify-center" style="background: rgba(0, 0, 0, 0.3);">
-                            <i class="fas fa-file-alt text-5xl text-white/30"></i>
-                        </div>
+                            <div class="w-full h-full flex items-center justify-center bg-white/5">
+                                <i class="fas fa-file-alt text-4xl text-white/10"></i>
+                            </div>
                         @endif
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     </div>
@@ -946,7 +952,7 @@
         </div>
         
         <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-4xl mx-auto text-center text-white reveal-on-scroll">
+                 <div class="max-w-4xl mx-auto text-center text-white reveal-on-scroll">
                 {{-- Badge --}}
                 <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full mb-10 glass-light">
                     <i class="fas fa-rocket" style="color: {{ config('colors.primary_light') }};"></i>
@@ -966,13 +972,13 @@
                     <a href="{{ route('request-design.create') }}" 
                        class="group relative inline-flex items-center justify-center gap-3 text-white font-bold py-5 px-10 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl"
                        style="background: linear-gradient(135deg, {{ config('colors.primary') }}, {{ config('colors.primary_dark') }});">
-                        <i class="fas fa-rocket"></i>
-                        <span>ابدأ مشروعك الآن</span>
+                        <i class="fas fa-rocket text-white"></i>
+                        <span class="text-white">ابدأ مشروعك الآن</span>
                         <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
                     </a>
                     <a href="{{ route('contact') }}" 
                        class="group inline-flex items-center justify-center gap-3 text-white font-bold py-5 px-10 rounded-2xl border-2 border-white/20 hover:border-white/50 hover:bg-white/10 transition-all duration-300">
-                        <i class="fas fa-comments"></i>
+                        <i class="fas fa-comments text-white"></i>
                         <span>تواصل معنا</span>
                     </a>
                 </div>
@@ -1022,7 +1028,7 @@
             new Swiper('.testimonials-swiper', {
                 slidesPerView: 1,
                 spaceBetween: 30,
-                loop: true,
+                loop: document.querySelectorAll('.testimonials-swiper .swiper-slide').length > 3,
                 autoplay: {
                     delay: 5000,
                     disableOnInteraction: false,
