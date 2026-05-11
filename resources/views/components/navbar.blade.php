@@ -10,7 +10,7 @@
     <!-- Glowing line at bottom -->
     <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent opacity-0 transition-opacity duration-500" id="navbar-glow"></div>
 
-    <div class="container mx-auto px-4 py-1 relative z-10">
+    <div class="container mx-auto px-4 py-4 relative z-10 sm:px-6 sm:py-2">
         <div class="flex items-center justify-between">
             {{-- Logo المُشرق --}}
             <div class="flex items-center">

@@ -103,10 +103,4 @@ select:focus {
 }
 
 /* Links */
-a:not([class*="btn"]):not([class*="nav-link"]) {
-    color: #FF6B35;
-}
 
-a:not([class*="btn"]):not([class*="nav-link"]):hover {
-    color: #ff8c5a;
-}
