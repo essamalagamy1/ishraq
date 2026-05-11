@@ -404,6 +404,13 @@
            ============================================ */
         .testimonial-card {
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+
+        .testimonials-swiper .swiper-slide {
+            height: auto !important;
+            display: flex;
+            align-items: stretch;
         }
 
         .testimonial-card:hover {
@@ -816,8 +823,8 @@
                 <div class="swiper testimonials-swiper">
                     <div class="swiper-wrapper pb-4">
                         @foreach($testimonials as $testimonial)
-                        <div class="swiper-slide">
-                            <div class="testimonial-card rounded-3xl p-8 border h-full shadow-lg" style="background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.08);">
+                        <div class="swiper-slide h-auto">
+                            <div class="testimonial-card rounded-3xl p-8 border h-full shadow-lg flex flex-col" style="background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.08);">
                                 {{-- Quote Icon --}}
                                 <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background: rgba(255, 107, 53, 0.15);">
                                     <i class="fas fa-quote-right text-xl" style="color: {{ config('colors.primary') }};"></i>
@@ -831,7 +838,7 @@
                                 </div>
 
                                 {{-- Content --}}
-                                <p class="text-gray-300 mb-8 leading-relaxed text-lg">{{ $testimonial->testimonial }}</p>
+                                <p class="text-gray-300 mb-8 leading-relaxed text-lg flex-grow">{{ $testimonial->testimonial }}</p>
 
                                 {{-- Author --}}
                                 <div class="flex items-center gap-4 pt-6 border-t" style="border-color: rgba(255, 255, 255, 0.1);">
