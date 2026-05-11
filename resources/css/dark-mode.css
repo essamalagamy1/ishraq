@@ -85,7 +85,7 @@ select:focus {
 /* Badges & Tags */
 .badge,
 .tag {
-    background: rgba(255, 107, 53, 0.15) !important;
+    background: rgba(255, 107, 53, 0.05) !important;
     color: #FF6B35 !important;
 }
 
@@ -93,7 +93,7 @@ select:focus {
 .shadow,
 .shadow-lg,
 .shadow-xl {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Hover States */

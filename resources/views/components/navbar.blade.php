@@ -17,7 +17,7 @@
                 <a href="{{ route('home') }}" class="flex items-center group relative">
                     @if(isset($companySettings) && $companySettings->logo_path)
                         {{-- Dynamic logo from database --}}
-                        <img class="h-15 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(255,211,61,0.8)] filter brightness-110"
+                        <img class="h-15 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_5px_rgba(255,211,61,0.3)] filter brightness-110"
                              src="{{ Storage::url($companySettings->logo_path) }}"
                              alt="{{ $companySettings->company_name ?? 'إشراق' }}"
                              width="140" height="60">
@@ -112,7 +112,7 @@
              {{-- CTA Button مُشرق مع تأثير خاص --}}
                 <a href="{{ route('request-design.create') }}"
                    class="mr-4 relative text-white font-black py-3 px-8 rounded-2xl hover:scale-110 transition-all duration-500 flex items-center gap-3 group overflow-hidden shadow-2xl"
-                   style="background: linear-gradient(135deg, #FF6B35, #ff8c5a); box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);">
+                   style="background: linear-gradient(135deg, #FF6B35, #ff8c5a); box-shadow: 0 10px 30px rgba(255, 107, 53, 0.1);">
                     <div class="absolute inset-0 bg-gradient-to-r from-orange-400 via-orange-300 to-orange-400 opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
                     <i class="fas fa-rocket text-lg relative z-10 group-hover:translate-x-2 transition-transform duration-500 text-white"></i>
                     <span class="relative z-10 text-white">ابدأ مشروعك</span>
@@ -175,7 +175,7 @@
     #navbar-ishraq.scrolled #navbar-bg {
         background: linear-gradient(135deg, rgba(10, 13, 20, 0.98) 0%, rgba(15, 20, 30, 0.95) 50%, rgba(20, 25, 35, 0.92) 100%);
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        border-bottom: 1px solid rgba(255, 107, 53, 0.4);
+        border-bottom: 1px solid rgba(255, 107, 53, 0.1);
     }
 
     #navbar-ishraq.scrolled #navbar-glow {

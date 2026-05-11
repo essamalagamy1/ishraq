@@ -3,10 +3,10 @@
 {{-- Radiant Footer with Glowing Effects --}}
 <footer class="relative overflow-hidden text-white" style="background: {{ config('colors.bg_dark') }};">
     {{-- Animated Background Glow --}}
-    <div class="absolute inset-0 opacity-30">
-        <div class="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl "
+    <div class="absolute inset-0 opacity-15">
+        <div class="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-xl "
              style="background: radial-gradient(circle, {{ config('colors.primary_30') }}, transparent);"></div>
-        <div class="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl "
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-xl "
              style="background: radial-gradient(circle, {{ config('colors.accent_yellow') }}33, transparent); animation-delay: 1s;"></div>
     </div>
 
@@ -27,12 +27,12 @@
             <div data-aos="fade-up" data-aos-delay="0">
                 <div class="flex items-center mb-6 group">
                     @if(isset($companySettings) && $companySettings->logo_2_path)
-                        <img class="h-12 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(255,107,53,0.5)]"
+                        <img class="h-12 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_5px_rgba(255,107,53,0.2)]"
                              src="{{ Storage::url($companySettings->logo_2_path) }}"
                              alt="{{ $companySettings->company_name ?? 'إشراق' }}"
                              width="120" height="48">
                     @elseif(isset($companySettings) && $companySettings->logo_path)
-                        <img class="h-12 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(255,107,53,0.5)]"
+                        <img class="h-12 transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_5px_rgba(255,107,53,0.2)]"
                              src="{{ Storage::url($companySettings->logo_path) }}"
                              alt="{{ $companySettings->company_name ?? 'إشراق' }}"
                              width="120" height="48">

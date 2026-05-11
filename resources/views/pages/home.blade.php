@@ -8,7 +8,7 @@
         .gradient-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
+            filter: blur(40px);
             animation: float 20s ease-in-out infinite;
             will-change: transform;
         }
@@ -111,7 +111,7 @@
 
         .cta-primary {
             background: linear-gradient(135deg, #0D9488, #10B981);
-            box-shadow: 0 10px 30px -5px rgba(13, 148, 136, 0.4);
+            box-shadow: 0 10px 30px -5px rgba(13, 148, 136, 0.1);
             position: relative;
             overflow: hidden;
         }
@@ -131,7 +131,7 @@
 
         .cta-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 20px 40px -5px rgba(13, 148, 136, 0.5);
+            box-shadow: 0 20px 40px -5px rgba(13, 148, 136, 0.15);
         }
 
         /* Hero Visual Animations */
@@ -173,7 +173,7 @@
 
         .floating-card:hover {
             transform: scale(1.1) translateY(-5px);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
         }
 
         .floating-card-1 {
@@ -356,7 +356,7 @@
 
         .service-card:hover .service-icon {
             transform: scale(1.1) rotate(-5deg);
-            box-shadow: 0 10px 25px -5px rgba(255, 107, 53, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(255, 107, 53, 0.1);
         }
 
         /* ============================================
@@ -392,7 +392,7 @@
 
         .feature-card:hover .feature-icon {
             transform: scale(1.15) rotate(-8deg);
-            box-shadow: 0 8px 20px -4px rgba(255, 107, 53, 0.4);
+            box-shadow: 0 8px 20px -4px rgba(255, 107, 53, 0.1);
         }
 
         .feature-icon {
@@ -483,7 +483,7 @@
     {{-- Hero Section - Ultra Professional Design --}}
     <section class="min-h-screen flex items-center relative overflow-hidden hero-section" style="background: linear-gradient(145deg, #0a0a1f 0%, #161637 50%, #1a1a3e 100%);">
         {{-- Animated Gradient Orbs - GPU Accelerated --}}
-        <div class="absolute inset-0 opacity-20">
+        <div class="absolute inset-0 opacity-10">
             <div class="gradient-orb gradient-orb-1"></div>
             <div class="gradient-orb gradient-orb-2"></div>
             <div class="gradient-orb gradient-orb-3"></div>
@@ -685,8 +685,8 @@
     <section class="py-28 relative overflow-hidden" style="background: {{ config('colors.bg_dark') }};">
         {{-- Static Background --}}
         <div class="absolute inset-0">
-            <div class="absolute top-20 right-20 w-72 h-72 rounded-full opacity-10" style="background: {{ config('colors.primary') }}; filter: blur(80px);"></div>
-            <div class="absolute bottom-20 left-20 w-64 h-64 rounded-full opacity-10" style="background: {{ config('colors.accent_blue') }}; filter: blur(80px);"></div>
+            <div class="absolute top-20 right-20 w-72 h-72 rounded-full opacity-10" style="background: {{ config('colors.primary') }}; filter: blur(40px);"></div>
+            <div class="absolute bottom-20 left-20 w-64 h-64 rounded-full opacity-10" style="background: {{ config('colors.accent_blue') }}; filter: blur(40px);"></div>
         </div>
         
         <div class="container mx-auto px-6 relative z-10">
@@ -938,7 +938,7 @@
         {{-- Animated Background Elements --}}
         <div class="absolute inset-0">
             <div class="absolute top-0 right-0 w-full h-full opacity-30" style="background: radial-gradient(circle at 80% 20%, {{ config('colors.primary') }}40, transparent 50%);"></div>
-            <div class="absolute bottom-0 left-0 w-full h-full opacity-20" style="background: radial-gradient(circle at 20% 80%, {{ config('colors.accent_blue') }}40, transparent 50%);"></div>
+            <div class="absolute bottom-0 left-0 w-full h-full opacity-10" style="background: radial-gradient(circle at 20% 80%, {{ config('colors.accent_blue') }}40, transparent 50%);"></div>
         </div>
         
         {{-- Grid Pattern --}}
