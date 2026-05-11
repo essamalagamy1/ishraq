@@ -3,21 +3,21 @@
 {{-- Radiant Footer with Glowing Effects --}}
 <footer class="relative overflow-hidden text-white" style="background: {{ config('colors.bg_dark') }};">
     {{-- Animated Background Glow --}}
-    <div class="absolute inset-0 opacity-15">
-        <div class="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-xl "
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-2xl "
              style="background: radial-gradient(circle, {{ config('colors.primary_30') }}, transparent);"></div>
-        <div class="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-xl "
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-2xl "
              style="background: radial-gradient(circle, {{ config('colors.accent_yellow') }}33, transparent); animation-delay: 1s;"></div>
     </div>
 
     {{-- Top Border with Gradient Glow --}}
     <div class="h-1 relative">
-        <div class="absolute inset-0 animate-gradient-x"
+        <div class="absolute inset-0 "
              style="background: linear-gradient(90deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }}, {{ config('colors.primary') }});
-                    background-size: 200% 100%;"></div>
-        <div class="absolute inset-0 blur-sm"
+                    "></div>
+        <div class="absolute inset-0 "
              style="background: linear-gradient(90deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }}, {{ config('colors.primary') }});
-                    background-size: 200% 100%;"></div>
+                    "></div>
     </div>
 
     <div class="container mx-auto px-6 py-16 relative z-10" data-aos="fade-up" data-aos-delay="300">
@@ -133,22 +133,22 @@
                         @endforeach
                     @else
                         <li class="flex items-center gap-2 text-gray-400 group">
-                            <i class="fas fa-sparkles text-xs transition-all duration-300 group-hover:text-yellow-400 group-hover:animate-pulse"
+                            <i class="fas fa-sparkles text-xs transition-all duration-300 group-hover:text-yellow-400 "
                                style="color: {{ config('colors.primary_light') }};"></i>
                             <span class="group-hover:text-white transition-colors duration-300">تطوير الويب</span>
                         </li>
                         <li class="flex items-center gap-2 text-gray-400 group">
-                            <i class="fas fa-sparkles text-xs transition-all duration-300 group-hover:text-yellow-400 group-hover:animate-pulse"
+                            <i class="fas fa-sparkles text-xs transition-all duration-300 group-hover:text-yellow-400 "
                                style="color: {{ config('colors.primary_light') }};"></i>
                             <span class="group-hover:text-white transition-colors duration-300">تطبيقات الجوال</span>
                         </li>
                         <li class="flex items-center gap-2 text-gray-400 group">
-                            <i class="fas fa-sparkles text-xs transition-all duration-300 group-hover:text-yellow-400 group-hover:animate-pulse"
+                            <i class="fas fa-sparkles text-xs transition-all duration-300 group-hover:text-yellow-400 "
                                style="color: {{ config('colors.primary_light') }};"></i>
                             <span class="group-hover:text-white transition-colors duration-300">تصميم UI/UX</span>
                         </li>
                         <li class="flex items-center gap-2 text-gray-400 group">
-                            <i class="fas fa-sparkles text-xs transition-all duration-300 group-hover:text-yellow-400 group-hover:animate-pulse"
+                            <i class="fas fa-sparkles text-xs transition-all duration-300 group-hover:text-yellow-400 "
                                style="color: {{ config('colors.primary_light') }};"></i>
                             <span class="group-hover:text-white transition-colors duration-300">الاستضافة والسيرفرات</span>
                         </li>
@@ -203,7 +203,7 @@
                            class="group w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-500 relative overflow-hidden hover:scale-110 hover:-rotate-6"
                            style="background: {{ config('colors.white_10') }};">
                             {{-- Glow Effect on Hover --}}
-                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md"
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 "
                                  style="background: linear-gradient(135deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }});"></div>
 
                             {{-- Icon --}}
@@ -270,7 +270,7 @@
             class="fixed bottom-8 left-8 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110 z-50 group shadow-2xl"
             style="background: linear-gradient(135deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }});">
         <i class="fas fa-arrow-up text-white group-hover:animate-bounce"></i>
-        <div class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg"
+        <div class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 "
              style="background: linear-gradient(135deg, {{ config('colors.primary') }}, {{ config('colors.accent_yellow') }});"></div>
     </button>
 </footer>
@@ -282,7 +282,7 @@
     50% { background-position: 100% 50%; }
 }
 
-.animate-gradient-x {
+. {
     animation: gradient-x 3s ease infinite;
 }
 

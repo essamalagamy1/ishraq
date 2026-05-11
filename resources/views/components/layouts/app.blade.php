@@ -62,8 +62,8 @@
             overflow-x: hidden;
         }
         .min-h-screen { min-height: 100vh; }
-        #page-loader { background: #0a0d14; position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease-out; }
-        .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.05); border-top: 4px solid #FF6B35; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        #page-loader { background: #0a0d14; position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease-out; }
+        .spinner { width: 40px; height: 40px; border: 3px solid rgba(255, 107, 53, 0.1); border-top: 3px solid #FF6B35; border-radius: 50%; animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         #app-content { opacity: 0; transition: opacity 0.8s ease-in-out; }
         .navbar-modern { min-height: 80px; }
@@ -142,9 +142,9 @@
 <body class="font-sans antialiased text-white" dir="rtl" style="font-family: 'Tajawal', sans-serif; background: #0a0d14; overflow: hidden;">
     <!-- Premium Loader -->
     <div id="page-loader">
-        <div class="page-loader-content" style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+        <div class="page-loader-content" style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; background: transparent; border: none; outline: none;">
             <div class="spinner"></div>
-            <div class="page-loader-text" style="color: #FF6B35; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; animation: pulse 1.5s ease-in-out infinite;">جاري التحميل...</div>
+            <div class="page-loader-text" style="color: #FF6B35; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.05em; opacity: 0.9; background: transparent; border: none; outline: none; box-shadow: none;">جاري التحميل...</div>
         </div>
     </div>
     <style>@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }</style>

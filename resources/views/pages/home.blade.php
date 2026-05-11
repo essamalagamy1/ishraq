@@ -9,7 +9,7 @@
             position: absolute;
             border-radius: 50%;
             filter: blur(40px);
-            animation: float 20s ease-in-out infinite;
+            animation: none;
             will-change: transform;
         }
 
@@ -56,7 +56,7 @@
             border-radius: 50%;
             background: {{ config('colors.primary_light') }};
             opacity: 0.3;
-            animation: float-gentle 8s ease-in-out infinite;
+            animation: none;
             will-change: transform;
         }
 
@@ -74,7 +74,7 @@
         }
 
         .pulse-icon {
-            animation: pulse 2s ease-in-out infinite;
+            animation: none;
         }
 
         @keyframes pulse {
@@ -166,7 +166,7 @@
 
         /* Floating Cards - Smooth 3D Animation */
         .floating-card {
-            animation: float-card 6s ease-in-out infinite;
+            animation: none;
             transition: all 0.3s ease;
             will-change: transform;
         }
@@ -490,7 +490,7 @@
     {{-- Hero Section - Ultra Professional Design --}}
     <section class="min-h-screen flex items-center relative overflow-hidden hero-section" style="background: linear-gradient(145deg, #0a0a1f 0%, #161637 50%, #1a1a3e 100%);">
         {{-- Animated Gradient Orbs - GPU Accelerated --}}
-        <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0 opacity-5">
             <div class="gradient-orb gradient-orb-1"></div>
             <div class="gradient-orb gradient-orb-2"></div>
             <div class="gradient-orb gradient-orb-3"></div>
@@ -543,7 +543,7 @@
                         <a href="{{ $heroSection->cta_secondary_link ?? route('portfolio') }}"
                            class="cta-secondary group inline-flex items-center gap-3 text-white font-bold py-4 px-8 rounded-2xl border-2 border-white/20 hover:border-white/40 backdrop-blur-sm transition-all duration-300 hover:bg-white/5">
                             <span>{{ $heroSection->cta_secondary_text }}</span>
-                            <i class="fas fa-external-link-alt text-sm opacity-70 group-hover:opacity-100 transition-opacity"></i>
+                            <i class="fas fa-external-link-alt text-sm opacity-70 group-hover:opacity-50 transition-opacity"></i>
                         </a>
                         @endif
                     </div>
@@ -622,8 +622,8 @@
     @if(isset($services) && count($services) > 0)
     <section class="services-section py-28 relative overflow-hidden" style="background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 100%);">
         {{-- Animated Background Decoration --}}
-        <div class="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10 animate-blob" style="background: {{ config('colors.primary') }}; filter: blur(100px);"></div>
-        <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-10 animate-blob animation-delay-2000" style="background: {{ config('colors.accent_blue') }}; filter: blur(100px);"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 rounded-full opacity-5 animate-blob" style="background: {{ config('colors.primary') }}; filter: blur(100px);"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-5 animate-blob animation-delay-2000" style="background: {{ config('colors.accent_blue') }}; filter: blur(100px);"></div>
         
         <div class="container mx-auto px-6 relative z-10">
             {{-- Section Header --}}
@@ -645,10 +645,10 @@
                 @foreach($services as $index => $service)
                 <div class="service-card group relative rounded-3xl p-8 border overflow-hidden {{ $index === 0 ? 'md:col-span-2 lg:col-span-1' : '' }}" style="background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.08); animation-delay: {{ $index * 0.1 }}s;">
                     {{-- Animated Gradient Overlay --}}
-                    <div class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(255, 107, 53, 0.15));"></div>
+                    <div class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-50 transition-opacity duration-700" style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(255, 107, 53, 0.15));"></div>
 
                     {{-- Shine Effect --}}
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none">
                         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                     </div>
 
@@ -671,7 +671,7 @@
                     </div>
 
                     {{-- Corner Decoration with Scale Effect --}}
-                    <div class="absolute top-4 left-4 w-24 h-24 rounded-full opacity-0 group-hover:opacity-10 transition-all duration-500 scale-0 group-hover:scale-100" style="background: {{ config('colors.primary') }};"></div>
+                    <div class="absolute top-4 left-4 w-24 h-24 rounded-full opacity-0 group-hover:opacity-5 transition-all duration-500 scale-0 group-hover:scale-100" style="background: {{ config('colors.primary') }};"></div>
                 </div>
                 @endforeach
             </div>
@@ -692,8 +692,8 @@
     <section class="py-28 relative overflow-hidden" style="background: {{ config('colors.bg_dark') }};">
         {{-- Static Background --}}
         <div class="absolute inset-0">
-            <div class="absolute top-20 right-20 w-72 h-72 rounded-full opacity-10" style="background: {{ config('colors.primary') }}; filter: blur(40px);"></div>
-            <div class="absolute bottom-20 left-20 w-64 h-64 rounded-full opacity-10" style="background: {{ config('colors.accent_blue') }}; filter: blur(40px);"></div>
+            <div class="absolute top-20 right-20 w-72 h-72 rounded-full opacity-5" style="background: {{ config('colors.primary') }}; filter: blur(40px);"></div>
+            <div class="absolute bottom-20 left-20 w-64 h-64 rounded-full opacity-5" style="background: {{ config('colors.accent_blue') }}; filter: blur(40px);"></div>
         </div>
         
         <div class="container mx-auto px-6 relative z-10">
@@ -747,7 +747,7 @@
                         @endif
                         
                         {{-- View Icon --}}
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-50 transition-all duration-500">
                             <div class="w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-md" style="background: {{ config('colors.primary') }};">
                                 <i class="fas fa-eye text-white text-xl"></i>
                             </div>
@@ -915,7 +915,7 @@
                                 <i class="fas fa-file-alt text-4xl text-white/10"></i>
                             </div>
                         @endif
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
                     </div>
 
                     {{-- Content --}}
@@ -945,7 +945,7 @@
         {{-- Animated Background Elements --}}
         <div class="absolute inset-0">
             <div class="absolute top-0 right-0 w-full h-full opacity-30" style="background: radial-gradient(circle at 80% 20%, {{ config('colors.primary') }}40, transparent 50%);"></div>
-            <div class="absolute bottom-0 left-0 w-full h-full opacity-10" style="background: radial-gradient(circle at 20% 80%, {{ config('colors.accent_blue') }}40, transparent 50%);"></div>
+            <div class="absolute bottom-0 left-0 w-full h-full opacity-5" style="background: radial-gradient(circle at 20% 80%, {{ config('colors.accent_blue') }}40, transparent 50%);"></div>
         </div>
         
         {{-- Grid Pattern --}}
