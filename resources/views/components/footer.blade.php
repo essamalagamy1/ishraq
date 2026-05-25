@@ -51,21 +51,21 @@
             {{-- Sitemap --}}
             <div class="md:col-span-4 grid grid-cols-2 gap-8">
                 <div>
-                    <h3 class="type-eyebrow mb-6">الشركة</h3>
-                    <ul class="space-y-3.5">
-                        <li><a href="{{ route('about') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>من نحن</a></li>
-                        <li><a href="{{ route('services') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>الخدمات</a></li>
-                        <li><a href="{{ route('portfolio') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>الأعمال</a></li>
-                        <li><a href="{{ route('careers') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>الفرص</a></li>
-                    </ul>
-                </div>
-                <div>
                     <h3 class="type-eyebrow mb-6">موارد</h3>
                     <ul class="space-y-3.5">
                         <li><a href="{{ route('articles') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>المدونة</a></li>
                         <li><a href="{{ route('request-design.create') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>طلب تصميم</a></li>
                         <li><a href="{{ route('contact') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>تواصل</a></li>
                         <li><a href="{{ route('testimonial.create') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>قصة عميل</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="type-eyebrow mb-6">الشركة</h3>
+                    <ul class="space-y-3.5">
+                        <li><a href="{{ route('about') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>من نحن</a></li>
+                        <li><a href="{{ route('services') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>الخدمات</a></li>
+                        {{--                        <li><a href="{{ route('portfolio') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>الأعمال</a></li>--}}
+                        <li><a href="{{ route('careers') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>الفرص</a></li>
                     </ul>
                 </div>
             </div>

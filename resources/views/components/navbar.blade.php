@@ -5,7 +5,7 @@
         ['route' => 'home',     'label' => 'الرئيسية',  'match' => 'home'],
         ['route' => 'about',    'label' => 'من نحن',    'match' => 'about'],
         ['route' => 'services', 'label' => 'الخدمات',   'match' => 'services'],
-        ['route' => 'portfolio','label' => 'الأعمال',   'match' => 'portfolio'],
+//        ['route' => 'portfolio','label' => 'الأعمال',   'match' => 'portfolio'],
         ['route' => 'articles', 'label' => 'المدونة',   'match' => 'articles*'],
         ['route' => 'contact',  'label' => 'تواصل',     'match' => 'contact'],
     ];

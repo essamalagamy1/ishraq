@@ -161,67 +161,67 @@
          4. FEATURED WORK
          ================================================================ --}}
     @if($featuredProjects && $featuredProjects->count())
-    <section id="work" class="section-pad" data-section style="background: var(--color-canvas);">
-        <div class="container-page">
-            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16" data-reveal>
-                <div class="max-w-2xl">
-                    <x-ui.eyebrow number="02">مختارات من أعمالنا</x-ui.eyebrow>
-                    <h2 class="type-h1 mt-6">
-                        ما صنعناه مؤخرًا.
-                    </h2>
-                </div>
-                <a href="{{ route('portfolio') }}" class="btn btn--ghost self-start md:self-auto">
-                    <span>الأرشيف الكامل</span>
-                    <svg class="btn-arrow" width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
-                        <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
-            </div>
+{{--    <section id="work" class="section-pad" data-section style="background: var(--color-canvas);">--}}
+{{--        <div class="container-page">--}}
+{{--            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16" data-reveal>--}}
+{{--                <div class="max-w-2xl">--}}
+{{--                    <x-ui.eyebrow number="02">مختارات من أعمالنا</x-ui.eyebrow>--}}
+{{--                    <h2 class="type-h1 mt-6">--}}
+{{--                        ما صنعناه مؤخرًا.--}}
+{{--                    </h2>--}}
+{{--                </div>--}}
+{{--                <a href="{{ route('portfolio') }}" class="btn btn--ghost self-start md:self-auto">--}}
+{{--                    <span>الأرشيف الكامل</span>--}}
+{{--                    <svg class="btn-arrow" width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">--}}
+{{--                        <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--                    </svg>--}}
+{{--                </a>--}}
+{{--            </div>--}}
 
-            <div class="space-y-24 md:space-y-32">
-                @foreach($featuredProjects->take(3) as $i => $project)
-                    @php $reverse = $i % 2 === 1; @endphp
-                    <a href="{{ route('projects.show', $project->slug) }}"
-                       class="work-card group grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-center"
-                       data-reveal>
-                        <div class="md:col-span-7 {{ $reverse ? 'md:order-2' : '' }}">
-                            <div class="work-card__media">
-                                @if($project->main_image)
-                                    <img src="{{ Storage::url($project->main_image) }}"
-                                         alt="{{ $project->title }}"
-                                         loading="lazy"
-                                         data-parallax="0.08" />
-                                @else
-                                    <div class="work-card__media-fallback">{{ $project->title }}</div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="md:col-span-5 {{ $reverse ? 'md:order-1' : '' }}">
-                            <div class="type-eyebrow mb-5 flex items-center gap-3">
-                                <span class="type-numeral text-base">{{ sprintf('%02d', $i + 1) }}</span>
-                                <span class="w-6 h-px bg-[color:var(--color-line-strong)]"></span>
-                                @if($project->types && $project->types->count())
-                                    <span>{{ $project->types->first()->name_ar }}</span>
-                                @endif
-                            </div>
-                            <h3 class="type-h2 transition-colors duration-300 group-hover:text-[color:var(--color-accent)]">
-                                {{ $project->title }}
-                            </h3>
-                            @if($project->short_description)
-                                <p class="type-body mt-4 max-w-md">{{ $project->short_description }}</p>
-                            @endif
-                            <div class="mt-8 inline-flex items-center gap-2 type-small text-[color:var(--color-ink)]">
-                                <span>عرض المشروع</span>
-                                <svg width="14" height="10" viewBox="0 0 16 10" fill="none" class="btn-arrow" aria-hidden="true">
-                                    <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-        </div>
-    </section>
+{{--            <div class="space-y-24 md:space-y-32">--}}
+{{--                @foreach($featuredProjects->take(3) as $i => $project)--}}
+{{--                    @php $reverse = $i % 2 === 1; @endphp--}}
+{{--                    <a href="{{ route('projects.show', $project->slug) }}"--}}
+{{--                       class="work-card group grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-center"--}}
+{{--                       data-reveal>--}}
+{{--                        <div class="md:col-span-7 {{ $reverse ? 'md:order-2' : '' }}">--}}
+{{--                            <div class="work-card__media">--}}
+{{--                                @if($project->main_image)--}}
+{{--                                    <img src="{{ Storage::url($project->main_image) }}"--}}
+{{--                                         alt="{{ $project->title }}"--}}
+{{--                                         loading="lazy"--}}
+{{--                                         data-parallax="0.08" />--}}
+{{--                                @else--}}
+{{--                                    <div class="work-card__media-fallback">{{ $project->title }}</div>--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="md:col-span-5 {{ $reverse ? 'md:order-1' : '' }}">--}}
+{{--                            <div class="type-eyebrow mb-5 flex items-center gap-3">--}}
+{{--                                <span class="type-numeral text-base">{{ sprintf('%02d', $i + 1) }}</span>--}}
+{{--                                <span class="w-6 h-px bg-[color:var(--color-line-strong)]"></span>--}}
+{{--                                @if($project->types && $project->types->count())--}}
+{{--                                    <span>{{ $project->types->first()->name_ar }}</span>--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
+{{--                            <h3 class="type-h2 transition-colors duration-300 group-hover:text-[color:var(--color-accent)]">--}}
+{{--                                {{ $project->title }}--}}
+{{--                            </h3>--}}
+{{--                            @if($project->short_description)--}}
+{{--                                <p class="type-body mt-4 max-w-md">{{ $project->short_description }}</p>--}}
+{{--                            @endif--}}
+{{--                            <div class="mt-8 inline-flex items-center gap-2 type-small text-[color:var(--color-ink)]">--}}
+{{--                                <span>عرض المشروع</span>--}}
+{{--                                <svg width="14" height="10" viewBox="0 0 16 10" fill="none" class="btn-arrow" aria-hidden="true">--}}
+{{--                                    <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--                                </svg>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
     @endif
 
     {{-- ================================================================
