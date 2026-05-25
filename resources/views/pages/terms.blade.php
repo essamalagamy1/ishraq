@@ -1,102 +1,38 @@
 <x-layouts.app>
-    <style>
-        .prose h2 { font-size: 1.5rem; font-weight: 700; color: #ffffff; margin-bottom: 1rem; }
-        .prose h3 { font-size: 1.25rem; font-weight: 600; color: #ffffff; margin-top: 2rem; margin-bottom: 0.75rem; }
-        .prose p { color: #d1d5db; line-height: 1.75; margin-bottom: 1rem; }
-        .prose ul { list-style-type: disc; padding-right: 1.5rem; margin-bottom: 1rem; }
-        .prose li { color: #d1d5db; margin-bottom: 0.5rem; }
-    </style>
-
-    {{-- Hero --}}
-    <section class="relative py-16 overflow-hidden" style="background: {{ config('colors.bg_dark') }};">
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-3xl">
-                <h1 class="text-4xl font-black text-white mb-4">
-                    الشروط <span style="color: {{ config('colors.primary_light') }};">والأحكام</span>
-                </h1>
-                <p class="text-gray-400">آخر تحديث: {{ date('Y/m/d') }}</p>
+    <section class="section-pad" style="background: var(--color-canvas);">
+        <div class="container-page">
+            <div class="max-w-3xl" data-reveal>
+                <x-ui.eyebrow number="01">{{ __('الشروط والأحكام') }}</x-ui.eyebrow>
+                <h1 class="type-display mt-6">{{ __('شروط التعامل') }}</h1>
+                <p class="type-small mt-4 text-[color:var(--color-ink-subtle)]">{{ __('آخر تحديث:') }} {{ date('Y/m/d') }}</p>
             </div>
         </div>
     </section>
 
-    {{-- Content --}}
-    <section class="py-16" style="background: #0f1419;">
-        <div class="container mx-auto px-6">
-            <div class="max-w-3xl mx-auto">
+    <section class="section-pad" style="background: var(--color-canvas);">
+        <div class="container-page">
+            <div class="max-w-3xl">
                 @if($companySettings?->terms_conditions)
-                    <div class="prose prose-lg max-w-none" style="color: #d1d5db;">
+                    <div class="prose-article">
                         {!! $companySettings->terms_conditions !!}
                     </div>
                 @else
-                    {{-- Fallback content if no data in database --}}
-                    <div class="rounded-2xl p-8 mb-8" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
-                        <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                            <i class="fas fa-file-contract" style="color: {{ config('colors.primary') }};"></i>
-                            مقدمة
-                        </h2>
-                        <p class="text-gray-300 leading-relaxed">
-                            باستخدامك لخدمات E-DATA 360، فإنك توافق على الالتزام بهذه الشروط والأحكام. يرجى قراءتها بعناية.
-                        </p>
-                    </div>
-
-                    <div class="space-y-8">
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-3">1. الخدمات</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                نقدم خدمات تطوير مواقع الويب، تطبيقات الجوال، تصميم واجهات المستخدم، والحلول البرمجية المتكاملة وفقاً للمواصفات المتفق عليها مع العميل.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-3">2. الدفع</h3>
-                            <p class="text-gray-300 leading-relaxed mb-4">شروط الدفع:</p>
-                            <ul class="list-disc list-inside text-gray-400 space-y-2 mr-4">
-                                <li>يتم دفع 30% مقدماً قبل بدء العمل</li>
-                                <li>يتم دفع 50% اثناء العمل ومتابعة العميل في تقدم وقبل عملية تسليم المشروع</li>
-                                <li>يتم دفع 20% عند تسليم المشروع</li>
+                    <div class="surface-card p-8">
+                        <div class="prose-article">
+                            <h2>{{ __('مقدمة') }}</h2>
+                            <p>{{ __('باستخدامك لخدماتنا فأنت توافق على الالتزام بهذه الشروط والأحكام.') }}</p>
+                            <h3>{{ __('الخدمات') }}</h3>
+                            <p>{{ __('نقدم خدمات تطوير ويب وتطبيقات وحلول رقمية وفق المواصفات المتفق عليها.') }}</p>
+                            <h3>{{ __('الدفع') }}</h3>
+                            <ul>
+                                <li>{{ __('30% مقدماً قبل بدء العمل') }}</li>
+                                <li>{{ __('50% أثناء العمل وقبل التسليم') }}</li>
+                                <li>{{ __('20% عند التسليم النهائي') }}</li>
                             </ul>
-                        </div>
-
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-3">3. التسليم</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                نلتزم بمواعيد التسليم المتفق عليها. قد تتأخر المواعيد في حال تأخر العميل في تقديم المتطلبات أو الموافقات.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-3">4. حقوق الملكية</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                تنتقل حقوق الملكية الفكرية للعميل بالكامل بعد السداد الكامل للمستحقات.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-3">5. التعديلات</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                نقدم عدداً معيناً من جولات التعديلات ضمن العقد. التعديلات الإضافية قد تتطلب رسوماً إضافية.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-3">6. السرية</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                نلتزم بالحفاظ على سرية جميع المعلومات والبيانات التي يشاركها العميل معنا.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-3">7. الإلغاء</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                في حال إلغاء المشروع، يحق لنا الاحتفاظ بالمبالغ المدفوعة مقابل العمل المنجز حتى تاريخ الإلغاء.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-3">8. التواصل</h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                للاستفسارات أو الشكاوى، يرجى التواصل معنا عبر صفحة 
-                                <a href="{{ route('contact') }}" style="color: {{ config('colors.primary') }};">اتصل بنا</a>.
+                            <h3>{{ __('التواصل') }}</h3>
+                            <p>
+                                {{ __('للاستفسارات أو الشكاوى، يرجى التواصل عبر صفحة') }}
+                                <a href="{{ route('contact') }}" wire:navigate>{{ __('اتصل بنا') }}</a>.
                             </p>
                         </div>
                     </div>

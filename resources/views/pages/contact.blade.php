@@ -1,177 +1,106 @@
+@php
+    $heroTitle = $heroSection?->title_line1 ?? __('تواصل معنا');
+    $heroSubtitle = $heroSection?->subtitle ?? __('يسعدنا الاستماع لتفاصيل مشروعك والرد خلال يوم عمل واحد.');
+@endphp
+
 <x-layouts.app>
-    {{-- Hero with Animations --}}
-    <section class="relative py-20 overflow-hidden" style="background: {{ config('colors.bg_dark') }};">
-        <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 30px 30px;"></div>
-        <div class="absolute top-10 right-10 w-3 h-3 rounded-full animate-float opacity-40" style="background: {{ config('colors.primary_light') }};"></div>
-        <div class="absolute bottom-10 left-20 w-4 h-4 rounded-full animate-float opacity-30" style="background: {{ config('colors.primary_lighter') }}; animation-delay: 1s;"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-3xl">
-                <div class="flex items-center gap-3 mb-6 text-gray-400 text-sm hero-animate animate-fade-in-up" style="animation-delay: 0.1s;">
-                    <a href="{{ route('home') }}" class="hover:text-white transition">الرئيسية</a>
-                    <i class="fas fa-chevron-left text-xs"></i>
-                    <span style="color: {{ config('colors.primary_light') }};">تواصل معنا</span>
-                </div>
-                @if($heroSection)
-                <h1 class="text-4xl md:text-5xl font-black text-white mb-4 hero-animate animate-fade-in-up" style="animation-delay: 0.2s;">
-                    {{ $heroSection->title_line1 }}
-                    <span class="gradient-text-animated">{{ $heroSection->title_line2 }}</span>
-                </h1>
-                @if($heroSection->subtitle)
-                <p class="text-gray-400 text-lg hero-animate animate-fade-in-up" style="animation-delay: 0.3s;">{{ $heroSection->subtitle }}</p>
-                @endif
-                @else
-                <h1 class="text-4xl md:text-5xl font-black text-white mb-4 hero-animate animate-fade-in-up" style="animation-delay: 0.2s;">
-                    تواصل <span class="gradient-text-animated">معنا</span>
-                </h1>
-                <p class="text-gray-400 text-lg hero-animate animate-fade-in-up" style="animation-delay: 0.3s;">نسعد بتواصلك معنا وسنرد عليك في أقرب وقت</p>
-                @endif
+    <section class="section-pad" style="background: var(--color-canvas);">
+        <div class="container-page">
+            <div class="max-w-3xl" data-reveal>
+                <x-ui.eyebrow number="01">{{ __('التواصل') }}</x-ui.eyebrow>
+                <x-ui.split-heading as="h1" class="type-display mt-6">
+                    {{ $heroTitle }}
+                    @if($heroSection?->title_line2)
+                        <span class="text-[color:var(--color-ink-muted)]">{{ $heroSection->title_line2 }}</span>
+                    @endif
+                </x-ui.split-heading>
+                <p class="type-body-lg mt-6" data-reveal data-reveal-stagger="200">{{ $heroSubtitle }}</p>
             </div>
         </div>
     </section>
 
-    {{-- Main Contact Section --}}
-    <section class="py-20" style="background: #0f1419;">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
-                
-                {{-- Contact Info - Sidebar --}}
-                <div class="lg:col-span-2 space-y-6">
-                    <div>
-                        <span class="text-sm font-bold tracking-wider uppercase" style="color: {{ config('colors.primary') }};">معلومات التواصل</span>
-                        <h2 class="text-3xl font-black text-white mt-2">كيف يمكننا مساعدتك؟</h2>
-                    </div>
-
-                    {{-- Contact Cards - Dynamic from $companySettings --}}
-                    <div class="space-y-4">
+    <section class="section-pad" style="background: var(--color-surface);">
+        <div class="container-page">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5" data-reveal>
+                    <x-ui.eyebrow number="02">{{ __('معلومات التواصل') }}</x-ui.eyebrow>
+                    <h2 class="type-h1 mt-6">{{ __('دعنا نبدأ الحديث.') }}</h2>
+                    <div class="mt-10 space-y-4">
                         @if($companySettings && $companySettings->main_email)
-                        <div class="rounded-xl p-5 hover:shadow-md transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style="background: {{ config('colors.primary_10') }};">
-                                    <i class="fas fa-envelope" style="color: {{ config('colors.primary') }};"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-white mb-1">البريد الإلكتروني</h3>
-                                    {{-- Dynamic email from database --}}
-                                    <a href="mailto:{{ $companySettings->main_email }}" class="text-gray-300 hover:underline">
-                                        {{ $companySettings->main_email }}
-                                    </a>
-                                </div>
+                            <div class="surface-card p-6">
+                                <div class="type-eyebrow mb-2">{{ __('البريد الإلكتروني') }}</div>
+                                <a href="mailto:{{ $companySettings->main_email }}" class="type-body text-[color:var(--color-ink)]">
+                                    {{ $companySettings->main_email }}
+                                </a>
                             </div>
-                        </div>
                         @endif
-
                         @if($companySettings && $companySettings->whatsapp_number)
-                        <div class="rounded-xl p-5 hover:shadow-md transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style="background: rgba(34, 197, 94, 0.1);">
-                                    <i class="fab fa-whatsapp text-green-500"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-white mb-1">واتساب</h3>
-                                    {{-- Dynamic WhatsApp from database --}}
-                                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companySettings->whatsapp_number) }}" class="text-gray-300 hover:underline">
-                                        <span dir="ltr">{{ $companySettings->whatsapp_number }}</span>
-                                    </a>
-                                </div>
+                            <div class="surface-card p-6">
+                                <div class="type-eyebrow mb-2">{{ __('واتساب') }}</div>
+                                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companySettings->whatsapp_number) }}"
+                                   class="type-body text-[color:var(--color-ink)]" dir="ltr">
+                                    {{ $companySettings->whatsapp_number }}
+                                </a>
                             </div>
-                        </div>
                         @endif
-
                         @if($companySettings && $companySettings->location_text)
-                        <div class="rounded-xl p-5 hover:shadow-md transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style="background: rgba(239, 68, 68, 0.1);">
-                                    <i class="fas fa-map-marker-alt text-red-500"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-white mb-1">الموقع</h3>
-                                    {{-- Dynamic location from database --}}
-                                    <p class="text-gray-300">{{ $companySettings->location_text }}</p>
-                                </div>
+                            <div class="surface-card p-6">
+                                <div class="type-eyebrow mb-2">{{ __('الموقع') }}</div>
+                                <p class="type-body text-[color:var(--color-ink)]">{{ $companySettings->location_text }}</p>
                             </div>
-                        </div>
                         @endif
                     </div>
 
-                    {{-- Social Links - Dynamic from $socialLinks --}}
-                    @if($socialLinks && $socialLinks->count() > 0)
-                    <div class="pt-6">
-                        <h3 class="font-bold text-white mb-4">تابعنا</h3>
-                        <div class="flex gap-3">
-                            @foreach($socialLinks as $link)
-                            <a href="{{ $link->url }}" target="_blank" class="w-10 h-10 rounded-lg flex items-center justify-center transition-all" style="background: rgba(255, 255, 255, 0.05); hover:background: rgba(255, 255, 255, 0.1);">
-                                @if(str_contains(strtolower($link->platform), 'twitter') || str_contains(strtolower($link->platform), 'x'))
-                                    <i class="fab fa-x-twitter text-gray-300"></i>
-                                @elseif(str_contains(strtolower($link->platform), 'facebook'))
-                                    <i class="fab fa-facebook-f text-gray-600"></i>
-                                @elseif(str_contains(strtolower($link->platform), 'instagram'))
-                                    <i class="fab fa-instagram text-gray-600"></i>
-                                @elseif(str_contains(strtolower($link->platform), 'linkedin'))
-                                    <i class="fab fa-linkedin-in text-gray-600"></i>
-                                @else
-                                    <i class="fas fa-link text-gray-600"></i>
-                                @endif
-                            </a>
-                            @endforeach
+                    @if($socialLinks && $socialLinks->count())
+                        <div class="mt-10">
+                            <div class="type-eyebrow mb-4">{{ __('تابعنا') }}</div>
+                            <div class="flex items-center gap-3">
+                                @foreach($socialLinks as $link)
+                                    <a href="{{ $link->url }}" target="_blank" rel="noopener noreferrer"
+                                       class="w-10 h-10 inline-flex items-center justify-center rounded-full border border-[color:var(--color-line-strong)] text-[color:var(--color-ink-muted)] hover:text-[color:var(--color-ink)] hover:border-[color:var(--color-accent)] transition-colors duration-300"
+                                       aria-label="{{ $link->platform }}">
+                                        <x-ui.social-icon :platform="$link->platform" />
+                                    </a>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
                     @endif
                 </div>
 
-                {{-- Contact Form --}}
-                <div class="lg:col-span-3">
+                <div class="lg:col-span-7" data-reveal data-reveal-stagger="120">
                     @if(session('success'))
-                    <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-8">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
-                                <i class="fas fa-check text-white"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-green-800">تم الإرسال بنجاح!</h4>
-                                <p class="text-green-700 text-sm">{{ session('success') }}</p>
-                            </div>
+                        <div class="surface-card p-6 mb-8">
+                            <div class="type-body text-[color:var(--color-ink)]">{{ session('success') }}</div>
                         </div>
-                    </div>
                     @endif
 
-                    <form action="{{ route('contact.store') }}" method="POST" class="rounded-2xl p-8 shadow-sm" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
+                    <form action="{{ route('contact.store') }}" method="POST" class="surface-card p-8">
                         @csrf
-                        <h3 class="text-2xl font-bold text-white mb-6">أرسل رسالتك</h3>
-                        
+                        <h3 class="type-h2 mb-6">{{ __('أرسل رسالتك') }}</h3>
                         <div class="space-y-5">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
-                                    <label for="name" class="block text-sm font-semibold text-gray-300 mb-2">الاسم الكامل</label>
-                                    <input type="text" name="name" id="name" required
-                                           class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-100 focus:outline-none transition-all"
-                                           placeholder="اسمك الكامل">
+                                    <label for="name" class="form-label">{{ __('الاسم الكامل') }}</label>
+                                    <input type="text" name="name" id="name" required class="form-input" placeholder="{{ __('اسمك الكامل') }}">
                                 </div>
                                 <div>
-                                    <label for="email" class="block text-sm font-semibold text-gray-300 mb-2">البريد الإلكتروني</label>
-                                    <input type="email" name="email" id="email" required
-                                           class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-100 focus:outline-none transition-all"
-                                           placeholder="example@email.com">
+                                    <label for="email" class="form-label">{{ __('البريد الإلكتروني') }}</label>
+                                    <input type="email" name="email" id="email" required class="form-input" placeholder="example@email.com">
                                 </div>
                             </div>
-                            
                             <div>
-                                <label for="phone" class="block text-sm font-semibold text-gray-300 mb-2">رقم الجوال <span class="text-gray-400 font-normal">(اختياري)</span></label>
-                                <input type="tel" name="phone" id="phone"
-                                       class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-100 focus:outline-none transition-all"
-                                       placeholder="+966 XX XXX XXXX">
+                                <label for="phone" class="form-label">{{ __('رقم الجوال (اختياري)') }}</label>
+                                <input type="tel" name="phone" id="phone" class="form-input" placeholder="+966 XX XXX XXXX">
                             </div>
-                            
                             <div>
-                                <label for="message" class="block text-sm font-semibold text-gray-300 mb-2">الرسالة</label>
-                                <textarea name="message" id="message" rows="5" required
-                                          class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-100 focus:outline-none transition-all resize-none"
-                                          placeholder="اكتب رسالتك هنا..."></textarea>
+                                <label for="message" class="form-label">{{ __('الرسالة') }}</label>
+                                <textarea name="message" id="message" rows="5" required class="form-textarea" placeholder="{{ __('اكتب رسالتك هنا...') }}"></textarea>
                             </div>
-
-                            <button type="submit" class="w-full text-white font-bold py-4 px-6 rounded-xl hover:opacity-90 transition-all flex items-center justify-center gap-2 cursor-pointer"
-                            style="background: {{ config('colors.primary') }};">
-                                <i class="fas fa-paper-plane"></i>
-                                <span>إرسال الرسالة</span>
+                            <button type="submit" class="btn btn--primary w-full justify-center">
+                                <span>{{ __('إرسال الرسالة') }}</span>
+                                <svg class="btn-arrow" width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+                                    <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                             </button>
                         </div>
                     </form>

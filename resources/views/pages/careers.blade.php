@@ -1,200 +1,89 @@
 <x-layouts.app>
-    {{-- Hero --}}
-    <section class="relative py-20 overflow-hidden" style="background: linear-gradient(135deg, {{ config('colors.bg_dark') }} 0%, #1a2942 100%);">
-                 <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 30px 30px;"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-3xl">
-                <h1 class="text-5xl font-black text-white mb-6">
-                    انضم إلى <span style="color: {{ config('colors.primary_light') }};">فريقنا</span>
-                </h1>
-                <p class="text-xl text-gray-300 leading-relaxed">
-                    نبحث عن مواهب مبدعة لتطوير حلول برمجية مبتكرة. إذا كنت شغوفاً بالتكنولوجيا، انضم إلينا!
-                </p>
+    <section class="section-pad" style="background: var(--color-canvas);">
+        <div class="container-page">
+            <div class="max-w-3xl" data-reveal>
+                <x-ui.eyebrow number="01">{{ __('الوظائف') }}</x-ui.eyebrow>
+                <x-ui.split-heading as="h1" class="type-display mt-6">
+                    {{ __('انضم إلى فريقنا') }}
+                </x-ui.split-heading>
+                <p class="type-body-lg mt-6">{{ __('نبحث عن مواهب تصنع فرقًا حقيقيًا في جودة المنتج.') }}</p>
             </div>
         </div>
-        
-        {{-- Decorative Elements --}}
-        <div class="absolute top-0 right-0 w-96 h-96 bg-teal-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
     </section>
 
-    {{-- Application Form --}}
-    <section class="py-16" style="background: #0f1419;">
-        <div class="container mx-auto px-6">
+    <section class="section-pad" style="background: var(--color-surface);">
+        <div class="container-page">
             <div class="max-w-3xl mx-auto">
-                {{-- Success Message --}}
                 @if(session('success'))
-                    <div class="mb-8 p-6 bg-green-50 border-r-4 border-green-500 rounded-lg">
-                        <div class="flex items-center gap-3">
-                            <i class="fas fa-check-circle text-green-500 text-2xl"></i>
-                            <p class="text-green-800 font-semibold">{{ session('success') }}</p>
-                        </div>
+                    <div class="surface-card p-6 mb-8">
+                        <p class="type-body text-[color:var(--color-ink)]">{{ session('success') }}</p>
                     </div>
                 @endif
 
-                {{-- Form Card --}}
-                <div class="rounded-2xl shadow-xl overflow-hidden" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
-                    <div class="p-8 border-b border-gray-100" style="background: linear-gradient(135deg, {{ config('colors.primary') }} 0%, {{ config('colors.primary_light') }} 100%);">
-                        <h2 class="text-3xl font-bold text-white mb-2">قدّم طلبك الآن</h2>
-                        <p class="text-teal-50">املأ النموذج أدناه وسنتواصل معك في أقرب وقت</p>
-                    </div>
-
-                    <form action="{{ route('careers.store') }}" method="POST" enctype="multipart/form-data" class="p-8">
+                <div class="surface-card p-8">
+                    <h2 class="type-h2 mb-6">{{ __('قدّم طلبك الآن') }}</h2>
+                    <form action="{{ route('careers.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                         @csrf
-
-                        <div class="grid md:grid-cols-2 gap-6 mb-6">
-                            {{-- Name --}}
+                        <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <label for="name" class="block text-gray-300 font-semibold mb-2">
-                                    <i class="fas fa-user text-teal-600 ml-2"></i>
-                                    الاسم الكامل
-                                </label>
-                                <input type="text" 
-                                       id="name" 
-                                       name="name" 
-                                       value="{{ old('name') }}"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all @error('name') border-red-500 @enderror"
-                                       placeholder="أدخل اسمك الكامل"
-                                       required>
-                                @error('name')
-                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
+                                <label for="name" class="form-label">{{ __('الاسم الكامل') }}</label>
+                                <input type="text" id="name" name="name" value="{{ old('name') }}" class="form-input @error('name') border-red-500 @enderror" required>
+                                @error('name')<p class="form-help text-red-400">{{ $message }}</p>@enderror
                             </div>
-
-                            {{-- Email --}}
                             <div>
-                                <label for="email" class="block text-gray-700 font-semibold mb-2">
-                                    <i class="fas fa-envelope text-teal-600 ml-2"></i>
-                                    البريد الإلكتروني
-                                </label>
-                                <input type="email" 
-                                       id="email" 
-                                       name="email" 
-                                       value="{{ old('email') }}"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all @error('email') border-red-500 @enderror"
-                                       placeholder="example@email.com"
-                                       required>
-                                @error('email')
-                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
+                                <label for="email" class="form-label">{{ __('البريد الإلكتروني') }}</label>
+                                <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-input @error('email') border-red-500 @enderror" required>
+                                @error('email')<p class="form-help text-red-400">{{ $message }}</p>@enderror
                             </div>
                         </div>
 
-                        <div class="grid md:grid-cols-2 gap-6 mb-6">
-                            {{-- Phone --}}
+                        <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <label for="phone" class="block text-gray-700 font-semibold mb-2">
-                                    <i class="fas fa-phone text-teal-600 ml-2"></i>
-                                    رقم الهاتف
-                                </label>
-                                <input type="tel" 
-                                       id="phone" 
-                                       name="phone" 
-                                       value="{{ old('phone') }}"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all @error('phone') border-red-500 @enderror"
-                                       placeholder="+966 50 123 4567"
-                                       required>
-                                @error('phone')
-                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
+                                <label for="phone" class="form-label">{{ __('رقم الهاتف') }}</label>
+                                <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" class="form-input @error('phone') border-red-500 @enderror" required>
+                                @error('phone')<p class="form-help text-red-400">{{ $message }}</p>@enderror
                             </div>
-
-                            {{-- Years of Experience --}}
                             <div>
-                                <label for="years_of_experience" class="block text-gray-700 font-semibold mb-2">
-                                    <i class="fas fa-briefcase text-teal-600 ml-2"></i>
-                                    سنوات الخبرة
-                                </label>
-                                <input type="number" 
-                                       id="years_of_experience" 
-                                       name="years_of_experience" 
-                                       value="{{ old('years_of_experience') }}"
-                                       min="0" 
-                                       max="50"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all @error('years_of_experience') border-red-500 @enderror"
-                                       placeholder="عدد سنوات الخبرة"
-                                       required>
-                                @error('years_of_experience')
-                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
+                                <label for="years_of_experience" class="form-label">{{ __('سنوات الخبرة') }}</label>
+                                <input type="number" id="years_of_experience" name="years_of_experience" value="{{ old('years_of_experience') }}" min="0" max="50" class="form-input @error('years_of_experience') border-red-500 @enderror" required>
+                                @error('years_of_experience')<p class="form-help text-red-400">{{ $message }}</p>@enderror
                             </div>
                         </div>
 
-                        {{-- Specialization --}}
-                        <div class="mb-6">
-                            <label for="specialization" class="block text-gray-700 font-semibold mb-2">
-                                <i class="fas fa-code text-teal-600 ml-2"></i>
-                                التخصص
-                            </label>
-                            <input type="text" 
-                                   id="specialization" 
-                                   name="specialization" 
-                                   value="{{ old('specialization') }}"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all @error('specialization') border-red-500 @enderror"
-                                   placeholder="مثال: مطور Full Stack، مصمم UI/UX، مطور تطبيقات جوال"
-                                   required>
-                            @error('specialization')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
+                        <div>
+                            <label for="specialization" class="form-label">{{ __('التخصص') }}</label>
+                            <input type="text" id="specialization" name="specialization" value="{{ old('specialization') }}" class="form-input @error('specialization') border-red-500 @enderror" required>
+                            @error('specialization')<p class="form-help text-red-400">{{ $message }}</p>@enderror
                         </div>
 
-                        {{-- CV Upload --}}
-                        <div class="mb-8">
-                            <label for="cv" class="block text-gray-700 font-semibold mb-2">
-                                <i class="fas fa-file-pdf text-teal-600 ml-2"></i>
-                                السيرة الذاتية (CV)
-                            </label>
-                            <div class="relative">
-                                <input type="file" 
-                                       id="cv" 
-                                       name="cv" 
-                                       accept=".pdf,.doc,.docx"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all @error('cv') border-red-500 @enderror"
-                                       required>
-                                <p class="mt-2 text-sm text-gray-500">
-                                    <i class="fas fa-info-circle ml-1"></i>
-                                    الصيغ المقبولة: PDF, DOC, DOCX (الحد الأقصى: 20 ميجابايت)
-                                </p>
-                            </div>
-                            @error('cv')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
+                        <div>
+                            <label for="cv" class="form-label">{{ __('السيرة الذاتية') }}</label>
+                            <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" class="form-input @error('cv') border-red-500 @enderror" required>
+                            <p class="form-help mt-2">{{ __('الصيغ المقبولة: PDF, DOC, DOCX (الحد الأقصى: 20 ميجابايت)') }}</p>
+                            @error('cv')<p class="form-help text-red-400">{{ $message }}</p>@enderror
                         </div>
 
-                        {{-- Submit Button --}}
-                        <button type="submit" 
-                                class="w-full cursor-pointer text-white font-bold py-4 px-6 rounded-xl hover:opacity-90 transition-all flex items-center justify-center gap-3 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                                style="background: linear-gradient(135deg, {{ config('colors.primary') }} 0%, {{ config('colors.primary_light') }} 100%);">
-                            <i class="fas fa-paper-plane"></i>
-                            <span>إرسال الطلب</span>
+                        <button type="submit" class="btn btn--primary w-full justify-center">
+                            <span>{{ __('إرسال الطلب') }}</span>
+                            <svg class="btn-arrow" width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+                                <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         </button>
                     </form>
                 </div>
 
-                {{-- Info Section --}}
                 <div class="mt-12 grid md:grid-cols-3 gap-6">
-                    <div class="p-6 rounded-xl shadow-md text-center" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
-                        <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-users text-teal-600 text-2xl"></i>
-                        </div>
-                        <h3 class="font-bold text-white mb-2">فريق متميز</h3>
-                        <p class="text-gray-400 text-sm">انضم لفريق من المحترفين المبدعين</p>
+                    <div class="surface-card p-6 text-center">
+                        <div class="type-eyebrow mb-3">{{ __('فريق متميز') }}</div>
+                        <p class="type-body">{{ __('انضم لفريق من المحترفين المبدعين.') }}</p>
                     </div>
-
-                    <div class="p-6 rounded-xl shadow-md text-center" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
-                        <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-rocket text-teal-600 text-2xl"></i>
-                        </div>
-                        <h3 class="font-bold text-white mb-2">مشاريع مبتكرة</h3>
-                        <p class="text-gray-400 text-sm">اعمل على مشاريع تقنية متطورة</p>
+                    <div class="surface-card p-6 text-center">
+                        <div class="type-eyebrow mb-3">{{ __('مشاريع مبتكرة') }}</div>
+                        <p class="type-body">{{ __('اعمل على منتجات رقمية متطورة.') }}</p>
                     </div>
-
-                    <div class="p-6 rounded-xl shadow-md text-center" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
-                        <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-chart-line text-teal-600 text-2xl"></i>
-                        </div>
-                        <h3 class="font-bold text-white mb-2">تطوير مستمر</h3>
-                        <p class="text-gray-400 text-sm">فرص للنمو والتعلم المستمر</p>
+                    <div class="surface-card p-6 text-center">
+                        <div class="type-eyebrow mb-3">{{ __('تطوير مستمر') }}</div>
+                        <p class="type-body">{{ __('فرص للنمو والتعلم المستمر.') }}</p>
                     </div>
                 </div>
             </div>

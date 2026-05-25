@@ -1,6 +1,12 @@
 {
+  "node_modules/embla-carousel/esm/embla-carousel.esm.js": {
+    "file": "assets/embla-carousel.esm-DIhUnPYQ.js",
+    "name": "embla-carousel.esm",
+    "src": "node_modules/embla-carousel/esm/embla-carousel.esm.js",
+    "isDynamicEntry": true
+  },
   "resources/css/app.css": {
-    "file": "assets/app-CbYB8JQn.css",
+    "file": "assets/app-RtWwQzcS.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -9,9 +15,12 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-De0LtGm1.js",
+    "file": "assets/app-CeG_woNs.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
+    "isEntry": true,
+    "dynamicImports": [
+      "node_modules/embla-carousel/esm/embla-carousel.esm.js"
+    ]
   }
 }

@@ -1,152 +1,128 @@
+@php
+    $heroTitle = $heroSection?->title_line1 ?? __('نصنع قيمة');
+    $heroSubtitle = $heroSection?->subtitle ?? __('شريك تصميم وتطوير منتجات رقمية يقود التحول ويصنع أثرًا قابلًا للقياس.');
+@endphp
+
 <x-layouts.app>
-    {{-- Hero Section with Animations --}}
-    <section class="relative py-20 overflow-hidden" style="background: {{ config('colors.bg_dark') }};">
-        <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 30px 30px;"></div>
-        <div class="absolute top-10 right-10 w-3 h-3 rounded-full animate-float opacity-40" style="background: {{ config('colors.primary_light') }};"></div>
-        <div class="absolute bottom-10 left-20 w-4 h-4 rounded-full animate-float opacity-30" style="background: {{ config('colors.primary_lighter') }}; animation-delay: 1s;"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-3xl">
-                <div class="flex items-center gap-3 mb-6 text-gray-400 text-sm hero-animate animate-fade-in-up" style="animation-delay: 0.1s;">
-                    <a href="{{ route('home') }}" class="hover:text-white transition">الرئيسية</a>
-                    <i class="fas fa-chevron-left text-xs"></i>
-                    <span style="color: {{ config('colors.primary_light') }};">من نحن</span>
-                </div>
-                @if($heroSection)
-                <h1 class="text-4xl md:text-5xl font-black text-white mb-4 hero-animate animate-fade-in-up" style="animation-delay: 0.2s;">
-                    {{ $heroSection->title_line1 }}
-                    <span class="gradient-text-animated">{{ $heroSection->title_line2 }}</span>
-                </h1>
-                @if($heroSection->subtitle)
-                <p class="text-gray-400 text-lg hero-animate animate-fade-in-up" style="animation-delay: 0.3s;">{{ $heroSection->subtitle }}</p>
-                @endif
-                @else
-                <h1 class="text-4xl md:text-5xl font-black text-white mb-4 hero-animate animate-fade-in-up" style="animation-delay: 0.2s;">
-                    من <span class="gradient-text-animated">نحن</span>
-                </h1>
-                <p class="text-gray-400 text-lg hero-animate animate-fade-in-up" style="animation-delay: 0.3s;">تعرف على قصتنا ورؤيتنا</p>
-                @endif
+    <section class="section-pad" style="background: var(--color-canvas);">
+        <div class="container-page">
+            <div class="max-w-3xl" data-reveal>
+                <x-ui.eyebrow number="01">{{ __('من نحن') }}</x-ui.eyebrow>
+                <x-ui.split-heading as="h1" class="type-display mt-6">
+                    {{ $heroTitle }}
+                    @if($heroSection?->title_line2)
+                        <span class="text-[color:var(--color-ink-muted)]">{{ $heroSection->title_line2 }}</span>
+                    @endif
+                </x-ui.split-heading>
+                <p class="type-body-lg mt-8 max-w-2xl" data-reveal data-reveal-stagger="200">
+                    {{ $heroSubtitle }}
+                </p>
             </div>
         </div>
     </section>
 
-    {{-- Our Story Section with Animations --}}
-    <section class="py-24" style="background: #0f1419;">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="reveal-on-scroll">
-                    <span class="text-sm font-bold uppercase tracking-wider" style="color: {{ config('colors.primary') }};">قصتنا</span>
-                    <h2 class="text-4xl md:text-5xl font-black text-white mt-2 mb-6">
-                        رحلة نحو التميز التقني
-                    </h2>
-                    <div class="space-y-6 text-gray-300 text-lg leading-relaxed">
-                        <p>انطلقت رحلتنا من شغف حقيقي بعالم التقنية والبرمجيات.</p>
-                        <p>اليوم، أصبحنا فريقاً متكاملاً من المبدعين والمطورين.</p>
-                        <p>نؤمن بأن النجاح الحقيقي يُقاس بنجاح عملائنا.</p>
+    <section class="section-pad" style="background: var(--color-surface);">
+        <div class="container-page">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div data-reveal>
+                    <x-ui.eyebrow number="02">{{ __('قصتنا') }}</x-ui.eyebrow>
+                    <h2 class="type-h1 mt-6">{{ __('نصمم بعين، ونبني بعقل.') }}</h2>
+                    <div class="type-body mt-6 space-y-4">
+                        <p>{{ __('بدأت إشراق من شغف بالتقنية وتحويل الأفكار إلى منتجات تعمل بكفاءة وتعيش طويلًا.') }}</p>
+                        <p>{{ __('اليوم، نعمل كفريق صغير عالي الحرفة، نؤمن بأن الجودة لا تأتي من السرعة فقط، بل من وضوح الرؤية.') }}</p>
+                        <p>{{ __('نقيس نجاحنا بما يتحقق لعملائنا من نتائج، لا بما نعرضه من وعود.') }}</p>
                     </div>
                 </div>
-                <div class="relative reveal-scale">
-                    <div class="rounded-2xl overflow-hidden shadow-2xl">
-                        <div class="aspect-video flex items-center justify-center" style="background: {{ config('colors.bg_dark') }};">
-                            <div class="text-center text-white">
-                                <i class="fas fa-code text-8xl mb-4" style="color: {{ config('colors.primary_light') }};"></i>
-                                <h3 class="text-2xl font-bold">نبني المستقبل الرقمي</h3>
+                <div class="surface-card p-10" data-reveal data-reveal-stagger="150">
+                    <div class="type-eyebrow mb-4">{{ __('منهج العمل') }}</div>
+                    <div class="type-h2 mb-6">{{ __('حرفة رقمية دقيقة.') }}</div>
+                    <p class="type-body">{{ __('نوازن بين التصميم والهندسة، ونبني حلولًا قابلة للنمو ومهيأة للتوسع منذ اليوم الأول.') }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @if($stats && $stats->count())
+        <section class="section-pad" style="background: var(--color-canvas);">
+            <div class="container-page">
+                <div class="max-w-3xl mb-16" data-reveal>
+                    <x-ui.eyebrow number="03">{{ __('بالأرقام') }}</x-ui.eyebrow>
+                    <h2 class="type-h1 mt-6">{{ __('مؤشرات تدل على الأثر.') }}</h2>
+                </div>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8">
+                    @foreach($stats->take(4) as $idx => $stat)
+                        @php
+                            $raw = (string) ($stat->number ?? '');
+                            preg_match('/(\d+(?:\.\d+)?)\s*(\D*)/u', $raw, $m);
+                            $value = isset($m[1]) ? (float) $m[1] : 0;
+                            $suffix = $m[2] ?? '';
+                            $decimals = (strpos($raw, '.') !== false) ? 1 : 0;
+                        @endphp
+                        <div data-reveal data-reveal-stagger="{{ $idx * 100 }}">
+                            <div class="type-numeral text-[clamp(2.5rem,5vw,4.5rem)] leading-none text-[color:var(--color-ink)]"
+                                 data-count="{{ $value }}"
+                                 data-count-format="{{ $suffix }}"
+                                 data-count-decimals="{{ $decimals }}"
+                                 dir="ltr">
+                                0{{ $suffix }}
                             </div>
+                            <div class="type-eyebrow mt-4 text-[color:var(--color-ink-muted)]">{{ $stat->label }}</div>
+                            @if($stat->description)
+                                <p class="type-small mt-3 max-w-[16rem]">{{ $stat->description }}</p>
+                            @endif
                         </div>
-                    </div>
+                    @endforeach
                 </div>
+            </div>
+        </section>
+    @endif
+
+    <section class="section-pad" style="background: var(--color-surface-inset);">
+        <div class="container-page">
+            <div class="max-w-3xl mb-16" data-reveal>
+                <x-ui.eyebrow number="04">{{ __('قيمنا') }}</x-ui.eyebrow>
+                <h2 class="type-h1 mt-6">{{ __('ما يميز تعاوننا.') }}</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                @foreach(($features ?? collect())->take(4) as $feature)
+                    <div class="surface-card p-8" data-reveal>
+                        <div class="type-eyebrow mb-4">{{ $feature->title }}</div>
+                        <p class="type-body">{{ $feature->description }}</p>
+                    </div>
+                @endforeach
+                @if(($features ?? collect())->isEmpty())
+                    <div class="surface-card p-8" data-reveal>
+                        <div class="type-eyebrow mb-4">{{ __('الدقة') }}</div>
+                        <p class="type-body">{{ __('نراجع كل تفصيلة حتى تصل النتيجة إلى المستوى الذي نرضى عنه.') }}</p>
+                    </div>
+                    <div class="surface-card p-8" data-reveal data-reveal-stagger="120">
+                        <div class="type-eyebrow mb-4">{{ __('الشفافية') }}</div>
+                        <p class="type-body">{{ __('نشاركك السياق والقرارات أولًا بأول.') }}</p>
+                    </div>
+                    <div class="surface-card p-8" data-reveal data-reveal-stagger="240">
+                        <div class="type-eyebrow mb-4">{{ __('التحسين') }}</div>
+                        <p class="type-body">{{ __('نقيس ونحسن بناءً على بيانات حقيقية.') }}</p>
+                    </div>
+                    <div class="surface-card p-8" data-reveal data-reveal-stagger="360">
+                        <div class="type-eyebrow mb-4">{{ __('الالتزام') }}</div>
+                        <p class="type-body">{{ __('نحترم الوقت ونلتزم بالمسار.') }}</p>
+                    </div>
+                @endif
             </div>
         </div>
     </section>
 
-    {{-- Mission & Vision --}}
-    <section class="py-24" style="background: #16213e;">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="text-sm font-bold uppercase tracking-wider" style="color: {{ config('colors.primary') }};">رسالتنا ورؤيتنا</span>
-                <h2 class="text-4xl md:text-5xl font-black text-white mt-2">ما يحركنا</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="rounded-2xl p-8 shadow-lg" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);">
-                    <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
-                        <i class="fas fa-bullseye text-2xl" style="color: {{ config('colors.primary') }};"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">رسالتنا</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        تمكين الشركات والأفراد من تحقيق أهدافهم الرقمية من خلال تقديم حلول برمجية مبتكرة وعالية الجودة، مع الالتزام بأعلى معايير الاحترافية والشفافية.
-                    </p>
-                </div>
-
-                <div class="rounded-2xl p-8 shadow-lg" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);">
-                    <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
-                        <i class="fas fa-eye text-2xl" style="color: {{ config('colors.primary') }};"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">رؤيتنا</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        أن نكون الشريك التقني الأول والأكثر ثقة في المنطقة العربية، ونساهم في بناء مستقبل رقمي أفضل من خلال الابتكار والتميز في كل ما نقدمه.
-                    </p>
+    <section class="section-pad" style="background: var(--color-canvas);">
+        <div class="container-page">
+            <div class="max-w-3xl" data-reveal>
+                <x-ui.eyebrow number="05">{{ __('ابدأ') }}</x-ui.eyebrow>
+                <h2 class="type-display mt-6">{{ __('فلنصنع منتجًا يستحق البقاء.') }}</h2>
+                <p class="type-body-lg mt-8 max-w-xl">{{ __('احكِ لنا عن مشروعك، وسنعود إليك بخطة واضحة خلال يوم عمل واحد.') }}</p>
+                <div class="mt-10 flex flex-wrap gap-4">
+                    <x-ui.button variant="primary" :href="route('request-design.create')" icon="arrow" wire:navigate>{{ __('ابدأ مشروعك') }}</x-ui.button>
+                    <x-ui.button variant="ghost" :href="route('contact')" wire:navigate>{{ __('تواصل معنا') }}</x-ui.button>
                 </div>
             </div>
-        </div>
-    </section>
-
-    {{-- Core Values --}}
-    <section class="py-24" style="background: #0f1419;">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="text-sm font-bold uppercase tracking-wider" style="color: {{ config('colors.primary') }};">قيمنا</span>
-                <h2 class="text-4xl md:text-5xl font-black text-white mt-2">ما يميزنا</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="text-center p-8 rounded-2xl hover:shadow-lg transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
-                    <div class="w-16 h-16 mx-auto rounded-xl flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
-                        <i class="fas fa-lightbulb text-2xl" style="color: {{ config('colors.primary') }};"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">الابتكار</h3>
-                    <p class="text-gray-400 text-sm">نسعى دائماً لإيجاد حلول إبداعية ومبتكرة</p>
-                </div>
-
-                <div class="text-center p-8 rounded-2xl hover:shadow-lg transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
-                    <div class="w-16 h-16 mx-auto rounded-xl flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
-                        <i class="fas fa-gem text-2xl" style="color: {{ config('colors.primary') }};"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">الجودة</h3>
-                    <p class="text-gray-400 text-sm">لا نقبل بأقل من الأفضل في كل مشروع</p>
-                </div>
-
-                <div class="text-center p-8 rounded-2xl hover:shadow-lg transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
-                    <div class="w-16 h-16 mx-auto rounded-xl flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
-                        <i class="fas fa-handshake text-2xl" style="color: {{ config('colors.primary') }};"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">الشفافية</h3>
-                    <p class="text-gray-400 text-sm">نبني علاقات قائمة على الثقة والوضوح</p>
-                </div>
-
-                <div class="text-center p-8 rounded-2xl hover:shadow-lg transition-all" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);">
-                    <div class="w-16 h-16 mx-auto rounded-xl flex items-center justify-center mb-6" style="background: {{ config('colors.primary_10') }};">
-                        <i class="fas fa-clock text-2xl" style="color: {{ config('colors.primary') }};"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">الالتزام</h3>
-                    <p class="text-gray-400 text-sm">نحترم المواعيد ونلتزم بما نعد به</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- CTA Section --}}
-    <section class="py-20" style="background: {{ config('colors.bg_dark') }};">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-black text-white mb-4">
-                هل أنت مستعد للعمل معنا؟
-            </h2>
-            <p class="text-gray-400 mb-8 max-w-xl mx-auto">
-                دعنا نساعدك في تحويل أفكارك إلى واقع رقمي مذهل
-            </p>
-            <a href="{{ route('request-design.create') }}" class="inline-flex items-center gap-2 text-white font-bold py-4 px-8 rounded-xl hover:opacity-90 transition-all" style="background: {{ config('colors.primary') }};">
-                <i class="fas fa-rocket"></i>
-                <span>ابدأ مشروعك الآن</span>
-            </a>
         </div>
     </section>
 </x-layouts.app>

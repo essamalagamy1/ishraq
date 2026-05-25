@@ -1,263 +1,842 @@
-/* Premium Arabic Font - Tajawal */
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 @import 'tailwindcss';
-@import './custom.css';
-@import './dark-mode.css';
-@import './dark-mode-override.css';
-@import './light-animations.css';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
-
-/* ============================================
-   TYPOGRAPHY THEME
-   ============================================ */
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Tajawal', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
-        
-    /* Explicitly defining gray scale to ensure recognition */
-    --color-gray-50: #f9fafb;
-    --color-gray-100: #f3f4f6;
-    --color-gray-200: #e5e7eb;
-    --color-gray-300: #d1d5db;
-    --color-gray-400: #9ca3af;
-    --color-gray-500: #6b7280;
-    --color-gray-600: #4b5563;
-    --color-gray-700: #374151;
-    --color-gray-800: #1f2937;
-    --color-gray-900: #111827;
+    /* Surfaces — warm near-black canvas */
+    --color-canvas:         #0B0A08;
+    --color-surface:        #131210;
+    --color-surface-raised: #1A1815;
+    --color-surface-inset:  #080706;
+
+    /* Text — warm off-whites */
+    --color-ink:            #F5F1EB;
+    --color-ink-muted:      #B8B2A8;
+    --color-ink-subtle:     #6B6760;
+    --color-ink-faint:      #3D3A35;
+
+    /* Hairlines */
+    --color-line:           rgba(245, 241, 235, 0.08);
+    --color-line-strong:    rgba(245, 241, 235, 0.16);
+    --color-line-bold:      rgba(245, 241, 235, 0.24);
+
+    /* Single accent — burnt amber */
+    --color-accent:         #C77D4A;
+    --color-accent-hover:   #D88E5B;
+    --color-accent-soft:    rgba(199, 125, 74, 0.12);
+    --color-accent-ring:    rgba(199, 125, 74, 0.32);
+
+    /* Type families */
+    --font-sans:  'IBM Plex Sans Arabic', 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'IBM Plex Serif', ui-serif, Georgia, serif;
+    --font-mono:  'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+
+    /* Motion */
+    --ease-out-soft:    cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* ============================================
-   ANIMATIONS - Optimized for Performance
-   ============================================ */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* ============================================================
+   Base
+   ============================================================ */
 
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+*, *::before, *::after { box-sizing: border-box; }
 
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Animation Classes - Optimized */
-.animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
-    will-change: opacity, transform;
-}
-
-.animate-fade-in-down {
-    animation: fadeInDown 0.6s ease-out forwards;
-    will-change: opacity, transform;
-}
-
-.animate-slide-in-right {
-    animation: slideInRight 0.6s ease-out forwards;
-    will-change: opacity, transform;
-}
-
-.animate-scale-in {
-    animation: scaleIn 0.5s ease-out forwards;
-    will-change: opacity, transform;
-}
-
-/* Removed continuous animations for better performance */
-.animate-float {
-    /* Animation disabled for performance - use hover effects instead */
-}
-
-.animate-glow {
-    /* Animation disabled for performance */
-}
-
-.animate-pulse-soft {
-    /* Animation disabled for performance */
-}
-
-/* ============================================
-   SMOOTH SCROLL
-   ============================================ */
 html {
-    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: auto;
+    background: var(--color-canvas);
 }
 
-/* ============================================
-   CUSTOM SCROLLBAR - Dark Theme with #FF6B35
-   ============================================ */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: #0a0d14;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #FF6B35, #ff8c5a);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #ff5722, #FF6B35);
-}
-
-/* ============================================
-   SELECTION COLOR - #FF6B35
-   ============================================ */
-::selection {
-    background: rgba(255, 107, 53, 0.4);
-    color: #ffffff;
-}
-
-::-moz-selection {
-    background: rgba(255, 107, 53, 0.4);
-    color: #ffffff;
-}
-
-/* ============================================
-   GLOBAL BODY STYLES
-   ============================================ */
 body {
-    font-family: 'Tajawal', sans-serif;
+    margin: 0;
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    font-feature-settings: 'kern', 'calt', 'ss01';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
 }
 
-/* ============================================
-   FOCUS STYLES - Accessibility
-   ============================================ */
+::selection      { background: var(--color-accent-soft); color: var(--color-ink); }
+::-moz-selection { background: var(--color-accent-soft); color: var(--color-ink); }
+
+/* Scrollbar — thin, monochrome */
+::-webkit-scrollbar         { width: 10px; height: 10px; }
+::-webkit-scrollbar-track   { background: var(--color-canvas); }
+::-webkit-scrollbar-thumb   { background: var(--color-line-strong); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-line-bold); }
+
 :focus-visible {
-    outline: 2px solid #FF6B35;
-    outline-offset: 2px;
-}
-
-/* ============================================
-   GLOBAL UTILITIES & FIXES
-   ============================================ */
-
-/* Fix for buttons with absolute overlays (ensures text/icons stay on top) */
-.group.relative.overflow-hidden > span,
-.group.relative.overflow-hidden > i {
-    position: relative !important;
-    z-index: 20 !important; /* Increased to ensure it's on top */
-}
-
-/* Floating WhatsApp Button Styling */
-.whatsapp-float {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    text-decoration: none;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.whatsapp-icon {
-    width: 100%;
-    height: 100%;
-    background: #25d366;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.1);
-    position: relative;
-    z-index: 2;
-}
-.text-gray-400 {
-    color: #c7cacf;
-}
-
-.whatsapp-pulse {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #25d366;
-    border-radius: 50%;
-    z-index: 1;
-    opacity: 0.7;
-    animation: whatsapp-pulse 2s infinite;
-}
-
-@keyframes whatsapp-pulse {
-    0% { transform: scale(1); opacity: 0.7; }
-    100% { transform: scale(1.6); opacity: 0; }
-}
-
-.whatsapp-tooltip {
-    position: absolute;
-    right: 75px;
-    background: #fff;
-    color: #333;
-    padding: 8px 15px;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 14px;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(10px);
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.whatsapp-float:hover .whatsapp-tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-}
-
-.whatsapp-float:hover {
-    transform: scale(1.1) rotate(5deg);
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
 }
 
 a {
-    transition: color 0.3s ease;
+    color: inherit;
+    text-decoration: none;
+    transition: color 200ms var(--ease-out-soft), opacity 200ms var(--ease-out-soft);
 }
+
+img, svg, video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+button { font: inherit; cursor: pointer; }
+
+/* Pre-Lenis FOUC mask: hide body until JS is ready */
+html:not(.is-ready) body { opacity: 0; }
+html.is-ready body {
+    opacity: 1;
+    transition: opacity 600ms var(--ease-out-soft);
+}
+
+/* ============================================================
+   Lenis smooth scroll
+   ============================================================ */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: clip; }
+
+/* ============================================================
+   Typography utilities
+   ============================================================ */
+
+.type-display {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(3rem, 7.5vw, 6.75rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.type-display-serif {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(3rem, 7.5vw, 6.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+}
+
+.type-h1 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(2.25rem, 4.5vw, 4rem);
+    line-height: 1.08;
+    letter-spacing: -0.018em;
+}
+
+.type-h2 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.014em;
+}
+
+.type-h3 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(1.25rem, 2vw, 1.625rem);
+    line-height: 1.25;
+    letter-spacing: -0.008em;
+}
+
+.type-body-lg {
+    font-size: 1.125rem;
+    line-height: 1.65;
+    color: var(--color-ink-muted);
+}
+
+.type-body {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-ink-muted);
+}
+
+.type-small {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+}
+
+.type-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-subtle);
+}
+
+.type-numeral {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-variant-numeric: lining-nums tabular-nums;
+    letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   Reveal primitives — used by motion.js
+   ============================================================ */
+
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 800ms var(--ease-out-soft), transform 800ms var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+}
+[data-reveal].is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[data-reveal-line] > span {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+}
+[data-reveal-line] > span > span {
+    display: inline-block;
+    transform: translateY(110%);
+    transition: transform 900ms var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: transform;
+}
+[data-reveal-line].is-revealed > span > span {
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal], [data-reveal-line] > span > span {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
+
+/* ============================================================
+   Hairlines & layout primitives
+   ============================================================ */
+
+.hairline-t { border-top: 1px solid var(--color-line); }
+.hairline-b { border-bottom: 1px solid var(--color-line); }
+.hairline-y { border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); }
+
+.container-page {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 4.5rem);
+}
+
+.container-narrow {
+    width: 100%;
+    max-width: 1080px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 4.5rem);
+}
+
+.section-pad {
+    padding-block: clamp(5rem, 10vw, 4rem);
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+
+.btn {
+    --btn-bg: transparent;
+    --btn-fg: var(--color-ink);
+    --btn-border: var(--color-line-strong);
+    --btn-bg-hover: var(--color-surface-raised);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.4rem;
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    border: 1px solid var(--btn-border);
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    letter-spacing: -0.005em;
+    line-height: 1;
+    transition:
+        background 300ms var(--ease-out-soft),
+        border-color 300ms var(--ease-out-soft),
+        color 300ms var(--ease-out-soft),
+        transform 300ms var(--ease-out-soft);
+    user-select: none;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    background: var(--btn-bg-hover);
+    border-color: var(--color-line-bold);
+}
+
+.btn--primary {
+    --btn-bg: var(--color-accent);
+    --btn-fg: #0B0A08;
+    --btn-border: var(--color-accent);
+    --btn-bg-hover: var(--color-accent-hover);
+}
+.btn--primary:hover {
+    border-color: var(--color-accent-hover);
+    box-shadow: 0 0 0 6px var(--color-accent-soft);
+}
+
+.btn--ghost { --btn-bg: transparent; --btn-border: var(--color-line-strong); }
+
+.btn--link {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--color-ink);
+    position: relative;
+}
+.btn--link::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: -4px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.6;
+    transform-origin: right;
+    transition: opacity 300ms var(--ease-out-soft), transform 400ms var(--ease-out-soft);
+}
+.btn--link:hover::after { opacity: 1; transform: scaleX(1.02); }
+
+.btn .btn-arrow {
+    transition: transform 400ms var(--ease-out-soft);
+}
+.btn:hover .btn-arrow { transform: translateX(-4px); }
+[dir="ltr"] .btn:hover .btn-arrow { transform: translateX(4px); }
+
+/* ============================================================
+   Cards & chips
+   ============================================================ */
+
+.surface-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 24px;
+}
+
+.surface-card--raised {
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-line-strong);
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-line-strong);
+    color: var(--color-ink-muted);
+    font-size: 0.875rem;
+    transition: border-color 250ms var(--ease-out-soft), color 250ms var(--ease-out-soft), background 250ms var(--ease-out-soft);
+}
+
+.chip.is-active {
+    color: var(--color-ink);
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+}
+
+/* ============================================================
+   Forms
+   ============================================================ */
+
+.form-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-ink-muted);
+    margin-bottom: 0.5rem;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+    width: 100%;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    border: 1px solid var(--color-line-strong);
+    border-radius: 14px;
+    padding: 0.85rem 1rem;
+    transition: border-color 200ms var(--ease-out-soft), box-shadow 200ms var(--ease-out-soft);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--color-ink-subtle);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px var(--color-accent-soft);
+}
+
+.form-help {
+    font-size: 0.8125rem;
+    color: var(--color-ink-subtle);
+}
+
+/* ============================================================
+   Masonry (portfolio)
+   ============================================================ */
+
+.masonry {
+    column-gap: 1.5rem;
+}
+@media (min-width: 768px) {
+    .masonry { columns: 2; }
+}
+@media (min-width: 1200px) {
+    .masonry { columns: 3; }
+}
+
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+}
+
+/* ============================================================
+   Article typography
+   ============================================================ */
+
+.prose-article {
+    color: var(--color-ink-muted);
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+.prose-article h2,
+.prose-article h3,
+.prose-article h4 {
+    color: var(--color-ink);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+.prose-article p { margin-bottom: 1.25rem; }
+.prose-article ul {
+    list-style: disc;
+    padding-inline-start: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+.prose-article li { margin-bottom: 0.5rem; }
+.prose-article a { color: var(--color-accent); }
+.prose-article img { border-radius: 16px; border: 1px solid var(--color-line); }
+
+/* ============================================================
+   Navbar
+   ============================================================ */
+
+.site-nav {
+    position: fixed;
+    top: 0;
+    inset-inline: 0;
+    z-index: 100;
+    background: var(--color-canvas);
+    border-bottom: 1px solid var(--color-line);
+    transition: none;
+}
+
+.nav-link {
+    position: relative;
+    color: var(--color-ink-muted);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    padding: 0.5rem 0;
+    transition: none;
+}
+.nav-link:hover { color: var(--color-ink); }
+.nav-link::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--color-accent);
+    transform: none;
+    transform-origin: center;
+    transition: none;
+}
+.nav-link.is-active { color: var(--color-ink); }
+.nav-link.is-active::after { opacity: 0.6; }
+.nav-link:hover::after { opacity: 1; }
+
+/* Mobile menu overlay */
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: var(--color-canvas);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+.nav-overlay.is-open { display: flex; }
+
+.nav-overlay .nav-link {
+    font-size: clamp(2rem, 7vw, 3rem);
+    font-weight: 500;
+    color: var(--color-ink);
+    padding: 0.65rem 0;
+    line-height: 1.15;
+    display: block;
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+.nav-overlay .nav-link::after { display: none; }
+
+.menu-toggle {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0;
+    color: var(--color-ink);
+}
+.menu-toggle .bar {
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: currentColor;
+    position: relative;
+    transition: none;
+}
+.menu-toggle .bar::before,
+.menu-toggle .bar::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: currentColor;
+    transition: none;
+}
+.menu-toggle .bar::before { top: -6px; }
+.menu-toggle .bar::after  { top:  6px; }
+.menu-toggle.is-open .bar { background: transparent; }
+.menu-toggle.is-open .bar::before { transform: translateY(6px) rotate(45deg); }
+.menu-toggle.is-open .bar::after  { transform: translateY(-6px) rotate(-45deg); }
+
+/* ============================================================
+   Hero cursor halo
+   ============================================================ */
+
+.hero-halo {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+.hero-halo::before {
+    content: '';
+    position: absolute;
+    width: 60vmax;
+    height: 60vmax;
+    border-radius: 50%;
+    background: radial-gradient(circle at center,
+        rgba(199, 125, 74, 0.18) 0%,
+        rgba(199, 125, 74, 0.06) 30%,
+        transparent 65%);
+    transform: translate3d(var(--halo-x, 50%), var(--halo-y, 50%), 0) translate(-50%, -50%);
+    transition: transform 800ms var(--ease-out-soft);
+    will-change: transform;
+}
+
+/* ============================================================
+   Marquee
+   ============================================================ */
+
+.marquee {
+    display: flex;
+    overflow: hidden;
+    gap: 0;
+    mask-image: linear-gradient(to left, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(to left, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee__track {
+    display: flex;
+    flex-shrink: 0;
+    gap: 4rem;
+    padding-inline-end: 4rem;
+    animation: marquee 38s linear infinite;
+}
+@keyframes marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(100%, 0, 0); }
+}
+[dir="rtl"] .marquee__track { animation-direction: reverse; }
+.marquee:hover .marquee__track { animation-play-state: paused; }
+
+/* ============================================================
+   Services scrollytelling
+   ============================================================ */
+
+.svc-row {
+    transition: opacity 400ms var(--ease-out-soft);
+}
+.svc-row[aria-selected="false"] { opacity: 0.35; }
+.svc-row[aria-selected="false"]:hover { opacity: 0.65; }
+
+.svc-panel {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 500ms var(--ease-out-soft), transform 500ms var(--ease-out-soft);
+}
+.svc-panel.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* ============================================================
+   Work strip (case studies)
+   ============================================================ */
+
+.work-card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: var(--color-surface);
+}
+.work-card__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/10;
+}
+.work-card__media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 900ms var(--ease-out-soft), filter 600ms var(--ease-out-soft);
+    filter: saturate(0.9) brightness(0.92);
+}
+.work-card:hover .work-card__media img {
+    transform: scale(1.04);
+    filter: saturate(1) brightness(1);
+}
+.work-card__media-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface-raised);
+    color: var(--color-ink-subtle);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   Cursor card utility
+   ============================================================ */
+
+.cursor-card {
+    position: relative;
+    display: block;
+    transition: transform 400ms var(--ease-out-soft);
+}
+.cursor-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--color-line-strong);
+    opacity: 0;
+    transition: opacity 300ms var(--ease-out-soft);
+    pointer-events: none;
+}
+.cursor-card:hover {
+    transform: translateY(-2px);
+}
+.cursor-card:hover::after {
+    opacity: 1;
+}
+
+/* ============================================================
+   Process timeline
+   ============================================================ */
+
+.process {
+    position: relative;
+}
+.process__rail {
+    position: absolute;
+    top: 0; bottom: 0;
+    inset-inline-start: 0;
+    width: 1px;
+    background: var(--color-line);
+}
+.process__rail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0; right: 0;
+    height: var(--rail-progress, 0%);
+    background: var(--color-accent);
+    transition: height 300ms linear;
+}
+@media (min-width: 900px) {
+    .process__rail {
+        top: auto;
+        inset-inline-start: 0;
+        inset-inline-end: 0;
+        bottom: auto;
+        height: 1px;
+        width: auto;
+    }
+    .process__rail::before {
+        top: 0; bottom: 0;
+        left: 0;
+        height: auto;
+        width: var(--rail-progress, 0%);
+    }
+    [dir="rtl"] .process__rail::before {
+        left: auto;
+        right: 0;
+    }
+}
+
+/* ============================================================
+   Floating WhatsApp button (refined)
+   ============================================================ */
+
+.fab-wa {
+    position: fixed;
+    bottom: clamp(1.25rem, 3vw, 2rem);
+    inset-inline-end: clamp(1.25rem, 3vw, 2rem);
+    z-index: 50;
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-line-strong);
+    color: var(--color-ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 400ms var(--ease-out-soft), border-color 400ms var(--ease-out-soft), background 400ms var(--ease-out-soft);
+}
+.fab-wa:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-accent);
+    background: var(--color-surface);
+}
+
+/* ============================================================
+   Embla carousel (testimonials)
+   ============================================================ */
+
+.embla {
+    position: relative;
+}
+.embla__viewport { overflow: hidden; }
+.embla__container {
+    display: flex;
+    gap: clamp(1rem, 3vw, 3rem);
+    touch-action: pan-y;
+}
+.embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+}
+@media (min-width: 900px) {
+    .embla__slide { flex: 0 0 78%; }
+}
+
+.embla__controls {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+.embla__dots {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+.embla__dot {
+    width: 28px;
+    height: 2px;
+    background: var(--color-line-strong);
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    transition: background 300ms var(--ease-out-soft), width 300ms var(--ease-out-soft);
+    cursor: pointer;
+}
+.embla__dot.is-active { background: var(--color-accent); width: 44px; }
+
+.embla__arrow {
+    width: 44px; height: 44px;
+    border-radius: 999px;
+    background: transparent;
+    border: 1px solid var(--color-line-strong);
+    color: var(--color-ink);
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: background 300ms var(--ease-out-soft), border-color 300ms var(--ease-out-soft);
+    cursor: pointer;
+}
+.embla__arrow:hover { border-color: var(--color-accent); background: var(--color-surface-raised); }
+
+/* ============================================================
+   Article card
+   ============================================================ */
+
+.article-card { display: block; }
+.article-card__cover {
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: var(--color-surface-raised);
+    margin-bottom: 1.5rem;
+}
+.article-card__cover img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 700ms var(--ease-out-soft);
+    filter: saturate(0.95);
+}
+.article-card:hover .article-card__cover img { transform: scale(1.03); }
+.article-card__title {
+    transition: color 250ms var(--ease-out-soft);
+}
+.article-card:hover .article-card__title { color: var(--color-accent); }
