@@ -1,12 +1,18 @@
-import Lenis from 'lenis';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+/**
+ * motion.js — Ishraq animation engine
+ * Powered by Motion (motiondivision/motion) — replaces GSAP
+ */
 
-gsap.registerPlugin(ScrollTrigger);
+import Lenis from 'lenis';
+import { animate, scroll, inView, stagger, spring } from 'motion';
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 let lenis = null;
+
+/* ----------------------------------------------------------------
+   Lenis smooth scroll
+   ---------------------------------------------------------------- */
 
 export function initLenis() {
     if (reduced) {
@@ -23,10 +29,11 @@ export function initLenis() {
         infinite: false,
     });
 
-    lenis.on('scroll', ScrollTrigger.update);
-
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
 
     requestAnimationFrame(() => document.documentElement.classList.add('is-ready'));
 
@@ -39,8 +46,7 @@ export function scrollTo(target, options = {}) {
 }
 
 /* ----------------------------------------------------------------
-   Reveals — simple opacity/translate fade for [data-reveal] elements.
-   Uses IntersectionObserver so it works without GSAP for cheap reveals.
+   Reveals — animate elements on scroll into view using Motion inView
    ---------------------------------------------------------------- */
 
 export function initReveals(root = document) {
@@ -49,26 +55,39 @@ export function initReveals(root = document) {
         return;
     }
 
-    const io = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                const el = entry.target;
-                const stagger = parseInt(el.dataset.revealStagger || '0', 10);
-                if (stagger) el.style.setProperty('--reveal-delay', `${stagger}ms`);
-                requestAnimationFrame(() => el.classList.add('is-revealed'));
-                io.unobserve(el);
-            });
-        },
-        { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
-    );
+    const revealElements = root.querySelectorAll('[data-reveal]');
+    revealElements.forEach((el) => {
+        inView(el, () => {
+            const staggerMs = parseInt(el.dataset.revealStagger || '0', 10);
+            const delayS = staggerMs / 1000;
 
-    root.querySelectorAll('[data-reveal], [data-reveal-line]').forEach((el) => io.observe(el));
+            animate(el, { opacity: [0, 1], y: [30, 0] }, {
+                duration: 0.8,
+                delay: delayS,
+                easing: [0.22, 1, 0.36, 1],
+            });
+            el.classList.add('is-revealed');
+        }, { margin: '0px 0px -8% 0px' });
+    });
+
+    // Line reveals
+    root.querySelectorAll('[data-reveal-line]').forEach((el) => {
+        inView(el, () => {
+            const innerSpans = el.querySelectorAll(':scope > span > span');
+            if (innerSpans.length > 0) {
+                animate(innerSpans, { y: ['110%', '0%'] }, {
+                    duration: 0.9,
+                    delay: stagger(0.06),
+                    easing: [0.22, 1, 0.36, 1],
+                });
+            }
+            el.classList.add('is-revealed');
+        }, { margin: '0px 0px -8% 0px' });
+    });
 }
 
 /* ----------------------------------------------------------------
-   Line splitting — wraps each word/line in spans for staggered reveals.
-   Pass the element a `data-split-lines` attribute and call this once.
+   Line splitting — wraps each word in spans for staggered reveals
    ---------------------------------------------------------------- */
 
 export function splitLines(el) {
@@ -92,7 +111,7 @@ export function splitLines(el) {
 }
 
 /* ----------------------------------------------------------------
-   Hero halo — radial light that follows the cursor with damping.
+   Hero halo — radial light following cursor with spring damping
    ---------------------------------------------------------------- */
 
 export function initHeroHalo(container) {
@@ -101,50 +120,68 @@ export function initHeroHalo(container) {
     const halo = container.querySelector('.hero-halo');
     if (!halo) return;
 
-    const xTo = gsap.quickTo(halo, '--halo-x', { duration: 0.9, ease: 'power2.out' });
-    const yTo = gsap.quickTo(halo, '--halo-y', { duration: 0.9, ease: 'power2.out' });
+    let currentX = 50, currentY = 50;
+    let targetX = 50, targetY = 50;
+    let rafId = null;
+
+    const lerp = (start, end, factor) => start + (end - start) * factor;
+
+    const update = () => {
+        currentX = lerp(currentX, targetX, 0.06);
+        currentY = lerp(currentY, targetY, 0.06);
+        halo.style.setProperty('--halo-x', `${currentX}%`);
+        halo.style.setProperty('--halo-y', `${currentY}%`);
+        rafId = requestAnimationFrame(update);
+    };
 
     const onMove = (e) => {
         const r = container.getBoundingClientRect();
-        const x = ((e.clientX - r.left) / r.width) * 100;
-        const y = ((e.clientY - r.top) / r.height) * 100;
-        xTo(`${x}%`);
-        yTo(`${y}%`);
+        targetX = ((e.clientX - r.left) / r.width) * 100;
+        targetY = ((e.clientY - r.top) / r.height) * 100;
     };
 
     container.addEventListener('pointermove', onMove);
     container.addEventListener('pointerleave', () => {
-        xTo('50%');
-        yTo('50%');
+        targetX = 50;
+        targetY = 50;
     });
+
+    rafId = requestAnimationFrame(update);
 }
 
 /* ----------------------------------------------------------------
-   Hero pinning — keeps the hero in view for a cinematic handoff.
+   Hero pinning — scroll-linked scale/fade for hero
    ---------------------------------------------------------------- */
 
 export function initHeroPin(section) {
     if (!section || reduced) return;
 
     const title = section.querySelector('[data-hero-title]') || section.querySelector('h1');
-    ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: '+=150%',
-        pin: true,
-        scrub: true,
-        anticipatePin: 1,
-        onUpdate: (self) => {
-            if (!title) return;
-            const scale = 1 - self.progress * 0.05;
-            title.style.transform = `translateY(${self.progress * -18}px) scale(${scale})`;
+    const content = section.querySelector('.hero-content');
+
+    scroll(
+        ({ y }) => {
+            const progress = y.progress;
+            if (title) {
+                const s = 1 - progress * 0.08;
+                const ty = progress * -30;
+                const op = 1 - progress * 1.5;
+                title.style.transform = `translateY(${ty}px) scale(${s})`;
+                title.style.opacity = Math.max(0, op);
+            }
+            if (content) {
+                content.style.opacity = Math.max(0, 1 - progress * 2);
+            }
         },
-    });
+        {
+            target: section,
+            offset: ['start start', 'end start'],
+        }
+    );
 }
 
 /* ----------------------------------------------------------------
-   Count-up — animates a number to its target on scroll-in.
-   Reads target from `data-count` attribute.
+   Count-up — animates numbers on scroll using Motion
    ---------------------------------------------------------------- */
 
 export function initCountUps(root = document) {
@@ -160,27 +197,23 @@ export function initCountUps(root = document) {
             return;
         }
 
-        const obj = { v: 0 };
-        ScrollTrigger.create({
-            trigger: el,
-            start: 'top 85%',
-            once: true,
-            onEnter: () => {
-                gsap.to(obj, {
-                    v: end,
-                    duration: 2.2,
-                    ease: 'power2.out',
-                    onUpdate: () => {
-                        el.textContent = obj.v.toLocaleString('ar-EG', { maximumFractionDigits: decimals, minimumFractionDigits: decimals }) + fmt;
-                    },
-                });
-            },
-        });
+        inView(el, () => {
+            animate(0, end, {
+                duration: 2.2,
+                easing: [0.22, 1, 0.36, 1],
+                onUpdate: (v) => {
+                    el.textContent = v.toLocaleString('ar-EG', {
+                        maximumFractionDigits: decimals,
+                        minimumFractionDigits: decimals,
+                    }) + fmt;
+                },
+            });
+        }, { margin: '0px 0px -15% 0px' });
     });
 }
 
 /* ----------------------------------------------------------------
-   Process timeline — fills the rail as the timeline scrolls past.
+   Process timeline — SVG path drawing with scroll
    ---------------------------------------------------------------- */
 
 export function initProcessRail(section) {
@@ -188,20 +221,19 @@ export function initProcessRail(section) {
     const rail = section.querySelector('.process__rail');
     if (!rail) return;
 
-    ScrollTrigger.create({
-        trigger: section,
-        start: 'top 70%',
-        end: 'bottom 60%',
-        scrub: 0.4,
-        onUpdate: (self) => {
-            section.style.setProperty('--rail-progress', `${(self.progress * 100).toFixed(2)}%`);
+    scroll(
+        ({ y }) => {
+            section.style.setProperty('--rail-progress', `${(y.progress * 100).toFixed(2)}%`);
         },
-    });
+        {
+            target: section,
+            offset: ['start 70%', 'end 60%'],
+        }
+    );
 }
 
 /* ----------------------------------------------------------------
-   Services scrollytelling — pins the section, swaps the active panel
-   based on which row is centered.
+   Services — interactive card switching with Motion animations
    ---------------------------------------------------------------- */
 
 export function initServicesScroller(section) {
@@ -211,57 +243,80 @@ export function initServicesScroller(section) {
     const panels = Array.from(section.querySelectorAll('.svc-panel'));
     if (rows.length === 0 || rows.length !== panels.length) return;
 
+    let activeIndex = 0;
+
     const setActive = (index) => {
+        if (index === activeIndex && panels[index].classList.contains('is-active')) return;
+
         rows.forEach((r, i) => r.setAttribute('aria-selected', i === index ? 'true' : 'false'));
-        panels.forEach((p, i) => p.classList.toggle('is-active', i === index));
+
+        // Animate out current
+        const currentPanel = panels[activeIndex];
+        const nextPanel = panels[index];
+
+        if (currentPanel && currentPanel !== nextPanel) {
+            animate(currentPanel, { opacity: 0, y: 12 }, { duration: 0.3, easing: 'ease-out' }).finished.then(() => {
+                currentPanel.classList.remove('is-active');
+            });
+        }
+
+        // Animate in next
+        nextPanel.classList.add('is-active');
+        animate(nextPanel, { opacity: [0, 1], y: [16, 0] }, {
+            duration: 0.5,
+            easing: [0.22, 1, 0.36, 1],
+        });
+
+        activeIndex = index;
     };
 
     setActive(0);
 
-    const isDesktop = window.matchMedia('(min-width: 900px)').matches;
-    if (!isDesktop) return;
-
-    const total = rows.length;
-    ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: () => `+=${total * 70}%`,
-        pin: true,
-        scrub: 0.3,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-            const idx = Math.min(total - 1, Math.floor(self.progress * total));
-            setActive(idx);
-        },
+    // Click handlers for rows
+    rows.forEach((row, i) => {
+        row.addEventListener('click', () => setActive(i));
     });
+
+    // Scroll-linked switching on desktop
+    const isDesktop = window.matchMedia('(min-width: 900px)').matches;
+    if (isDesktop) {
+        scroll(
+            ({ y }) => {
+                const total = rows.length;
+                const idx = Math.min(total - 1, Math.floor(y.progress * total));
+                setActive(idx);
+            },
+            {
+                target: section,
+                offset: ['start start', `end end`],
+            }
+        );
+    }
 }
 
 /* ----------------------------------------------------------------
-   Parallax — moves an element vertically with the scroll.
+   Parallax — scroll-linked y movement
    ---------------------------------------------------------------- */
 
 export function initParallax(root = document) {
     if (reduced) return;
     root.querySelectorAll('[data-parallax]').forEach((el) => {
         const depth = parseFloat(el.dataset.parallax) || 0.15;
-        gsap.fromTo(el,
-            { y: `-${depth * 100}px` },
+        scroll(
+            ({ y }) => {
+                const move = (y.progress - 0.5) * depth * 200;
+                el.style.transform = `translateY(${move}px)`;
+            },
             {
-                y: `${depth * 100}px`,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: el,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: true,
-                },
+                target: el,
+                offset: ['start end', 'end start'],
             }
         );
     });
 }
 
 /* ----------------------------------------------------------------
-   Magnetic hover — subtle cursor pull for primary CTAs.
+   Magnetic hover — cursor-pull effect for primary CTAs
    ---------------------------------------------------------------- */
 
 export function initMagneticHover(selector = '.btn--primary') {
@@ -273,21 +328,92 @@ export function initMagneticHover(selector = '.btn--primary') {
             const rect = el.getBoundingClientRect();
             const relX = e.clientX - rect.left - rect.width / 2;
             const relY = e.clientY - rect.top - rect.height / 2;
-            gsap.to(el, {
+            animate(el, {
                 x: Math.max(-strength, Math.min(strength, relX * 0.08)),
                 y: Math.max(-strength, Math.min(strength, relY * 0.08)),
-                duration: 0.3,
-                ease: 'power2.out',
-            });
+            }, { duration: 0.3, easing: [0.22, 1, 0.36, 1] });
         };
-        const reset = () => gsap.to(el, { x: 0, y: 0, duration: 0.4, ease: 'power2.out' });
+        const reset = () => animate(el, { x: 0, y: 0 }, { duration: 0.4, easing: [0.22, 1, 0.36, 1] });
         el.addEventListener('pointermove', onMove);
         el.addEventListener('pointerleave', reset);
     });
 }
 
 /* ----------------------------------------------------------------
-   Embla carousel wrapper — sets up testimonials.
+   3D Service cards — tilt on hover
+   ---------------------------------------------------------------- */
+
+export function init3DCards(selector = '.svc-card-3d') {
+    if (reduced) return;
+    document.querySelectorAll(selector).forEach((card) => {
+        const inner = card.querySelector('.svc-card-3d__inner') || card;
+
+        card.addEventListener('pointermove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+            const rotateX = (0.5 - y) * 20;
+            const rotateY = (x - 0.5) * 20;
+
+            animate(inner, {
+                rotateX: rotateX,
+                rotateY: rotateY,
+            }, { duration: 0.4, easing: 'ease-out' });
+        });
+
+        card.addEventListener('pointerleave', () => {
+            animate(inner, { rotateX: 0, rotateY: 0 }, {
+                duration: 0.6,
+                easing: spring({ stiffness: 300, damping: 20 }),
+            });
+        });
+    });
+}
+
+/* ----------------------------------------------------------------
+   Stats — 3D flip counter effect
+   ---------------------------------------------------------------- */
+
+export function initStatsFlip(root = document) {
+    if (reduced) return;
+    root.querySelectorAll('.stat-3d').forEach((el) => {
+        inView(el, () => {
+            animate(el, {
+                rotateX: [-90, 0],
+                opacity: [0, 1],
+                y: [40, 0],
+            }, {
+                duration: 0.8,
+                easing: spring({ stiffness: 200, damping: 25 }),
+                delay: parseFloat(el.dataset.stagger || '0'),
+            });
+        }, { margin: '0px 0px -10% 0px' });
+    });
+}
+
+/* ----------------------------------------------------------------
+   Floating elements — continuous subtle animation
+   ---------------------------------------------------------------- */
+
+export function initFloatingElements() {
+    if (reduced) return;
+    document.querySelectorAll('.float-el').forEach((el, i) => {
+        const duration = 4 + (i % 3) * 1.5;
+        const yRange = 10 + (i % 4) * 5;
+
+        animate(el, {
+            y: [0, -yRange, 0],
+            rotateZ: [0, (i % 2 === 0 ? 3 : -3), 0],
+        }, {
+            duration: duration,
+            repeat: Infinity,
+            easing: 'ease-in-out',
+        });
+    });
+}
+
+/* ----------------------------------------------------------------
+   Embla carousel wrapper
    ---------------------------------------------------------------- */
 
 export async function initEmbla(root) {
@@ -332,4 +458,37 @@ export async function initEmbla(root) {
     embla.on('select', updateDots);
     embla.on('init', updateDots);
     updateDots();
+}
+
+/* ----------------------------------------------------------------
+   Accordion — services section
+   ---------------------------------------------------------------- */
+
+export function initAccordion(root = document) {
+    const containers = root.querySelectorAll('[data-accordion]');
+    containers.forEach((container) => {
+        const items = container.querySelectorAll('[data-accordion-item]');
+
+        items.forEach((item) => {
+            const trigger = item.querySelector('[data-accordion-trigger]');
+            if (!trigger) return;
+
+            trigger.addEventListener('click', () => {
+                const isOpen = item.classList.contains('is-open');
+
+                // Close all items in this accordion
+                items.forEach((other) => {
+                    other.classList.remove('is-open');
+                    const otherTrigger = other.querySelector('[data-accordion-trigger]');
+                    if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
+                });
+
+                // Toggle the clicked item
+                if (!isOpen) {
+                    item.classList.add('is-open');
+                    trigger.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+    });
 }

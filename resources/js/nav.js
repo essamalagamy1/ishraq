@@ -6,8 +6,6 @@ export function initNav() {
     const overlay = document.querySelector('[data-nav-overlay]');
     if (!toggle || !overlay) return;
 
-    const overlayLinks = overlay.querySelectorAll('.nav-link');
-
     const open = () => {
         overlay.classList.add('is-open');
         toggle.classList.add('is-open');
