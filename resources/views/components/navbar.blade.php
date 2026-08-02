@@ -45,7 +45,7 @@
 
             {{-- Mobile toggle --}}
             <button type="button"
-                    class="nav-ed__toggle"
+                    class="nav-ed__toggle lg:hidden"
                     data-menu-toggle
                     aria-controls="nav-overlay"
                     aria-expanded="false"

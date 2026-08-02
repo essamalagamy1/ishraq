@@ -616,7 +616,7 @@ html.lenis, html.lenis body { height: auto; }
 
 @media (min-width: 1024px) {
     .nav-ed__toggle {
-        display: none;
+        display: none !important;
     }
 }
 
