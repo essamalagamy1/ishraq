@@ -18,11 +18,11 @@
         <div class="container-page">
 
             {{-- Top strip: brief label --}}
-            <div class="hero-ed__top" data-reveal>
+            {{-- <div class="hero-ed__top" data-reveal>
                 <span class="hero-ed__label">وكالة رقمية</span>
                 <span class="hero-ed__line-h"></span>
                 <span class="hero-ed__label">تصميم · تطوير · إستراتيجية</span>
-            </div>
+            </div> --}}
 
             {{-- Main headline --}}
             <div class="hero-ed__headline">
