@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (\Illuminate\Support\Facades\App::environment('local', 'production')) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         if (! $this->app->runningInConsole()) {
             View::composer(['components.navbar', 'components.footer', 'components.layouts.app'], AppComposer::class);
         }
