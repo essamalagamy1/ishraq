@@ -9,6 +9,7 @@ import {
     initAccordion,
 } from './motion.js';
 import { initNav } from './nav.js';
+import { initGallery } from './gallery.js';
 
 const boot = () => {
     initLenis();
@@ -21,6 +22,9 @@ const boot = () => {
 
     // Accordion (services)
     initAccordion();
+
+    // Project Gallery
+    initGallery();
 
     // Carousel (if used on other pages)
     document.querySelectorAll('[data-embla-root]').forEach((root) => initEmbla(root));

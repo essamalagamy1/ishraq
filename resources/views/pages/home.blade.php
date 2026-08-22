@@ -145,62 +145,142 @@
     @if($featuredProjects && $featuredProjects->count())
     <section id="work" class="section-pad" data-section style="background: var(--color-canvas);">
         <div class="container-page">
-            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16" data-reveal>
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16" data-reveal>
                 <div class="max-w-2xl">
                     <x-ui.eyebrow number="02">مختارات من أعمالنا</x-ui.eyebrow>
                     <h2 class="type-h1 mt-6">
                         ما صنعناه مؤخرًا.
                     </h2>
+                    <p class="type-body-lg mt-4 text-[color:var(--color-ink-muted)] max-w-xl">
+                        حلول برمجية وتصميمية متكاملة شُيّدت بعناية فائقة تلبي تطلعات عملائنا وترتقي برؤاهم.
+                    </p>
                 </div>
-                <a href="{{ route('portfolio') }}" class="btn btn--ghost self-start md:self-auto">
-                    <span>الأرشيف الكامل</span>
-                    <svg class="btn-arrow" width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
-                        <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
+                <div class="flex items-center gap-4">
+                    <a href="{{ route('portfolio') }}" class="btn btn--ghost group inline-flex items-center gap-3 px-6 py-3.5 border border-[color:var(--color-line-strong)] hover:border-[color:var(--color-accent)] rounded-full transition-all">
+                        <span>الأرشيف الكامل</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[color:var(--color-surface-raised)] text-[color:var(--color-accent)] border border-[color:var(--color-line)] font-mono" dir="ltr">{{ str_pad($featuredProjects->count(), 2, '0', STR_PAD_LEFT) }}</span>
+                        <svg class="btn-arrow transition-transform duration-300 group-hover:-translate-x-1" width="16" height="12" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+                            <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
 
-            <div class="space-y-24 md:space-y-32">
-                @foreach($featuredProjects->take(3) as $i => $project)
-                    @php $reverse = $i % 2 === 1; @endphp
-                    <a href="{{ route('projects.show', $project->slug) }}"
-                       class="work-card group grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-center"
-                       data-reveal>
-                        <div class="md:col-span-7 {{ $reverse ? 'md:order-2' : '' }}">
-                            <div class="work-card__media">
-                                @if($project->main_image)
-                                    <img src="{{ Storage::url($project->main_image) }}"
-                                         alt="{{ $project->title }}"
-                                         loading="lazy"
-                                         data-parallax="0.08" />
+            @php
+                $firstProject = $featuredProjects->first();
+                $otherProjects = $featuredProjects->skip(1)->take(2);
+            @endphp
+
+            <div class="space-y-10 lg:space-y-12">
+                {{-- Spotlight Featured Card (Main Hero Project) --}}
+                @if($firstProject)
+                    <div data-reveal>
+                        <a href="{{ route('projects.show', $firstProject->slug) }}" class="featured-card featured-card--spotlight group grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
+                            <div class="lg:col-span-7 featured-card__media-wrapper">
+                                @if($firstProject->main_image)
+                                    <img src="{{ Storage::url($firstProject->main_image) }}"
+                                         alt="{{ $firstProject->title }}"
+                                         class="featured-card__img"
+                                         loading="lazy" />
                                 @else
-                                    <div class="work-card__media-fallback">{{ $project->title }}</div>
+                                    <div class="featured-card__fallback">
+                                        <div class="featured-card__fallback-title">{{ $firstProject->title }}</div>
+                                    </div>
+                                @endif
+                                
+                                <span class="featured-card__num-pill" dir="ltr">01</span>
+                                @if($firstProject->types && $firstProject->types->count())
+                                    <span class="featured-card__glass-pill">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent)] animate-pulse"></span>
+                                        {{ $firstProject->types->first()->name_ar ?? $firstProject->types->first()->name }}
+                                    </span>
                                 @endif
                             </div>
-                        </div>
-                        <div class="md:col-span-5 {{ $reverse ? 'md:order-1' : '' }}">
-                            <div class="type-eyebrow mb-5 flex items-center gap-3">
-                                <span class="type-numeral text-base">{{ sprintf('%02d', $i + 1) }}</span>
-                                <span class="w-6 h-px bg-[color:var(--color-line-strong)]"></span>
-                                @if($project->types && $project->types->count())
-                                    <span>{{ $project->types->first()->name_ar }}</span>
-                                @endif
+
+                            <div class="lg:col-span-5 featured-card__body p-8 lg:p-12 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center gap-3 text-xs tracking-wider uppercase text-[color:var(--color-accent)] mb-4 font-mono">
+                                        <span>مشروع رئيسي // Spotlight</span>
+                                    </div>
+                                    <h3 class="featured-card__title text-2xl lg:text-3xl mb-4">
+                                        {{ $firstProject->title }}
+                                    </h3>
+                                    @if($firstProject->short_description)
+                                        <p class="type-body text-[color:var(--color-ink-muted)] line-clamp-3 leading-relaxed">
+                                            {{ $firstProject->short_description }}
+                                        </p>
+                                    @endif
+                                </div>
+
+                                <div class="mt-8 pt-6 border-t border-[color:var(--color-line)] flex items-center justify-between">
+                                    <span class="type-small font-medium text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent)] transition-colors">
+                                        استكشف تفاصيل المشروع
+                                    </span>
+                                    <div class="featured-card__arrow-btn">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                                            <path d="M12 4L4 12M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
-                            <h3 class="type-h2 transition-colors duration-300 group-hover:text-[color:var(--color-accent)]">
-                                {{ $project->title }}
-                            </h3>
-                            @if($project->short_description)
-                                <p class="type-body mt-4 max-w-md">{{ $project->short_description }}</p>
-                            @endif
-                            <div class="mt-8 inline-flex items-center gap-2 type-small text-[color:var(--color-ink)]">
-                                <span>عرض المشروع</span>
-                                <svg width="14" height="10" viewBox="0 0 16 10" fill="none" class="btn-arrow" aria-hidden="true">
-                                    <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                        </a>
+                    </div>
+                @endif
+
+                {{-- Secondary Featured Grid (2 Columns) --}}
+                @if($otherProjects->count())
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+                        @foreach($otherProjects as $idx => $project)
+                            <div data-reveal data-reveal-stagger="{{ ($idx + 1) * 150 }}">
+                                <a href="{{ route('projects.show', $project->slug) }}" class="featured-card featured-card--grid group">
+                                    <div class="featured-card__media-wrapper">
+                                        @if($project->main_image)
+                                            <img src="{{ Storage::url($project->main_image) }}"
+                                                 alt="{{ $project->title }}"
+                                                 class="featured-card__img"
+                                                 loading="lazy" />
+                                        @else
+                                            <div class="featured-card__fallback">
+                                                <div class="featured-card__fallback-title">{{ $project->title }}</div>
+                                            </div>
+                                        @endif
+
+                                        <span class="featured-card__num-pill" dir="ltr">{{ str_pad($idx + 2, 2, '0', STR_PAD_LEFT) }}</span>
+                                        @if($project->types && $project->types->count())
+                                            <span class="featured-card__glass-pill">
+                                                {{ $project->types->first()->name_ar ?? $project->types->first()->name }}
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    <div class="featured-card__body p-6 lg:p-8">
+                                        <div>
+                                            <h3 class="featured-card__title text-xl mb-3">
+                                                {{ $project->title }}
+                                            </h3>
+                                            @if($project->short_description)
+                                                <p class="type-body text-[color:var(--color-ink-muted)] text-sm line-clamp-2 leading-relaxed">
+                                                    {{ $project->short_description }}
+                                                </p>
+                                            @endif
+                                        </div>
+
+                                        <div class="mt-6 pt-5 border-t border-[color:var(--color-line)] flex items-center justify-between">
+                                            <span class="type-small font-medium text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent)] transition-colors">
+                                                عرض التفاصيل
+                                            </span>
+                                            <div class="featured-card__arrow-btn">
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                                                    <path d="M12 4L4 12M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </div>
-                    </a>
-                @endforeach
+                        @endforeach
+                    </div>
+                @endif
             </div>
         </div>
     </section>

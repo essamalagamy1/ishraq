@@ -1493,3 +1493,240 @@ html.lenis, html.lenis body { height: auto; }
     transition: color 250ms var(--ease-out-soft);
 }
 .article-card:hover .article-card__title { color: var(--color-accent); }
+
+/* ============================================================
+   Featured Projects Showcase — Redesigned
+   ============================================================ */
+
+.featured-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line-strong);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: transform 500ms var(--ease-out-soft), border-color 400ms var(--ease-out-soft), box-shadow 500ms var(--ease-out-soft);
+}
+
+.featured-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-accent-ring);
+    box-shadow: 0 20px 45px -15px rgba(199, 125, 74, 0.18), 0 0 0 1px rgba(199, 125, 74, 0.25);
+}
+
+.featured-card__media-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: var(--color-surface-inset);
+}
+
+.featured-card--spotlight .featured-card__media-wrapper {
+    aspect-ratio: 16 / 9;
+}
+
+.featured-card--grid .featured-card__media-wrapper {
+    aspect-ratio: 16 / 10;
+}
+
+.featured-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 900ms var(--ease-out-soft), filter 600ms var(--ease-out-soft);
+    filter: saturate(0.95) brightness(0.95);
+}
+
+.featured-card:hover .featured-card__img {
+    transform: scale(1.06);
+    filter: saturate(1.1) brightness(1);
+}
+
+.featured-card__glass-pill {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1.1rem;
+    border-radius: 999px;
+    background: rgba(11, 10, 8, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(245, 241, 235, 0.15);
+    color: var(--color-ink);
+    font-size: 0.8125rem;
+    font-weight: 500;
+}
+
+.featured-card__num-pill {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    height: 2.25rem;
+    padding: 0 0.6rem;
+    border-radius: 999px;
+    background: rgba(11, 10, 8, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(245, 241, 235, 0.15);
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.featured-card__fallback {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, #1A1815 0%, #0B0A08 100%);
+    overflow: hidden;
+}
+
+.featured-card__fallback::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 60% 30%, rgba(199, 125, 74, 0.22), transparent 70%);
+    pointer-events: none;
+}
+
+.featured-card__fallback::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(245, 241, 235, 0.08) 1px, transparent 1px);
+    background-size: 22px 22px;
+    pointer-events: none;
+}
+
+.featured-card__fallback-title {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+    color: var(--color-ink);
+    text-align: center;
+    font-style: italic;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.featured-card__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    padding: 2rem;
+}
+
+.featured-card__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    line-height: 1.35;
+    transition: color 300ms var(--ease-out-soft);
+}
+
+.featured-card:hover .featured-card__title {
+    color: var(--color-accent);
+}
+
+.featured-card__arrow-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-line-strong);
+    color: var(--color-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 400ms var(--ease-out-soft);
+    flex-shrink: 0;
+}
+
+.featured-card:hover .featured-card__arrow-btn {
+    background: var(--color-accent);
+    color: #000;
+    border-color: transparent;
+    transform: scale(1.08) rotate(-45deg);
+}
+
+/* ============================================================
+   Project Image Gallery & Lightbox Styles
+   ============================================================ */
+
+.gallery-main-container {
+    position: relative;
+    width: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    background: var(--color-surface-inset);
+    border: 1px solid var(--color-line-strong);
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-main-img {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    background: #080706;
+    transition: opacity 250ms var(--ease-out-soft), transform 250ms var(--ease-out-soft);
+}
+
+.gallery-thumb {
+    position: relative;
+    width: 100px;
+    height: 70px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    opacity: 0.5;
+    transition: all 300ms var(--ease-out-soft);
+    cursor: pointer;
+    background: var(--color-surface-raised);
+}
+
+.gallery-thumb:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.gallery-thumb.is-active {
+    opacity: 1;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 16px rgba(199, 125, 74, 0.45);
+    transform: scale(1.05);
+}
+
+.gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Lightbox Modal */
+.lightbox-backdrop {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
