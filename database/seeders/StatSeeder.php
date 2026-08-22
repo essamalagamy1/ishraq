@@ -14,7 +14,7 @@ class StatSeeder extends Seeder
             [
                 'page' => 'home',
                 'icon' => 'fas fa-project-diagram',
-                'number' => '+200',
+                'number' => '+45',
                 'label' => 'مشروع منجز',
                 'description' => 'ويب وتطبيقات',
                 'color_from' => 'cyan-400',
@@ -25,7 +25,7 @@ class StatSeeder extends Seeder
             [
                 'page' => 'home',
                 'icon' => 'fas fa-mobile-alt',
-                'number' => '+80',
+                'number' => '+18',
                 'label' => 'تطبيق جوال',
                 'description' => 'iOS و Android',
                 'color_from' => 'purple-400',
@@ -36,7 +36,7 @@ class StatSeeder extends Seeder
             [
                 'page' => 'home',
                 'icon' => 'fas fa-trophy',
-                'number' => '5+',
+                'number' => '4+',
                 'label' => 'سنوات خبرة',
                 'description' => 'في التطوير البرمجي',
                 'color_from' => 'blue-400',
@@ -47,9 +47,9 @@ class StatSeeder extends Seeder
             [
                 'page' => 'home',
                 'icon' => 'fas fa-smile',
-                'number' => '99%',
+                'number' => '98%',
                 'label' => 'رضا العملاء',
-                'description' => 'تقييم 5 نجوم',
+                'description' => 'تقييم ممتاز',
                 'color_from' => 'green-400',
                 'color_to' => 'emerald-400',
                 'order' => 4,
@@ -59,7 +59,7 @@ class StatSeeder extends Seeder
             [
                 'page' => 'about',
                 'icon' => 'fas fa-users',
-                'number' => '+150',
+                'number' => '+35',
                 'label' => 'عميل سعيد',
                 'color_from' => 'cyan-400',
                 'color_to' => 'blue-400',
@@ -69,7 +69,7 @@ class StatSeeder extends Seeder
             [
                 'page' => 'about',
                 'icon' => 'fas fa-code',
-                'number' => '+200',
+                'number' => '+45',
                 'label' => 'مشروع برمجي',
                 'color_from' => 'purple-400',
                 'color_to' => 'pink-400',
@@ -79,7 +79,7 @@ class StatSeeder extends Seeder
             [
                 'page' => 'about',
                 'icon' => 'fas fa-trophy',
-                'number' => '5+',
+                'number' => '4+',
                 'label' => 'سنوات خبرة',
                 'color_from' => 'green-400',
                 'color_to' => 'emerald-400',
@@ -89,7 +89,7 @@ class StatSeeder extends Seeder
             [
                 'page' => 'about',
                 'icon' => 'fas fa-smile',
-                'number' => '99%',
+                'number' => '98%',
                 'label' => 'رضا العملاء',
                 'color_from' => 'orange-400',
                 'color_to' => 'red-400',
@@ -110,7 +110,7 @@ class StatSeeder extends Seeder
             [
                 'page' => 'services',
                 'icon' => 'fas fa-laptop-code',
-                'number' => '200+',
+                'number' => '+45',
                 'label' => 'مشروع منجز',
                 'color_from' => 'purple-400',
                 'color_to' => 'pink-400',
@@ -120,7 +120,7 @@ class StatSeeder extends Seeder
             [
                 'page' => 'services',
                 'icon' => 'fas fa-star',
-                'number' => '99%',
+                'number' => '98%',
                 'label' => 'رضا العملاء',
                 'color_from' => 'green-400',
                 'color_to' => 'emerald-400',
