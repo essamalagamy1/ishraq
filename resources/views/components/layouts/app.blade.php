@@ -3,7 +3,7 @@
     $companySettings = $companySettings ?? \App\Models\CompanySetting::first();
     $socialLinks = $socialLinks ?? \App\Models\SocialLink::where('is_active', true)->get();
     $whatsappClean = $companySettings ? preg_replace('/[^0-9]/', '', $companySettings->whatsapp_number ?? '') : '';
-    $defaultMetaTitle = ($companySettings->company_name ?? 'إشراق') . ' — استوديو تطوير منتجات رقمية';
+    $defaultMetaTitle = $companySettings->company_name ?? 'إشراق';
     $defaultMetaDescription = $companySettings->about_short ?? 'إشراق شريكك في التحول الرقمي. نُصمّم ونطوّر تجارب رقمية متينة وبمعايير عالية.';
 @endphp
 <!DOCTYPE html>
