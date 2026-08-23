@@ -213,7 +213,7 @@
                                 <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companySettings->whatsapp_number ?? '') }}?text={{ urlencode('مرحباً، أنا مهتم بطلب تصميم مشابه لمشروع: ' . $project->title) }}"
                                    target="_blank"
                                    class="btn btn--primary w-full justify-center">
-                                    <span>{{ __('اطلب تصميم مشابه') }}</span>
+                                    <span>{{ __('اطلب فكرة مشابهة') }}</span>
                                 </a>
                                 <a href="{{ route('portfolio') }}" class="btn btn--ghost w-full justify-center" wire:navigate>
                                     <span>{{ __('عودة لمعرض الأعمال') }}</span>
