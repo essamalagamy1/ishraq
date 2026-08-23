@@ -64,7 +64,7 @@
                     <ul class="space-y-3.5">
                         <li><a href="{{ route('about') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>من نحن</a></li>
                         <li><a href="{{ route('services') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>الخدمات</a></li>
-                        {{--                        <li><a href="{{ route('portfolio') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>الأعمال</a></li>--}}
+                        <li><a href="{{ route('portfolio') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>أعمالنا</a></li>
                         <li><a href="{{ route('careers') }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" wire:navigate>الفرص</a></li>
                     </ul>
                 </div>

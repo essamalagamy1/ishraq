@@ -20,16 +20,15 @@
 
 <x-layouts.app :seo="$project">
     {{-- Header Section --}}
-    <section class="pt-12 pb-8" style="background: var(--color-canvas);">
+    <section class="pt-28 lg:pt-36 pb-8" style="background: var(--color-canvas);">
         <div class="container-page">
             <div class="max-w-4xl" data-reveal>
                 <div class="flex items-center gap-3 mb-4">
                     <x-ui.eyebrow number="01">{{ __('تفاصيل العمل') }}</x-ui.eyebrow>
                     <span class="w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent)]"></span>
-                    <span class="type-small text-[color:var(--color-ink-subtle)]" dir="ltr">{{ $project->created_at->format('Y-m-d') }}</span>
                 </div>
 
-                <h1 class="type-display mt-4 text-3xl lg:text-5xl font-bold leading-tight">{{ $project->title }}</h1>
+                <h1 class="mt-4 text-3xl lg:text-5xl font-bold leading-tight">{{ $project->title }}</h1>
 
                 @if($project->short_description)
                     <p class="type-body-lg mt-6 text-[color:var(--color-ink-muted)] text-lg lg:text-xl leading-relaxed max-w-3xl">
