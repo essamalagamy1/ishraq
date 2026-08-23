@@ -192,7 +192,7 @@
                                 <div class="type-eyebrow mb-2 text-[color:var(--color-accent)]">{{ __('متاح للشراء والمصادرة') }}</div>
                                 @if($project->price)
                                     <div class="type-numeral text-3xl font-bold mb-4 text-[color:var(--color-ink)] flex items-center gap-2" dir="ltr">
-                                        <span>{{ $project->price }}</span>
+                                        <span>{{ number_format($project->price, 0) }}</span>
                                         <x-ui.currency-symbol class="w-6 h-6 text-[color:var(--color-accent)] inline-block shrink-0" />
                                     </div>
                                 @endif
