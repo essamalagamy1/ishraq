@@ -191,8 +191,9 @@
                             <div class="surface-card p-6 rounded-3xl border border-[color:var(--color-accent-ring)]" data-reveal>
                                 <div class="type-eyebrow mb-2 text-[color:var(--color-accent)]">{{ __('متاح للشراء والمصادرة') }}</div>
                                 @if($project->price)
-                                    <div class="type-numeral text-3xl font-bold mb-4 text-[color:var(--color-ink)]" dir="ltr">
-                                        {{ number_format($project->price, 2) }} {{ __('ر.س') }}
+                                    <div class="type-numeral text-3xl font-bold mb-4 text-[color:var(--color-ink)] flex items-center gap-2" dir="ltr">
+                                        <span>{{ number_format($project->price, 2) }}</span>
+                                        <x-ui.currency-symbol class="w-6 h-6 text-[color:var(--color-accent)] inline-block shrink-0" />
                                     </div>
                                 @endif
                                 <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companySettings->whatsapp_number) }}?text={{ urlencode('مرحباً، أنا مهتم بشراء المشروع: ' . $project->title . "\n" . 'رابط المشروع: ' . request()->url()) }}"

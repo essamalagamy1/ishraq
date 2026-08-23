@@ -62,7 +62,7 @@
                             </div>
                             <div>
                                 <label class="form-label">{{ __('الميزانية المتوقعة') }}</label>
-                                <input type="text" name="budget_range" class="form-input" placeholder="{{ __('مثال: 500 - 1000 ر.س') }}">
+                                <input type="text" name="budget_range" class="form-input" placeholder="{{ __('مثال: 500 - 1000 ريال') }}">
                             </div>
                             <div class="md:col-span-2">
                                 <label class="form-label">{{ __('الموعد النهائي') }}</label>

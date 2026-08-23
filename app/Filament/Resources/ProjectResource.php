@@ -80,7 +80,7 @@ class ProjectResource extends Resource
             Forms\Components\TextInput::make('price')
                 ->label('السعر')
                 ->numeric()
-                ->prefix('ر.س')
+                ->prefix('ريال')
                 ->visible(fn ($get) => $get('is_available_for_purchase'))
                 ->helperText('سعر المشروع بالريال السعودي'),
             Forms\Components\Select::make('status')
