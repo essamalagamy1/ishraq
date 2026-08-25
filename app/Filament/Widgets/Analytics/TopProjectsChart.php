@@ -20,14 +20,17 @@ class TopProjectsChart extends ChartWidget
     {
         try {
             if (! config('analytics.property_id')) {
-                return $this->getEmptyData();
+                $settingPropertyId = \App\Models\AnalyticsSetting::first()?->ga_property_id;
+                if ($settingPropertyId) {
+                    config(['analytics.property_id' => $settingPropertyId]);
+                } else {
+                    return $this->getEmptyData();
+                }
             }
 
             $period = $this->getPeriod();
-            $cacheKey = "analytics.top_projects.{$period->startDate->format('Y-m-d')}.{$period->endDate->format('Y-m-d')}.10";
-
-            // Use cache-only access, fallback to empty array if cache miss
-            $projects = Cache::get($cacheKey, []);
+            $service = app(\App\Services\AnalyticsService::class);
+            $projects = $service->getTopProjects($period);
 
             if (empty($projects)) {
                 return $this->getNoProjectsData();

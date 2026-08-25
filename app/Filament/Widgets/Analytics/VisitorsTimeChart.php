@@ -18,21 +18,24 @@ class VisitorsTimeChart extends ChartWidget
     {
         try {
             if (! config('analytics.property_id')) {
-                return $this->getEmptyData();
+                $settingPropertyId = \App\Models\AnalyticsSetting::first()?->ga_property_id;
+                if ($settingPropertyId) {
+                    config(['analytics.property_id' => $settingPropertyId]);
+                } else {
+                    return $this->getEmptyData();
+                }
             }
 
             $period = $this->getPeriod();
-            $cacheKey = "analytics.visitors_by_date.{$period->startDate->format('Y-m-d')}.{$period->endDate->format('Y-m-d')}";
-
-            // Use cache-only access, fallback to empty array if cache miss
-            $data = Cache::get($cacheKey, []);
+            $service = app(\App\Services\AnalyticsService::class);
+            $data = $service->getVisitorsByDate($period);
 
             $labels = [];
             $visitors = [];
             $pageViews = [];
 
             foreach ($data as $item) {
-                $labels[] = date('d/m', strtotime($item['date']));
+                $labels[] = isset($item['date']) ? date('d/m', strtotime($item['date'])) : '';
                 $visitors[] = $item['activeUsers'] ?? 0;
                 $pageViews[] = $item['screenPageViews'] ?? 0;
             }

@@ -11,47 +11,73 @@ class OverviewStats extends BaseWidget
 {
     protected static ?int $sort = 1;
 
+    protected ?string $pollingInterval = '15s';
+
     public ?string $filter = '7days';
 
     protected function getStats(): array
     {
         try {
             if (! config('analytics.property_id')) {
-                return $this->getWarningStats();
+                $settingPropertyId = \App\Models\AnalyticsSetting::first()?->ga_property_id;
+                if ($settingPropertyId) {
+                    config(['analytics.property_id' => $settingPropertyId]);
+                } else {
+                    return $this->getWarningStats();
+                }
             }
 
             $period = $this->getPeriod();
-            $cacheKey = "analytics.overview.{$period->startDate->format('Y-m-d')}.{$period->endDate->format('Y-m-d')}";
+            $service = app(\App\Services\AnalyticsService::class);
+            
+            // Get stats, realtime users, and engagement
+            $stats = $service->getOverviewStats($period);
+            $realtimeUsers = $service->getRealtimeUsers();
+            $engagement = $service->getEngagementMetrics($period);
 
-            // Use cache-only access, fallback to empty data if cache miss
-            $stats = Cache::get($cacheKey, function () {
-                return [
-                    'total_users' => 0,
-                    'total_page_views' => 0,
-                    'total_sessions' => 0,
-                    'bounce_rate' => 0,
-                    'avg_session_duration' => 0,
-                    'pages_per_session' => 0,
-                ];
-            });
+            // Format duration
+            $avgDurationSeconds = (int) ($engagement['avg_duration'] ?? 0);
+            $durationFormatted = $avgDurationSeconds >= 60 
+                ? floor($avgDurationSeconds / 60) . 'د ' . ($avgDurationSeconds % 60) . 'ث'
+                : $avgDurationSeconds . ' ثانية';
+
+            $engagementRate = round($engagement['engagement_rate'] ?? 0, 1);
 
             return [
-                Stat::make('إجمالي الزوار', number_format($stats['total_users']))
-                    ->description($this->getPeriodDescription())
-                    ->descriptionIcon('heroicon-o-users')
-                    ->color('success')
-                    ->chart($this->generateTrendChart($stats['total_users'])),
+                Stat::make('المستخدمون النشطون الآن', $realtimeUsers)
+                    ->description('تحديث حي مباشر (آخر 30 دقيقة)')
+                    ->descriptionIcon(\Filament\Support\Icons\Heroicon::OutlinedSignal)
+                    ->color($realtimeUsers > 0 ? 'success' : 'gray')
+                    ->extraAttributes([
+                        'class' => 'cursor-pointer ring-1 ring-emerald-500/20',
+                    ]),
 
-                Stat::make('مشاهدات الصفحات', number_format($stats['total_page_views']))
+                Stat::make('إجمالي الزوار', number_format($stats['total_users'] ?? 0))
                     ->description($this->getPeriodDescription())
-                    ->descriptionIcon('heroicon-o-eye')
+                    ->descriptionIcon(\Filament\Support\Icons\Heroicon::OutlinedUsers)
+                    ->color('primary')
+                    ->chart($this->generateTrendChart($stats['total_users'] ?? 0)),
+
+                Stat::make('مشاهدات الصفحات', number_format($stats['total_page_views'] ?? 0))
+                    ->description($this->getPeriodDescription())
+                    ->descriptionIcon(\Filament\Support\Icons\Heroicon::OutlinedEye)
                     ->color('info')
-                    ->chart($this->generateTrendChart($stats['total_page_views'])),
+                    ->chart($this->generateTrendChart($stats['total_page_views'] ?? 0)),
 
-                Stat::make('الصفحات لكل جلسة', round($stats['pages_per_session'], 1))
-                    ->description($this->getPeriodDescription())
-                    ->descriptionIcon('heroicon-o-document-text')
+                Stat::make('متوسط مدة الجلسة', $durationFormatted)
+                    ->description('تفاعل الزائر داخل الموقع')
+                    ->descriptionIcon(\Filament\Support\Icons\Heroicon::OutlinedClock)
                     ->color('warning'),
+
+                Stat::make('معدل التفاعل', $engagementRate . '%')
+                    ->description('نسبة الجلسات ذات التفاعل')
+                    ->descriptionIcon(\Filament\Support\Icons\Heroicon::OutlinedBolt)
+                    ->color($engagementRate > 50 ? 'success' : 'warning'),
+
+                Stat::make('الصفحات لكل جلسة', round($stats['pages_per_session'] ?? 0, 1))
+                    ->description($this->getPeriodDescription())
+                    ->descriptionIcon(\Filament\Support\Icons\Heroicon::OutlinedDocumentText)
+                    ->color('secondary'),
             ];
 
         } catch (\Exception $e) {

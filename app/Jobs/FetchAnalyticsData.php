@@ -26,6 +26,13 @@ class FetchAnalyticsData implements ShouldQueue
     public function handle(AnalyticsService $service): void
     {
         try {
+            if (! config('analytics.property_id')) {
+                $setting = \App\Models\AnalyticsSetting::first();
+                if ($setting?->ga_property_id) {
+                    config(['analytics.property_id' => $setting->ga_property_id]);
+                }
+            }
+
             Log::info('FetchAnalyticsData: Starting analytics data fetch');
 
             // Define periods for different widgets

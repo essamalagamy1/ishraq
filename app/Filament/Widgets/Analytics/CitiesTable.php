@@ -5,41 +5,38 @@ namespace App\Filament\Widgets\Analytics;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-use Illuminate\Support\Facades\Cache;
 use Spatie\Analytics\Period;
 
-class TopPagesTable extends BaseWidget
+class CitiesTable extends BaseWidget
 {
-    protected static ?int $sort = 3;
+    protected static ?int $sort = 8;
 
-    protected int|string|array $columnSpan = 'full';
-
-    public ?string $filter = '7days';
+    public ?string $filter = '30days';
 
     public function table(Table $table): Table
     {
         return $table
-            ->heading('الصفحات الأكثر زيارة')
+            ->heading('المدن والدول الأكثر زيارة')
             ->paginated(false)
             ->columns([
                 Tables\Columns\TextColumn::make('rank')
-                    ->label('#')
+                    ->label('#'),
+                Tables\Columns\TextColumn::make('city')
+                    ->label('المدينة')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('country')
+                    ->label('الدولة')
+                    ->badge()
+                    ->color('info'),
+                Tables\Columns\TextColumn::make('users')
+                    ->label('الزوار')
+                    ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('title')
-                    ->label('عنوان الصفحة')
-                    ->searchable()
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('path')
-                    ->label('المسار')
-                    ->searchable()
-                    ->limit(40)
-                    ->copyable(),
                 Tables\Columns\TextColumn::make('views')
                     ->label('المشاهدات')
                     ->numeric()
                     ->sortable(),
-            ])
-            ->defaultSort('views', 'desc');
+            ]);
     }
 
     public function getTableRecords(): \Illuminate\Support\Collection
@@ -56,16 +53,17 @@ class TopPagesTable extends BaseWidget
 
             $period = $this->getPeriod();
             $service = app(\App\Services\AnalyticsService::class);
-            $pages = $service->getMostVisitedPages($period, 10);
+            $cities = $service->getCitiesWithCountry($period, 12);
 
-            return collect($pages)->map(function ($page, $index) {
+            return collect($cities)->map(function ($item, $index) {
                 return [
                     'id' => $index + 1,
                     'key' => (string) ($index + 1),
                     'rank' => $index + 1,
-                    'title' => $page['pageTitle'] ?? 'بدون عنوان',
-                    'path' => $page['fullPageUrl'] ?? $page['pagePath'] ?? '/',
-                    'views' => $page['screenPageViews'] ?? 0,
+                    'city' => ($item['city'] ?? '') === '(not set)' ? 'غير محدد' : ($item['city'] ?? 'غير محدد'),
+                    'country' => $item['country'] ?? 'غير محدد',
+                    'users' => (int) ($item['activeUsers'] ?? 0),
+                    'views' => (int) ($item['screenPageViews'] ?? 0),
                 ];
             });
         } catch (\Exception $e) {
@@ -78,13 +76,24 @@ class TopPagesTable extends BaseWidget
         return (string) ($record['key'] ?? $record['id'] ?? $record['rank'] ?? uniqid());
     }
 
+    protected function getFilters(): ?array
+    {
+        return [
+            '7days' => 'آخر 7 أيام',
+            '30days' => 'آخر 30 يوم',
+            '90days' => 'آخر 90 يوم',
+            '365days' => 'آخر سنة',
+        ];
+    }
+
     protected function getPeriod(): Period
     {
         return match ($this->filter) {
             '7days' => Period::days(7),
             '30days' => Period::days(30),
             '90days' => Period::days(90),
-            default => Period::days(7),
+            '365days' => Period::days(365),
+            default => Period::days(30),
         };
     }
 }

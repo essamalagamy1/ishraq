@@ -38,22 +38,22 @@ class EventsTable extends BaseWidget
     {
         try {
             if (! config('analytics.property_id')) {
-                return collect([]);
+                $settingPropertyId = \App\Models\AnalyticsSetting::first()?->ga_property_id;
+                if ($settingPropertyId) {
+                    config(['analytics.property_id' => $settingPropertyId]);
+                } else {
+                    return collect([]);
+                }
             }
 
             $period = $this->getPeriod();
-            $cacheKey = "analytics.events.{$period->startDate->format('Y-m-d')}.{$period->endDate->format('Y-m-d')}.15";
-
-            // Use cache-only access, fallback to empty array if cache miss
-            $events = Cache::get($cacheKey, function () use ($period) {
-                // Fallback: fetch with max 10 instead of 15 if cache miss
-                $key = "analytics.events.{$period->startDate->format('Y-m-d')}.{$period->endDate->format('Y-m-d')}.10";
-
-                return Cache::get($key, []);
-            });
+            $service = app(\App\Services\AnalyticsService::class);
+            $events = $service->getEvents($period, 15);
 
             return collect($events)->map(function ($event, $index) {
                 return [
+                    'id' => $index + 1,
+                    'key' => (string) ($index + 1),
                     'rank' => $index + 1,
                     'event_name' => $this->translateEventName($event['event_name']),
                     'count' => $event['count'],

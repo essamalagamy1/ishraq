@@ -503,6 +503,109 @@ class AnalyticsService
     }
 
     /**
+     * Get real-time active users right now (last 30 minutes)
+     */
+    public function getRealtimeUsers(): int
+    {
+        try {
+            return Cache::remember('analytics.realtime_users', 15, function () {
+                $data = Analytics::getRealtime(Period::days(1), ['activeUsers']);
+                if ($data instanceof \Illuminate\Support\Collection && $data->isNotEmpty()) {
+                    return (int) ($data->first()['activeUsers'] ?? $data->sum('activeUsers'));
+                }
+                return 0;
+            });
+        } catch (\Throwable $e) {
+            Log::warning('Analytics getRealtimeUsers: ' . $e->getMessage());
+            return 0;
+        }
+    }
+
+    /**
+     * Get user types (New vs Returning visitors)
+     */
+    public function getUserTypes(Period $period): array
+    {
+        $cacheKey = "analytics.user_types.{$period->startDate->format('Y-m-d')}.{$period->endDate->format('Y-m-d')}";
+
+        try {
+            return Cache::remember($cacheKey, $this->cacheMinutes * 60, function () use ($period) {
+                $data = Analytics::fetchUserTypes($period);
+                $result = ['new' => 0, 'returning' => 0];
+                foreach ($data as $row) {
+                    $type = strtolower($row['newVsReturning'] ?? '');
+                    if ($type === 'new') {
+                        $result['new'] += (int) ($row['activeUsers'] ?? 0);
+                    } elseif ($type === 'returning') {
+                        $result['returning'] += (int) ($row['activeUsers'] ?? 0);
+                    }
+                }
+                return $result;
+            });
+        } catch (\Throwable $e) {
+            return ['new' => 0, 'returning' => 0];
+        }
+    }
+
+    /**
+     * Get engagement metrics (average duration and engagement rate)
+     */
+    public function getEngagementMetrics(Period $period): array
+    {
+        $cacheKey = "analytics.engagement.{$period->startDate->format('Y-m-d')}.{$period->endDate->format('Y-m-d')}";
+
+        try {
+            return Cache::remember($cacheKey, $this->cacheMinutes * 60, function () use ($period) {
+                $data = Analytics::get($period, ['averageSessionDuration', 'engagementRate', 'screenPageViewsPerSession'], [], 1);
+                if ($data instanceof \Illuminate\Support\Collection && $data->isNotEmpty()) {
+                    $first = $data->first();
+                    return [
+                        'avg_duration' => (float) ($first['averageSessionDuration'] ?? 0),
+                        'engagement_rate' => (float) ($first['engagementRate'] ?? 0) * 100,
+                        'views_per_session' => (float) ($first['screenPageViewsPerSession'] ?? 0),
+                    ];
+                }
+                return ['avg_duration' => 0, 'engagement_rate' => 0, 'views_per_session' => 0];
+            });
+        } catch (\Throwable $e) {
+            return ['avg_duration' => 0, 'engagement_rate' => 0, 'views_per_session' => 0];
+        }
+    }
+
+    /**
+     * Get operating systems distribution
+     */
+    public function getOperatingSystems(Period $period): array
+    {
+        $cacheKey = "analytics.os.{$period->startDate->format('Y-m-d')}.{$period->endDate->format('Y-m-d')}";
+
+        try {
+            return Cache::remember($cacheKey, $this->cacheMinutes * 60, function () use ($period) {
+                return Analytics::fetchTopOperatingSystems($period)->toArray();
+            });
+        } catch (\Throwable $e) {
+            return [];
+        }
+    }
+
+    /**
+     * Get cities with country breakdown
+     */
+    public function getCitiesWithCountry(Period $period, int $max = 10): array
+    {
+        $cacheKey = "analytics.cities_detailed.{$period->startDate->format('Y-m-d')}.{$period->endDate->format('Y-m-d')}.{$max}";
+
+        try {
+            return Cache::remember($cacheKey, $this->cacheMinutes * 60, function () use ($period, $max) {
+                $data = Analytics::get($period, ['activeUsers', 'screenPageViews'], ['country', 'city'], $max);
+                return $data->toArray();
+            });
+        } catch (\Throwable $e) {
+            return [];
+        }
+    }
+
+    /**
      * Get empty overview stats (fallback)
      */
     protected function getEmptyOverviewStats(): array

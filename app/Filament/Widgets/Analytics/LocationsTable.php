@@ -38,17 +38,22 @@ class LocationsTable extends BaseWidget
     {
         try {
             if (! config('analytics.property_id')) {
-                return collect([]);
+                $settingPropertyId = \App\Models\AnalyticsSetting::first()?->ga_property_id;
+                if ($settingPropertyId) {
+                    config(['analytics.property_id' => $settingPropertyId]);
+                } else {
+                    return collect([]);
+                }
             }
 
             $period = $this->getPeriod();
-            $cacheKey = "analytics.countries.{$period->startDate->format('Y-m-d')}.{$period->endDate->format('Y-m-d')}.10";
-
-            // Use cache-only access, fallback to empty array if cache miss
-            $countries = Cache::get($cacheKey, []);
+            $service = app(\App\Services\AnalyticsService::class);
+            $countries = $service->getCountries($period, 10);
 
             return collect($countries)->map(function ($country, $index) {
                 return [
+                    'id' => $index + 1,
+                    'key' => (string) ($index + 1),
                     'rank' => $index + 1,
                     'country' => $country['country'],
                     'users' => $country['users'],

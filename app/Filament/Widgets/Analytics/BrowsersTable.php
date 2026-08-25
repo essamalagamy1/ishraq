@@ -39,14 +39,17 @@ class BrowsersTable extends BaseWidget
     {
         try {
             if (! config('analytics.property_id')) {
-                return collect([]);
+                $settingPropertyId = \App\Models\AnalyticsSetting::first()?->ga_property_id;
+                if ($settingPropertyId) {
+                    config(['analytics.property_id' => $settingPropertyId]);
+                } else {
+                    return collect([]);
+                }
             }
 
             $period = $this->getPeriod();
-            $cacheKey = "analytics.browsers.{$period->startDate->format('Y-m-d')}.{$period->endDate->format('Y-m-d')}.10";
-
-            // Use cache-only access, fallback to empty array if cache miss
-            $browsers = Cache::get($cacheKey, []);
+            $service = app(\App\Services\AnalyticsService::class);
+            $browsers = $service->getBrowsers($period);
 
             $totalUsers = array_sum(array_column($browsers, 'users'));
 
@@ -54,6 +57,8 @@ class BrowsersTable extends BaseWidget
                 $percentage = $totalUsers > 0 ? ($browser['users'] / $totalUsers) * 100 : 0;
 
                 return [
+                    'id' => $index + 1,
+                    'key' => (string) ($index + 1),
                     'rank' => $index + 1,
                     'browser' => $browser['browser'],
                     'users' => $browser['users'],
