@@ -14,21 +14,21 @@
     {{-- ================================================================
          1. HERO — Editorial Typography
          ================================================================ --}}
-    <section id="hero" class="hero-ed" data-section>
-        <div class="container-page">
+    <section id="hero" class="hero-ed" data-section data-hero-section>
+        {{-- Halo glow — follows cursor via JS --}}
+        <div class="hero-halo" aria-hidden="true"></div>
 
-            {{-- Top strip: brief label --}}
-            {{-- <div class="hero-ed__top" data-reveal>
-                <span class="hero-ed__label">وكالة رقمية</span>
-                <span class="hero-ed__line-h"></span>
-                <span class="hero-ed__label">تصميم · تطوير · إستراتيجية</span>
-            </div> --}}
+        {{-- Decorative ambient blobs --}}
+        <div class="hero-blob hero-blob--1" aria-hidden="true"></div>
+        <div class="hero-blob hero-blob--2" aria-hidden="true"></div>
+
+        <div class="container-page" style="position:relative;z-index:1;">
 
             {{-- Main headline --}}
             <div class="hero-ed__headline">
-                <h1 data-reveal data-reveal-stagger="100">
-                    <span class="hero-ed__line">{{ $heroTitleLine1 }}</span>
-                    <span class="hero-ed__line hero-ed__line--accent">{{ $heroTitleLine2 }}</span>
+                <h1 data-hero-title>
+                    <span class="hero-ed__line" data-reveal data-reveal-stagger="0">{{ $heroTitleLine1 }}</span>
+                    <span class="hero-ed__line hero-ed__line--accent" data-reveal data-reveal-stagger="120">{{ $heroTitleLine2 }}</span>
                 </h1>
             </div>
 
@@ -37,20 +37,20 @@
                 <div class="hero-ed__col-text" data-reveal data-reveal-stagger="300">
                     <p class="hero-ed__subtitle">{{ $heroSubtitle }}</p>
                     <div class="hero-ed__ctas">
-                        <a href="{{ $heroCtaPrimaryLink }}" class="btn btn--primary">
+                        <a href="{{ $heroCtaPrimaryLink }}" class="btn btn--primary" id="hero-cta-primary">
                             <span>{{ $heroCtaPrimaryText }}</span>
                             <svg class="btn-arrow" width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
                                 <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
-                        <a href="{{ $heroCtaSecondaryLink }}" class="btn btn--ghost">
+                        <a href="{{ $heroCtaSecondaryLink }}" class="btn btn--ghost" id="hero-cta-secondary">
                             {{ $heroCtaSecondaryText }}
                         </a>
                     </div>
                 </div>
 
                 @if($stats && $stats->count())
-                <div class="hero-ed__col-stats" data-reveal data-reveal-stagger="500">
+                <div class="hero-ed__col-stats" data-reveal data-reveal-stagger="480">
                     @foreach($stats->take(3) as $idx => $stat)
                         @php
                             $raw = (string) ($stat->number ?? '');
@@ -140,154 +140,222 @@
     @endif
 
     {{-- ================================================================
-         4. FEATURED WORK
+         4. FEATURED WORK — Bento Grid
          ================================================================ --}}
     @if($featuredProjects && $featuredProjects->count())
-    <section id="work" class="section-pad" data-section style="background: var(--color-canvas);">
+    <section id="work" class="section-pad work-bento" data-section>
         <div class="container-page">
-            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16" data-reveal>
-                <div class="max-w-2xl">
-                    <x-ui.eyebrow number="02">مختارات من أعمالنا</x-ui.eyebrow>
-                    <h2 class="type-h1 mt-6">
-                        ما صنعناه مؤخرًا.
-                    </h2>
-                    <p class="type-body-lg mt-4 text-[color:var(--color-ink-muted)] max-w-xl">
-                        حلول برمجية وتصميمية متكاملة شُيّدت بعناية فائقة تلبي تطلعات عملائنا وترتقي برؤاهم.
-                    </p>
-                </div>
-                <div class="flex items-center gap-4">
-                    <a href="{{ route('portfolio') }}" class="btn btn--ghost group inline-flex items-center gap-3 px-6 py-3.5 border border-[color:var(--color-line-strong)] hover:border-[color:var(--color-accent)] rounded-full transition-all">
-                        <span>الأرشيف الكامل</span>
-                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[color:var(--color-surface-raised)] text-[color:var(--color-accent)] border border-[color:var(--color-line)] font-mono" dir="ltr">{{ str_pad($featuredProjects->count(), 2, '0', STR_PAD_LEFT) }}</span>
-                        <svg class="btn-arrow transition-transform duration-300 group-hover:-translate-x-1" width="16" height="12" viewBox="0 0 16 10" fill="none" aria-hidden="true">
-                            <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
+
+            {{-- Section header --}}
+            <div class="ed-section-head" data-reveal>
+                <span class="ed-section-num" dir="ltr">02</span>
+                <div class="flex-1">
+                    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                        <div>
+                            <h2 class="type-h1">ما صنعناه مؤخرًا.</h2>
+                            <p class="type-body-lg mt-4 max-w-xl">حلول مُشيّدة بعناية، تقيس الأثر بمؤشرات حقيقية.</p>
+                        </div>
+                        <a href="{{ route('portfolio') }}" class="btn btn--ghost self-start lg:self-auto group" id="work-archive-btn">
+                            <span>الأرشيف الكامل</span>
+                            <span class="font-mono text-[color:var(--color-accent)] text-xs" dir="ltr">{{ str_pad($featuredProjects->count(), 2, '0', STR_PAD_LEFT) }}</span>
+                            <svg class="btn-arrow" width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+                                <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
 
             @php
-                $firstProject = $featuredProjects->first();
-                $otherProjects = $featuredProjects->skip(1)->take(2);
+                $firstProject  = $featuredProjects->first();
+                $otherProjects = $featuredProjects->skip(1)->values();
+                $secondProject = $otherProjects->get(0);
+                $thirdProject  = $otherProjects->get(1);
+                $extraProjects = $otherProjects->skip(2)->take(2);
             @endphp
 
-            <div class="space-y-10 lg:space-y-12">
-                {{-- Spotlight Featured Card (Main Hero Project) --}}
+            {{-- Bento Grid --}}
+            <div class="work-bento__grid">
+
+                {{-- SPOTLIGHT — large left card --}}
                 @if($firstProject)
-                    <div data-reveal>
-                        <a href="{{ route('projects.show', $firstProject->slug) }}" class="featured-card featured-card--spotlight group grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
-                            <div class="lg:col-span-7 featured-card__media-wrapper">
-                                @if($firstProject->main_image)
-                                    <img src="{{ Storage::url($firstProject->main_image) }}"
-                                         alt="{{ $firstProject->title }}"
-                                         class="featured-card__img"
-                                         loading="lazy" />
-                                @else
-                                    <div class="featured-card__fallback">
-                                        <div class="featured-card__fallback-title">{{ $firstProject->title }}</div>
-                                    </div>
-                                @endif
-                                
-                                <span class="featured-card__num-pill" dir="ltr">01</span>
+                <div class="work-bento__spotlight" data-reveal data-reveal-stagger="0">
+                    <a href="{{ route('projects.show', $firstProject->slug) }}"
+                       class="work-bento__card group"
+                       aria-label="{{ $firstProject->title }}">
+
+                        {{-- Image --}}
+                        <div class="work-bento__media">
+                            @if($firstProject->main_image)
+                                <img src="{{ Storage::url($firstProject->main_image) }}"
+                                     alt="{{ $firstProject->title }}"
+                                     class="work-bento__img"
+                                     loading="eager" />
+                            @else
+                                <div class="work-bento__fallback">
+                                    <span>{{ $firstProject->title }}</span>
+                                </div>
+                            @endif
+                            {{-- Gradient overlay --}}
+                            <div class="work-bento__overlay" aria-hidden="true"></div>
+                        </div>
+
+                        {{-- Hover info panel --}}
+                        <div class="work-bento__info">
+                            <div class="work-bento__meta">
+                                <span class="work-bento__index" dir="ltr">01</span>
                                 @if($firstProject->types && $firstProject->types->count())
-                                    <span class="featured-card__glass-pill">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent)] animate-pulse"></span>
+                                    <span class="work-bento__tag">
                                         {{ $firstProject->types->first()->name_ar ?? $firstProject->types->first()->name }}
                                     </span>
                                 @endif
                             </div>
+                            <div class="work-bento__title-wrap">
+                                <h3 class="work-bento__title">{{ $firstProject->title }}</h3>
+                                @if($firstProject->short_description)
+                                    <p class="work-bento__desc">{{ Str::limit($firstProject->short_description, 100) }}</p>
+                                @endif
+                            </div>
+                            <div class="work-bento__cta">
+                                <span>استكشف المشروع</span>
+                                <span class="work-bento__arrow" aria-hidden="true">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                        <path d="M10 2L2 10M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
 
-                            <div class="lg:col-span-5 featured-card__body p-8 lg:p-12 flex flex-col justify-between">
-                                <div>
-                                    <div class="flex items-center gap-3 text-xs tracking-wider uppercase text-[color:var(--color-accent)] mb-4 font-mono">
-                                        <span>مشروع رئيسي // Spotlight</span>
+                    </a>
+                </div>
+                @endif
+
+                {{-- STACK — two cards stacked on the right --}}
+                <div class="work-bento__stack">
+
+                    @if($secondProject)
+                    <div class="work-bento__secondary" data-reveal data-reveal-stagger="150">
+                        <a href="{{ route('projects.show', $secondProject->slug) }}"
+                           class="work-bento__card group"
+                           aria-label="{{ $secondProject->title }}">
+                            <div class="work-bento__media">
+                                @if($secondProject->main_image)
+                                    <img src="{{ Storage::url($secondProject->main_image) }}"
+                                         alt="{{ $secondProject->title }}"
+                                         class="work-bento__img"
+                                         loading="lazy" />
+                                @else
+                                    <div class="work-bento__fallback">
+                                        <span>{{ $secondProject->title }}</span>
                                     </div>
-                                    <h3 class="featured-card__title text-2xl lg:text-3xl mb-4">
-                                        {{ $firstProject->title }}
-                                    </h3>
-                                    @if($firstProject->short_description)
-                                        <p class="type-body text-[color:var(--color-ink-muted)] line-clamp-3 leading-relaxed">
-                                            {{ $firstProject->short_description }}
-                                        </p>
+                                @endif
+                                <div class="work-bento__overlay" aria-hidden="true"></div>
+                            </div>
+                            <div class="work-bento__info">
+                                <div class="work-bento__meta">
+                                    <span class="work-bento__index" dir="ltr">02</span>
+                                    @if($secondProject->types && $secondProject->types->count())
+                                        <span class="work-bento__tag">{{ $secondProject->types->first()->name_ar ?? $secondProject->types->first()->name }}</span>
                                     @endif
                                 </div>
-
-                                <div class="mt-8 pt-6 border-t border-[color:var(--color-line)] flex items-center justify-between">
-                                    <span class="type-small font-medium text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent)] transition-colors">
-                                        استكشف تفاصيل المشروع
-                                    </span>
-                                    <div class="featured-card__arrow-btn">
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                                            <path d="M12 4L4 12M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                <div class="work-bento__title-wrap">
+                                    <h3 class="work-bento__title work-bento__title--sm">{{ $secondProject->title }}</h3>
+                                </div>
+                                <div class="work-bento__cta">
+                                    <span>عرض التفاصيل</span>
+                                    <span class="work-bento__arrow" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                            <path d="M10 2L2 10M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
-                                    </div>
+                                    </span>
                                 </div>
                             </div>
                         </a>
                     </div>
-                @endif
+                    @endif
 
-                {{-- Secondary Featured Grid (2 Columns) --}}
-                @if($otherProjects->count())
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-                        @foreach($otherProjects as $idx => $project)
-                            <div data-reveal data-reveal-stagger="{{ ($idx + 1) * 150 }}">
-                                <a href="{{ route('projects.show', $project->slug) }}" class="featured-card featured-card--grid group">
-                                    <div class="featured-card__media-wrapper">
-                                        @if($project->main_image)
-                                            <img src="{{ Storage::url($project->main_image) }}"
-                                                 alt="{{ $project->title }}"
-                                                 class="featured-card__img"
-                                                 loading="lazy" />
-                                        @else
-                                            <div class="featured-card__fallback">
-                                                <div class="featured-card__fallback-title">{{ $project->title }}</div>
-                                            </div>
-                                        @endif
-
-                                        <span class="featured-card__num-pill" dir="ltr">{{ str_pad($idx + 2, 2, '0', STR_PAD_LEFT) }}</span>
-                                        @if($project->types && $project->types->count())
-                                            <span class="featured-card__glass-pill">
-                                                {{ $project->types->first()->name_ar ?? $project->types->first()->name }}
-                                            </span>
-                                        @endif
+                    @if($thirdProject)
+                    <div class="work-bento__secondary" data-reveal data-reveal-stagger="280">
+                        <a href="{{ route('projects.show', $thirdProject->slug) }}"
+                           class="work-bento__card group"
+                           aria-label="{{ $thirdProject->title }}">
+                            <div class="work-bento__media">
+                                @if($thirdProject->main_image)
+                                    <img src="{{ Storage::url($thirdProject->main_image) }}"
+                                         alt="{{ $thirdProject->title }}"
+                                         class="work-bento__img"
+                                         loading="lazy" />
+                                @else
+                                    <div class="work-bento__fallback">
+                                        <span>{{ $thirdProject->title }}</span>
                                     </div>
-
-                                    <div class="featured-card__body p-6 lg:p-8">
-                                        <div>
-                                            <h3 class="featured-card__title text-xl mb-3">
-                                                {{ $project->title }}
-                                            </h3>
-                                            @if($project->short_description)
-                                                <p class="type-body text-[color:var(--color-ink-muted)] text-sm line-clamp-2 leading-relaxed">
-                                                    {{ $project->short_description }}
-                                                </p>
-                                            @endif
-                                        </div>
-
-                                        <div class="mt-6 pt-5 border-t border-[color:var(--color-line)] flex items-center justify-between">
-                                            <span class="type-small font-medium text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent)] transition-colors">
-                                                عرض التفاصيل
-                                            </span>
-                                            <div class="featured-card__arrow-btn">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                                                    <path d="M12 4L4 12M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
+                                @endif
+                                <div class="work-bento__overlay" aria-hidden="true"></div>
                             </div>
-                        @endforeach
+                            <div class="work-bento__info">
+                                <div class="work-bento__meta">
+                                    <span class="work-bento__index" dir="ltr">03</span>
+                                    @if($thirdProject->types && $thirdProject->types->count())
+                                        <span class="work-bento__tag">{{ $thirdProject->types->first()->name_ar ?? $thirdProject->types->first()->name }}</span>
+                                    @endif
+                                </div>
+                                <div class="work-bento__title-wrap">
+                                    <h3 class="work-bento__title work-bento__title--sm">{{ $thirdProject->title }}</h3>
+                                </div>
+                                <div class="work-bento__cta">
+                                    <span>عرض التفاصيل</span>
+                                    <span class="work-bento__arrow" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                            <path d="M10 2L2 10M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                @endif
+                    @endif
+
+                </div>{{-- /stack --}}
+
+            </div>{{-- /bento grid --}}
+
+            {{-- Extra projects row (4th, 5th) --}}
+            @if($extraProjects->count())
+            <div class="work-bento__extra-row">
+                @foreach($extraProjects as $idx => $project)
+                <div class="work-bento__extra-card" data-reveal data-reveal-stagger="{{ ($idx + 1) * 150 }}">
+                    <a href="{{ route('projects.show', $project->slug) }}" class="work-bento__card group">
+                        <div class="work-bento__media">
+                            @if($project->main_image)
+                                <img src="{{ Storage::url($project->main_image) }}" alt="{{ $project->title }}" class="work-bento__img" loading="lazy" />
+                            @else
+                                <div class="work-bento__fallback"><span>{{ $project->title }}</span></div>
+                            @endif
+                            <div class="work-bento__overlay" aria-hidden="true"></div>
+                        </div>
+                        <div class="work-bento__info">
+                            <div class="work-bento__meta">
+                                <span class="work-bento__index" dir="ltr">{{ str_pad($idx + 4, 2, '0', STR_PAD_LEFT) }}</span>
+                                @if($project->types && $project->types->count())
+                                    <span class="work-bento__tag">{{ $project->types->first()->name_ar ?? $project->types->first()->name }}</span>
+                                @endif
+                            </div>
+                            <h3 class="work-bento__title work-bento__title--sm">{{ $project->title }}</h3>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
             </div>
+            @endif
+
         </div>
     </section>
     @endif
 
+
     {{-- ================================================================
          5. STATS — Full-width big numbers (if more than 3 stats)
+
          ================================================================ --}}
     @if($stats && $stats->count() > 3)
     <section class="section-pad" style="background: var(--color-surface);">
@@ -308,7 +376,7 @@
                         $suffix = $m[2] ?? '';
                         $decimals = (strpos($raw, '.') !== false) ? 1 : 0;
                     @endphp
-                    <div class="stats-grid__item" data-reveal data-reveal-stagger="{{ $idx * 100 }}">
+                    <div class="stats-grid__item stat-3d" data-reveal data-reveal-stagger="{{ $idx * 100 }}">
                         <div class="stats-grid__num"
                              data-count="{{ $value }}"
                              data-count-format="{{ $suffix }}"
@@ -328,7 +396,7 @@
     {{-- ================================================================
          6. PROCESS — Large numbered steps
          ================================================================ --}}
-    <section id="process" class="section-pad" data-section style="background: var(--color-canvas);">
+    <section id="process" class="section-pad process-section" data-section data-process-section style="background: var(--color-canvas);">
         <div class="container-page">
             <div class="ed-section-head" data-reveal>
                 <span class="ed-section-num" dir="ltr">03</span>
@@ -424,13 +492,13 @@
                 @foreach($latestArticles->take(3) as $idx => $article)
                     <a href="{{ route('articles.show', $article->slug) }}"
                        class="article-card group"
-                       data-reveal data-reveal-stagger="{{ $idx * 120 }}">
+                       data-reveal data-reveal-stagger="{{ $idx * 130 }}">
                         <div class="article-card__cover">
                             @if($article->featured_image)
                                 <img src="{{ Storage::url($article->featured_image) }}" alt="{{ $article->title }}" loading="lazy" />
                             @endif
                         </div>
-                        <div class="type-eyebrow mb-4 flex items-center gap-3">
+                        <div class="article-card__eyebrow">
                             @if($article->published_at)
                                 <time datetime="{{ $article->published_at->toIso8601String() }}">
                                     {{ $article->published_at->translatedFormat('j F Y') }}
@@ -441,6 +509,10 @@
                         @if($article->excerpt)
                             <p class="type-body mt-3 line-clamp-2">{{ \Illuminate\Support\Str::limit(strip_tags($article->excerpt), 120) }}</p>
                         @endif
+                        <div class="flex items-center gap-2 mt-4 text-xs font-mono text-[color:var(--color-ink-subtle)] group-hover:text-[color:var(--color-accent)] transition-colors">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M10 6H2M4 3L1 6l3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>اقرأ المقال</span>
+                        </div>
                     </a>
                 @endforeach
             </div>

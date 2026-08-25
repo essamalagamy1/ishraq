@@ -20,17 +20,17 @@ class TeamMemberResource extends Resource
     protected static ?string $model = TeamMember::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    
+
     protected static ?string $navigationLabel = 'فريق العمل';
-    
+
     protected static ?string $modelLabel = 'عضو فريق';
-    
+
     protected static ?string $pluralModelLabel = 'فريق العمل';
 
     protected static ?string $recordTitleAttribute = 'name';
-    
+
     protected static UnitEnum|string|null $navigationGroup = 'الأعمال';
-    
+
     protected static ?int $navigationSort = 2;
 
     public static function form(Schema $schema): Schema

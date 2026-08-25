@@ -19,10 +19,13 @@ class AnalyticsSettingResource extends Resource
     protected static ?string $model = AnalyticsSetting::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartBar;
-    
+
     protected static ?string $modelLabel = 'إعدادات التحليلات';
+
     protected static ?string $pluralModelLabel = 'إعدادات التحليلات';
+
     protected static string|\UnitEnum|null $navigationGroup = 'الإعدادات';
+
     protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema

@@ -20,17 +20,17 @@ class HeroSectionResource extends Resource
     protected static ?string $model = HeroSection::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    
+
     protected static ?string $navigationLabel = 'أقسام البطل';
-    
+
     protected static ?string $modelLabel = 'قسم بطل';
-    
+
     protected static ?string $pluralModelLabel = 'أقسام البطل';
 
     protected static ?string $recordTitleAttribute = 'title_line1';
-    
+
     protected static UnitEnum|string|null $navigationGroup = 'المحتوى';
-    
+
     protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema

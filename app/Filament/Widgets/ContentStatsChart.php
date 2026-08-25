@@ -11,8 +11,9 @@ use Filament\Widgets\ChartWidget;
 class ContentStatsChart extends ChartWidget
 {
     protected ?string $heading = 'إحصائيات المحتوى';
-    protected int | string | array $columnSpan = 1;
-    
+
+    protected int|string|array $columnSpan = 1;
+
     protected static ?int $sort = 3;
 
     protected function getData(): array

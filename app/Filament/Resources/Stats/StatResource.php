@@ -20,17 +20,17 @@ class StatResource extends Resource
     protected static ?string $model = Stat::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    
+
     protected static ?string $navigationLabel = 'الإحصائيات';
-    
+
     protected static ?string $modelLabel = 'إحصائية';
-    
+
     protected static ?string $pluralModelLabel = 'الإحصائيات';
 
     protected static ?string $recordTitleAttribute = 'label';
-    
+
     protected static UnitEnum|string|null $navigationGroup = 'المحتوى';
-    
+
     protected static ?int $navigationSort = 2;
 
     public static function form(Schema $schema): Schema

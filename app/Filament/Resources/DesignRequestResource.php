@@ -20,7 +20,9 @@ class DesignRequestResource extends Resource
     protected static ?string $model = DesignRequest::class;
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-document-text';
+
     protected static ?string $modelLabel = 'طلب تصميم';
+
     protected static ?string $pluralModelLabel = 'طلبات التصميم';
 
     public static function form(Schema $schema): Schema
@@ -82,10 +84,10 @@ class DesignRequestResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListDesignRequests::route('/'),
+            'index' => Pages\ListDesignRequests::route('/'),
             'create' => Pages\CreateDesignRequest::route('/create'),
-            'view'   => Pages\ViewDesignRequest::route('/{record}'),
-            'edit'   => Pages\EditDesignRequest::route('/{record}/edit'),
+            'view' => Pages\ViewDesignRequest::route('/{record}'),
+            'edit' => Pages\EditDesignRequest::route('/{record}/edit'),
         ];
     }
 }

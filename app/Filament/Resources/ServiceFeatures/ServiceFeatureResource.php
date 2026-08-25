@@ -20,17 +20,17 @@ class ServiceFeatureResource extends Resource
     protected static ?string $model = ServiceFeature::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    
+
     protected static ?string $navigationLabel = 'مميزات الخدمات';
-    
+
     protected static ?string $modelLabel = 'ميزة خدمة';
-    
+
     protected static ?string $pluralModelLabel = 'مميزات الخدمات';
 
     protected static ?string $recordTitleAttribute = 'feature_text';
-    
+
     protected static UnitEnum|string|null $navigationGroup = 'الخدمات';
-    
+
     protected static ?int $navigationSort = 2;
 
     public static function form(Schema $schema): Schema

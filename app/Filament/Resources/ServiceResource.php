@@ -21,17 +21,17 @@ class ServiceResource extends Resource
     protected static ?string $model = Service::class;
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-cog';
-    
+
     protected static ?string $navigationLabel = 'الخدمات';
-    
+
     protected static ?string $modelLabel = 'خدمة';
-    
+
     protected static ?string $pluralModelLabel = 'الخدمات';
-    
+
     protected static ?string $recordTitleAttribute = 'title';
-    
+
     protected static UnitEnum|string|null $navigationGroup = 'الخدمات';
-    
+
     protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
@@ -42,9 +42,9 @@ class ServiceResource extends Resource
                 ->required()
                 ->maxLength(255)
                 ->live(onBlur: true)
-	            ->afterStateUpdated(
-		            fn ($set, ?string $state) => $set('slug', Str::slug($state)),
-	            ),
+                ->afterStateUpdated(
+                    fn ($set, ?string $state) => $set('slug', Str::slug($state)),
+                ),
             Forms\Components\TextInput::make('slug')
                 ->label('الرابط (Slug)')
                 ->required()
@@ -64,7 +64,7 @@ class ServiceResource extends Resource
             Forms\Components\Toggle::make('is_active')
                 ->label('فعّالة؟')
                 ->default(true),
-                
+
         ]);
     }
 
@@ -89,9 +89,9 @@ class ServiceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListServices::route('/'),
+            'index' => Pages\ListServices::route('/'),
             'create' => Pages\CreateService::route('/create'),
-            'edit'   => Pages\EditService::route('/{record}/edit'),
+            'edit' => Pages\EditService::route('/{record}/edit'),
         ];
     }
 }

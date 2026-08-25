@@ -20,17 +20,17 @@ class FeatureResource extends Resource
     protected static ?string $model = Feature::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    
+
     protected static ?string $navigationLabel = 'المميزات';
-    
+
     protected static ?string $modelLabel = 'ميزة';
-    
+
     protected static ?string $pluralModelLabel = 'المميزات';
 
     protected static ?string $recordTitleAttribute = 'title';
-    
+
     protected static UnitEnum|string|null $navigationGroup = 'المحتوى';
-    
+
     protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema

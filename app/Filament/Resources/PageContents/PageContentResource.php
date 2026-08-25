@@ -20,17 +20,17 @@ class PageContentResource extends Resource
     protected static ?string $model = PageContent::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    
+
     protected static ?string $navigationLabel = 'محتوى الصفحات';
-    
+
     protected static ?string $modelLabel = 'محتوى صفحة';
-    
+
     protected static ?string $pluralModelLabel = 'محتوى الصفحات';
 
     protected static ?string $recordTitleAttribute = 'page';
-    
+
     protected static UnitEnum|string|null $navigationGroup = 'المحتوى';
-    
+
     protected static ?int $navigationSort = 5;
 
     public static function form(Schema $schema): Schema

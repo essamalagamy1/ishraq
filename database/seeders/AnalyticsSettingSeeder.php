@@ -30,4 +30,3 @@ class AnalyticsSettingSeeder extends Seeder
         );
     }
 }
-

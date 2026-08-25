@@ -56,10 +56,10 @@ class SeoSetting extends Model
      */
     public function getKeywordsArrayAttribute()
     {
-        if (!$this->meta_keywords) {
+        if (! $this->meta_keywords) {
             return [];
         }
-        
+
         return array_map('trim', explode(',', $this->meta_keywords));
     }
 }

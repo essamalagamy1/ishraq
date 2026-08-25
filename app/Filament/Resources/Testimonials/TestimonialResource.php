@@ -20,17 +20,17 @@ class TestimonialResource extends Resource
     protected static ?string $model = Testimonial::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    
+
     protected static ?string $navigationLabel = 'آراء العملاء';
-    
+
     protected static ?string $modelLabel = 'رأي عميل';
-    
+
     protected static ?string $pluralModelLabel = 'آراء العملاء';
 
     protected static ?string $recordTitleAttribute = 'client_name';
-    
+
     protected static UnitEnum|string|null $navigationGroup = 'المحتوى';
-    
+
     protected static ?int $navigationSort = 4;
 
     public static function form(Schema $schema): Schema

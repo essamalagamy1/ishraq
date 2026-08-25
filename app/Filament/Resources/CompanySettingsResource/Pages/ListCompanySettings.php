@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\CompanySettingsResource\Pages;
 
 use App\Filament\Resources\CompanySettingsResource;
-use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListCompanySettings extends ListRecords

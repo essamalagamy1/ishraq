@@ -20,39 +20,39 @@ class ProjectTypesTable
                     ->label('الاسم بالعربية')
                     ->searchable()
                     ->sortable(),
-                
+
                 TextColumn::make('name_en')
                     ->label('الاسم بالإنجليزية')
                     ->searchable()
                     ->sortable(),
-                
+
                 TextColumn::make('slug')
                     ->label('الرابط')
                     ->searchable()
                     ->copyable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                
+
                 ColorColumn::make('color')
                     ->label('اللون'),
-                
+
                 TextColumn::make('icon')
                     ->label('الأيقونة')
                     ->toggleable(),
-                
+
                 IconColumn::make('is_active')
                     ->label('نشط')
                     ->boolean(),
-                
+
                 TextColumn::make('order')
                     ->label('الترتيب')
                     ->numeric()
                     ->sortable(),
-                
+
                 TextColumn::make('projects_count')
                     ->label('عدد المشاريع')
                     ->counts('projects')
                     ->sortable(),
-                
+
                 TextColumn::make('created_at')
                     ->label('تاريخ الإنشاء')
                     ->dateTime()
@@ -73,4 +73,3 @@ class ProjectTypesTable
             ]);
     }
 }
-

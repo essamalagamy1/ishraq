@@ -22,12 +22,12 @@ class ProjectTypeForm
                     ->afterStateUpdated(
                         fn ($set, ?string $state) => $set('slug', Str::slug($state)),
                     ),
-                    
+
                 TextInput::make('name_en')
                     ->label('الاسم بالإنجليزية')
                     ->required()
                     ->maxLength(255),
-                
+
                 TextInput::make('slug')
                     ->label('الرابط (Slug)')
                     ->required()
@@ -35,25 +35,25 @@ class ProjectTypeForm
                     ->unique(ignoreRecord: true)
                     ->helperText('سيتم إنشاؤه تلقائياً من الاسم العربي')
                     ->columnSpanFull(),
-                
+
                 ColorPicker::make('color')
                     ->label('اللون')
                     ->required()
                     ->default('#3B82F6')
                     ->helperText('اللون المستخدم في عرض النوع'),
-                
+
                 TextInput::make('icon')
                     ->label('الأيقونة')
                     ->placeholder('fas fa-laptop-code')
                     ->helperText('أيقونة FontAwesome (اختياري)'),
-                
+
                 TextInput::make('order')
                     ->label('الترتيب')
                     ->required()
                     ->numeric()
                     ->default(0)
                     ->helperText('ترتيب العرض (الأقل أولاً)'),
-                
+
                 Toggle::make('is_active')
                     ->label('نشط')
                     ->default(true)
@@ -62,4 +62,3 @@ class ProjectTypeForm
             ]);
     }
 }
-

@@ -19,9 +19,13 @@ class SEOSettingsResource extends Resource
     protected static ?string $model = SeoSetting::class;
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-magnifying-glass';
+
     protected static ?string $modelLabel = 'إعداد SEO';
+
     protected static ?string $pluralModelLabel = 'إعدادات SEO';
+
     protected static string|\UnitEnum|null $navigationGroup = 'الإعدادات';
+
     protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
@@ -41,14 +45,14 @@ class SEOSettingsResource extends Resource
                 ->required()
                 ->unique(ignoreRecord: true)
                 ->columnSpanFull(),
-            
+
             // Basic SEO
             Forms\Components\TextInput::make('meta_title')
                 ->label('عنوان الصفحة (Meta Title)')
                 ->required()
                 ->maxLength(60)
                 ->helperText('الحد الأقصى: 60 حرف'),
-            
+
             Forms\Components\Textarea::make('meta_description')
                 ->label('وصف الصفحة (Meta Description)')
                 ->required()
@@ -56,18 +60,18 @@ class SEOSettingsResource extends Resource
                 ->rows(3)
                 ->helperText('الحد الأقصى: 160 حرف')
                 ->columnSpanFull(),
-            
+
             Forms\Components\TagsInput::make('meta_keywords')
                 ->label('الكلمات المفتاحية')
                 ->placeholder('أضف كلمة مفتاحية')
                 ->separator(',')
                 ->columnSpanFull(),
-            
+
             Forms\Components\TextInput::make('canonical_url')
                 ->label('الرابط الأساسي (Canonical URL)')
                 ->url()
                 ->placeholder('https://example.com/page'),
-            
+
             Forms\Components\Select::make('robots')
                 ->label('تعليمات محركات البحث')
                 ->options([
@@ -78,7 +82,7 @@ class SEOSettingsResource extends Resource
                 ])
                 ->default('index,follow')
                 ->required(),
-            
+
             Forms\Components\Toggle::make('is_active')
                 ->label('نشط')
                 ->default(true),
@@ -88,19 +92,19 @@ class SEOSettingsResource extends Resource
                 ->label('عنوان Open Graph')
                 ->maxLength(60)
                 ->helperText('للمشاركة على وسائل التواصل'),
-            
+
             Forms\Components\Textarea::make('og_description')
                 ->label('وصف Open Graph')
                 ->maxLength(160)
                 ->rows(2)
                 ->columnSpanFull(),
-            
+
             Forms\Components\FileUpload::make('og_image')
                 ->label('صورة Open Graph')
                 ->image()
                 ->directory('seo/og-images')
                 ->helperText('1200x630 بكسل'),
-            
+
             Forms\Components\Select::make('og_type')
                 ->label('نوع المحتوى')
                 ->options([
@@ -118,7 +122,7 @@ class SEOSettingsResource extends Resource
                     'summary_large_image' => 'ملخص مع صورة كبيرة',
                 ])
                 ->default('summary_large_image'),
-            
+
             Forms\Components\TextInput::make('twitter_site')
                 ->label('حساب Twitter')
                 ->placeholder('@username'),
@@ -127,11 +131,11 @@ class SEOSettingsResource extends Resource
             Forms\Components\TextInput::make('ga4_measurement_id')
                 ->label('Google Analytics 4 ID')
                 ->placeholder('G-XXXXXXXXXX'),
-            
+
             Forms\Components\TextInput::make('gsc_verification_code')
                 ->label('Google Search Console Code')
                 ->placeholder('google123...'),
-            
+
             Forms\Components\TextInput::make('gtm_container_id')
                 ->label('Google Tag Manager ID')
                 ->placeholder('GTM-XXXXXXX'),
@@ -182,9 +186,9 @@ class SEOSettingsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListSEOSettings::route('/'),
+            'index' => Pages\ListSEOSettings::route('/'),
             'create' => Pages\CreateSEOSettings::route('/create'),
-            'edit'   => Pages\EditSEOSettings::route('/{record}/edit'),
+            'edit' => Pages\EditSEOSettings::route('/{record}/edit'),
         ];
     }
 }

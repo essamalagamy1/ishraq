@@ -21,9 +21,13 @@ class ProjectResource extends Resource
     protected static ?string $model = Project::class;
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $modelLabel = 'مشروع';
+
     protected static ?string $pluralModelLabel = 'المشاريع';
+
     protected static string|\UnitEnum|null $navigationGroup = 'المشاريع';
+
     protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
@@ -34,10 +38,10 @@ class ProjectResource extends Resource
                 ->required()
                 ->maxLength(255)
                 ->live(onBlur: true)
-	            ->afterStateUpdated(
-		            fn ($set, ?string $state) => $set('slug', Str::slug($state)),
-	            ),
-	        Forms\Components\TextInput::make('slug')
+                ->afterStateUpdated(
+                    fn ($set, ?string $state) => $set('slug', Str::slug($state)),
+                ),
+            Forms\Components\TextInput::make('slug')
                 ->label('الرابط (Slug)')
                 ->required()
                 ->maxLength(255)
@@ -123,9 +127,9 @@ class ProjectResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListProjects::route('/'),
+            'index' => Pages\ListProjects::route('/'),
             'create' => Pages\CreateProject::route('/create'),
-            'edit'   => Pages\EditProject::route('/{record}/edit'),
+            'edit' => Pages\EditProject::route('/{record}/edit'),
         ];
     }
 }

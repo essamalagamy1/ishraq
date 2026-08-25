@@ -2,7 +2,7 @@
 
 return [
     'direction' => 'rtl',
-    
+
     'actions' => [
         'attach' => 'إرفاق',
         'attach_another' => 'إرفاق آخر',

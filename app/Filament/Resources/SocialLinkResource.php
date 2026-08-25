@@ -19,7 +19,9 @@ class SocialLinkResource extends Resource
     protected static ?string $model = SocialLink::class;
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-share';
+
     protected static ?string $modelLabel = 'رابط تواصل';
+
     protected static ?string $pluralModelLabel = 'روابط التواصل';
 
     public static function form(Schema $schema): Schema
@@ -34,7 +36,7 @@ class SocialLinkResource extends Resource
                     'instagram' => 'Instagram',
                     'youtube' => 'YouTube',
                     'whatsapp' => 'WhatsApp',
-                    'behance'=> 'Behance',
+                    'behance' => 'Behance',
                     'other' => 'Other',
                 ])
                 ->required(),
@@ -70,9 +72,9 @@ class SocialLinkResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListSocialLinks::route('/'),
+            'index' => Pages\ListSocialLinks::route('/'),
             'create' => Pages\CreateSocialLink::route('/create'),
-            'edit'   => Pages\EditSocialLink::route('/{record}/edit'),
+            'edit' => Pages\EditSocialLink::route('/{record}/edit'),
         ];
     }
 }

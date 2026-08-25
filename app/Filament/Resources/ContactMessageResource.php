@@ -20,7 +20,9 @@ class ContactMessageResource extends Resource
     protected static ?string $model = ContactMessage::class;
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-envelope';
+
     protected static ?string $modelLabel = 'رسالة تواصل';
+
     protected static ?string $pluralModelLabel = 'رسائل التواصل';
 
     public static function form(Schema $schema): Schema
@@ -55,7 +57,7 @@ class ContactMessageResource extends Resource
     {
         return [
             'index' => Pages\ListContactMessages::route('/'),
-            'view'  => Pages\ViewContactMessage::route('/{record}'),
+            'view' => Pages\ViewContactMessage::route('/{record}'),
         ];
     }
 

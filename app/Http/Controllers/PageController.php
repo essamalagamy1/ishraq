@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HeroSection;
-use App\Models\Stat;
-use App\Models\Feature;
-use App\Models\Service;
 use App\Models\CompanySetting;
-use App\Models\SocialLink;
+use App\Models\Feature;
+use App\Models\HeroSection;
 use App\Models\SeoSetting;
-use Illuminate\Http\Request;
+use App\Models\Service;
+use App\Models\SocialLink;
+use App\Models\Stat;
 
 class PageController extends Controller
 {
@@ -47,6 +46,7 @@ class PageController extends Controller
     public function privacy()
     {
         $seo = SeoSetting::where('page', 'privacy')->first();
+
         return view('pages.privacy', [
             'seo' => $seo,
             'companySettings' => CompanySetting::first(),
@@ -57,6 +57,7 @@ class PageController extends Controller
     public function terms()
     {
         $seo = SeoSetting::where('page', 'terms')->first();
+
         return view('pages.terms', [
             'seo' => $seo,
             'companySettings' => CompanySetting::first(),

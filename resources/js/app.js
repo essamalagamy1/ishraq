@@ -7,6 +7,10 @@ import {
     initEmbla,
     initMagneticHover,
     initAccordion,
+    initHeroHalo,
+    init3DCards,
+    initProcessCards,
+    initStatsFlip,
 } from './motion.js';
 import { initNav } from './nav.js';
 import { initGallery } from './gallery.js';
@@ -18,7 +22,27 @@ const boot = () => {
     initReveals();
     initCountUps();
     initParallax();
+
+    // Hero interactions
+    const heroSection = document.querySelector('[data-hero-section]');
+    if (heroSection) {
+        initHeroHalo(heroSection);
+    }
+
+    // 3D tilt on featured project cards
+    init3DCards();
+
+    // Magnetic hover on primary CTAs + arrow buttons
     initMagneticHover();
+
+    // Process section scroll-driven card animations
+    const processSection = document.querySelector('[data-process-section]');
+    if (processSection) {
+        initProcessCards(processSection);
+    }
+
+    // Stats 3D flip effect
+    initStatsFlip();
 
     // Accordion (services)
     initAccordion();

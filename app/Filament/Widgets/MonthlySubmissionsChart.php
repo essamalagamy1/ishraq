@@ -11,8 +11,9 @@ use Illuminate\Support\Carbon;
 class MonthlySubmissionsChart extends ChartWidget
 {
     protected ?string $heading = 'الطلبات الشهرية';
-    protected int | string | array $columnSpan = 1;
-    
+
+    protected int|string|array $columnSpan = 1;
+
     protected static ?int $sort = 4;
 
     protected function getData(): array
@@ -60,7 +61,7 @@ class MonthlySubmissionsChart extends ChartWidget
                     'backgroundColor' => 'rgba(251, 191, 36, 0.1)',
                 ],
             ],
-            'labels' => $months->map(fn($month) => $month->locale('ar')->format('M Y'))->toArray(),
+            'labels' => $months->map(fn ($month) => $month->locale('ar')->format('M Y'))->toArray(),
         ];
     }
 

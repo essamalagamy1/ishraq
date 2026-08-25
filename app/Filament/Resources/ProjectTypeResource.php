@@ -19,10 +19,13 @@ class ProjectTypeResource extends Resource
     protected static ?string $model = ProjectType::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-    
+
     protected static ?string $modelLabel = 'نوع مشروع';
+
     protected static ?string $pluralModelLabel = 'أنواع المشاريع';
+
     protected static string|\UnitEnum|null $navigationGroup = 'المشاريع';
+
     protected static ?int $navigationSort = 2;
 
     public static function form(Schema $schema): Schema

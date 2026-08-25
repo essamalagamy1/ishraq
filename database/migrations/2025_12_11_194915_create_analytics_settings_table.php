@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('analytics_settings', function (Blueprint $table) {
             $table->id();
-            
+
             // Google Analytics
             $table->boolean('ga_enabled')->default(false);
             $table->string('ga_measurement_id')->nullable()->comment('G-XXXXXXXXX for gtag.js tracking');
@@ -22,17 +22,17 @@ return new class extends Migration
             // Google Tag Manager
             $table->boolean('gtm_enabled')->default(false);
             $table->string('gtm_container_id')->nullable();
-            
+
             // Facebook Pixel
             $table->boolean('fb_pixel_enabled')->default(false);
             $table->string('fb_pixel_id')->nullable();
-            
+
             // Cookie Consent Settings
             $table->boolean('cookie_consent_enabled')->default(true);
             $table->boolean('analytics_cookies_default')->default(false);
             $table->boolean('marketing_cookies_default')->default(false);
             $table->boolean('preferences_cookies_default')->default(false);
-            
+
             $table->timestamps();
         });
     }

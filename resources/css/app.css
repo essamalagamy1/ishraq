@@ -819,7 +819,7 @@ html.lenis, html.lenis body { height: auto; }
     font-family: var(--font-sans);
     font-weight: 600;
     font-size: clamp(2.8rem, 6.5vw, 6rem);
-    line-height: 1.05;
+    line-height: 1.3;
     letter-spacing: -0.025em;
     color: var(--color-ink);
 }
@@ -1730,3 +1730,529 @@ html.lenis, html.lenis body { height: auto; }
     -webkit-backdrop-filter: blur(20px);
 }
 
+
+/* ============================================================
+   🌟 Hero Halo — radial glow following cursor
+   ============================================================ */
+
+.hero-halo {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hero-halo::after {
+    content: '';
+    position: absolute;
+    width: 65vw;
+    height: 65vw;
+    max-width: 800px;
+    max-height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at center,
+        rgba(199, 125, 74, 0.11) 0%,
+        rgba(199, 125, 74, 0.04) 40%,
+        transparent 70%
+    );
+    transform: translate(-50%, -50%);
+    top: var(--halo-y, 40%);
+    left: var(--halo-x, 55%);
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-halo::after { display: none; }
+}
+
+/* ============================================================
+   🟢 Availability Badge — live pulsing indicator
+   ============================================================ */
+
+.availability-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1rem 0.45rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(199, 125, 74, 0.08);
+    border: 1px solid rgba(199, 125, 74, 0.22);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 2rem;
+}
+
+.availability-badge__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex-shrink: 0;
+    position: relative;
+}
+
+.availability-badge__dot::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    opacity: 0.35;
+    animation: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-ring {
+    0%, 100% { transform: scale(1); opacity: 0.35; }
+    50%       { transform: scale(2); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .availability-badge__dot::before { animation: none; }
+}
+
+/* ============================================================
+   🔢 Process — hover accent & rail
+   ============================================================ */
+
+.process-grid__card {
+    overflow: hidden;
+}
+
+.process-grid__card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 0% 100%, rgba(199, 125, 74, 0.07), transparent 60%);
+    opacity: 0;
+    transition: opacity 400ms var(--ease-out-soft);
+    pointer-events: none;
+}
+
+.process-grid__card:hover::after {
+    opacity: 1;
+}
+
+/* ============================================================
+   📊 Stats — 3D perspective wrapper
+   ============================================================ */
+
+.stat-3d {
+    perspective: 600px;
+    transform-style: preserve-3d;
+    will-change: transform, opacity;
+}
+
+/* ============================================================
+   🃏 Tilt card — 3D interactive hover
+   ============================================================ */
+
+.tilt-card {
+    transform-style: preserve-3d;
+    perspective: 900px;
+    will-change: transform;
+}
+
+/* ============================================================
+   🎯 CTA Section — ambient glow underlay
+   ============================================================ */
+
+.cta-ed {
+    position: relative;
+}
+
+.cta-ed::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(199, 125, 74, 0.07) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.cta-ed > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================================
+   🌙 Testimonial — hover lift
+   ============================================================ */
+
+.testimonial-ed {
+    transition:
+        border-color 400ms var(--ease-out-soft),
+        transform 400ms var(--ease-out-soft),
+        box-shadow 400ms var(--ease-out-soft);
+}
+
+.testimonial-ed:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.45);
+    border-color: rgba(199, 125, 74, 0.22);
+}
+
+/* ============================================================
+   🌊 Hero — decorative floating blobs
+   ============================================================ */
+
+.hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.035;
+    background: var(--color-accent);
+    filter: blur(80px);
+    z-index: 0;
+    animation: blob-drift 18s ease-in-out infinite alternate;
+}
+
+.hero-blob--1 {
+    width: 500px;
+    height: 500px;
+    top: -15%;
+    left: -8%;
+    animation-duration: 20s;
+}
+
+.hero-blob--2 {
+    width: 350px;
+    height: 350px;
+    bottom: -10%;
+    right: 5%;
+    animation-duration: 15s;
+    animation-delay: -7s;
+}
+
+@keyframes blob-drift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(30px, 20px) scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-blob { animation: none; display: none; }
+}
+
+/* ============================================================
+   📋 Accordion — Motion-enhanced open indicator
+   ============================================================ */
+
+.svc-accordion__item.is-open .svc-accordion__trigger {
+    color: var(--color-accent);
+}
+
+.svc-accordion__trigger:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* ============================================================
+   ⬆️ Hero title — clip-path wrap (used by JS splitLines)
+   ============================================================ */
+
+.hero-ed__line {
+    display: block;
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   🏆 Work Bento Grid — Featured Projects Showcase
+   ============================================================ */
+
+.work-bento {
+    background: var(--color-canvas);
+}
+
+/* ── Grid container ─────────────────────────────────────── */
+.work-bento__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 900px) {
+    .work-bento__grid {
+        grid-template-columns: 1.72fr 1fr;
+        gap: 1rem;
+        align-items: stretch;
+    }
+}
+
+/* ── Spotlight (large left) ─────────────────────────────── */
+.work-bento__spotlight {
+    position: relative;
+}
+
+/* ── Stack (right column) ───────────────────────────────── */
+.work-bento__stack {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* ── Card base ──────────────────────────────────────────── */
+.work-bento__card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 20px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    height: 100%;
+    min-height: 260px;
+    cursor: pointer;
+}
+
+.work-bento__spotlight .work-bento__card {
+    min-height: 460px;
+}
+
+@media (min-width: 900px) {
+    .work-bento__spotlight .work-bento__card {
+        min-height: 600px;
+    }
+
+    .work-bento__stack .work-bento__card {
+        min-height: 0;
+    }
+}
+
+/* ── Media layer (image) ────────────────────────────────── */
+.work-bento__media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.work-bento__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition:
+        transform 700ms var(--ease-out-soft),
+        filter 600ms var(--ease-out-soft),
+        opacity 500ms var(--ease-out-soft);
+    filter: saturate(0.82) brightness(0.75);
+    will-change: transform, filter;
+}
+
+.work-bento__card:hover .work-bento__img {
+    transform: scale(1.06);
+    filter: saturate(1.05) brightness(0.65);
+}
+
+/* Fallback when no image */
+.work-bento__fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-surface-raised), var(--color-canvas));
+    padding: 2rem;
+}
+
+.work-bento__fallback span {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--color-ink-muted);
+    text-align: center;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+
+/* ── Gradient overlay ───────────────────────────────────── */
+.work-bento__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.92) 0%,
+        rgba(0, 0, 0, 0.55) 40%,
+        rgba(0, 0, 0, 0.15) 70%,
+        transparent 100%
+    );
+    z-index: 1;
+    transition: opacity 400ms var(--ease-out-soft);
+}
+
+.work-bento__card:hover .work-bento__overlay {
+    opacity: 0.95;
+}
+
+/* ── Info panel (slides up on hover) ───────────────────── */
+.work-bento__info {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transform: translateY(0);
+    transition: transform 450ms var(--ease-out-soft);
+}
+
+/* ── Meta row: index + tag ──────────────────────────────── */
+.work-bento__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.work-bento__index {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--color-accent);
+    line-height: 1;
+}
+
+.work-bento__tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    background: rgba(245, 241, 235, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(245, 241, 235, 0.14);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245, 241, 235, 0.75);
+    white-space: nowrap;
+}
+
+/* ── Title block ────────────────────────────────────────── */
+.work-bento__title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.work-bento__title {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin: 0;
+}
+
+.work-bento__title--sm {
+    font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+}
+
+.work-bento__desc {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: rgba(245, 241, 235, 0.6);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    /* Hidden by default, revealed on hover */
+    max-height: 0;
+    opacity: 0;
+    transition:
+        max-height 400ms var(--ease-out-soft),
+        opacity 350ms var(--ease-out-soft);
+    transition-delay: 0s;
+}
+
+.work-bento__card:hover .work-bento__desc {
+    max-height: 80px;
+    opacity: 1;
+    transition-delay: 0.05s;
+}
+
+/* ── CTA row ────────────────────────────────────────────── */
+.work-bento__cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(245, 241, 235, 0.12);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245, 241, 235, 0.5);
+    transition: color 300ms var(--ease-out-soft);
+}
+
+.work-bento__card:hover .work-bento__cta {
+    color: var(--color-ink);
+    border-color: rgba(245, 241, 235, 0.2);
+}
+
+.work-bento__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(245, 241, 235, 0.08);
+    border: 1px solid rgba(245, 241, 235, 0.14);
+    color: var(--color-ink-muted);
+    transition:
+        background 350ms var(--ease-out-soft),
+        color 350ms var(--ease-out-soft),
+        transform 350ms var(--ease-out-soft),
+        border-color 350ms var(--ease-out-soft);
+    flex-shrink: 0;
+}
+
+.work-bento__card:hover .work-bento__arrow {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #0B0A08;
+    transform: rotate(-45deg) scale(1.1);
+}
+
+/* ── Extra row (4th, 5th projects) ─────────────────────── */
+.work-bento__extra-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+    .work-bento__extra-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.work-bento__extra-card .work-bento__card {
+    min-height: 220px;
+}
+
+/* ── Reduced motion: disable hover transforms ───────────── */
+@media (prefers-reduced-motion: reduce) {
+    .work-bento__img {
+        transition: none;
+    }
+    .work-bento__desc {
+        max-height: none;
+        opacity: 1;
+        transition: none;
+    }
+    .work-bento__arrow {
+        transition: none;
+    }
+}

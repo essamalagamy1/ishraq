@@ -117,36 +117,42 @@ export function splitLines(el) {
 export function initHeroHalo(container) {
     if (!container || reduced) return;
 
-    const halo = container.querySelector('.hero-halo');
-    if (!halo) return;
+    // The halo element uses CSS custom props for position
+    let currentX = 55, currentY = 40;
+    let targetX  = 55, targetY  = 40;
+    let rafId    = null;
 
-    let currentX = 50, currentY = 50;
-    let targetX = 50, targetY = 50;
-    let rafId = null;
+    const lerp = (a, b, t) => a + (b - a) * t;
 
-    const lerp = (start, end, factor) => start + (end - start) * factor;
-
-    const update = () => {
-        currentX = lerp(currentX, targetX, 0.06);
-        currentY = lerp(currentY, targetY, 0.06);
-        halo.style.setProperty('--halo-x', `${currentX}%`);
-        halo.style.setProperty('--halo-y', `${currentY}%`);
-        rafId = requestAnimationFrame(update);
+    const tick = () => {
+        currentX = lerp(currentX, targetX, 0.07);
+        currentY = lerp(currentY, targetY, 0.07);
+        container.style.setProperty('--halo-x', `${currentX.toFixed(2)}%`);
+        container.style.setProperty('--halo-y', `${currentY.toFixed(2)}%`);
+        rafId = requestAnimationFrame(tick);
     };
 
     const onMove = (e) => {
         const r = container.getBoundingClientRect();
-        targetX = ((e.clientX - r.left) / r.width) * 100;
-        targetY = ((e.clientY - r.top) / r.height) * 100;
+        const x = ((e.clientX - r.left) / r.width)  * 100;
+        const y = ((e.clientY - r.top)  / r.height) * 100;
+        targetX = Math.max(0, Math.min(100, x));
+        targetY = Math.max(0, Math.min(100, y));
     };
 
-    container.addEventListener('pointermove', onMove);
-    container.addEventListener('pointerleave', () => {
-        targetX = 50;
-        targetY = 50;
-    });
+    const onLeave = () => { targetX = 55; targetY = 40; };
 
-    rafId = requestAnimationFrame(update);
+    container.addEventListener('pointermove', onMove, { passive: true });
+    container.addEventListener('pointerleave', onLeave);
+
+    rafId = requestAnimationFrame(tick);
+
+    // Clean up when the element leaves the DOM (optional safety)
+    return () => {
+        cancelAnimationFrame(rafId);
+        container.removeEventListener('pointermove', onMove);
+        container.removeEventListener('pointerleave', onLeave);
+    };
 }
 
 /* ----------------------------------------------------------------
@@ -316,55 +322,90 @@ export function initParallax(root = document) {
 }
 
 /* ----------------------------------------------------------------
+   Process section — scroll-driven card accent progress
+   ---------------------------------------------------------------- */
+
+export function initProcessCards(section) {
+    if (!section || reduced) return;
+
+    const cards = Array.from(section.querySelectorAll('.process-grid__card'));
+    if (!cards.length) return;
+
+    // Stagger-reveal each card on scroll with a slight delay
+    cards.forEach((card, i) => {
+        inView(card, () => {
+            animate(card, { opacity: [0, 1], y: [40, 0] }, {
+                duration: 0.7,
+                delay: i * 0.1,
+                easing: [0.22, 1, 0.36, 1],
+            });
+        }, { margin: '0px 0px -5% 0px' });
+
+        // Micro scale on hover using CSS transitions (already handled in CSS)
+        // Additional: number accent animation via JS on hover
+        const num = card.querySelector('.process-grid__num');
+        if (num) {
+            card.addEventListener('mouseenter', () => {
+                animate(num, { scale: [1, 1.06, 1] }, { duration: 0.4, easing: 'ease-out' });
+            });
+        }
+    });
+}
+
+/* ----------------------------------------------------------------
    Magnetic hover — cursor-pull effect for primary CTAs
    ---------------------------------------------------------------- */
 
-export function initMagneticHover(selector = '.btn--primary') {
+export function initMagneticHover(selector = '.btn--primary, .featured-card__arrow-btn') {
     if (reduced) return;
     const targets = document.querySelectorAll(selector);
     targets.forEach((el) => {
-        const strength = 6;
+        const strength = 7;
         const onMove = (e) => {
             const rect = el.getBoundingClientRect();
             const relX = e.clientX - rect.left - rect.width / 2;
             const relY = e.clientY - rect.top - rect.height / 2;
             animate(el, {
-                x: Math.max(-strength, Math.min(strength, relX * 0.08)),
-                y: Math.max(-strength, Math.min(strength, relY * 0.08)),
+                x: Math.max(-strength, Math.min(strength, relX * 0.1)),
+                y: Math.max(-strength, Math.min(strength, relY * 0.1)),
             }, { duration: 0.3, easing: [0.22, 1, 0.36, 1] });
         };
-        const reset = () => animate(el, { x: 0, y: 0 }, { duration: 0.4, easing: [0.22, 1, 0.36, 1] });
+        const reset = () => animate(el, { x: 0, y: 0 }, { duration: 0.5, easing: [0.22, 1, 0.36, 1] });
         el.addEventListener('pointermove', onMove);
         el.addEventListener('pointerleave', reset);
     });
 }
 
 /* ----------------------------------------------------------------
-   3D Service cards — tilt on hover
+   3D Service cards — tilt on hover (.svc-card-3d and .tilt-card)
    ---------------------------------------------------------------- */
 
-export function init3DCards(selector = '.svc-card-3d') {
+export function init3DCards(selector = '.svc-card-3d, .tilt-card') {
     if (reduced) return;
     document.querySelectorAll(selector).forEach((card) => {
-        const inner = card.querySelector('.svc-card-3d__inner') || card;
+        const inner = card.querySelector('.svc-card-3d__inner, .featured-card') || card;
+
+        card.style.perspective = '900px';
 
         card.addEventListener('pointermove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = (e.clientX - rect.left) / rect.width;
             const y = (e.clientY - rect.top) / rect.height;
-            const rotateX = (0.5 - y) * 20;
-            const rotateY = (x - 0.5) * 20;
+            // Gentle: 12deg max for featured cards, 20 for service cards
+            const maxDeg = card.classList.contains('tilt-card') ? 10 : 18;
+            const rotateX = (0.5 - y) * maxDeg;
+            const rotateY = (x - 0.5) * maxDeg;
 
             animate(inner, {
                 rotateX: rotateX,
                 rotateY: rotateY,
-            }, { duration: 0.4, easing: 'ease-out' });
+            }, { duration: 0.35, easing: 'ease-out' });
         });
 
         card.addEventListener('pointerleave', () => {
             animate(inner, { rotateX: 0, rotateY: 0 }, {
-                duration: 0.6,
-                easing: spring({ stiffness: 300, damping: 20 }),
+                duration: 0.7,
+                easing: spring({ stiffness: 260, damping: 22 }),
             });
         });
     });

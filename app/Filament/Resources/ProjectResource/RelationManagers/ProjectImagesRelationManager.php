@@ -16,7 +16,9 @@ use Filament\Tables\Table;
 class ProjectImagesRelationManager extends RelationManager
 {
     protected static string $relationship = 'projectImages';
+
     protected static ?string $modelLabel = 'صورة مشروع';
+
     protected static ?string $pluralModelLabel = 'صور المشروع';
 
     public function form(Schema $schema): Schema

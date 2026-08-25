@@ -3,8 +3,6 @@
 namespace App\Filament\Widgets;
 
 use App\Models\ContactMessage;
-use App\Models\DesignRequest;
-use App\Models\Testimonial;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -12,8 +10,8 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestEntriesWidget extends BaseWidget
 {
-    protected int | string | array $columnSpan = 'full';
-    
+    protected int|string|array $columnSpan = 'full';
+
     protected static ?int $sort = 2;
 
     public function table(Table $table): Table

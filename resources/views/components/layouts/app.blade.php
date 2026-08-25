@@ -1,28 +1,21 @@
+@props(['seo' => null, 'breadcrumbs' => []])
+
 @php
     $analyticsSettings = \App\Models\AnalyticsSetting::first();
     $companySettings = $companySettings ?? \App\Models\CompanySetting::first();
     $socialLinks = $socialLinks ?? \App\Models\SocialLink::where('is_active', true)->get();
     $whatsappClean = $companySettings ? preg_replace('/[^0-9]/', '', $companySettings->whatsapp_number ?? '') : '';
-    $defaultMetaTitle = $companySettings->company_name ?? 'إشراق';
-    $defaultMetaDescription = $companySettings->about_short ?? 'إشراق شريكك في التحول الرقمي. نُصمّم ونطوّر تجارب رقمية متينة وبمعايير عالية.';
 @endphp
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#0B0A08">
 
-    <title>{{ $seo->meta_title ?? $defaultMetaTitle }}</title>
-    <meta name="description" content="{{ $seo->meta_description ?? $defaultMetaDescription }}">
-    <meta name="keywords" content="تطوير مواقع, تطبيقات جوال, إشراق, حلول برمجية, تصميم منتجات">
-    <link rel="canonical" href="{{ url()->current() }}">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ $seo->meta_title ?? $defaultMetaTitle }}">
-    <meta property="og:description" content="{{ $seo->meta_description ?? $defaultMetaDescription }}">
-    <meta property="og:url" content="{{ url()->current() }}">
+    {{-- Comprehensive SEO, GEO & Schema.org JSON-LD --}}
+    <x-seo-meta :seo="$seo ?? null" :breadcrumbs="$breadcrumbs ?? []" />
 
     @if($companySettings && $companySettings->favicon_path)
         <link rel="icon" href="{{ Storage::url($companySettings->favicon_path) }}">
@@ -52,25 +45,6 @@
             gtag('config', '{{ $analyticsSettings->ga_measurement_id }}');
         </script>
     @endif
-
-    @php
-        $jsonLd = [
-            '@context' => 'https://schema.org',
-            '@type' => 'Organization',
-            'name' => $companySettings->company_name ?? 'إشراق',
-            'url' => config('app.url', url('/')),
-            'logo' => ($companySettings && $companySettings->logo_path) ? Storage::url($companySettings->logo_path) : asset('favicon.svg'),
-            'description' => $seo->meta_description ?? $defaultMetaDescription,
-            'contactPoint' => [
-                '@type' => 'ContactPoint',
-                'telephone' => $companySettings->phone_primary ?? '',
-                'contactType' => 'customer service',
-                'availableLanguage' => ['Arabic', 'English'],
-            ],
-            'sameAs' => $socialLinks->pluck('url')->toArray(),
-        ];
-    @endphp
-    <script type="application/ld+json">{!! json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
 </head>
 <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:right-4 focus:z-[200] focus:btn focus:btn--primary">تخطي إلى المحتوى</a>

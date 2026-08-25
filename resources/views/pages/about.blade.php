@@ -1,55 +1,111 @@
 @php
-    $heroTitle = $heroSection?->title_line1 ?? __('نصنع قيمة');
-    $heroSubtitle = $heroSection?->subtitle ?? __('شريك تصميم وتطوير منتجات رقمية يقود التحول ويصنع أثرًا قابلًا للقياس.');
+    $heroTitle = $heroSection?->title_line1 ?? __('نصنع تجارب رقمية');
+    $heroTitle2 = $heroSection?->title_line2 ?? __('تترك أثرًا وتعيش طويلاً.');
+    $heroSubtitle = $heroSection?->subtitle ?? __('شريك تصميم وتطوير منتجات رقمية يقود التحول ويصنع أثرًا ملموسًا وقابلًا للقياس.');
 @endphp
 
 <x-layouts.app>
-    <section class="section-pad" style="background: var(--color-canvas);">
-        <div class="container-page">
-            <div class="max-w-3xl" data-reveal>
-                <x-ui.eyebrow number="01">{{ __('من نحن') }}</x-ui.eyebrow>
-                <x-ui.split-heading as="h1" class="type-display mt-6">
-                    {{ $heroTitle }}
-                    @if($heroSection?->title_line2)
-                        <span class="text-[color:var(--color-ink-muted)]">{{ $heroSection->title_line2 }}</span>
+    {{-- ================================================================
+         1. HERO — Editorial Typography
+         ================================================================ --}}
+    <section class="section-pad relative overflow-hidden" style="background: var(--color-canvas);">
+        {{-- Ambient decorative blobs --}}
+        <div class="hero-blob hero-blob--1" aria-hidden="true"></div>
+        <div class="hero-blob hero-blob--2" aria-hidden="true"></div>
+
+        <div class="container-page relative z-10">
+            <div class="max-w-4xl" data-reveal>
+                <div class="flex items-center gap-3 mb-6">
+                    <x-ui.eyebrow number="01">{{ __('من نحن') }}</x-ui.eyebrow>
+                    <span class="w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent)] animate-pulse"></span>
+                    <span class="type-eyebrow text-[color:var(--color-accent)]">{{ __('الرؤية والمسار') }}</span>
+                </div>
+
+                <h1 class="type-display mt-6 leading-tight">
+                    <span>{{ $heroTitle }}</span>
+                    @if($heroTitle2)
+                        <span class="block text-[color:var(--color-accent)] italic font-serif">{{ $heroTitle2 }}</span>
                     @endif
-                </x-ui.split-heading>
-                <p class="type-body-lg mt-8 max-w-2xl" data-reveal data-reveal-stagger="200">
+                </h1>
+
+                <p class="type-body-lg mt-8 max-w-2xl text-[color:var(--color-ink-muted)] leading-relaxed" data-reveal data-reveal-stagger="200">
                     {{ $heroSubtitle }}
                 </p>
             </div>
         </div>
     </section>
 
-    <section class="section-pad" style="background: var(--color-surface);">
+    {{-- ================================================================
+         2. STORY & MANIFESTO — Split Layout
+         ================================================================ --}}
+    <section class="section-pad hairline-y" style="background: var(--color-surface);">
         <div class="container-page">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <div data-reveal>
-                    <x-ui.eyebrow number="02">{{ __('قصتنا') }}</x-ui.eyebrow>
-                    <h2 class="type-h1 mt-6">{{ __('نصمم بعين، ونبني بعقل.') }}</h2>
-                    <div class="type-body mt-6 space-y-4">
-                        <p>{{ __('بدأت إشراق من شغف بالتقنية وتحويل الأفكار إلى منتجات تعمل بكفاءة وتعيش طويلًا.') }}</p>
-                        <p>{{ __('اليوم، نعمل كفريق صغير عالي الحرفة، نؤمن بأن الجودة لا تأتي من السرعة فقط، بل من وضوح الرؤية.') }}</p>
-                        <p>{{ __('نقيس نجاحنا بما يتحقق لعملائنا من نتائج، لا بما نعرضه من وعود.') }}</p>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch">
+                {{-- Left: Story narrative --}}
+                <div class="lg:col-span-7 flex flex-col justify-between" data-reveal>
+                    <div>
+                        <x-ui.eyebrow number="02">{{ __('قصتنا') }}</x-ui.eyebrow>
+                        <h2 class="type-h1 mt-6">{{ __('نصمم بعين فنان، ونبني بعقل مهندس.') }}</h2>
+                        <div class="type-body mt-8 space-y-6 text-lg leading-relaxed text-[color:var(--color-ink-muted)]">
+                            <p>{{ __('بدأت إشراق من شغف بالتقنية وتحويل الأفكار إلى منتجات متقنة تعمل بكفاءة استثنائية وتعيش طويلاً.') }}</p>
+                            <p>{{ __('اليوم، نعمل كفريق نخبوي عالي الحرفة، نؤمن بأن الجودة لا تأتي من التسرع، بل من وضوح الرؤية والعمق في فهم احتياج المستخدم والنشاط التجاري.') }}</p>
+                            <p>{{ __('نقيس نجاحنا بما يتحقق لعملائنا من نتائج حقيقية ونمو ملموس، لا بالوعود النظرية.') }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 pt-8 border-t border-[color:var(--color-line)] flex items-center gap-8">
+                        <div>
+                            <div class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-subtle)]">{{ __('المقر') }}</div>
+                            <div class="type-body font-medium mt-1 text-[color:var(--color-ink)]">{{ __('المملكة العربية السعودية') }}</div>
+                        </div>
+                        <div class="w-px h-8 bg-[color:var(--color-line)]"></div>
+                        <div>
+                            <div class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-subtle)]">{{ __('مجال التركيز') }}</div>
+                            <div class="type-body font-medium mt-1 text-[color:var(--color-accent)]">{{ __('المنتجات والحلول الرقمية المتطورة') }}</div>
+                        </div>
                     </div>
                 </div>
-                <div class="surface-card p-10" data-reveal data-reveal-stagger="150">
-                    <div class="type-eyebrow mb-4">{{ __('منهج العمل') }}</div>
-                    <div class="type-h2 mb-6">{{ __('حرفة رقمية دقيقة.') }}</div>
-                    <p class="type-body">{{ __('نوازن بين التصميم والهندسة، ونبني حلولًا قابلة للنمو ومهيأة للتوسع منذ اليوم الأول.') }}</p>
+
+                {{-- Right: Manifesto Highlight Card --}}
+                <div class="lg:col-span-5" data-reveal data-reveal-stagger="150">
+                    <div class="surface-card p-8 lg:p-12 rounded-3xl h-full flex flex-col justify-between relative overflow-hidden border border-[color:var(--color-line-strong)]">
+                        <div class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-[color:var(--color-accent-soft)] blur-3xl pointer-events-none"></div>
+
+                        <div>
+                            <span class="font-mono text-xs text-[color:var(--color-accent)] tracking-widest uppercase mb-4 block">{{ __('منهج العمل // Manifesto') }}</span>
+                            <h3 class="type-h2 mb-6 leading-snug">{{ __('حرفة رقمية متقنة تسبق المعايير.') }}</h3>
+                            <p class="type-body text-[color:var(--color-ink-muted)] leading-relaxed">
+                                {{ __('نوازن بدقة بين الجماليات البصرية الفاخرة والبنية التقنية المتينة، لنبني حلولًا مهيأة للتوسع والنمو السلس منذ اليوم الأول.') }}
+                            </p>
+                        </div>
+
+                        <div class="mt-10 pt-6 border-t border-[color:var(--color-line)]">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-[color:var(--color-accent-soft)] flex items-center justify-center text-[color:var(--color-accent)] font-mono text-sm font-semibold">
+                                    ✦
+                                </div>
+                                <span class="type-small font-medium text-[color:var(--color-ink)]">{{ __('التزام كامل بالجودة العالية والأداء الفائق') }}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    {{-- ================================================================
+         3. STATS — 3D Counters
+         ================================================================ --}}
     @if($stats && $stats->count())
         <section class="section-pad" style="background: var(--color-canvas);">
             <div class="container-page">
                 <div class="max-w-3xl mb-16" data-reveal>
                     <x-ui.eyebrow number="03">{{ __('بالأرقام') }}</x-ui.eyebrow>
                     <h2 class="type-h1 mt-6">{{ __('مؤشرات تدل على الأثر.') }}</h2>
+                    <p class="type-body-lg mt-4 text-[color:var(--color-ink-muted)]">{{ __('إحصائيات تلخص مسيرتنا وشراكاتنا الناجحة.') }}</p>
                 </div>
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8">
+
+                <div class="stats-grid">
                     @foreach($stats->take(4) as $idx => $stat)
                         @php
                             $raw = (string) ($stat->number ?? '');
@@ -58,17 +114,17 @@
                             $suffix = $m[2] ?? '';
                             $decimals = (strpos($raw, '.') !== false) ? 1 : 0;
                         @endphp
-                        <div data-reveal data-reveal-stagger="{{ $idx * 100 }}">
-                            <div class="type-numeral text-[clamp(2.5rem,5vw,4.5rem)] leading-none text-[color:var(--color-ink)]"
+                        <div class="stats-grid__item stat-3d" data-reveal data-reveal-stagger="{{ $idx * 100 }}">
+                            <div class="stats-grid__num"
                                  data-count="{{ $value }}"
                                  data-count-format="{{ $suffix }}"
                                  data-count-decimals="{{ $decimals }}"
                                  dir="ltr">
                                 0{{ $suffix }}
                             </div>
-                            <div class="type-eyebrow mt-4 text-[color:var(--color-ink-muted)]">{{ $stat->label }}</div>
+                            <div class="stats-grid__label">{{ $stat->label }}</div>
                             @if($stat->description)
-                                <p class="type-small mt-3 max-w-[16rem]">{{ $stat->description }}</p>
+                                <p class="stats-grid__desc">{{ $stat->description }}</p>
                             @endif
                         </div>
                     @endforeach
@@ -77,52 +133,92 @@
         </section>
     @endif
 
-    <section class="section-pad" style="background: var(--color-surface-inset);">
+    {{-- ================================================================
+         4. VALUES — Bento Box Grid
+         ================================================================ --}}
+    <section class="section-pad hairline-t" style="background: var(--color-surface-inset);">
         <div class="container-page">
-            <div class="max-w-3xl mb-16" data-reveal>
-                <x-ui.eyebrow number="04">{{ __('قيمنا') }}</x-ui.eyebrow>
-                <h2 class="type-h1 mt-6">{{ __('ما يميز تعاوننا.') }}</h2>
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16" data-reveal>
+                <div class="max-w-2xl">
+                    <x-ui.eyebrow number="04">{{ __('قيمنا الراسخة') }}</x-ui.eyebrow>
+                    <h2 class="type-h1 mt-6">{{ __('المبادئ التي تقود كل قرار.') }}</h2>
+                </div>
+                <p class="type-body max-w-md text-[color:var(--color-ink-muted)]">
+                    {{ __('ثوابت مهنية نسترشد بها في كل تفصيلة من الفكرة وحتى الإطلاق.') }}
+                </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                @foreach(($features ?? collect())->take(4) as $feature)
-                    <div class="surface-card p-8" data-reveal>
-                        <div class="type-eyebrow mb-4">{{ $feature->title }}</div>
-                        <p class="type-body">{{ $feature->description }}</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                @php
+                    $valuesList = ($features && $features->count()) ? $features->take(4) : collect([
+                        (object)[
+                            'title' => __('الدقة والحرفة'),
+                            'description' => __('نراجع كل سطر كود وكل بكسل حتى تصل النتيجة إلى المستوى الذي نفتخر به ونرضى عنه.')
+                        ],
+                        (object)[
+                            'title' => __('الشفافية الكاملة'),
+                            'description' => __('نشاركك السياق الكامل والقرارات التقنية أولاً بأول، ونعمل كامتداد مباشر لفريقك.')
+                        ],
+                        (object)[
+                            'title' => __('التحسين المستمر'),
+                            'description' => __('نقيس ونختبر بناءً على بيانات وتجارب حقيقية لضمان نمو المنتج وتعظيم عائده.')
+                        ],
+                        (object)[
+                            'title' => __('الالتزام بالمسار'),
+                            'description' => __('نحترم الجداول الزمنية ونفي بالوعود بدقة وانضباط مهني صارم.')
+                        ],
+                    ]);
+                @endphp
+
+                @foreach($valuesList as $idx => $feature)
+                    <div class="surface-card p-8 rounded-2xl flex flex-col justify-between group hover:border-[color:var(--color-accent-ring)] transition-all duration-300 relative overflow-hidden"
+                         data-reveal data-reveal-stagger="{{ $idx * 120 }}">
+                        <div class="flex items-center justify-between mb-8">
+                            <span class="font-mono text-xs text-[color:var(--color-accent)] font-semibold tracking-wider" dir="ltr">
+                                0{{ $idx + 1 }}
+                            </span>
+                            <span class="w-2 h-2 rounded-full bg-[color:var(--color-line-strong)] group-hover:bg-[color:var(--color-accent)] transition-colors"></span>
+                        </div>
+                        <div>
+                            <h3 class="type-h3 mb-4 text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent)] transition-colors">
+                                {{ $feature->title }}
+                            </h3>
+                            <p class="type-body text-[color:var(--color-ink-muted)] leading-relaxed text-sm">
+                                {{ $feature->description }}
+                            </p>
+                        </div>
                     </div>
                 @endforeach
-                @if(($features ?? collect())->isEmpty())
-                    <div class="surface-card p-8" data-reveal>
-                        <div class="type-eyebrow mb-4">{{ __('الدقة') }}</div>
-                        <p class="type-body">{{ __('نراجع كل تفصيلة حتى تصل النتيجة إلى المستوى الذي نرضى عنه.') }}</p>
-                    </div>
-                    <div class="surface-card p-8" data-reveal data-reveal-stagger="120">
-                        <div class="type-eyebrow mb-4">{{ __('الشفافية') }}</div>
-                        <p class="type-body">{{ __('نشاركك السياق والقرارات أولًا بأول.') }}</p>
-                    </div>
-                    <div class="surface-card p-8" data-reveal data-reveal-stagger="240">
-                        <div class="type-eyebrow mb-4">{{ __('التحسين') }}</div>
-                        <p class="type-body">{{ __('نقيس ونحسن بناءً على بيانات حقيقية.') }}</p>
-                    </div>
-                    <div class="surface-card p-8" data-reveal data-reveal-stagger="360">
-                        <div class="type-eyebrow mb-4">{{ __('الالتزام') }}</div>
-                        <p class="type-body">{{ __('نحترم الوقت ونلتزم بالمسار.') }}</p>
-                    </div>
-                @endif
             </div>
         </div>
     </section>
 
-    <section class="section-pad" style="background: var(--color-canvas);">
+    {{-- ================================================================
+         5. CTA SECTION
+         ================================================================ --}}
+    <section class="cta-ed" data-section>
         <div class="container-page">
-            <div class="max-w-3xl" data-reveal>
-                <x-ui.eyebrow number="05">{{ __('ابدأ') }}</x-ui.eyebrow>
-                <h2 class="type-display mt-6">{{ __('فلنصنع منتجًا يستحق البقاء.') }}</h2>
-                <p class="type-body-lg mt-8 max-w-xl">{{ __('احكِ لنا عن مشروعك، وسنعود إليك بخطة واضحة خلال يوم عمل واحد.') }}</p>
-                <div class="mt-10 flex flex-wrap gap-4">
-                    <x-ui.button variant="primary" :href="route('request-design.create')" icon="arrow" wire:navigate>{{ __('ابدأ مشروعك') }}</x-ui.button>
-                    <x-ui.button variant="ghost" :href="route('contact')" wire:navigate>{{ __('تواصل معنا') }}</x-ui.button>
+            <div class="cta-ed__inner" data-reveal>
+                <x-ui.eyebrow number="05">{{ __('ابدأ رحلتك') }}</x-ui.eyebrow>
+                <h2 class="cta-ed__heading mt-6">
+                    {{ __('فلنصنع منتجًا') }} <em>{{ __('يستحق البقاء') }}</em>
+                </h2>
+                <p class="type-body-lg mt-6 max-w-xl text-[color:var(--color-ink-muted)]">
+                    {{ __('احكِ لنا عن فكرتك أو مشروعك، وسنعود إليك بخطة واضحة ومقترح مدروس خلال يوم عمل واحد.') }}
+                </p>
+                <div class="cta-ed__actions">
+                    <a href="{{ route('request-design.create') }}" class="btn btn--primary" id="about-cta-primary" wire:navigate>
+                        <span>{{ __('ابدأ مشروعك الآن') }}</span>
+                        <svg class="btn-arrow" width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+                            <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="{{ route('contact') }}" class="btn btn--ghost" id="about-cta-secondary" wire:navigate>
+                        {{ __('تواصل للاستشارة') }}
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 </x-layouts.app>
+

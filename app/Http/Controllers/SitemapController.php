@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use App\Models\Service;
-use Illuminate\Http\Response;
 
 class SitemapController extends Controller
 {
@@ -29,11 +27,15 @@ class SitemapController extends Controller
     {
         $pages = [
             ['loc' => route('home'), 'changefreq' => 'daily', 'priority' => '1.0'],
-            ['loc' => route('about'), 'changefreq' => 'monthly', 'priority' => '0.8'],
+            ['loc' => route('about'), 'changefreq' => 'weekly', 'priority' => '0.8'],
             ['loc' => route('services'), 'changefreq' => 'weekly', 'priority' => '0.9'],
             ['loc' => route('portfolio'), 'changefreq' => 'daily', 'priority' => '0.9'],
-            ['loc' => route('contact'), 'changefreq' => 'monthly', 'priority' => '0.7'],
-            ['loc' => route('request-design.create'), 'changefreq' => 'monthly', 'priority' => '0.8'],
+            ['loc' => route('articles'), 'changefreq' => 'daily', 'priority' => '0.8'],
+            ['loc' => route('contact'), 'changefreq' => 'monthly', 'priority' => '0.8'],
+            ['loc' => route('request-design.create'), 'changefreq' => 'weekly', 'priority' => '0.9'],
+            ['loc' => route('careers'), 'changefreq' => 'monthly', 'priority' => '0.6'],
+            ['loc' => route('privacy'), 'changefreq' => 'yearly', 'priority' => '0.3'],
+            ['loc' => route('terms'), 'changefreq' => 'yearly', 'priority' => '0.3'],
         ];
 
         return response()->view('sitemap.pages', compact('pages'))
@@ -71,7 +73,7 @@ class SitemapController extends Controller
 
         if ($project->main_image) {
             $images[] = [
-                'loc' => asset('storage/' . $project->main_image),
+                'loc' => asset('storage/'.$project->main_image),
                 'title' => $project->title,
                 'caption' => $project->short_description,
             ];
@@ -79,7 +81,7 @@ class SitemapController extends Controller
 
         foreach ($project->projectImages as $image) {
             $images[] = [
-                'loc' => asset('storage/' . $image->image_path),
+                'loc' => asset('storage/'.$image->image_path),
                 'title' => $image->caption ?? $project->title,
                 'caption' => $image->caption,
             ];
