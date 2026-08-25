@@ -387,117 +387,47 @@ class AnalyticsService
         $cacheKey = "analytics.top_projects.{$period->startDate->format('Y-m-d')}.{$period->endDate->format('Y-m-d')}.{$maxResults}";
 
         try {
-            return Cache::remember($cacheKey, $this->cacheMinutes * 60, function () use ($period, $maxResults) {
+            return Cache::remember($cacheKey, 60 * 15, function () use ($period, $maxResults) {
                 try {
-                    // Get all pages (reduced from 100 to 30 for performance)
-                    $pages = Analytics::fetchMostVisitedPages($period, 30);
-
-                    if (app()->environment('local')) {
-                        Log::info('TopProjects: Fetched pages', [
-                            'total_pages' => $pages->count(),
-                            'sample_data' => $pages->take(3)->toArray(),
-                        ]);
-                    }
-
-                    // Filter only project pages (URLs that contain /projects/)
-                    $projectPages = $pages->filter(function ($page) {
-                        $url = $page['fullPageUrl'] ?? '';
-
-                        // Match various patterns: /projects/, domain.com/projects/
-                        return str_contains($url, '/projects/');
-                    });
-
-                    if (app()->environment('local')) {
-                        Log::info('TopProjects: Filtered project pages', [
-                            'project_pages_count' => $projectPages->count(),
-                            'project_urls' => $projectPages->pluck('fullPageUrl')->toArray(),
-                        ]);
-                    }
-
-                    // Extract project slugs and get project details
+                    $pages = Analytics::fetchMostVisitedPages($period, 100);
+                    $allProjects = Project::where('status', 'published')->get();
                     $projectData = [];
-                    foreach ($projectPages as $page) {
-                        $url = $page['fullPageUrl'] ?? '';
 
-                        // Extract slug from various URL patterns
-                        // Patterns: domain.com/projects/slug, domain.com/ar/projects/slug, etc.
-                        preg_match('/\/projects\/([^\/? ]+)/', $url, $matches);
+                    foreach ($allProjects as $project) {
+                        $views = 0;
 
-                        if (! empty($matches[1])) {
-                            $slug = $matches[1];
-
-                            if (app()->environment('local')) {
-                                Log::info('TopProjects: Extracted slug', [
-                                    'url' => $url,
-                                    'slug' => $slug,
-                                ]);
-                            }
-
-                            // Try to find the project
-                            $project = Project::where('slug', $slug)->first();
-
-                            if ($project) {
-                                // Check if this project is already in the array
-                                $existingIndex = array_search($project->id, array_column($projectData, 'project_id'));
-
-                                if ($existingIndex !== false) {
-                                    // Add views to existing project
-                                    $projectData[$existingIndex]['views'] += $page['screenPageViews'] ?? 0;
-                                } else {
-                                    // Add new project
-                                    $projectData[] = [
-                                        'project_id' => $project->id,
-                                        'project_name' => $project->title,
-                                        'project_slug' => $project->slug,
-                                        'views' => $page['screenPageViews'] ?? 0,
-                                    ];
+                        foreach ($pages as $page) {
+                            $url = $page['fullPageUrl'] ?? '';
+                            $title = $page['pageTitle'] ?? '';
+                            if (str_contains($url, $project->slug) || str_contains($url, '/projects/') || str_contains($title, $project->title)) {
+                                if (str_contains($url, $project->slug) || str_contains($title, $project->title)) {
+                                    $views += (int) ($page['screenPageViews'] ?? 0);
                                 }
-
-                                if (app()->environment('local')) {
-                                    Log::info('TopProjects: Found project', [
-                                        'project_id' => $project->id,
-                                        'project_title' => $project->title,
-                                        'views' => $page['screenPageViews'] ?? 0,
-                                    ]);
-                                }
-                            } else {
-                                Log::warning('TopProjects: Project not found in database', [
-                                    'slug' => $slug,
-                                    'url' => $url,
-                                ]);
                             }
-                        } else {
-                            Log::warning('TopProjects: Could not extract slug from URL', [
-                                'url' => $url,
-                            ]);
                         }
+
+                        $projectData[] = [
+                            'project_id' => $project->id,
+                            'project_name' => $project->title,
+                            'project_slug' => $project->slug,
+                            'views' => $views,
+                        ];
                     }
 
-                    if (app()->environment('local')) {
-                        Log::info('TopProjects: Final project data', [
-                            'count' => count($projectData),
-                            'projects' => $projectData,
-                        ]);
-                    }
-
-                    // Sort by views and take top results
                     usort($projectData, function ($a, $b) {
-                        return $b['views'] - $a['views'];
+                        return $b['views'] <=> $a['views'];
                     });
 
                     return array_slice($projectData, 0, $maxResults);
                 } catch (\Exception $e) {
                     Log::error('TopProjects: Error', [
                         'message' => $e->getMessage(),
-                        'trace' => $e->getTraceAsString(),
                     ]);
 
                     return [];
                 }
             });
         } catch (\Exception $e) {
-            Log::error('Analytics cache error', ['cache_key' => $cacheKey, 'message' => $e->getMessage()]);
-
             return [];
         }
     }
@@ -509,21 +439,40 @@ class AnalyticsService
     {
         try {
             $propertyId = config('analytics.property_id') ?: \App\Models\AnalyticsSetting::first()?->ga_property_id;
-            if ($propertyId) {
-                config(['analytics.property_id' => $propertyId]);
+            if (! $propertyId) {
+                return 0;
             }
 
             return Cache::remember('analytics.realtime_users', 10, function () use ($propertyId) {
-                $analytics = Analytics::getFacadeRoot();
-                if ($propertyId) {
-                    $analytics->setPropertyId($propertyId);
-                }
+                try {
+                    $analyticsRoot = Analytics::getFacadeRoot();
+                    $clientProperty = (new \ReflectionClass($analyticsRoot))->getProperty('client');
+                    $clientProperty->setAccessible(true);
+                    $client = $clientProperty->getValue($analyticsRoot);
 
-                $data = $analytics->getRealtime(Period::days(1), ['activeUsers']);
-                if ($data instanceof \Illuminate\Support\Collection && $data->isNotEmpty()) {
-                    return (int) ($data->first()['activeUsers'] ?? $data->sum('activeUsers'));
+                    $minuteRange = new \Google\Analytics\Data\V1beta\MinuteRange([
+                        'start_minutes_ago' => 29,
+                        'end_minutes_ago' => 0,
+                    ]);
+
+                    $metric = new \Google\Analytics\Data\V1beta\Metric(['name' => 'activeUsers']);
+
+                    $response = $client->runRealtimeReport([
+                        'property' => "properties/{$propertyId}",
+                        'minute_ranges' => [$minuteRange],
+                        'metrics' => [$metric],
+                    ]);
+
+                    $total = 0;
+                    foreach ($response->getRows() as $row) {
+                        $total += (int) $row->getMetricValues()[0]->getValue();
+                    }
+
+                    return $total;
+                } catch (\Throwable $e) {
+                    Log::warning('Analytics getRealtimeUsers runRealtimeReport: ' . $e->getMessage());
+                    return 0;
                 }
-                return 0;
             });
         } catch (\Throwable $e) {
             Log::warning('Analytics getRealtimeUsers: ' . $e->getMessage());
