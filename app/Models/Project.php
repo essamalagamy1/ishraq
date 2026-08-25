@@ -20,6 +20,7 @@ class Project extends Model
         'status',
         'is_available_for_purchase',
         'price',
+        'purchase_includes',
     ];
 
     protected $casts = [

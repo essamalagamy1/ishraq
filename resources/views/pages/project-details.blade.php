@@ -140,6 +140,34 @@
                         </div>
                     </div>
 
+                    {{-- What's Included With Purchase (Deliverables Section) --}}
+                    @if($project->is_available_for_purchase && $project->purchase_includes)
+                        <div class="surface-card p-8 rounded-3xl border border-[color:var(--color-accent-ring)] relative overflow-hidden" data-reveal>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-[color:var(--color-line)]">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-[color:var(--color-accent-glow)] text-[color:var(--color-accent)] flex items-center justify-center shrink-0">
+                                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h2 class="type-h2">{{ __('ما يُقدَّم مع الشراء (المشمولات والتسليمات)') }}</h2>
+                                        <p class="type-small text-[color:var(--color-ink-muted)] mt-0.5">{{ __('كافة الأصول والملفات والتراخيص التي ستحصل عليها عند شراء هذا العمل') }}</p>
+                                    </div>
+                                </div>
+                                @if($project->price)
+                                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[color:var(--color-surface-inset)] border border-[color:var(--color-line)] shrink-0 self-start sm:self-auto" dir="ltr">
+                                        <span class="type-numeral text-xl font-bold text-[color:var(--color-ink)]">{{ number_format($project->price, 0) }}</span>
+                                        <x-ui.currency-symbol class="w-4 h-4 text-[color:var(--color-accent)]" />
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="prose-article text-base leading-relaxed text-[color:var(--color-ink-muted)]">
+                                {!! $project->purchase_includes !!}
+                            </div>
+                        </div>
+                    @endif
+
                     {{-- Expanded Image Grid (If images exist) --}}
                     @if(count($galleryList) > 1)
                         <div class="surface-card p-8 rounded-3xl border border-[color:var(--color-line-strong)]" data-reveal>
@@ -187,20 +215,40 @@
                 {{-- Right Sidebar --}}
                 <div class="lg:col-span-4 min-w-0">
                     <div class="sticky top-24 space-y-6">
-                        @if($project->is_available_for_purchase && $companySettings && $companySettings->whatsapp_number)
+                        @if($project->is_available_for_purchase)
                             <div class="surface-card p-6 rounded-3xl border border-[color:var(--color-accent-ring)]" data-reveal>
-                                <div class="type-eyebrow mb-2 text-[color:var(--color-accent)]">{{ __('متاح للشراء والمصادرة') }}</div>
+                                <div class="flex items-center justify-between gap-2 mb-2">
+                                    <span class="type-eyebrow text-[color:var(--color-accent)]">{{ __('متاح للشراء والتملك') }}</span>
+                                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                </div>
                                 @if($project->price)
                                     <div class="type-numeral text-3xl font-bold mb-4 text-[color:var(--color-ink)] flex items-center gap-2" dir="ltr">
                                         <span>{{ number_format($project->price, 0) }}</span>
                                         <x-ui.currency-symbol class="w-6 h-6 text-[color:var(--color-accent)] inline-block shrink-0" />
                                     </div>
                                 @endif
-                                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companySettings->whatsapp_number) }}?text={{ urlencode('مرحباً، أنا مهتم بشراء المشروع: ' . $project->title . "\n" . 'رابط المشروع: ' . request()->url()) }}"
-                                   target="_blank"
-                                   class="btn btn--primary w-full justify-center gap-2">
-                                    <span>{{ __('اشتري عبر واتساب') }}</span>
-                                </a>
+
+                                @if($project->purchase_includes)
+                                    <div class="mb-5 pt-3 border-t border-[color:var(--color-line)]">
+                                        <div class="text-xs font-semibold text-[color:var(--color-ink)] mb-2 flex items-center gap-1.5">
+                                            <svg class="w-3.5 h-3.5 text-[color:var(--color-accent)]" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                            </svg>
+                                            <span>{{ __('يشمل الشراء والتسليم:') }}</span>
+                                        </div>
+                                        <div class="text-xs text-[color:var(--color-ink-muted)] leading-relaxed space-y-1 prose-sm">
+                                            {!! $project->purchase_includes !!}
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if($companySettings && $companySettings->whatsapp_number)
+                                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companySettings->whatsapp_number) }}?text={{ urlencode('مرحباً، أنا مهتم بشراء المشروع: ' . $project->title . "\n" . 'رابط المشروع: ' . request()->url()) }}"
+                                       target="_blank"
+                                       class="btn btn--primary w-full justify-center gap-2">
+                                        <span>{{ __('اشتري عبر واتساب') }}</span>
+                                    </a>
+                                @endif
                             </div>
                         @endif
 

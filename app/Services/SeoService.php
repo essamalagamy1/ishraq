@@ -15,9 +15,10 @@ class SeoService
     {
         $seo = SeoSetting::forPage($page);
         $company = CompanySetting::first();
+        $analytics = \App\Models\AnalyticsSetting::first();
 
         $defaults = [
-            'meta_title' => config('app.name', 'إشراق').' | استوديو تصميم وتطوير المنتجات والحلول الرقمية في السعودية',
+            'meta_title' => config('app.name', 'إشراق').' | تصميم وتطوير المنتجات والحلول الرقمية في السعودية',
             'meta_description' => 'شريكك الرائد في التحول الرقمي وتطوير المنتجات الرقمية في المملكة العربية السعودية. تصميم مواقع ويب، تطبيقات جوال iOS وAndroid، واجهات مستخدم UI/UX، ومتاجر إلكترونية متطورة.',
             'meta_keywords' => 'تصميم مواقع السعودية, برمجة تطبيقات الرياض, شركة برمجة السعودية, تصميم واجهات UI UX الرياض, تطوير متاجر إلكترونية سلة زد, استوديو حلول رقمية, التحول الرقمي السعودية, أفضل شركة تصميم مواقع في الرياض جدة, برمجة حلول SaaS السعودية',
             'og_title' => config('app.name', 'إشراق').' | حلول رقمية مبتكرة تصنع الفارق بالسعودية',
@@ -27,6 +28,8 @@ class SeoService
             'twitter_card' => 'summary_large_image',
             'canonical_url' => URL::current(),
             'robots' => 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
+            'ga4_measurement_id' => $analytics?->ga_measurement_id ?? 'G-JPMFLC695E',
+            'gtm_container_id' => $analytics?->gtm_container_id ?? 'GTM-T59355DS',
         ];
 
         if ($seo) {
@@ -44,9 +47,9 @@ class SeoService
                 'canonical_url' => $seo->canonical_url ?? URL::current(),
                 'robots' => $seo->robots ?? $defaults['robots'],
                 'structured_data' => $seo->structured_data,
-                'ga4_measurement_id' => $seo->ga4_measurement_id,
+                'ga4_measurement_id' => $seo->ga4_measurement_id ?: ($analytics?->ga_measurement_id ?? 'G-JPMFLC695E'),
                 'gsc_verification_code' => $seo->gsc_verification_code,
-                'gtm_container_id' => $seo->gtm_container_id,
+                'gtm_container_id' => $seo->gtm_container_id ?: ($analytics?->gtm_container_id ?? 'GTM-T59355DS'),
             ]), $overrides);
         }
 

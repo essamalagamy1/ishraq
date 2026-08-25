@@ -508,8 +508,18 @@ class AnalyticsService
     public function getRealtimeUsers(): int
     {
         try {
-            return Cache::remember('analytics.realtime_users', 15, function () {
-                $data = Analytics::getRealtime(Period::days(1), ['activeUsers']);
+            $propertyId = config('analytics.property_id') ?: \App\Models\AnalyticsSetting::first()?->ga_property_id;
+            if ($propertyId) {
+                config(['analytics.property_id' => $propertyId]);
+            }
+
+            return Cache::remember('analytics.realtime_users', 10, function () use ($propertyId) {
+                $analytics = Analytics::getFacadeRoot();
+                if ($propertyId) {
+                    $analytics->setPropertyId($propertyId);
+                }
+
+                $data = $analytics->getRealtime(Period::days(1), ['activeUsers']);
                 if ($data instanceof \Illuminate\Support\Collection && $data->isNotEmpty()) {
                     return (int) ($data->first()['activeUsers'] ?? $data->sum('activeUsers'));
                 }

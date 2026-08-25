@@ -80,13 +80,19 @@ class ProjectResource extends Resource
             Forms\Components\Toggle::make('is_available_for_purchase')
                 ->label('متاح للشراء')
                 ->live()
-                ->helperText('هل هذا المشروع متاح للبيع؟'),
+                ->helperText('هل هذا المشروع معروض للبيع؟'),
             Forms\Components\TextInput::make('price')
-                ->label('السعر')
+                ->label('السعر (بالريال السعودي)')
                 ->numeric()
-                ->prefix('ريال')
-                ->visible(fn ($get) => $get('is_available_for_purchase'))
-                ->helperText('سعر المشروع بالريال السعودي'),
+                ->prefix('ر.س')
+                ->visible(fn ($get) => (bool) $get('is_available_for_purchase'))
+                ->helperText('سعر شراء المشروع بالريال السعودي'),
+            Forms\Components\RichEditor::make('purchase_includes')
+                ->label('ما يُقدَّم مع الشراء (المشمولات والتسليمات)')
+                ->placeholder("اكتب كل ما سيحصل عليه المشتري، مثل:\n• ملفات التصميم الأصلية (Figma / PSD / AI)\n• الكود المصدري الكامل مع التوثيق البرمجي\n• رخصة الاستخدام التجاري الحصري\n• دعم فني مجاني لمدة 3 أشهر")
+                ->helperText('سيتم عرض هذه المشمولات والتسليمات في صفحة تفاصيل المشروع لتعريف المشتري بما يحصل عليه.')
+                ->visible(fn ($get) => (bool) $get('is_available_for_purchase'))
+                ->columnSpanFull(),
             Forms\Components\Select::make('status')
                 ->label('الحالة')
                 ->options([
