@@ -1,25 +1,19 @@
 <x-layouts.app>
     {{-- ================================================================
-         1. HERO — Editorial Typography
+         1. HERO
          ================================================================ --}}
-    <section class="section-pad relative overflow-hidden" style="background: var(--color-canvas);">
-        <div class="hero-blob hero-blob--1" aria-hidden="true"></div>
-        <div class="hero-blob hero-blob--2" aria-hidden="true"></div>
+    <section class="svc-hero relative overflow-hidden" data-section>
+        <div class="svc-hero__glow" aria-hidden="true"></div>
 
-        <div class="container-page relative z-10">
-            <div class="max-w-4xl" data-reveal>
-                <div class="flex items-center gap-3 mb-6">
-                    <x-ui.eyebrow number="01">{{ __('فرص العمل') }}</x-ui.eyebrow>
-                    <span class="w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent)] animate-pulse"></span>
-                    <span class="type-eyebrow text-[color:var(--color-accent)]">{{ __('انضم إلى فريق إشراق') }}</span>
-                </div>
+        <div class="container-page relative z-10 svc-hero__content">
+            <div class="max-w-5xl pt-40 pb-24 md:pt-48 md:pb-32">
 
-                <h1 class="type-display mt-6 leading-tight">
-                    <span>{{ __('نبني المستقبل معًا') }}</span>
-                    <span class="block text-[color:var(--color-accent)] italic font-serif">{{ __('بشغف وإتقان لا يهدأ.') }}</span>
+                <h1 class="type-display leading-[1.1]" data-reveal>
+                    <span class="block">{{ __('نبني المستقبل معًا') }}</span>
+                    <span class="block text-gradient mt-2">{{ __('بشغف وإتقان لا يهدأ.') }}</span>
                 </h1>
 
-                <p class="type-body-lg mt-8 max-w-2xl text-[color:var(--color-ink-muted)] leading-relaxed" data-reveal data-reveal-stagger="200">
+                <p class="type-body-lg mt-10 max-w-2xl leading-relaxed" data-reveal data-reveal-stagger="200">
                     {{ __('نبحث باستمرار عن عقول مبدعة ومواهب استثنائية تشاركنا الشغف بصناعة منتجات رقمية فارقة ترتقي بالمعايير.') }}
                 </p>
             </div>
@@ -36,21 +30,21 @@
                 {{-- Perks Strip --}}
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-reveal>
                     <div class="surface-card p-6 rounded-2xl border border-[color:var(--color-line)] group hover:border-[color:var(--color-accent-ring)] transition-all">
-                        <span class="font-mono text-xs text-[color:var(--color-accent)] font-semibold mb-3 block" dir="ltr">01 // الثقافة</span>
+                        <span class="font-mono text-xs text-[color:var(--color-accent)] font-semibold mb-3 block">01. {{ __('الثقافة') }}</span>
                         <h3 class="type-h3 text-lg mb-2 text-[color:var(--color-ink)]">{{ __('بيئة نخبويّة') }}</h3>
                         <p class="type-body text-xs text-[color:var(--color-ink-muted)] leading-relaxed">
                             {{ __('اعمل بجانب محترفين شغوفين يركزون على جودة العمل والقيمة الحقيقية.') }}
                         </p>
                     </div>
                     <div class="surface-card p-6 rounded-2xl border border-[color:var(--color-line)] group hover:border-[color:var(--color-accent-ring)] transition-all">
-                        <span class="font-mono text-xs text-[color:var(--color-accent)] font-semibold mb-3 block" dir="ltr">02 // التحدي</span>
+                        <span class="font-mono text-xs text-[color:var(--color-accent)] font-semibold mb-3 block">02. {{ __('التحدي') }}</span>
                         <h3 class="type-h3 text-lg mb-2 text-[color:var(--color-ink)]">{{ __('مشاريع واعدة') }}</h3>
                         <p class="type-body text-xs text-[color:var(--color-ink-muted)] leading-relaxed">
                             {{ __('تحديات تقنية وتصميمية مثرية في بناء منتجات لشركات ناشئة ومؤسسات رائدة.') }}
                         </p>
                     </div>
                     <div class="surface-card p-6 rounded-2xl border border-[color:var(--color-line)] group hover:border-[color:var(--color-accent-ring)] transition-all">
-                        <span class="font-mono text-xs text-[color:var(--color-accent)] font-semibold mb-3 block" dir="ltr">03 // النمو</span>
+                        <span class="font-mono text-xs text-[color:var(--color-accent)] font-semibold mb-3 block">03. {{ __('النمو') }}</span>
                         <h3 class="type-h3 text-lg mb-2 text-[color:var(--color-ink)]">{{ __('تطوير متواصل') }}</h3>
                         <p class="type-body text-xs text-[color:var(--color-ink-muted)] leading-relaxed">
                             {{ __('مساحة كاملة للابتكار والتجربة واستخدام أحدث التقنيات وأدوات الذكاء الاصطناعي.') }}
@@ -75,7 +69,6 @@
                         @csrf
 
                         <div>
-                            <span class="font-mono text-xs font-semibold text-[color:var(--color-accent)] uppercase tracking-wider block mb-2" dir="ltr">// Application</span>
                             <h2 class="type-h2 mb-2 leading-snug">{{ __('قدّم طلب الانضمام') }}</h2>
                             <p class="type-small text-[color:var(--color-ink-muted)] mb-8">{{ __('شاركنا سيرتك الذاتية وخبرتك وسنتواصل معك فور توفر فرصة مناسبة.') }}</p>
                         </div>

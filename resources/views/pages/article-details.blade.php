@@ -3,7 +3,7 @@
          1. HERO — Article Header
          ================================================================ --}}
     <section class="section-pad relative overflow-hidden pb-8" style="background: var(--color-canvas);">
-        <div class="hero-blob hero-blob--1" aria-hidden="true"></div>
+        <div class="svc-hero__glow" aria-hidden="true"></div>
 
         <div class="container-page relative z-10">
             <div class="max-w-4xl" data-reveal>

@@ -6,29 +6,22 @@
 
 <x-layouts.app>
     {{-- ================================================================
-         1. HERO — Editorial Typography
+         1. HERO
          ================================================================ --}}
-    <section class="section-pad relative overflow-hidden" style="background: var(--color-canvas);">
-        <div class="hero-blob hero-blob--1" aria-hidden="true"></div>
-        <div class="hero-blob hero-blob--2" aria-hidden="true"></div>
+    <section class="svc-hero relative overflow-hidden" data-section>
+        <div class="svc-hero__glow" aria-hidden="true"></div>
 
-        <div class="container-page relative z-10">
-            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-                <div class="max-w-3xl" data-reveal>
-                    <div class="flex items-center gap-3 mb-6">
-                        <x-ui.eyebrow number="01">{{ __('أعمالنا') }}</x-ui.eyebrow>
-                        <span class="w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent)] animate-pulse"></span>
-                        <span class="type-eyebrow text-[color:var(--color-accent)]">{{ __('المعرض الرقمي') }}</span>
-                    </div>
-
-                    <h1 class="type-display mt-6 leading-tight">
-                        <span>{{ $heroTitle }}</span>
+        <div class="container-page relative z-10 svc-hero__content">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 pt-40 pb-24 md:pt-48 md:pb-32">
+                <div class="max-w-4xl" data-reveal>
+                    <h1 class="type-display leading-[1.1]">
+                        <span class="block">{{ $heroTitle }}</span>
                         @if($heroTitle2)
-                            <span class="block text-[color:var(--color-accent)] italic font-serif">{{ $heroTitle2 }}</span>
+                            <span class="block text-gradient mt-2">{{ $heroTitle2 }}</span>
                         @endif
                     </h1>
 
-                    <p class="type-body-lg mt-8 max-w-2xl text-[color:var(--color-ink-muted)] leading-relaxed" data-reveal data-reveal-stagger="200">
+                    <p class="type-body-lg mt-10 max-w-2xl leading-relaxed" data-reveal data-reveal-stagger="200">
                         {{ $heroSubtitle }}
                     </p>
                 </div>

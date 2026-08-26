@@ -1,25 +1,19 @@
 <x-layouts.app>
     {{-- ================================================================
-         1. HERO — Editorial Typography
+         1. HERO
          ================================================================ --}}
-    <section class="section-pad relative overflow-hidden" style="background: var(--color-canvas);">
-        <div class="hero-blob hero-blob--1" aria-hidden="true"></div>
-        <div class="hero-blob hero-blob--2" aria-hidden="true"></div>
+    <section class="svc-hero relative overflow-hidden" data-section>
+        <div class="svc-hero__glow" aria-hidden="true"></div>
 
-        <div class="container-page relative z-10">
-            <div class="max-w-4xl" data-reveal>
-                <div class="flex items-center gap-3 mb-6">
-                    <x-ui.eyebrow number="01">{{ __('بدء مشروع') }}</x-ui.eyebrow>
-                    <span class="w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent)] animate-pulse"></span>
-                    <span class="type-eyebrow text-[color:var(--color-accent)]">{{ __('استمارة الطلب // Briefing') }}</span>
-                </div>
+        <div class="container-page relative z-10 svc-hero__content">
+            <div class="max-w-5xl pt-40 pb-24 md:pt-48 md:pb-32">
 
-                <h1 class="type-display mt-6 leading-tight">
-                    <span>{{ __('ابدأ مشروعك معنا') }}</span>
-                    <span class="block text-[color:var(--color-accent)] italic font-serif">{{ __('وحوّل فكرتك إلى واقع مُبهر.') }}</span>
+                <h1 class="type-display leading-[1.1]" data-reveal>
+                    <span class="block">{{ __('ابدأ مشروعك معنا') }}</span>
+                    <span class="block text-gradient mt-2">{{ __('وحوّل فكرتك إلى واقع مُبهر.') }}</span>
                 </h1>
 
-                <p class="type-body-lg mt-8 max-w-2xl text-[color:var(--color-ink-muted)] leading-relaxed" data-reveal data-reveal-stagger="200">
+                <p class="type-body-lg mt-10 max-w-2xl leading-relaxed" data-reveal data-reveal-stagger="200">
                     {{ __('املأ تفاصيل مشروعك وسنقوم بدراسة المتطلبات وتقديم مقترح زمني ومالي مدروس خلال 24 ساعة عمل.') }}
                 </p>
             </div>
@@ -49,7 +43,7 @@
                     {{-- SECTION 1: Personal & Organization Info --}}
                     <div class="space-y-6">
                         <div class="flex items-center gap-3 pb-4 border-b border-[color:var(--color-line)]">
-                            <span class="font-mono text-xs font-semibold text-[color:var(--color-accent)]" dir="ltr">// 01</span>
+                            <span class="font-mono text-xs font-semibold text-[color:var(--color-accent)]" dir="ltr">01</span>
                             <h2 class="type-h3 text-xl">{{ __('معلومات الاتصال والجهة') }}</h2>
                         </div>
 
@@ -76,7 +70,7 @@
                     {{-- SECTION 2: Project Classification & Scope --}}
                     <div class="space-y-6">
                         <div class="flex items-center gap-3 pb-4 border-b border-[color:var(--color-line)]">
-                            <span class="font-mono text-xs font-semibold text-[color:var(--color-accent)]" dir="ltr">// 02</span>
+                            <span class="font-mono text-xs font-semibold text-[color:var(--color-accent)]" dir="ltr">02</span>
                             <h2 class="type-h3 text-xl">{{ __('نوع المشروع والميزانية والجدول') }}</h2>
                         </div>
 
@@ -107,7 +101,7 @@
                     {{-- SECTION 3: Detailed Description --}}
                     <div class="space-y-6">
                         <div class="flex items-center gap-3 pb-4 border-b border-[color:var(--color-line)]">
-                            <span class="font-mono text-xs font-semibold text-[color:var(--color-accent)]" dir="ltr">// 03</span>
+                            <span class="font-mono text-xs font-semibold text-[color:var(--color-accent)]" dir="ltr">03</span>
                             <h2 class="type-h3 text-xl">{{ __('تفاصيل المتطلبات والمرفقات') }}</h2>
                         </div>
 

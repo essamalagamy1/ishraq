@@ -1,25 +1,19 @@
 <x-layouts.app>
     {{-- ================================================================
-         1. HERO — Editorial Typography
+         1. HERO
          ================================================================ --}}
-    <section class="section-pad relative overflow-hidden" style="background: var(--color-canvas);">
-        <div class="hero-blob hero-blob--1" aria-hidden="true"></div>
-        <div class="hero-blob hero-blob--2" aria-hidden="true"></div>
+    <section class="svc-hero relative overflow-hidden" data-section>
+        <div class="svc-hero__glow" aria-hidden="true"></div>
 
-        <div class="container-page relative z-10">
-            <div class="max-w-4xl" data-reveal>
-                <div class="flex items-center gap-3 mb-6">
-                    <x-ui.eyebrow number="01">{{ __('تقييم العملاء') }}</x-ui.eyebrow>
-                    <span class="w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent)] animate-pulse"></span>
-                    <span class="type-eyebrow text-[color:var(--color-accent)]">{{ __('صوت العميل // Feedback') }}</span>
-                </div>
+        <div class="container-page relative z-10 svc-hero__content">
+            <div class="max-w-5xl pt-40 pb-24 md:pt-48 md:pb-32">
 
-                <h1 class="type-display mt-6 leading-tight">
-                    <span>{{ __('شاركنا تجربتك') }}</span>
-                    <span class="block text-[color:var(--color-accent)] italic font-serif">{{ __('ورأيك في شراكتنا معك.') }}</span>
+                <h1 class="type-display leading-[1.1]" data-reveal>
+                    <span class="block">{{ __('شاركنا تجربتك') }}</span>
+                    <span class="block text-gradient mt-2">{{ __('ورأيك في شراكتنا معك.') }}</span>
                 </h1>
 
-                <p class="type-body-lg mt-8 max-w-2xl text-[color:var(--color-ink-muted)] leading-relaxed" data-reveal data-reveal-stagger="200">
+                <p class="type-body-lg mt-10 max-w-2xl leading-relaxed" data-reveal data-reveal-stagger="200">
                     {{ __('نعتز بكل شراكة نبنيها، ورأيك الصادق يساعدنا في مواصلة التطوير وتقديم تجارب رقمية تليق بتطلعاتك.') }}
                 </p>
             </div>

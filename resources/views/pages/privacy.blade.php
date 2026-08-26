@@ -1,24 +1,19 @@
 <x-layouts.app>
     {{-- ================================================================
-         1. HERO — Editorial Typography
+         1. HERO
          ================================================================ --}}
-    <section class="section-pad relative overflow-hidden" style="background: var(--color-canvas);">
-        <div class="hero-blob hero-blob--1" aria-hidden="true"></div>
+    <section class="svc-hero relative overflow-hidden" data-section>
+        <div class="svc-hero__glow" aria-hidden="true"></div>
 
-        <div class="container-page relative z-10">
-            <div class="max-w-4xl" data-reveal>
-                <div class="flex items-center gap-3 mb-6">
-                    <x-ui.eyebrow number="01">{{ __('السياسات القانونية') }}</x-ui.eyebrow>
-                    <span class="w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent)] animate-pulse"></span>
-                    <span class="type-eyebrow text-[color:var(--color-accent)]">{{ __('سياسة الخصوصية') }}</span>
-                </div>
+        <div class="container-page relative z-10 svc-hero__content">
+            <div class="max-w-5xl pt-40 pb-24 md:pt-48 md:pb-32">
 
-                <h1 class="type-display mt-6 leading-tight">
-                    <span>{{ __('خصوصيتك وأمان بياناتك') }}</span>
-                    <span class="block text-[color:var(--color-accent)] italic font-serif">{{ __('في صلب أولوياتنا.') }}</span>
+                <h1 class="type-display leading-[1.1]" data-reveal>
+                    <span class="block">{{ __('خصوصيتك وأمان بياناتك') }}</span>
+                    <span class="block text-gradient mt-2">{{ __('في صلب أولوياتنا.') }}</span>
                 </h1>
 
-                <p class="type-small mt-6 text-[color:var(--color-ink-subtle)] font-mono">
+                <p class="type-small mt-8 text-[color:var(--color-ink-subtle)] font-mono" data-reveal data-reveal-stagger="200">
                     {{ __('آخر تحديث وتدقيق:') }} {{ date('Y/m/d') }}
                 </p>
             </div>

@@ -2256,3 +2256,282 @@ html.lenis, html.lenis body { height: auto; }
         transition: none;
     }
 }
+
+/* ============================================================
+   🌟 SERVICES PAGE — Immersive Redesign
+   ============================================================ */
+
+/* Hero */
+.svc-hero {
+    background: var(--color-canvas);
+    min-height: clamp(500px, 70vh, 700px);
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+}
+
+.svc-hero__glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(199, 125, 74, 0.07), transparent 70%);
+    pointer-events: none;
+}
+
+.svc-hero__grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(245, 241, 235, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245, 241, 235, 0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, transparent 10%, rgba(0,0,0,0.5) 50%, transparent 90%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 10%, rgba(0,0,0,0.5) 50%, transparent 90%);
+}
+
+.svc-hero__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.svc-hero__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-line-strong);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-ink-muted);
+}
+
+.svc-hero__chip-number {
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+/* Service Grid — Bento layout */
+.svc-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .svc-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .svc-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Service Card */
+.svc-card {
+    position: relative;
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 400ms var(--ease-out-soft), box-shadow 400ms var(--ease-out-soft), transform 400ms var(--ease-out-soft);
+    overflow: hidden;
+}
+
+.svc-card:hover {
+    border-color: rgba(199, 125, 74, 0.3);
+    box-shadow: 0 8px 40px rgba(199, 125, 74, 0.06), 0 0 0 1px rgba(199, 125, 74, 0.1);
+    transform: translateY(-3px);
+}
+
+.svc-card__accent {
+    position: absolute;
+    top: 0;
+    inset-inline: 2rem;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+    opacity: 0;
+    transition: opacity 400ms var(--ease-out-soft);
+}
+
+.svc-card:hover .svc-card__accent {
+    opacity: 1;
+}
+
+.svc-card__number {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-subtle);
+    margin-bottom: 1.25rem;
+}
+
+.svc-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(199, 125, 74, 0.08);
+    border: 1px solid rgba(199, 125, 74, 0.12);
+    color: var(--color-accent);
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+    transition: background 300ms var(--ease-out-soft), border-color 300ms var(--ease-out-soft);
+}
+
+.svc-card:hover .svc-card__icon {
+    background: rgba(199, 125, 74, 0.15);
+    border-color: rgba(199, 125, 74, 0.25);
+}
+
+.svc-card__title {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    line-height: 1.3;
+    color: var(--color-ink);
+    margin-bottom: 0.75rem;
+    transition: color 300ms var(--ease-out-soft);
+}
+
+.svc-card:hover .svc-card__title {
+    color: var(--color-accent);
+}
+
+.svc-card__desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-ink-muted);
+    margin-bottom: 1.25rem;
+    flex: 1;
+}
+
+.svc-card__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.svc-card__features li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--color-ink-subtle);
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-line);
+    transition: border-color 200ms var(--ease-out-soft), color 200ms var(--ease-out-soft);
+}
+
+.svc-card:hover .svc-card__features li {
+    border-color: var(--color-line-strong);
+    color: var(--color-ink-muted);
+}
+
+.svc-card__features-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex-shrink: 0;
+}
+
+.svc-card__footer {
+    margin-top: auto;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-line);
+}
+
+.svc-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+    transition: color 300ms var(--ease-out-soft);
+    cursor: pointer;
+}
+
+.svc-card__cta:hover,
+.svc-card:hover .svc-card__cta {
+    color: var(--color-accent);
+}
+
+.svc-card__cta-arrow {
+    transition: transform 400ms var(--ease-out-soft);
+}
+
+[dir="rtl"] .svc-card:hover .svc-card__cta-arrow {
+    transform: translateX(-4px);
+}
+
+[dir="ltr"] .svc-card:hover .svc-card__cta-arrow {
+    transform: translateX(4px);
+}
+
+/* Why Us cards */
+.svc-why-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: border-color 400ms var(--ease-out-soft), box-shadow 400ms var(--ease-out-soft);
+}
+
+.svc-why-card:hover {
+    border-color: rgba(199, 125, 74, 0.2);
+    box-shadow: 0 4px 24px rgba(199, 125, 74, 0.04);
+}
+
+.svc-why-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(199, 125, 74, 0.08);
+    border: 1px solid rgba(199, 125, 74, 0.12);
+    color: var(--color-accent);
+}
+
+.svc-why-card__icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* CTA Section */
+.svc-cta {
+    padding-block: clamp(6rem, 14vw, 10rem);
+    background: var(--color-surface-inset);
+}
+
+.svc-cta__glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(199, 125, 74, 0.06), transparent 70%);
+    pointer-events: none;
+}
+
+.svc-cta__inner {
+    max-width: 48rem;
+}

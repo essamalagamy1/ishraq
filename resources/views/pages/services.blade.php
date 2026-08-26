@@ -6,42 +6,54 @@
 
 <x-layouts.app>
     {{-- ================================================================
-         1. HERO — Editorial Typography
+         1. HERO — Immersive Editorial
          ================================================================ --}}
-    <section class="section-pad relative overflow-hidden" style="background: var(--color-canvas);">
-        <div class="hero-blob hero-blob--1" aria-hidden="true"></div>
-        <div class="hero-blob hero-blob--2" aria-hidden="true"></div>
+    <section class="svc-hero relative overflow-hidden" data-section>
+        {{-- Ambient glow --}}
+        <div class="svc-hero__glow" aria-hidden="true"></div>
 
-        <div class="container-page relative z-10">
-            <div class="max-w-4xl" data-reveal>
-                <div class="flex items-center gap-3 mb-6">
-                    <x-ui.eyebrow number="01">{{ __('مجالات الخبرة') }}</x-ui.eyebrow>
-                    <span class="w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent)] animate-pulse"></span>
-                    <span class="type-eyebrow text-[color:var(--color-accent)]">{{ __('الخدمات المتميزة') }}</span>
-                </div>
+        <div class="container-page relative z-10 svc-hero__content">
+            <div class="max-w-5xl pt-40 pb-24 md:pt-48 md:pb-32">
 
-                <h1 class="type-display mt-6 leading-tight">
-                    <span>{{ $heroTitle }}</span>
+                {{-- Title --}}
+                <h1 class="type-display leading-[1.1]" data-reveal data-reveal-stagger="100">
+                    <span class="block">{{ $heroTitle }}</span>
                     @if($heroTitle2)
-                        <span class="block text-[color:var(--color-accent)] italic font-serif">{{ $heroTitle2 }}</span>
+                        <span class="block text-gradient mt-2">{{ $heroTitle2 }}</span>
                     @endif
                 </h1>
 
-                <p class="type-body-lg mt-8 max-w-2xl text-[color:var(--color-ink-muted)] leading-relaxed" data-reveal data-reveal-stagger="200">
+                {{-- Subtitle --}}
+                <p class="type-body-lg mt-10 max-w-2xl leading-relaxed" data-reveal data-reveal-stagger="300">
                     {{ $heroSubtitle }}
                 </p>
+
+                {{-- Service count chip --}}
+                <div class="mt-10 flex items-center gap-4" data-reveal data-reveal-stagger="500">
+                    <span class="svc-hero__chip">
+                        <span class="svc-hero__chip-number" dir="ltr">{{ $services->count() }}</span>
+                        <span>{{ __('خدمة متخصصة') }}</span>
+                    </span>
+                    <a href="#services-list" class="btn btn--ghost text-sm" data-lenis-href>
+                        {{ __('استكشف الخدمات') }}
+                        <svg class="btn-arrow" width="12" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+                            <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     {{-- ================================================================
-         2. SERVICES LIST — High-End Editorial Cards
+         2. SERVICES LIST — Editorial Bento Cards
          ================================================================ --}}
-    <section class="section-pad hairline-y" style="background: var(--color-surface);">
+    <section id="services-list" class="section-pad" style="background: var(--color-surface);" data-section>
         <div class="container-page">
-            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16" data-reveal>
+            {{-- Section header --}}
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20" data-reveal>
                 <div class="max-w-2xl">
-                    <x-ui.eyebrow number="02">{{ __('ما نقدمه') }}</x-ui.eyebrow>
+                    <x-ui.eyebrow number="01">{{ __('ما نقدّمه') }}</x-ui.eyebrow>
                     <h2 class="type-h1 mt-6">{{ __('حلول متكاملة تخدم غايتك.') }}</h2>
                 </div>
                 <p class="type-body max-w-md text-[color:var(--color-ink-muted)]">
@@ -49,72 +61,58 @@
                 </p>
             </div>
 
-            <div class="space-y-12">
+            {{-- Services grid --}}
+            <div class="svc-grid">
                 @foreach($services as $index => $service)
                     <article id="{{ $service->slug ?? 'service-' . $index }}"
-                             class="surface-card p-8 md:p-14 rounded-3xl group hover:border-[color:var(--color-accent-ring)] transition-all duration-400 relative overflow-hidden"
-                             data-reveal data-reveal-stagger="{{ $index * 100 }}">
-                        
-                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-                            {{-- Header Col --}}
-                            <div class="lg:col-span-4 flex flex-col justify-between h-full">
-                                <div>
-                                    <div class="flex items-center gap-3 mb-6">
-                                        <span class="font-mono text-xs font-semibold text-[color:var(--color-accent)] tracking-widest" dir="ltr">
-                                            // {{ sprintf('%02d', $index + 1) }}
-                                        </span>
-                                        <span class="h-px w-8 bg-[color:var(--color-line-strong)]"></span>
-                                    </div>
-                                    <h3 class="type-h2 text-2xl lg:text-3xl text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent)] transition-colors leading-snug">
-                                        {{ $service->title }}
-                                    </h3>
-                                </div>
+                             class="svc-card group"
+                             data-reveal data-reveal-stagger="{{ $index * 80 }}">
 
-                                <div class="hidden lg:block mt-12">
-                                    <a href="{{ route('request-design.create', ['service' => $service->slug ?? $service->id]) }}"
-                                       class="inline-flex items-center gap-3 text-xs font-mono tracking-wider uppercase text-[color:var(--color-ink)] hover:text-[color:var(--color-accent)] transition-colors"
-                                       wire:navigate>
-                                        <span>{{ __('طلب هذه الخدمة') }}</span>
-                                        <svg class="btn-arrow" width="12" height="10" viewBox="0 0 16 10" fill="none">
-                                            <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </a>
-                                </div>
+                        {{-- Card top accent line --}}
+                        <div class="svc-card__accent" aria-hidden="true"></div>
+
+                        {{-- Number --}}
+                        <div class="svc-card__number" dir="ltr" aria-hidden="true">
+                            {{ sprintf('%02d', $index + 1) }}
+                        </div>
+
+                        {{-- Icon --}}
+                        @if($service->icon)
+                            <div class="svc-card__icon">
+                                <i class="{{ $service->icon }}"></i>
                             </div>
+                        @endif
 
-                            {{-- Content Col --}}
-                            <div class="lg:col-span-8">
-                                <p class="type-body-lg text-[color:var(--color-ink)] text-lg leading-relaxed">
-                                    {{ $service->short_description ?? strip_tags($service->description) }}
-                                </p>
+                        {{-- Title --}}
+                        <h3 class="svc-card__title">{{ $service->title }}</h3>
 
-                                @if($service->features && $service->features->count())
-                                    <div class="mt-10 pt-8 border-t border-[color:var(--color-line)]">
-                                        <div class="font-mono text-xs text-[color:var(--color-ink-subtle)] uppercase tracking-widest mb-6">
-                                            {{ __('ما يشمله النطاق // Deliverables') }}
-                                        </div>
-                                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
-                                            @foreach($service->features as $feature)
-                                                <li class="flex items-baseline gap-3.5 type-body text-[color:var(--color-ink-muted)] text-sm">
-                                                    <span class="w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent)] flex-shrink-0 translate-y-1.5"></span>
-                                                    <span>{{ $feature->feature_text }}</span>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
+                        {{-- Description --}}
+                        <p class="svc-card__desc">
+                            {{ $service->short_description ?? strip_tags($service->description) }}
+                        </p>
 
-                                <div class="mt-8 pt-6 border-t border-[color:var(--color-line)] flex items-center justify-between lg:hidden">
-                                    <a href="{{ route('request-design.create', ['service' => $service->slug ?? $service->id]) }}"
-                                       class="btn btn--primary text-xs py-2.5 px-5"
-                                       wire:navigate>
-                                        <span>{{ __('طلب الخدمة') }}</span>
-                                    </a>
-                                    <a href="{{ route('contact') }}" class="type-small text-[color:var(--color-ink-muted)] hover:text-[color:var(--color-accent)] transition-colors" wire:navigate>
-                                        {{ __('استفسار سريع') }}
-                                    </a>
-                                </div>
-                            </div>
+                        {{-- Features --}}
+                        @if($service->features && $service->features->count())
+                            <ul class="svc-card__features">
+                                @foreach($service->features->take(4) as $feature)
+                                    <li>
+                                        <span class="svc-card__features-dot" aria-hidden="true"></span>
+                                        <span>{{ $feature->feature_text }}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+
+                        {{-- CTA --}}
+                        <div class="svc-card__footer">
+                            <a href="{{ route('request-design.create', ['service' => $service->slug ?? $service->id]) }}"
+                               class="svc-card__cta"
+                               wire:navigate>
+                                <span>{{ __('طلب الخدمة') }}</span>
+                                <svg width="14" height="10" viewBox="0 0 16 10" fill="none" class="svc-card__cta-arrow" aria-hidden="true">
+                                    <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
                         </div>
                     </article>
                 @endforeach
@@ -123,16 +121,49 @@
     </section>
 
     {{-- ================================================================
-         3. STATS
+         3. WHY US — Trust indicators
+         ================================================================ --}}
+    <section class="section-pad" style="background: var(--color-canvas);" data-section>
+        <div class="container-page">
+            <div class="max-w-3xl mb-16" data-reveal>
+                <x-ui.eyebrow number="02">{{ __('لماذا إشراق') }}</x-ui.eyebrow>
+                <h2 class="type-h1 mt-6">{{ __('ما يميزنا عن البقية.') }}</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @php
+                    $whyUs = [
+                        ['icon' => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>', 'title' => 'جودة بلا تنازل', 'desc' => 'كل سطر كود ومكوّن تصميم يمر بمراجعة صارمة قبل التسليم.'],
+                        ['icon' => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>', 'title' => 'التزام بالموعد', 'desc' => 'جداول واقعية ومحدّثة أولاً بأول — نسلّم في الوقت أو قبله.'],
+                        ['icon' => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>', 'title' => 'شراكة حقيقية', 'desc' => 'لسنا مزوّد خدمة فحسب — نصبح جزءاً من فريقك.'],
+                    ];
+                @endphp
+
+                @foreach($whyUs as $idx => $item)
+                    <div class="svc-why-card" data-reveal data-reveal-stagger="{{ $idx * 120 }}">
+                        <div class="svc-why-card__icon">
+                            {!! $item['icon'] !!}
+                        </div>
+                        <h3 class="type-h3 mt-5">{{ __($item['title']) }}</h3>
+                        <p class="type-body mt-3">{{ __($item['desc']) }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    {{-- ================================================================
+         4. STATS
          ================================================================ --}}
     @if($stats && $stats->count())
-        <section class="section-pad" style="background: var(--color-canvas);">
-            <div class="container-page">
+        <section class="section-pad relative overflow-hidden" style="background: var(--color-surface);" data-section>
+            <div class="stats-bg-glow" aria-hidden="true"></div>
+            <div class="container-page relative z-10">
                 <div class="max-w-3xl mb-16" data-reveal>
                     <x-ui.eyebrow number="03">{{ __('الأثر والنتائج') }}</x-ui.eyebrow>
                     <h2 class="type-h1 mt-6">{{ __('أرقام تلخص التجربة.') }}</h2>
                 </div>
-                <div class="stats-grid">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-8">
                     @foreach($stats->take(4) as $idx => $stat)
                         @php
                             $raw = (string) ($stat->number ?? '');
@@ -141,17 +172,20 @@
                             $suffix = $m[2] ?? '';
                             $decimals = (strpos($raw, '.') !== false) ? 1 : 0;
                         @endphp
-                        <div class="stats-grid__item stat-3d" data-reveal data-reveal-stagger="{{ $idx * 100 }}">
-                            <div class="stats-grid__num"
-                                 data-count="{{ $value }}"
-                                 data-count-format="{{ $suffix }}"
-                                 data-count-decimals="{{ $decimals }}"
-                                 dir="ltr">
-                                0{{ $suffix }}
+                        <div class="stat-3d" data-reveal data-reveal-stagger="{{ $idx * 100 }}">
+                            <div class="stat-3d__number">
+                                <div class="type-numeral text-[clamp(3rem,7vw,5rem)] leading-none text-[color:var(--color-ink)]"
+                                     data-count="{{ $value }}"
+                                     data-count-format="{{ $suffix }}"
+                                     data-count-decimals="{{ $decimals }}"
+                                     dir="ltr">
+                                    0{{ $suffix }}
+                                </div>
+                                <div class="stat-3d__glow" aria-hidden="true"></div>
                             </div>
-                            <div class="stats-grid__label">{{ $stat->label }}</div>
+                            <div class="type-eyebrow mt-5 text-[color:var(--color-ink-muted)]">{{ $stat->label }}</div>
                             @if($stat->description)
-                                <p class="stats-grid__desc">{{ $stat->description }}</p>
+                                <p class="type-small mt-3 max-w-[16rem]">{{ $stat->description }}</p>
                             @endif
                         </div>
                     @endforeach
@@ -161,20 +195,22 @@
     @endif
 
     {{-- ================================================================
-         4. CTA SECTION
+         5. CTA — Immersive
          ================================================================ --}}
-    <section class="cta-ed" data-section>
-        <div class="container-page">
-            <div class="cta-ed__inner" data-reveal>
+    <section class="svc-cta relative overflow-hidden" data-section>
+        <div class="svc-cta__glow" aria-hidden="true"></div>
+        <div class="container-page relative z-10">
+            <div class="svc-cta__inner" data-reveal>
                 <x-ui.eyebrow number="04">{{ __('الخطوة التالية') }}</x-ui.eyebrow>
-                <h2 class="cta-ed__heading mt-6">
-                    {{ __('فلنبدأ خطة واضحة') }} <em>{{ __('لمشروعك') }}</em>
+                <h2 class="type-display mt-8" style="font-size: clamp(2.5rem, 5.5vw, 5rem);">
+                    {{ __('فلنبدأ خطة واضحة') }}
+                    <em class="type-display-serif text-gradient" style="font-size: inherit;">{{ __('لمشروعك') }}</em>
                 </h2>
-                <p class="type-body-lg mt-6 max-w-xl text-[color:var(--color-ink-muted)]">
+                <p class="type-body-lg mt-8 max-w-xl text-[color:var(--color-ink-muted)]">
                     {{ __('أرسل متطلبات مشروعك وسنقترح المسار الأنسب مع تقدير دقيق للمراحل والتكلفة خلال يوم عمل واحد.') }}
                 </p>
-                <div class="cta-ed__actions">
-                    <a href="{{ route('request-design.create') }}" class="btn btn--primary" id="services-cta-primary" wire:navigate>
+                <div class="mt-12 flex flex-wrap items-center gap-5">
+                    <a href="{{ route('request-design.create') }}" class="btn btn--primary btn-glow" id="services-cta-primary" wire:navigate>
                         <span>{{ __('ابدأ مشروعك الآن') }}</span>
                         <svg class="btn-arrow" width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
                             <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -188,4 +224,3 @@
         </div>
     </section>
 </x-layouts.app>
-
