@@ -12,6 +12,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ProjectImagesRelationManager extends RelationManager
 {
@@ -28,13 +29,23 @@ class ProjectImagesRelationManager extends RelationManager
                 ->label('الصورة')
                 ->image()
                 ->directory('project-gallery')
+                ->live()
+                ->afterStateUpdated(function ($state, $set, $get) {
+                    $file = is_array($state) ? (reset($state) ?: null) : $state;
+                    if ($file instanceof TemporaryUploadedFile) {
+                        $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                        $set('caption', $filename);
+                    }
+                })
                 ->required(),
             Forms\Components\TextInput::make('caption')
-                ->label('تعليق')
-                ->maxLength(255),
+                ->label('التعليق')
+                ->maxLength(255)
+                ->helperText('يتم تعيين اسم الملف تلقائياً كتعليق، ويمكنك تعديله بحرية'),
             Forms\Components\TextInput::make('order')
                 ->label('الترتيب')
-                ->numeric(),
+                ->numeric()
+                ->default(0),
         ]);
     }
 

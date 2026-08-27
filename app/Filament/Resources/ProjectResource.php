@@ -15,6 +15,7 @@ use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ProjectResource extends Resource
 {
@@ -68,6 +69,37 @@ class ProjectResource extends Resource
                 ->downloadable()
                 ->openable()
                 ->helperText('الحد الأقصى: 100 ميجابايت'),
+            Forms\Components\Repeater::make('projectImages')
+                ->relationship('projectImages')
+                ->label('صور إضافية للمشروع (المعرض)')
+                ->schema([
+                    Forms\Components\FileUpload::make('image_path')
+                        ->label('الصورة')
+                        ->image()
+                        ->directory('project-gallery')
+                        ->live()
+                        ->afterStateUpdated(function ($state, $set, $get) {
+                            $file = is_array($state) ? (reset($state) ?: null) : $state;
+                            if ($file instanceof TemporaryUploadedFile) {
+                                $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                                $set('caption', $filename);
+                            }
+                        })
+                        ->required(),
+                    Forms\Components\TextInput::make('caption')
+                        ->label('التعليق')
+                        ->maxLength(255)
+                        ->helperText('يتم تعيين اسم الملف تلقائياً كتعليق، ويمكنك تعديله بحرية'),
+                    Forms\Components\TextInput::make('order')
+                        ->label('الترتيب')
+                        ->numeric()
+                        ->default(0),
+                ])
+                ->columns(3)
+                ->collapsible()
+                ->defaultItems(0)
+                ->addActionLabel('إضافة صورة جديدة')
+                ->columnSpanFull(),
             Forms\Components\Toggle::make('is_featured')
                 ->label('عرض في الصفحة الرئيسية؟'),
             Forms\Components\Select::make('types')
