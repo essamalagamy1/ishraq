@@ -36,8 +36,8 @@
                     </p>
                 @endif
 
-                @if($project->types && $project->types->count())
-                    <div class="mt-6 flex flex-wrap gap-2.5">
+                <div class="mt-6 flex flex-wrap items-center gap-2.5">
+                    @if($project->types && $project->types->count())
                         @foreach($project->types as $type)
                             <a href="{{ route('portfolio', ['type' => $type->slug]) }}"
                                class="px-4 py-1.5 rounded-full text-sm font-medium bg-[color:var(--color-surface-raised)] border border-[color:var(--color-line-strong)] text-[color:var(--color-ink)] hover:border-[color:var(--color-accent)] transition-all"
@@ -45,8 +45,20 @@
                                 {{ $type->name }}
                             </a>
                         @endforeach
-                    </div>
-                @endif
+                    @endif
+
+                    @if($project->project_url)
+                        <a href="{{ $project->project_url }}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="inline-flex items-center gap-2 px-5 py-1.5 rounded-full text-sm font-semibold bg-[color:var(--color-accent)] text-black hover:bg-white hover:text-black transition-all shadow-sm group">
+                            <span>{{ __('معاينة / زيارة المشروع') }}</span>
+                            <svg class="w-4 h-4 rtl:-scale-x-100 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </a>
+                    @endif
+                </div>
             </div>
         </div>
     </section>
@@ -65,13 +77,29 @@
                                 01 / {{ str_pad(count($galleryList), 2, '0', STR_PAD_LEFT) }}
                             </span>
 
-                            <button type="button" data-gallery-fullscreen
-                                    class="pointer-events-auto group/btn inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/65 backdrop-blur-md border border-white/15 text-white hover:border-[color:var(--color-accent)] transition-all text-xs font-medium">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
-                                </svg>
-                                <span>{{ __('توسيع الشاشة') }}</span>
-                            </button>
+                            <div class="pointer-events-auto flex items-center gap-2">
+                                @if($project->project_url)
+                                    <a href="{{ $project->project_url }}"
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       class="group/live inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/65 backdrop-blur-md border border-white/15 text-white hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-accent)] transition-all text-xs font-medium">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rtl:-scale-x-100">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                            <polyline points="15 3 21 3 21 9"></polyline>
+                                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                                        </svg>
+                                        <span>{{ __('رابط مباشر') }}</span>
+                                    </a>
+                                @endif
+
+                                <button type="button" data-gallery-fullscreen
+                                        class="group/btn inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/65 backdrop-blur-md border border-white/15 text-white hover:border-[color:var(--color-accent)] transition-all text-xs font-medium">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                                    </svg>
+                                    <span>{{ __('توسيع الشاشة') }}</span>
+                                </button>
+                            </div>
                         </div>
 
                         {{-- Main Display Image --}}
@@ -215,6 +243,29 @@
                 {{-- Right Sidebar --}}
                 <div class="lg:col-span-4 min-w-0">
                     <div class="sticky top-24 space-y-6">
+                        @if($project->project_url)
+                            <div class="surface-card p-6 rounded-3xl border border-[color:var(--color-accent-ring)] relative overflow-hidden" data-reveal>
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                        <span class="type-eyebrow text-[color:var(--color-accent)]">{{ __('المعاينة الحية') }}</span>
+                                    </div>
+                                    <span class="type-small font-mono text-[color:var(--color-ink-subtle)] text-xs">Live Demo</span>
+                                </div>
+                                <p class="type-body text-sm text-[color:var(--color-ink-muted)] mb-5 leading-relaxed">
+                                    {{ __('استعرض هذا المشروع على أرض الواقع وتصفح صفحاته ومميزاته الحية.') }}
+                                </p>
+                                <a href="{{ $project->project_url }}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="btn btn--primary w-full justify-center gap-2 group">
+                                    <span>{{ __('زيارة موقع المشروع') }}</span>
+                                    <svg class="w-4 h-4 rtl:-scale-x-100 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        @endif
                         @if($project->is_available_for_purchase)
                             <div class="surface-card p-6 rounded-3xl border border-[color:var(--color-accent-ring)]" data-reveal>
                                 <div class="flex items-center justify-between gap-2 mb-2">

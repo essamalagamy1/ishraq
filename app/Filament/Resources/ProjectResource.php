@@ -69,6 +69,12 @@ class ProjectResource extends Resource
                 ->downloadable()
                 ->openable()
                 ->helperText('الحد الأقصى: 100 ميجابايت'),
+            Forms\Components\TextInput::make('project_url')
+                ->label('رابط المشروع / المعاينة المباشرة')
+                ->url()
+                ->placeholder('https://example.com')
+                ->maxLength(500)
+                ->helperText('رابط الموقع الحي أو رابط معاينة وتجربة المشروع (اختياري)'),
             Forms\Components\Repeater::make('projectImages')
                 ->relationship('projectImages')
                 ->label('صور إضافية للمشروع (المعرض)')
@@ -141,6 +147,13 @@ class ProjectResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')->label('العنوان'),
+                Tables\Columns\TextColumn::make('project_url')
+                    ->label('رابط المشروع')
+                    ->icon('heroicon-m-arrow-top-right-on-square')
+                    ->url(fn ($record) => $record->project_url, true)
+                    ->openUrlInNewTab()
+                    ->placeholder('—')
+                    ->toggleable(),
                 Tables\Columns\IconColumn::make('is_featured')->label('مميز')->boolean(),
                 Tables\Columns\TextColumn::make('status')->label('الحالة'),
                 Tables\Columns\TextColumn::make('created_at')->label('تاريخ الإنشاء')->dateTime()->sortable(),
