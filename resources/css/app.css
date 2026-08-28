@@ -9,35 +9,35 @@
 
 @theme {
     /* Surfaces — warm near-black canvas */
-    --color-canvas:         #0B0A08;
-    --color-surface:        #131210;
+    --color-canvas: #0B0A08;
+    --color-surface: #131210;
     --color-surface-raised: #1A1815;
-    --color-surface-inset:  #080706;
+    --color-surface-inset: #080706;
 
     /* Text — warm off-whites */
-    --color-ink:            #F5F1EB;
-    --color-ink-muted:      #B8B2A8;
-    --color-ink-subtle:     #958F85;
-    --color-ink-faint:      #3D3A35;
+    --color-ink: #F5F1EB;
+    --color-ink-muted: #B8B2A8;
+    --color-ink-subtle: #958F85;
+    --color-ink-faint: #3D3A35;
 
     /* Hairlines */
-    --color-line:           rgba(245, 241, 235, 0.08);
-    --color-line-strong:    rgba(245, 241, 235, 0.16);
-    --color-line-bold:      rgba(245, 241, 235, 0.24);
+    --color-line: rgba(245, 241, 235, 0.08);
+    --color-line-strong: rgba(245, 241, 235, 0.16);
+    --color-line-bold: rgba(245, 241, 235, 0.24);
 
     /* Single accent — burnt amber */
-    --color-accent:         #C77D4A;
-    --color-accent-hover:   #D88E5B;
-    --color-accent-soft:    rgba(199, 125, 74, 0.12);
-    --color-accent-ring:    rgba(199, 125, 74, 0.32);
+    --color-accent: #C77D4A;
+    --color-accent-hover: #D88E5B;
+    --color-accent-soft: rgba(199, 125, 74, 0.12);
+    --color-accent-ring: rgba(199, 125, 74, 0.32);
 
     /* Type families */
-    --font-sans:  'IBM Plex Sans Arabic', 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'IBM Plex Sans Arabic', 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
     --font-serif: 'IBM Plex Serif', ui-serif, Georgia, serif;
-    --font-mono:  'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
 
     /* Motion */
-    --ease-out-soft:    cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
     --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
@@ -45,7 +45,11 @@
    Base
    ============================================================ */
 
-*, *::before, *::after { box-sizing: border-box; }
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
 html {
     -webkit-text-size-adjust: 100%;
@@ -68,14 +72,34 @@ body {
     overflow-x: hidden;
 }
 
-::selection      { background: var(--color-accent-soft); color: var(--color-ink); }
-::-moz-selection { background: var(--color-accent-soft); color: var(--color-ink); }
+::selection {
+    background: var(--color-accent-soft);
+    color: var(--color-ink);
+}
+
+::-moz-selection {
+    background: var(--color-accent-soft);
+    color: var(--color-ink);
+}
 
 /* Scrollbar — thin, monochrome */
-::-webkit-scrollbar         { width: 10px; height: 10px; }
-::-webkit-scrollbar-track   { background: var(--color-canvas); }
-::-webkit-scrollbar-thumb   { background: var(--color-line-strong); border-radius: 0; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-line-bold); }
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-canvas);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-line-strong);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-line-bold);
+}
 
 :focus-visible {
     outline: 2px solid var(--color-accent);
@@ -89,16 +113,24 @@ a {
     transition: color 200ms var(--ease-out-soft), opacity 200ms var(--ease-out-soft);
 }
 
-img, svg, video {
+img,
+svg,
+video {
     display: block;
     max-width: 100%;
     height: auto;
 }
 
-button { font: inherit; cursor: pointer; }
+button {
+    font: inherit;
+    cursor: pointer;
+}
 
 /* Pre-Lenis FOUC mask */
-html:not(.is-ready) body { opacity: 0; }
+html:not(.is-ready) body {
+    opacity: 0;
+}
+
 html.is-ready body {
     opacity: 1;
     transition: opacity 600ms var(--ease-out-soft);
@@ -107,10 +139,22 @@ html.is-ready body {
 /* ============================================================
    Lenis smooth scroll
    ============================================================ */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: clip; }
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: clip;
+}
 
 /* ============================================================
    Typography utilities
@@ -201,27 +245,32 @@ html.lenis, html.lenis body { height: auto; }
     transform: translateY(28px);
     will-change: opacity, transform;
 }
+
 [data-reveal].is-revealed {
     opacity: 1;
     transform: translateY(0);
 }
 
-[data-reveal-line] > span {
+[data-reveal-line]>span {
     display: inline-block;
     overflow: hidden;
     vertical-align: top;
 }
-[data-reveal-line] > span > span {
+
+[data-reveal-line]>span>span {
     display: inline-block;
     transform: translateY(110%);
     will-change: transform;
 }
-[data-reveal-line].is-revealed > span > span {
+
+[data-reveal-line].is-revealed>span>span {
     transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
-    [data-reveal], [data-reveal-line] > span > span {
+
+    [data-reveal],
+    [data-reveal-line]>span>span {
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
@@ -235,18 +284,35 @@ html.lenis, html.lenis body { height: auto; }
     will-change: auto;
     animation: heroFadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
 @keyframes heroFadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ============================================================
    Hairlines & layout primitives
    ============================================================ */
 
-.hairline-t { border-top: 1px solid var(--color-line); }
-.hairline-b { border-bottom: 1px solid var(--color-line); }
-.hairline-y { border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); }
+.hairline-t {
+    border-top: 1px solid var(--color-line);
+}
+
+.hairline-b {
+    border-bottom: 1px solid var(--color-line);
+}
+
+.hairline-y {
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+}
 
 .container-page {
     width: 100%;
@@ -310,12 +376,16 @@ html.lenis, html.lenis body { height: auto; }
     --btn-border: var(--color-accent);
     --btn-bg-hover: var(--color-accent-hover);
 }
+
 .btn--primary:hover {
     border-color: var(--color-accent-hover);
     box-shadow: 0 0 0 6px var(--color-accent-soft);
 }
 
-.btn--ghost { --btn-bg: transparent; --btn-border: var(--color-line-strong); }
+.btn--ghost {
+    --btn-bg: transparent;
+    --btn-border: var(--color-line-strong);
+}
 
 .btn--link {
     padding: 0;
@@ -325,6 +395,7 @@ html.lenis, html.lenis body { height: auto; }
     color: var(--color-ink);
     position: relative;
 }
+
 .btn--link::after {
     content: '';
     position: absolute;
@@ -336,13 +407,23 @@ html.lenis, html.lenis body { height: auto; }
     transform-origin: right;
     transition: opacity 300ms var(--ease-out-soft), transform 400ms var(--ease-out-soft);
 }
-.btn--link:hover::after { opacity: 1; transform: scaleX(1.02); }
+
+.btn--link:hover::after {
+    opacity: 1;
+    transform: scaleX(1.02);
+}
 
 .btn .btn-arrow {
     transition: transform 400ms var(--ease-out-soft);
 }
-.btn:hover .btn-arrow { transform: translateX(-4px); }
-[dir="ltr"] .btn:hover .btn-arrow { transform: translateX(4px); }
+
+.btn:hover .btn-arrow {
+    transform: translateX(-4px);
+}
+
+[dir="ltr"] .btn:hover .btn-arrow {
+    transform: translateX(4px);
+}
 
 /* ============================================================
    Cards & chips
@@ -425,11 +506,17 @@ html.lenis, html.lenis body { height: auto; }
 .masonry {
     column-gap: 1.5rem;
 }
+
 @media (min-width: 768px) {
-    .masonry { columns: 2; }
+    .masonry {
+        columns: 2;
+    }
 }
+
 @media (min-width: 1200px) {
-    .masonry { columns: 3; }
+    .masonry {
+        columns: 3;
+    }
 }
 
 .masonry-item {
@@ -447,6 +534,7 @@ html.lenis, html.lenis body { height: auto; }
     overflow-wrap: anywhere;
     word-break: break-word;
 }
+
 .prose-article h2,
 .prose-article h3,
 .prose-article h4 {
@@ -456,15 +544,29 @@ html.lenis, html.lenis body { height: auto; }
     margin-top: 2.5rem;
     margin-bottom: 1rem;
 }
-.prose-article p { margin-bottom: 1.25rem; }
+
+.prose-article p {
+    margin-bottom: 1.25rem;
+}
+
 .prose-article ul {
     list-style: disc;
     padding-inline-start: 1.5rem;
     margin-bottom: 1.25rem;
 }
-.prose-article li { margin-bottom: 0.5rem; }
-.prose-article a { color: var(--color-accent); }
-.prose-article img { border-radius: 16px; border: 1px solid var(--color-line); }
+
+.prose-article li {
+    margin-bottom: 0.5rem;
+}
+
+.prose-article a {
+    color: var(--color-accent);
+}
+
+.prose-article img {
+    border-radius: 16px;
+    border: 1px solid var(--color-line);
+}
 
 /* ============================================================
    Navbar — Editorial
@@ -645,20 +747,29 @@ html.lenis, html.lenis body { height: auto; }
 .nav-ed__toggle-bar::after {
     content: '';
     position: absolute;
-    left: 0; right: 0;
+    left: 0;
+    right: 0;
     height: 1.5px;
     background: currentColor;
     transition: transform 350ms var(--ease-out-soft);
 }
-.nav-ed__toggle-bar::before { top: -7px; }
-.nav-ed__toggle-bar::after  { top:  7px; }
+
+.nav-ed__toggle-bar::before {
+    top: -7px;
+}
+
+.nav-ed__toggle-bar::after {
+    top: 7px;
+}
 
 .nav-ed__toggle.is-open .nav-ed__toggle-bar {
     background: transparent;
 }
+
 .nav-ed__toggle.is-open .nav-ed__toggle-bar::before {
     transform: translateY(7px) rotate(45deg);
 }
+
 .nav-ed__toggle.is-open .nav-ed__toggle-bar::after {
     transform: translateY(-7px) rotate(-45deg);
 }
@@ -683,6 +794,7 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 @media (min-width: 1024px) {
+
     .nav-mobile,
     .nav-mobile.is-open {
         display: none;
@@ -792,7 +904,7 @@ html.lenis, html.lenis body { height: auto; }
     z-index: 0;
 }
 
-.hero-ed > .container-page {
+.hero-ed>.container-page {
     position: relative;
     z-index: 1;
 }
@@ -844,7 +956,6 @@ html.lenis, html.lenis body { height: auto; }
     color: var(--color-accent);
     font-family: var(--font-serif);
     font-weight: 400;
-    font-style: italic;
     letter-spacing: -0.015em;
 }
 
@@ -931,6 +1042,7 @@ html.lenis, html.lenis body { height: auto; }
     mask-image: linear-gradient(to left, transparent, #000 8%, #000 92%, transparent);
     -webkit-mask-image: linear-gradient(to left, transparent, #000 8%, #000 92%, transparent);
 }
+
 .marquee__track {
     display: flex;
     flex-shrink: 0;
@@ -938,12 +1050,24 @@ html.lenis, html.lenis body { height: auto; }
     padding-inline-end: 4rem;
     animation: marquee 38s linear infinite;
 }
+
 @keyframes marquee {
-    from { transform: translate3d(0, 0, 0); }
-    to   { transform: translate3d(100%, 0, 0); }
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(100%, 0, 0);
+    }
 }
-[dir="rtl"] .marquee__track { animation-direction: reverse; }
-.marquee:hover .marquee__track { animation-play-state: paused; }
+
+[dir="rtl"] .marquee__track {
+    animation-direction: reverse;
+}
+
+.marquee:hover .marquee__track {
+    animation-play-state: paused;
+}
 
 
 /* ============================================================
@@ -1344,21 +1468,26 @@ html.lenis, html.lenis body { height: auto; }
     overflow: hidden;
     background: var(--color-surface);
 }
+
 .work-card__media {
     position: relative;
     overflow: hidden;
     aspect-ratio: 16/10;
 }
+
 .work-card__media img {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     transition: transform 900ms var(--ease-out-soft), filter 600ms var(--ease-out-soft);
     filter: saturate(0.9) brightness(0.92);
 }
+
 .work-card:hover .work-card__media img {
     transform: scale(1.04);
     filter: saturate(1) brightness(1);
 }
+
 .work-card__media-fallback {
     position: absolute;
     inset: 0;
@@ -1382,6 +1511,7 @@ html.lenis, html.lenis body { height: auto; }
     display: block;
     transition: transform 400ms var(--ease-out-soft);
 }
+
 .cursor-card::after {
     content: '';
     position: absolute;
@@ -1391,9 +1521,11 @@ html.lenis, html.lenis body { height: auto; }
     transition: opacity 300ms var(--ease-out-soft);
     pointer-events: none;
 }
+
 .cursor-card:hover {
     transform: translateY(-2px);
 }
+
 .cursor-card:hover::after {
     opacity: 1;
 }
@@ -1418,6 +1550,7 @@ html.lenis, html.lenis body { height: auto; }
     justify-content: center;
     transition: transform 400ms var(--ease-out-soft), border-color 400ms var(--ease-out-soft), background 400ms var(--ease-out-soft);
 }
+
 .fab-wa:hover {
     transform: translateY(-2px);
     border-color: var(--color-accent);
@@ -1431,18 +1564,26 @@ html.lenis, html.lenis body { height: auto; }
 .embla {
     position: relative;
 }
-.embla__viewport { overflow: hidden; }
+
+.embla__viewport {
+    overflow: hidden;
+}
+
 .embla__container {
     display: flex;
     gap: clamp(1rem, 3vw, 3rem);
     touch-action: pan-y;
 }
+
 .embla__slide {
     flex: 0 0 100%;
     min-width: 0;
 }
+
 @media (min-width: 900px) {
-    .embla__slide { flex: 0 0 78%; }
+    .embla__slide {
+        flex: 0 0 78%;
+    }
 }
 
 .embla__controls {
@@ -1452,11 +1593,13 @@ html.lenis, html.lenis body { height: auto; }
     justify-content: space-between;
     gap: 1.5rem;
 }
+
 .embla__dots {
     display: flex;
     gap: 0.5rem;
     align-items: center;
 }
+
 .embla__dot {
     width: 28px;
     height: 2px;
@@ -1467,25 +1610,39 @@ html.lenis, html.lenis body { height: auto; }
     transition: background 300ms var(--ease-out-soft), width 300ms var(--ease-out-soft);
     cursor: pointer;
 }
-.embla__dot.is-active { background: var(--color-accent); width: 44px; }
+
+.embla__dot.is-active {
+    background: var(--color-accent);
+    width: 44px;
+}
 
 .embla__arrow {
-    width: 44px; height: 44px;
+    width: 44px;
+    height: 44px;
     border-radius: 999px;
     background: transparent;
     border: 1px solid var(--color-line-strong);
     color: var(--color-ink);
-    display: inline-flex; align-items: center; justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     transition: background 300ms var(--ease-out-soft), border-color 300ms var(--ease-out-soft);
     cursor: pointer;
 }
-.embla__arrow:hover { border-color: var(--color-accent); background: var(--color-surface-raised); }
+
+.embla__arrow:hover {
+    border-color: var(--color-accent);
+    background: var(--color-surface-raised);
+}
 
 /* ============================================================
    Article card
    ============================================================ */
 
-.article-card { display: block; }
+.article-card {
+    display: block;
+}
+
 .article-card__cover {
     aspect-ratio: 16/10;
     overflow: hidden;
@@ -1494,17 +1651,26 @@ html.lenis, html.lenis body { height: auto; }
     border-radius: 16px;
     border: 1px solid var(--color-line);
 }
+
 .article-card__cover img {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     transition: transform 700ms var(--ease-out-soft);
     filter: saturate(0.95);
 }
-.article-card:hover .article-card__cover img { transform: scale(1.03); }
+
+.article-card:hover .article-card__cover img {
+    transform: scale(1.03);
+}
+
 .article-card__title {
     transition: color 250ms var(--ease-out-soft);
 }
-.article-card:hover .article-card__title { color: var(--color-accent); }
+
+.article-card:hover .article-card__title {
+    color: var(--color-accent);
+}
 
 /* ============================================================
    Featured Projects Showcase — Redesigned
@@ -1515,7 +1681,8 @@ html.lenis, html.lenis body { height: auto; }
     cursor: pointer;
     transform-style: preserve-3d;
 }
-.tilt-card > a {
+
+.tilt-card>a {
     transform-style: preserve-3d;
     pointer-events: auto;
 }
@@ -1774,12 +1941,10 @@ html.lenis, html.lenis body { height: auto; }
     max-width: 800px;
     max-height: 800px;
     border-radius: 50%;
-    background: radial-gradient(
-        circle at center,
-        rgba(199, 125, 74, 0.11) 0%,
-        rgba(199, 125, 74, 0.04) 40%,
-        transparent 70%
-    );
+    background: radial-gradient(circle at center,
+            rgba(199, 125, 74, 0.11) 0%,
+            rgba(199, 125, 74, 0.04) 40%,
+            transparent 70%);
     transform: translate(-50%, -50%);
     top: var(--halo-y, 40%);
     left: var(--halo-x, 55%);
@@ -1787,7 +1952,9 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-halo::after { display: none; }
+    .hero-halo::after {
+        display: none;
+    }
 }
 
 /* ============================================================
@@ -1830,12 +1997,23 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 @keyframes pulse-ring {
-    0%, 100% { transform: scale(1); opacity: 0.35; }
-    50%       { transform: scale(2); opacity: 0; }
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.35;
+    }
+
+    50% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .availability-badge__dot::before { animation: none; }
+    .availability-badge__dot::before {
+        animation: none;
+    }
 }
 
 /* ============================================================
@@ -1897,7 +2075,7 @@ html.lenis, html.lenis body { height: auto; }
     z-index: 0;
 }
 
-.cta-ed > * {
+.cta-ed>* {
     position: relative;
     z-index: 1;
 }
@@ -1952,12 +2130,20 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 @keyframes blob-drift {
-    from { transform: translate(0, 0) scale(1); }
-    to   { transform: translate(30px, 20px) scale(1.08); }
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+
+    to {
+        transform: translate(30px, 20px) scale(1.08);
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-blob { animation: none; display: none; }
+    .hero-blob {
+        animation: none;
+        display: none;
+    }
 }
 
 /* ============================================================
@@ -2096,13 +2282,11 @@ html.lenis, html.lenis body { height: auto; }
 .work-bento__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.92) 0%,
-        rgba(0, 0, 0, 0.55) 40%,
-        rgba(0, 0, 0, 0.15) 70%,
-        transparent 100%
-    );
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.92) 0%,
+            rgba(0, 0, 0, 0.55) 40%,
+            rgba(0, 0, 0, 0.15) 70%,
+            transparent 100%);
     z-index: 1;
     transition: opacity 400ms var(--ease-out-soft);
 }
@@ -2270,11 +2454,13 @@ html.lenis, html.lenis body { height: auto; }
     .work-bento__img {
         transition: none;
     }
+
     .work-bento__desc {
         max-height: none;
         opacity: 1;
         transition: none;
     }
+
     .work-bento__arrow {
         transition: none;
     }
@@ -2308,8 +2494,8 @@ html.lenis, html.lenis body { height: auto; }
         linear-gradient(90deg, rgba(245, 241, 235, 0.03) 1px, transparent 1px);
     background-size: 80px 80px;
     pointer-events: none;
-    mask-image: linear-gradient(to bottom, transparent 10%, rgba(0,0,0,0.5) 50%, transparent 90%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 10%, rgba(0,0,0,0.5) 50%, transparent 90%);
+    mask-image: linear-gradient(to bottom, transparent 10%, rgba(0, 0, 0, 0.5) 50%, transparent 90%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 10%, rgba(0, 0, 0, 0.5) 50%, transparent 90%);
 }
 
 .svc-hero__dot {
