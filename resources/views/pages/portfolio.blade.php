@@ -12,7 +12,7 @@
         <div class="svc-hero__glow" aria-hidden="true"></div>
 
         <div class="container-page relative z-10 svc-hero__content">
-            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 pt-40 pb-24 md:pt-48 md:pb-32">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 pt-20 pb-12 md:pt-24 md:pb-16">
                 <div class="max-w-4xl" data-reveal>
                     <h1 class="type-display leading-[1.1]">
                         <span class="block">{{ $heroTitle }}</span>

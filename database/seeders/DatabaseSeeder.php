@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             TestimonialSeeder::class,
             ServiceUpdateSeeder::class,
             ArticleSeeder::class,
+            ArticleSeoSeeder::class,
         ]);
     }
 }

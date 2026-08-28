@@ -2287,7 +2287,7 @@ html.lenis, html.lenis body { height: auto; }
 /* Hero */
 .svc-hero {
     background: var(--color-canvas);
-    min-height: clamp(500px, 70vh, 700px);
+    min-height: clamp(500px, 50vh, 700px);
     display: flex;
     align-items: flex-end;
     position: relative;
