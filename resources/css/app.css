@@ -1510,6 +1510,16 @@ html.lenis, html.lenis body { height: auto; }
    Featured Projects Showcase — Redesigned
    ============================================================ */
 
+/* Tilt-card wrapper — ensure clickability through 3D transforms */
+.tilt-card {
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+.tilt-card > a {
+    transform-style: preserve-3d;
+    pointer-events: auto;
+}
+
 .featured-card {
     position: relative;
     display: flex;
@@ -1519,6 +1529,7 @@ html.lenis, html.lenis body { height: auto; }
     border: 1px solid var(--color-line-strong);
     border-radius: 24px;
     overflow: hidden;
+    cursor: pointer;
     transition: transform 500ms var(--ease-out-soft), border-color 400ms var(--ease-out-soft), box-shadow 500ms var(--ease-out-soft);
 }
 

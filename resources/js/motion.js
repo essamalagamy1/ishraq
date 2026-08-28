@@ -385,27 +385,23 @@ export function initMagneticHover(selector = '.btn--primary, .featured-card__arr
 export function init3DCards(selector = '.svc-card-3d, .tilt-card') {
     if (reduced || !hasFinePointer) return;
     document.querySelectorAll(selector).forEach((card) => {
-        const inner = card.querySelector('.svc-card-3d__inner, .featured-card') || card;
-
         card.style.perspective = '900px';
+        card.style.transformStyle = 'preserve-3d';
 
         card.addEventListener('pointermove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = (e.clientX - rect.left) / rect.width;
             const y = (e.clientY - rect.top) / rect.height;
-            // Gentle: 12deg max for featured cards, 20 for service cards
             const maxDeg = card.classList.contains('tilt-card') ? 10 : 18;
             const rotateX = (0.5 - y) * maxDeg;
             const rotateY = (x - 0.5) * maxDeg;
 
-            animate(inner, {
-                rotateX: rotateX,
-                rotateY: rotateY,
-            }, { duration: 0.35, easing: 'ease-out' });
+            // Apply transform directly on the card wrapper — not on the <a> inside
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
 
         card.addEventListener('pointerleave', () => {
-            animate(inner, { rotateX: 0, rotateY: 0 }, {
+            animate(card, { rotateX: 0, rotateY: 0 }, {
                 duration: 0.7,
                 easing: spring({ stiffness: 260, damping: 22 }),
             });
