@@ -7,6 +7,8 @@ import Lenis from 'lenis';
 import { animate, scroll, inView, stagger, spring } from 'motion';
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
 
 let lenis = null;
 
@@ -15,7 +17,7 @@ let lenis = null;
    ---------------------------------------------------------------- */
 
 export function initLenis() {
-    if (reduced) {
+    if (reduced || !isDesktop) {
         document.documentElement.classList.add('is-ready');
         return null;
     }
@@ -115,7 +117,7 @@ export function splitLines(el) {
    ---------------------------------------------------------------- */
 
 export function initHeroHalo(container) {
-    if (!container || reduced) return;
+    if (!container || reduced || !hasFinePointer) return;
 
     // The halo element uses CSS custom props for position
     let currentX = 55, currentY = 40;
@@ -357,7 +359,7 @@ export function initProcessCards(section) {
    ---------------------------------------------------------------- */
 
 export function initMagneticHover(selector = '.btn--primary, .featured-card__arrow-btn') {
-    if (reduced) return;
+    if (reduced || !hasFinePointer) return;
     const targets = document.querySelectorAll(selector);
     targets.forEach((el) => {
         const strength = 7;
@@ -381,7 +383,7 @@ export function initMagneticHover(selector = '.btn--primary, .featured-card__arr
    ---------------------------------------------------------------- */
 
 export function init3DCards(selector = '.svc-card-3d, .tilt-card') {
-    if (reduced) return;
+    if (reduced || !hasFinePointer) return;
     document.querySelectorAll(selector).forEach((card) => {
         const inner = card.querySelector('.svc-card-3d__inner, .featured-card') || card;
 

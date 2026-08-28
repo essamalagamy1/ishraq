@@ -16,7 +16,7 @@
             <div class="md:col-span-5">
                 <a href="{{ route('home') }}" class="inline-flex items-center gap-3" aria-label="{{ $companyName }}" wire:navigate>
                     @if($companySettings && $companySettings->logo_path)
-                        <img src="{{ Storage::url($companySettings->logo_path) }}" alt="{{ $companyName }}" class="h-10 w-auto object-contain" style="width: 180px;"/>
+                        <img src="{{ Storage::url($companySettings->logo_path) }}" alt="{{ $companyName }}" class="h-10 w-auto object-contain" width="180" height="40" decoding="async" />
                     @else
                         <span class="type-h2 font-medium tracking-tight">{{ $companyName }}</span>
                     @endif

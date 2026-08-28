@@ -1,26 +1,30 @@
-# إشراق - Ishraq Tech
-> شريكك في التحول الرقمي
+# إشراق للحلول والمنتجات البرمجية الرقمية | Ishraq Tech
 
-## About
-إشراق شركة تطوير برمجيات متخصصة في بناء المواقع والتطبيقات الاحترافية. نقدم حلول تقنية متكاملة باستخدام أحدث التقنيات مثل Laravel, React, Flutter.
+> شريكك في التحول الرقمي — شركة تطوير برمجيات متخصصة في بناء المواقع والتطبيقات الاحترافية باستخدام أحدث التقنيات مثل Laravel, React, Flutter. نقدم حلول تقنية متكاملة من تصميم واجهات المستخدم UI/UX إلى البنية التحتية والاستضافة.
 
-## Services
+## الخدمات
+
 - تطوير مواقع ويب احترافية
 - تطبيقات جوال iOS و Android
-- تصميم واجهات UI/UX
+- تصميم واجهات المستخدم UI/UX
 - متاجر إلكترونية متكاملة
-- أنظمة إدارة مخصصة
-- استضافة وDevOps
+- أنظمة إدارة مخصصة (ERP, CRM, SaaS)
+- استضافة وإدارة خوادم DevOps
 
-## Links
-- Homepage: https://ishraq.tech
-- Services: https://ishraq.tech/services
-- Portfolio: https://ishraq.tech/portfolio
-- About: https://ishraq.tech/about-us
-- Contact: https://ishraq.tech/contact-us
-- Blog: https://ishraq.tech/articles
-- Request a Project: https://ishraq.tech/request-a-design
+## صفحات الموقع
 
-## Contact
-- Email: info@ishraq.tech
-- Website: https://ishraq.tech
+- [الرئيسية](https://ishraq.tech): الصفحة الرئيسية لمنصة إشراق لابتكار وتطوير المنتجات الرقمية
+- [الخدمات](https://ishraq.tech/services): تفاصيل خدمات تطوير الويب، التطبيقات، تصميم الواجهات، والمتاجر الإلكترونية
+- [أعمالنا](https://ishraq.tech/portfolio): استعراض المشاريع المنفذة وقصص النجاح
+- [من نحن](https://ishraq.tech/about-us): نبذة عن إشراق، الرؤية والرسالة وفريق العمل
+- [المدونة](https://ishraq.tech/articles): مقالات تقنية في البرمجة والتصميم والتحول الرقمي
+- [طلب مشروع](https://ishraq.tech/request-a-design): تقديم طلب مشروع أو تصميم جديد
+- [تواصل معنا](https://ishraq.tech/contact-us): معلومات الاتصال والدعم الفني
+- [الوظائف](https://ishraq.tech/careers): الفرص الوظيفية المتاحة في إشراق
+- [سياسة الخصوصية](https://ishraq.tech/privacy-policy): سياسة حماية البيانات والخصوصية
+- [الشروط والأحكام](https://ishraq.tech/terms-conditions): شروط وأحكام استخدام الخدمات
+
+## التواصل
+
+- البريد الإلكتروني: info@ishraq.tech
+- الموقع: [ishraq.tech](https://ishraq.tech)

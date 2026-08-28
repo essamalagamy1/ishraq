@@ -64,7 +64,7 @@
                                   data-count="{{ $value }}"
                                   data-count-format="{{ $suffix }}"
                                   data-count-decimals="{{ $decimals }}"
-                                  dir="ltr">0{{ $suffix }}</span>
+                                  dir="ltr">{{ number_format($value, $decimals) }}{{ $suffix }}</span>
                             <span class="hero-stat__label">{{ $stat->label }}</span>
                         </div>
                     @endforeach
@@ -190,6 +190,8 @@
                                 <img src="{{ Storage::url($firstProject->main_image) }}"
                                      alt="{{ $firstProject->title }}"
                                      class="work-bento__img"
+                                     width="800" height="600"
+                                     decoding="async"
                                      loading="eager" />
                             @else
                                 <div class="work-bento__fallback">
@@ -243,6 +245,8 @@
                                     <img src="{{ Storage::url($secondProject->main_image) }}"
                                          alt="{{ $secondProject->title }}"
                                          class="work-bento__img"
+                                         width="600" height="400"
+                                         decoding="async"
                                          loading="lazy" />
                                 @else
                                     <div class="work-bento__fallback">
@@ -284,6 +288,8 @@
                                     <img src="{{ Storage::url($thirdProject->main_image) }}"
                                          alt="{{ $thirdProject->title }}"
                                          class="work-bento__img"
+                                         width="600" height="400"
+                                         decoding="async"
                                          loading="lazy" />
                                 @else
                                     <div class="work-bento__fallback">
@@ -327,7 +333,7 @@
                     <a href="{{ route('projects.show', $project->slug) }}" class="work-bento__card group">
                         <div class="work-bento__media">
                             @if($project->main_image)
-                                <img src="{{ Storage::url($project->main_image) }}" alt="{{ $project->title }}" class="work-bento__img" loading="lazy" />
+                                <img src="{{ Storage::url($project->main_image) }}" alt="{{ $project->title }}" class="work-bento__img" width="600" height="400" decoding="async" loading="lazy" />
                             @else
                                 <div class="work-bento__fallback"><span>{{ $project->title }}</span></div>
                             @endif

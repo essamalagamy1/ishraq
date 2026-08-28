@@ -123,24 +123,6 @@
 </script>
 @endif
 
-{{-- ================================================================
-     7. ANALYTICS & TAG MANAGERS
-     ================================================================ --}}
-@if(!empty($seoData['ga4_measurement_id']))
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ $seoData['ga4_measurement_id'] }}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', '{{ $seoData['ga4_measurement_id'] }}');
-</script>
-@endif
+{{-- Analytics & Tag Managers are loaded via components/layouts/app.blade.php with deferred/idle strategy --}}
 
-@if(!empty($seoData['gtm_container_id']))
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','{{ $seoData['gtm_container_id'] }}');</script>
-@endif
 
