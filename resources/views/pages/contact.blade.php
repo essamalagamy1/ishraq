@@ -12,7 +12,7 @@
         <div class="svc-hero__glow" aria-hidden="true"></div>
 
         <div class="container-page relative z-10 svc-hero__content">
-            <div class="max-w-5xl pt-40 pb-24 md:pt-48 md:pb-32">
+            <div class="max-w-5xl pt-20 pb-12 md:pt-24 md:pb-16">
 
                 <h1 class="type-display leading-[1.1]" data-reveal>
                     <span class="block">{{ $heroTitle }}</span>
