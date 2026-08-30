@@ -8,7 +8,7 @@
 
 **Project:** Ishraq
 **Generated:** 2026-08-25 19:26:20
-**Category:** Photography Studio
+**Category:** Software & Digital Solutions Company
 
 ---
 

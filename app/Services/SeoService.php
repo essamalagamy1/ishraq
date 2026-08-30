@@ -20,7 +20,7 @@ class SeoService
         $defaults = [
             'meta_title' => config('app.name', 'إشراق').' | تصميم وتطوير المنتجات والحلول الرقمية في السعودية',
             'meta_description' => 'شريكك الرائد في التحول الرقمي وتطوير المنتجات الرقمية في المملكة العربية السعودية. تصميم مواقع ويب، تطبيقات جوال iOS وAndroid، واجهات مستخدم UI/UX، ومتاجر إلكترونية متطورة.',
-            'meta_keywords' => 'تصميم مواقع السعودية, برمجة تطبيقات الرياض, شركة برمجة السعودية, تصميم واجهات UI UX الرياض, تطوير متاجر إلكترونية سلة زد, استوديو حلول رقمية, التحول الرقمي السعودية, أفضل شركة تصميم مواقع في الرياض جدة, برمجة حلول SaaS السعودية',
+            'meta_keywords' => 'تصميم مواقع السعودية, برمجة تطبيقات الرياض, شركة برمجة السعودية, تصميم واجهات UI UX الرياض, تطوير متاجر إلكترونية سلة زد, شركة حلول رقمية, التحول الرقمي السعودية, أفضل شركة تصميم مواقع في الرياض جدة, برمجة حلول SaaS السعودية',
             'og_title' => config('app.name', 'إشراق').' | حلول رقمية مبتكرة تصنع الفارق بالسعودية',
             'og_description' => 'شريكك التقني الموثوق لبناء وتطوير المنتجات الرقمية الحديثة بالمملكة العربية السعودية.',
             'og_type' => 'website',
@@ -69,7 +69,7 @@ class SeoService
             '@type' => ['Organization', 'ProfessionalService', 'LocalBusiness'],
             '@id' => url('/#organization'),
             'name' => $name,
-            'alternateName' => ['Ishraq Digital Studio', 'إشراق للحلول الرقمية', 'إشراق استوديو تقني'],
+            'alternateName' => ['Ishraq Digital Company', 'إشراق للحلول الرقمية', 'شركة إشراق للتقنية'],
             'url' => url('/'),
             'logo' => [
                 '@type' => 'ImageObject',
@@ -78,7 +78,7 @@ class SeoService
                 'height' => 512,
             ],
             'image' => $company?->logo_path ? asset('storage/'.$company->logo_path) : null,
-            'description' => $company?->about_short ?? 'استوديو سعودي متخصص في تصميم وتطوير المنتجات الرقمية الحديثة، المواقع الإلكترونية، وتطبيقات الجوال وحلول التحول الرقمي.',
+            'description' => $company?->about_short ?? 'شركة سعودية متخصصة في تصميم وتطوير المنتجات الرقمية الحديثة، المواقع الإلكترونية، وتطبيقات الجوال وحلول التحول الرقمي.',
             'priceRange' => '$$$',
             'currenciesAccepted' => 'SAR',
             'paymentAccepted' => 'Mada, Apple Pay, Visa, Mastercard, Bank Transfer',
