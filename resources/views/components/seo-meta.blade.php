@@ -4,14 +4,50 @@
     $seoService = app(\App\Services\SeoService::class);
     $currentPage = request()->route()?->getName() ?? 'home';
     
-    // Get SEO data
-    $seoData = $seo instanceof \App\Models\SeoSetting 
-        ? $seoService->getPageSeo($seo->page) 
-        : $seoService->getPageSeo($currentPage);
-    
     // Get company settings
     $company = \App\Models\CompanySetting::first();
     $currentUrl = url()->current();
+
+    // Get SEO data
+    if ($seo instanceof \App\Models\SeoSetting) {
+        $seoData = $seoService->getPageSeo($seo->page);
+    } elseif ($seo instanceof \App\Models\Project) {
+        $defaultSeo = $seoService->getPageSeo('portfolio');
+        $seoData = [
+            'meta_title' => $seo->title . ' | إشراق تك (Ishraq Tech)',
+            'meta_description' => $seo->short_description ?: \Illuminate\Support\Str::limit(strip_tags($seo->description), 160),
+            'meta_keywords' => 'مشروع ' . $seo->title . ', إشراق تك, أعمال إشراق, شركة إشراق, تطوير برمجيات',
+            'og_title' => $seo->title . ' | إشراق تك',
+            'og_description' => $seo->short_description ?: \Illuminate\Support\Str::limit(strip_tags($seo->description), 160),
+            'og_type' => 'article',
+            'og_image' => $seo->main_image ? asset('storage/'.$seo->main_image) : ($defaultSeo['og_image'] ?? null),
+            'twitter_card' => 'summary_large_image',
+            'canonical_url' => route('projects.show', $seo->slug),
+            'robots' => 'index,follow',
+            'ga4_measurement_id' => $defaultSeo['ga4_measurement_id'] ?? null,
+            'gtm_container_id' => $defaultSeo['gtm_container_id'] ?? null,
+            'structured_data' => null,
+        ];
+    } elseif ($seo instanceof \App\Models\Article) {
+        $defaultSeo = $seoService->getPageSeo('articles');
+        $seoData = [
+            'meta_title' => ($seo->meta_title ?: $seo->title) . ' | مدونة إشراق تك',
+            'meta_description' => $seo->meta_description ?: ($seo->excerpt ?: \Illuminate\Support\Str::limit(strip_tags($seo->content), 160)),
+            'meta_keywords' => 'مقال ' . $seo->title . ', إشراق تك, Ishraq Tech, مدونة إشراق, شركة إشراق',
+            'og_title' => $seo->title . ' | مدونة إشراق تك',
+            'og_description' => $seo->excerpt ?: \Illuminate\Support\Str::limit(strip_tags($seo->content), 160),
+            'og_type' => 'article',
+            'og_image' => $seo->featured_image ? asset('storage/'.$seo->featured_image) : ($defaultSeo['og_image'] ?? null),
+            'twitter_card' => 'summary_large_image',
+            'canonical_url' => route('articles.show', $seo->slug),
+            'robots' => 'index,follow',
+            'ga4_measurement_id' => $defaultSeo['ga4_measurement_id'] ?? null,
+            'gtm_container_id' => $defaultSeo['gtm_container_id'] ?? null,
+            'structured_data' => null,
+        ];
+    } else {
+        $seoData = $seoService->getPageSeo($currentPage);
+    }
 @endphp
 
 {{-- ================================================================
