@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Project;
 
 class SitemapController extends Controller
@@ -13,7 +14,8 @@ class SitemapController extends Controller
     {
         $sitemaps = [
             ['loc' => route('sitemap.pages'), 'lastmod' => now()->toAtomString()],
-            ['loc' => route('sitemap.projects'), 'lastmod' => Project::latest('updated_at')->first()?->updated_at->toAtomString()],
+            ['loc' => route('sitemap.projects'), 'lastmod' => Project::latest('updated_at')->first()?->updated_at?->toAtomString() ?? now()->toAtomString()],
+            ['loc' => route('sitemap.articles'), 'lastmod' => Article::published()->latest('updated_at')->first()?->updated_at?->toAtomString() ?? now()->toAtomString()],
         ];
 
         return response()->view('sitemap.index', compact('sitemaps'))
@@ -61,6 +63,37 @@ class SitemapController extends Controller
             });
 
         return response()->view('sitemap.projects', compact('projects'))
+            ->header('Content-Type', 'text/xml');
+    }
+
+    /**
+     * Generate articles sitemap
+     */
+    public function articles()
+    {
+        $articles = Article::published()
+            ->latest('updated_at')
+            ->get()
+            ->map(function ($article) {
+                $images = [];
+                if ($article->featured_image) {
+                    $images[] = [
+                        'loc' => asset('storage/'.$article->featured_image),
+                        'title' => $article->title,
+                        'caption' => $article->excerpt,
+                    ];
+                }
+
+                return [
+                    'loc' => route('articles.show', $article->slug),
+                    'lastmod' => ($article->updated_at ?? $article->published_at ?? now())->toAtomString(),
+                    'changefreq' => 'weekly',
+                    'priority' => '0.8',
+                    'images' => $images,
+                ];
+            });
+
+        return response()->view('sitemap.articles', compact('articles'))
             ->header('Content-Type', 'text/xml');
     }
 

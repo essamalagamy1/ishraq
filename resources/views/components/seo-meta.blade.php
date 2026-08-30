@@ -103,6 +103,18 @@
 {!! json_encode($seoService->getWebSiteSchema(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
 </script>
 
+{{-- Site Navigation Schema (Google Sitelinks) --}}
+<script type="application/ld+json">
+{!! json_encode($seoService->getSiteNavigationSchema(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+</script>
+
+{{-- FAQ Schema (Google Rich Snippets) --}}
+@if($currentPage === 'home' || $currentPage === 'services' || str_contains($currentUrl, 'contact') || str_contains($currentUrl, 'about'))
+<script type="application/ld+json">
+{!! json_encode($seoService->getFaqSchema(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+</script>
+@endif
+
 {{-- Breadcrumbs Schema --}}
 @if(!empty($breadcrumbs))
 <script type="application/ld+json">

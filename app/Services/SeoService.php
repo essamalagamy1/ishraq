@@ -18,11 +18,11 @@ class SeoService
         $analytics = \App\Models\AnalyticsSetting::first();
 
         $defaults = [
-            'meta_title' => config('app.name', 'إشراق').' | تصميم وتطوير المنتجات والحلول الرقمية في السعودية',
-            'meta_description' => 'شريكك الرائد في التحول الرقمي وتطوير المنتجات الرقمية في المملكة العربية السعودية. تصميم مواقع ويب، تطبيقات جوال iOS وAndroid، واجهات مستخدم UI/UX، ومتاجر إلكترونية متطورة.',
-            'meta_keywords' => 'تصميم مواقع السعودية, برمجة تطبيقات الرياض, شركة برمجة السعودية, تصميم واجهات UI UX الرياض, تطوير متاجر إلكترونية سلة زد, شركة حلول رقمية, التحول الرقمي السعودية, أفضل شركة تصميم مواقع في الرياض جدة, برمجة حلول SaaS السعودية',
-            'og_title' => config('app.name', 'إشراق').' | حلول رقمية مبتكرة تصنع الفارق بالسعودية',
-            'og_description' => 'شريكك التقني الموثوق لبناء وتطوير المنتجات الرقمية الحديثة بالمملكة العربية السعودية.',
+            'meta_title' => 'إشراق تك | شركة تصميم وتطوير الحلول البرمجية والمنتجات الرقمية',
+            'meta_description' => 'إشراق تك (Ishraq Tech) - شريكك الرائد في التحول الرقمي وتطوير الحلول البرمجية. تصميم مواقع ويب، تطبيقات جوال iOS وAndroid، واجهات UI/UX، ومتاجر إلكترونية وحلول SaaS متطورة.',
+            'meta_keywords' => 'إشراق, إشراق تك, Ishraq Tech, ishraq.tech, شركة إشراق, شركة برمجة السعودية, تصميم مواقع السعودية, برمجة تطبيقات الرياض, تصميم واجهات UI UX الرياض, تطوير متاجر إلكترونية سلة زد, شركة حلول رقمية, التحول الرقمي السعودية, أفضل شركة تصميم مواقع في الرياض جدة, برمجة حلول SaaS السعودية',
+            'og_title' => 'إشراق تك | حلول رقمية وبرمجية مبتكرة تصنع الفارق',
+            'og_description' => 'إشراق تك - شريكك التقني الموثوق لبناء وتطوير المنتجات الرقمية الحديثة والتطبيقات الذكية بالمملكة العربية السعودية والخليج.',
             'og_type' => 'website',
             'og_image' => $company?->logo_path ? asset('storage/'.$company->logo_path) : null,
             'twitter_card' => 'summary_large_image',
@@ -57,7 +57,7 @@ class SeoService
     }
 
     /**
-     * Generate Organization & LocalBusiness Schema for Saudi Arabia
+     * Generate Organization & LocalBusiness Schema for Saudi Arabia & International
      */
     public function getOrganizationSchema(): array
     {
@@ -66,10 +66,21 @@ class SeoService
 
         return [
             '@context' => 'https://schema.org',
-            '@type' => ['Organization', 'ProfessionalService', 'LocalBusiness'],
+            '@type' => ['Organization', 'Corporation', 'ProfessionalService', 'LocalBusiness'],
             '@id' => url('/#organization'),
-            'name' => $name,
-            'alternateName' => ['Ishraq Digital Company', 'إشراق للحلول الرقمية', 'شركة إشراق للتقنية'],
+            'name' => 'إشراق تك | Ishraq Tech',
+            'legalName' => 'شركة إشراق للحلول الرقمية والبرمجية',
+            'alternateName' => [
+                'إشراق تك',
+                'Ishraq Tech',
+                'إشراق',
+                'ishraq.tech',
+                'شركة إشراق',
+                'شركة إشراق للتقنية',
+                'إشراق للحلول الرقمية',
+                'Ishraq Digital Company',
+                'Ishraq Software Solutions',
+            ],
             'url' => url('/'),
             'logo' => [
                 '@type' => 'ImageObject',
@@ -78,9 +89,9 @@ class SeoService
                 'height' => 512,
             ],
             'image' => $company?->logo_path ? asset('storage/'.$company->logo_path) : null,
-            'description' => $company?->about_short ?? 'شركة سعودية متخصصة في تصميم وتطوير المنتجات الرقمية الحديثة، المواقع الإلكترونية، وتطبيقات الجوال وحلول التحول الرقمي.',
+            'description' => $company?->about_short ?? 'إشراق تك - شركة متخصصة في تطوير البرمجيات، تصميم وتطوير المواقع الإلكترونية، تطبيقات الجوال iOS وAndroid، وحلول التحول الرقمي الحديثة.',
             'priceRange' => '$$$',
-            'currenciesAccepted' => 'SAR',
+            'currenciesAccepted' => 'SAR, USD, AED, EGP',
             'paymentAccepted' => 'Mada, Apple Pay, Visa, Mastercard, Bank Transfer',
             'address' => [
                 '@type' => 'PostalAddress',
@@ -139,10 +150,10 @@ class SeoService
             ],
             'contactPoint' => [
                 '@type' => 'ContactPoint',
-                'telephone' => $company?->phone_primary ?? '+966500000000',
+                'telephone' => $company?->phone_primary ?? '+201554468657',
                 'contactType' => 'customer support and sales',
                 'email' => $company?->main_email ?? 'info@ishraq.tech',
-                'areaServed' => 'SA',
+                'areaServed' => ['SA', 'EG', 'AE', 'GCC'],
                 'availableLanguage' => ['Arabic', 'English'],
             ],
             'knowsAbout' => [
@@ -151,7 +162,7 @@ class SeoService
                 'تصميم تجربة وواجهة المستخدم UI/UX Design',
                 'بناء المتاجر الإلكترونية وحلول التجارة الرقمية',
                 'الأنظمة الإدارية والسحابية SaaS',
-                'التحول الرقمي للشركات السعودية',
+                'التحول الرقمي للشركات',
                 'رؤية السعودية 2030 للتحول الرقمي',
             ],
             'sameAs' => array_values(array_filter([
@@ -163,7 +174,7 @@ class SeoService
     }
 
     /**
-     * Generate WebSite Schema
+     * Generate WebSite Schema with Sitelinks Searchbox
      */
     public function getWebSiteSchema(): array
     {
@@ -171,10 +182,13 @@ class SeoService
             '@context' => 'https://schema.org',
             '@type' => 'WebSite',
             '@id' => url('/#website'),
-            'name' => config('app.name', 'إشراق'),
-            'alternateName' => 'إشراق للحلول الرقمية بالسعودية',
+            'name' => 'إشراق تك | Ishraq Tech',
+            'alternateName' => ['إشراق', 'إشراق تك', 'Ishraq Tech', 'شركة إشراق للحلول البرمجية'],
             'url' => url('/'),
             'inLanguage' => 'ar-SA',
+            'publisher' => [
+                '@id' => url('/#organization'),
+            ],
             'potentialAction' => [
                 '@type' => 'SearchAction',
                 'target' => [
@@ -183,6 +197,106 @@ class SeoService
                 ],
                 'query-input' => 'required name=search_term_string',
             ],
+        ];
+    }
+
+    /**
+     * Generate SiteNavigationElement Schema for Google Sitelinks
+     */
+    public function getSiteNavigationSchema(): array
+    {
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'ItemList',
+            'itemListElement' => [
+                [
+                    '@type' => 'SiteNavigationElement',
+                    'position' => 1,
+                    'name' => 'من نحن',
+                    'description' => 'تعرف على شركة إشراق تك وفريق العمل ورؤيتنا في الحلول البرمجية وتطوير المنتجات الرقمية',
+                    'url' => route('about'),
+                ],
+                [
+                    '@type' => 'SiteNavigationElement',
+                    'position' => 2,
+                    'name' => 'خدماتنا',
+                    'description' => 'خدمات تطوير مواقع الويب، تطبيقات الجوال iOS وAndroid، تصميم UI/UX والمتاجر الإلكترونية',
+                    'url' => route('services'),
+                ],
+                [
+                    '@type' => 'SiteNavigationElement',
+                    'position' => 3,
+                    'name' => 'معرض الأعمال',
+                    'description' => 'استعرض محفظة المشاريع والمنتجات الرقمية والتطبيقات التي تم تطويرها بواسطة إشراق',
+                    'url' => route('portfolio'),
+                ],
+                [
+                    '@type' => 'SiteNavigationElement',
+                    'position' => 4,
+                    'name' => 'المقالات والمدونة',
+                    'description' => 'أحدث المقالات التقنية والمعرفية حول هندسة البرمجيات وتصميم الواجهات والتحول الرقمي',
+                    'url' => route('articles'),
+                ],
+                [
+                    '@type' => 'SiteNavigationElement',
+                    'position' => 5,
+                    'name' => 'تواصل معنا',
+                    'description' => 'تواصل مع فريق إشراق تك للحصول على استشارة تقنية ودراسة لمشروعك',
+                    'url' => route('contact'),
+                ],
+                [
+                    '@type' => 'SiteNavigationElement',
+                    'position' => 6,
+                    'name' => 'اطلب مشروعك',
+                    'description' => 'ابدأ مشروعك الرقمي وقدم مواصفات فكرتك للحصول على عرض سعر فني ومالي',
+                    'url' => route('request-design.create'),
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Generate FAQPage Schema for Google Rich Snippets
+     */
+    public function getFaqSchema(array $faqs = []): array
+    {
+        if (empty($faqs)) {
+            $faqs = [
+                [
+                    'q' => 'ما هي الخدمات التي تقدمها شركة إشراق تك (Ishraq Tech)؟',
+                    'a' => 'تقدم شركة إشراق تك حلولاً رقمية وبرمجية متكاملة تشمل: تطوير مواقع الويب والمنصات السحابية SaaS، تصميم وبرمجة تطبيقات الجوال لأنظمة iOS وAndroid، تصميم واجهات وتجربة المستخدم UI/UX، وبناء المتاجر الإلكترونية وحلول التحول الرقمي.',
+                ],
+                [
+                    'q' => 'كيف أبدأ مشروعي الرقمي مع إشراق تك؟',
+                    'a' => 'يمكنك بدء مشروعك عبر تعبئة استمارة "اطلب مشروعك" أو التواصل معنا مباشرة عبر صفحة اتصل بنا أو الواتساب، وسيقوم فريقنا التقني بدراسة المتطلبات وتقديم مقترح فني وعرض سعر مدروس خلال 24 ساعة.',
+                ],
+                [
+                    'q' => 'ما هي التقنيات المستخدمة في تطوير المواقع والتطبيقات؟',
+                    'a' => 'نستخدم أحدث التقنيات البرمجية وأكثرها استقراراً مثل Laravel، PHP، React، Next.js، Vue.js، Flutter لتطبيقات الجوال، وTailwind CSS مع بنية تحتية سحابية آمنة تضمن أداءً فائقاً.',
+                ],
+                [
+                    'q' => 'هل تقدم إشراق خدمات الدعم الفني والصيانة بعد تسليم المشروع؟',
+                    'a' => 'نعم، نوفر خطط دعم فني متواصلة، صيانة دورية، تحديثات أمنية، ومتابعة لأداء الموقع والتطبيق لضمان استمرارية وكفاءة عمل مشروعك الرقمي.',
+                ],
+            ];
+        }
+
+        $items = [];
+        foreach ($faqs as $faq) {
+            $items[] = [
+                '@type' => 'Question',
+                'name' => $faq['q'],
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => $faq['a'],
+                ],
+            ];
+        }
+
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'FAQPage',
+            'mainEntity' => $items,
         ];
     }
 
