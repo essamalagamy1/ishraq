@@ -1,0 +1,40 @@
+{
+    "specVersion": "1.0",
+    "host": {
+        "displayName": "Ishraq Tech",
+        "identifier": "did:web:ishraq.tech"
+    },
+    "entries": [
+        {
+            "identifier": "urn:air:ishraq.tech:server:mcp",
+            "displayName": "Ishraq MCP Server",
+            "type": "application/mcp-server-card+json",
+            "url": "https://ishraq.tech/.well-known/mcp/server-card.json",
+            "representativeQueries": [
+                "what services does Ishraq tech provide",
+                "request a software development project or design from Ishraq",
+                "get case studies and portfolio projects from Ishraq"
+            ]
+        },
+        {
+            "identifier": "urn:air:ishraq.tech:skill:services",
+            "displayName": "Ishraq Agency Services Skill",
+            "type": "text/markdown",
+            "url": "https://ishraq.tech/.well-known/agent-skills/ishraq-services/SKILL.md",
+            "representativeQueries": [
+                "what are the web development and mobile app packages at Ishraq",
+                "how to submit a design request to Ishraq tech"
+            ]
+        },
+        {
+            "identifier": "urn:air:ishraq.tech:api:openapi",
+            "displayName": "Ishraq REST API Specification",
+            "type": "application/vnd.oai.openapi+json;version=3.0",
+            "url": "https://ishraq.tech/openapi.json",
+            "representativeQueries": [
+                "fetch published articles and blog posts via API",
+                "submit design inquiry or contact form programmatically"
+            ]
+        }
+    ]
+}

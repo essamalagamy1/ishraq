@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <sitemap>
+        <loc>https://ishraq.tech/sitemap-pages.xml</loc>
+        <lastmod>2026-09-03T02:53:18+03:00</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://ishraq.tech/sitemap-projects.xml</loc>
+        <lastmod>2026-02-17T00:49:02+02:00</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://ishraq.tech/sitemap-articles.xml</loc>
+        <lastmod>2026-08-30T16:05:54+03:00</lastmod>
+    </sitemap>
+</sitemapindex>

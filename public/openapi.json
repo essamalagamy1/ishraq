@@ -1,0 +1,98 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Ishraq Tech API",
+        "description": "Public API for Ishraq Tech agency - articles, portfolio, services, and design inquiries.",
+        "version": "1.0.0",
+        "contact": {
+            "name": "Ishraq Tech Support",
+            "url": "https://ishraq.tech",
+            "email": "info@ishraq.tech"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://ishraq.tech",
+            "description": "Production Server"
+        }
+    ],
+    "paths": {
+        "/api/health": {
+            "get": {
+                "summary": "System Health Check",
+                "description": "Returns operational status of the service.",
+                "responses": {
+                    "200": {
+                        "description": "Healthy",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "ok"
+                                        },
+                                        "timestamp": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/services": {
+            "get": {
+                "summary": "List Services",
+                "description": "Get all active agency services and offerings.",
+                "responses": {
+                    "200": {
+                        "description": "A list of services"
+                    }
+                }
+            }
+        },
+        "/api/articles": {
+            "get": {
+                "summary": "List Articles",
+                "description": "Get latest blog articles and publications.",
+                "responses": {
+                    "200": {
+                        "description": "A list of published articles"
+                    }
+                }
+            }
+        },
+        "/api/projects": {
+            "get": {
+                "summary": "List Portfolio Projects",
+                "description": "Get case studies and completed client projects.",
+                "responses": {
+                    "200": {
+                        "description": "A list of portfolio projects"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "OAuth2": {
+                "type": "oauth2",
+                "description": "Ishraq Agent OAuth 2.0",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://ishraq.tech/oauth/token",
+                        "scopes": {
+                            "read": "Read public data",
+                            "write": "Submit inquiries"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

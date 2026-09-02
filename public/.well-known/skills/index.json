@@ -1,0 +1,19 @@
+{
+    "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+    "skills": [
+        {
+            "name": "ishraq-services",
+            "type": "skill-md",
+            "description": "Explore Ishraq Tech digital solutions, software engineering, mobile app development, and UI/UX design services.",
+            "url": "https://ishraq.tech/.well-known/agent-skills/ishraq-services/SKILL.md",
+            "digest": "sha256:39ae0037f24febdd825bcfc3b5d9f5516c5cda4a704421035c5c3436b1919470"
+        },
+        {
+            "name": "design-request",
+            "type": "skill-md",
+            "description": "Autonomous agent guide to submit project requirements, custom design requests, and quote inquiries to Ishraq Tech.",
+            "url": "https://ishraq.tech/.well-known/agent-skills/design-request/SKILL.md",
+            "digest": "sha256:0b58cf57928f2b1f72a5e1d73e7072d1b4fbc50022499b2f87f58dbde290c972"
+        }
+    ]
+}

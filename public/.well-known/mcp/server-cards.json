@@ -1,0 +1,22 @@
+{
+    "serverInfo": {
+        "name": "ishraq-mcp-server",
+        "title": "Ishraq Tech Agent MCP Server",
+        "version": "1.0.0",
+        "description": "MCP server for Ishraq digital agency - interact with services, portfolio, blog articles, and design inquiries."
+    },
+    "endpoint": "https://ishraq.tech/api/mcp",
+    "transport": "streamable-http",
+    "capabilities": {
+        "tools": {
+            "listChanged": true
+        },
+        "resources": {
+            "subscribe": false,
+            "listChanged": true
+        },
+        "prompts": {
+            "listChanged": true
+        }
+    }
+}
