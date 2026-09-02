@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Project;
+use Illuminate\Http\Response;
 
 class SitemapController extends Controller
 {
     /**
-     * Generate main sitemap index
+     * Generate main sitemap index directly in PHP (immune to Blade/short_open_tag errors)
      */
-    public function index()
+    public function index(): Response
     {
         $sitemaps = [
             ['loc' => route('sitemap.pages'), 'lastmod' => now()->toAtomString()],
@@ -18,14 +19,27 @@ class SitemapController extends Controller
             ['loc' => route('sitemap.articles'), 'lastmod' => Article::published()->latest('updated_at')->first()?->updated_at?->toAtomString() ?? now()->toAtomString()],
         ];
 
-        return response()->view('sitemap.index', compact('sitemaps'))
-            ->header('Content-Type', 'text/xml');
+        $xml = '<' . '?xml version="1.0" encoding="UTF-8"?' . '>' . "\n";
+        $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+        foreach ($sitemaps as $sitemap) {
+            $xml .= "    <sitemap>\n";
+            $xml .= "        <loc>" . htmlspecialchars($sitemap['loc'], ENT_XML1, 'UTF-8') . "</loc>\n";
+            $xml .= "        <lastmod>" . htmlspecialchars($sitemap['lastmod'], ENT_XML1, 'UTF-8') . "</lastmod>\n";
+            $xml .= "    </sitemap>\n";
+        }
+
+        $xml .= '</sitemapindex>' . "\n";
+
+        return response($xml, 200, [
+            'Content-Type' => 'text/xml; charset=utf-8',
+        ]);
     }
 
     /**
      * Generate pages sitemap
      */
-    public function pages()
+    public function pages(): Response
     {
         $pages = [
             ['loc' => route('home'), 'changefreq' => 'daily', 'priority' => '1.0'],
@@ -40,73 +54,120 @@ class SitemapController extends Controller
             ['loc' => route('terms'), 'changefreq' => 'yearly', 'priority' => '0.3'],
         ];
 
-        return response()->view('sitemap.pages', compact('pages'))
-            ->header('Content-Type', 'text/xml');
+        $xml = '<' . '?xml version="1.0" encoding="UTF-8"?' . '>' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+        foreach ($pages as $page) {
+            $xml .= "    <url>\n";
+            $xml .= "        <loc>" . htmlspecialchars($page['loc'], ENT_XML1, 'UTF-8') . "</loc>\n";
+            $xml .= "        <changefreq>" . htmlspecialchars($page['changefreq'], ENT_XML1, 'UTF-8') . "</changefreq>\n";
+            $xml .= "        <priority>" . htmlspecialchars($page['priority'], ENT_XML1, 'UTF-8') . "</priority>\n";
+            $xml .= "    </url>\n";
+        }
+
+        $xml .= '</urlset>' . "\n";
+
+        return response($xml, 200, [
+            'Content-Type' => 'text/xml; charset=utf-8',
+        ]);
     }
 
     /**
      * Generate projects sitemap
      */
-    public function projects()
+    public function projects(): Response
     {
         $projects = Project::where('status', 'published')
             ->latest('updated_at')
-            ->get()
-            ->map(function ($project) {
-                return [
-                    'loc' => route('projects.show', $project),
-                    'lastmod' => $project->updated_at->toAtomString(),
-                    'changefreq' => 'monthly',
-                    'priority' => '0.8',
-                    'images' => $this->getProjectImages($project),
-                ];
-            });
+            ->get();
 
-        return response()->view('sitemap.projects', compact('projects'))
-            ->header('Content-Type', 'text/xml');
+        $xml = '<' . '?xml version="1.0" encoding="UTF-8"?' . '>' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n";
+        $xml .= '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
+
+        foreach ($projects as $project) {
+            $xml .= "    <url>\n";
+            $xml .= "        <loc>" . htmlspecialchars(route('projects.show', $project), ENT_XML1, 'UTF-8') . "</loc>\n";
+            $xml .= "        <lastmod>" . htmlspecialchars($project->updated_at->toAtomString(), ENT_XML1, 'UTF-8') . "</lastmod>\n";
+            $xml .= "        <changefreq>monthly</changefreq>\n";
+            $xml .= "        <priority>0.8</priority>\n";
+
+            $images = $this->getProjectImages($project);
+            foreach ($images as $img) {
+                $xml .= "        <image:image>\n";
+                $xml .= "            <image:loc>" . htmlspecialchars($img['loc'], ENT_XML1, 'UTF-8') . "</image:loc>\n";
+                if (!empty($img['title'])) {
+                    $xml .= "            <image:title>" . htmlspecialchars($img['title'], ENT_XML1, 'UTF-8') . "</image:title>\n";
+                }
+                if (!empty($img['caption'])) {
+                    $xml .= "            <image:caption>" . htmlspecialchars($img['caption'], ENT_XML1, 'UTF-8') . "</image:caption>\n";
+                }
+                $xml .= "        </image:image>\n";
+            }
+
+            $xml .= "    </url>\n";
+        }
+
+        $xml .= '</urlset>' . "\n";
+
+        return response($xml, 200, [
+            'Content-Type' => 'text/xml; charset=utf-8',
+        ]);
     }
 
     /**
      * Generate articles sitemap
      */
-    public function articles()
+    public function articles(): Response
     {
         $articles = Article::published()
             ->latest('updated_at')
-            ->get()
-            ->map(function ($article) {
-                $images = [];
-                if ($article->featured_image) {
-                    $images[] = [
-                        'loc' => asset('storage/'.$article->featured_image),
-                        'title' => $article->title,
-                        'caption' => $article->excerpt,
-                    ];
+            ->get();
+
+        $xml = '<' . '?xml version="1.0" encoding="UTF-8"?' . '>' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n";
+        $xml .= '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
+
+        foreach ($articles as $article) {
+            $lastmod = ($article->updated_at ?? $article->published_at ?? now())->toAtomString();
+            $xml .= "    <url>\n";
+            $xml .= "        <loc>" . htmlspecialchars(route('articles.show', $article->slug), ENT_XML1, 'UTF-8') . "</loc>\n";
+            $xml .= "        <lastmod>" . htmlspecialchars($lastmod, ENT_XML1, 'UTF-8') . "</lastmod>\n";
+            $xml .= "        <changefreq>weekly</changefreq>\n";
+            $xml .= "        <priority>0.8</priority>\n";
+
+            if ($article->featured_image) {
+                $xml .= "        <image:image>\n";
+                $xml .= "            <image:loc>" . htmlspecialchars(asset('storage/' . $article->featured_image), ENT_XML1, 'UTF-8') . "</image:loc>\n";
+                if (!empty($article->title)) {
+                    $xml .= "            <image:title>" . htmlspecialchars($article->title, ENT_XML1, 'UTF-8') . "</image:title>\n";
                 }
+                if (!empty($article->excerpt)) {
+                    $xml .= "            <image:caption>" . htmlspecialchars($article->excerpt, ENT_XML1, 'UTF-8') . "</image:caption>\n";
+                }
+                $xml .= "        </image:image>\n";
+            }
 
-                return [
-                    'loc' => route('articles.show', $article->slug),
-                    'lastmod' => ($article->updated_at ?? $article->published_at ?? now())->toAtomString(),
-                    'changefreq' => 'weekly',
-                    'priority' => '0.8',
-                    'images' => $images,
-                ];
-            });
+            $xml .= "    </url>\n";
+        }
 
-        return response()->view('sitemap.articles', compact('articles'))
-            ->header('Content-Type', 'text/xml');
+        $xml .= '</urlset>' . "\n";
+
+        return response($xml, 200, [
+            'Content-Type' => 'text/xml; charset=utf-8',
+        ]);
     }
 
     /**
      * Get project images for image sitemap
      */
-    private function getProjectImages($project)
+    private function getProjectImages($project): array
     {
         $images = [];
 
         if ($project->main_image) {
             $images[] = [
-                'loc' => asset('storage/'.$project->main_image),
+                'loc' => asset('storage/' . $project->main_image),
                 'title' => $project->title,
                 'caption' => $project->short_description,
             ];
@@ -114,7 +175,7 @@ class SitemapController extends Controller
 
         foreach ($project->projectImages as $image) {
             $images[] = [
-                'loc' => asset('storage/'.$image->image_path),
+                'loc' => asset('storage/' . $image->image_path),
                 'title' => $image->caption ?? $project->title,
                 'caption' => $image->caption,
             ];
