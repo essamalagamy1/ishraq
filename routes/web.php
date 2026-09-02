@@ -45,9 +45,32 @@ Route::get('/robots.txt', function () {
     $content .= "Disallow: /admin\n";
     $content .= "Disallow: /api\n\n";
     $content .= 'Sitemap: '.route('sitemap.index')."\n";
+    $content .= "Agentmap: https://ishraq.tech/.well-known/ai-catalog.json\n";
 
     return response($content)->header('Content-Type', 'text/plain');
 })->name('robots');
+
+// AI Agent Discovery & Standards Endpoints
+use App\Http\Controllers\AgentDiscoveryController;
+
+Route::get('/.well-known/api-catalog', [AgentDiscoveryController::class, 'apiCatalog'])->name('agent.api-catalog');
+Route::get('/.well-known/ai-catalog.json', [AgentDiscoveryController::class, 'aiCatalog'])->name('agent.ai-catalog');
+Route::get('/.well-known/mcp/server-card.json', [AgentDiscoveryController::class, 'mcpServerCard'])->name('agent.mcp-server-card');
+Route::get('/.well-known/mcp/server-cards.json', [AgentDiscoveryController::class, 'mcpServerCard']);
+Route::get('/.well-known/mcp.json', [AgentDiscoveryController::class, 'mcpServerCard']);
+Route::get('/.well-known/agent-skills/index.json', [AgentDiscoveryController::class, 'agentSkillsIndex'])->name('agent.skills.index');
+Route::get('/.well-known/skills/index.json', [AgentDiscoveryController::class, 'agentSkillsIndex']);
+Route::get('/.well-known/agent-skills/{skill}/SKILL.md', [AgentDiscoveryController::class, 'agentSkillFile'])->name('agent.skill.file');
+Route::get('/.well-known/oauth-protected-resource', [AgentDiscoveryController::class, 'oauthProtectedResource'])->name('agent.oauth-protected-resource');
+Route::get('/.well-known/oauth-authorization-server', [AgentDiscoveryController::class, 'oauthAuthorizationServer'])->name('agent.oauth-auth-server');
+Route::get('/.well-known/openid-configuration', [AgentDiscoveryController::class, 'oauthAuthorizationServer'])->name('agent.openid-config');
+Route::get('/.well-known/jwks.json', [AgentDiscoveryController::class, 'jwks'])->name('agent.jwks');
+Route::get('/.well-known/http-message-signatures-directory', [AgentDiscoveryController::class, 'botAuthDirectory'])->name('agent.bot-auth');
+Route::get('/auth.md', [AgentDiscoveryController::class, 'authMd'])->name('agent.auth-md');
+Route::get('/openapi.json', [AgentDiscoveryController::class, 'openapi'])->name('agent.openapi');
+Route::get('/docs/api', [AgentDiscoveryController::class, 'docs'])->name('agent.docs');
+Route::get('/api/health', [AgentDiscoveryController::class, 'health'])->name('agent.health');
+Route::get('/status', [AgentDiscoveryController::class, 'health']);
 
 // The default welcome route can be removed or kept for testing
 // Route::get('/welcome', function () {

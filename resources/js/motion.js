@@ -201,7 +201,7 @@ export function initCountUps(root = document) {
         const decimals = parseInt(el.dataset.countDecimals || '0', 10);
 
         if (reduced) {
-            el.textContent = end.toLocaleString('ar-EG', { maximumFractionDigits: decimals, minimumFractionDigits: decimals }) + fmt;
+            el.textContent = end.toLocaleString('en-US', { maximumFractionDigits: decimals, minimumFractionDigits: decimals }) + fmt;
             return;
         }
 
@@ -210,7 +210,7 @@ export function initCountUps(root = document) {
                 duration: 2.2,
                 easing: [0.22, 1, 0.36, 1],
                 onUpdate: (v) => {
-                    el.textContent = v.toLocaleString('ar-EG', {
+                    el.textContent = v.toLocaleString('en-US', {
                         maximumFractionDigits: decimals,
                         minimumFractionDigits: decimals,
                     }) + fmt;

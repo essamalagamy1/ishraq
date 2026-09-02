@@ -4,3 +4,4 @@ Disallow: /admin
 Disallow: /api
 
 Sitemap: https://ishraq.tech/sitemap.xml
+Agentmap: https://ishraq.tech/.well-known/ai-catalog.json

@@ -65,7 +65,8 @@ body {
     font-weight: 400;
     font-size: 16px;
     line-height: 1.6;
-    font-feature-settings: 'kern', 'calt', 'ss01';
+    font-feature-settings: 'kern' 1, 'calt' 1, 'ss01' 1, 'locl' 0;
+    font-variant-numeric: lining-nums tabular-nums;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;

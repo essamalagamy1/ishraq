@@ -23,6 +23,108 @@
         <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     @endif
 
+    {{-- AI Agent Discovery & Standards Links --}}
+    <link rel="ai-catalog" href="/.well-known/ai-catalog.json">
+    <link rel="api-catalog" href="/.well-known/api-catalog">
+    <link rel="service-doc" href="/docs/api">
+    <link rel="mcp-server-card" href="/.well-known/mcp/server-card.json">
+    <link rel="agent-skills" href="/.well-known/agent-skills/index.json">
+
+    {{-- WebMCP: Browser Agent Tools Exposure --}}
+    <script>
+        (function() {
+            try {
+                var tools = [
+                    {
+                        name: "get_agency_services",
+                        description: "Get information about Ishraq Tech software engineering, mobile apps, UI/UX, and branding services.",
+                        inputSchema: {
+                            type: "object",
+                            properties: {
+                                category: {
+                                    type: "string",
+                                    description: "Optional category filter: web, mobile, ui-ux, or branding"
+                                }
+                            }
+                        },
+                        execute: async function(args) {
+                            return {
+                                services: [
+                                    { name: "Web Application Development", description: "Modern, high-performance web systems and portals built with Laravel and modern frontends." },
+                                    { name: "Mobile App Development", description: "iOS and Android apps with Flutter and React Native." },
+                                    { name: "UI/UX Design", description: "Premium design systems, user journeys, and interactive prototypes." },
+                                    { name: "Branding & Visual Identity", description: "Comprehensive corporate identity packages and visual branding." }
+                                ]
+                            };
+                        }
+                    },
+                    {
+                        name: "search_articles",
+                        description: "Search blog articles and technical publications by Ishraq Tech.",
+                        inputSchema: {
+                            type: "object",
+                            properties: {
+                                query: {
+                                    type: "string",
+                                    description: "Search keyword or topic"
+                                }
+                            },
+                            required: ["query"]
+                        },
+                        execute: async function(args) {
+                            window.location.href = '/articles';
+                            return { status: "success", message: "Searching articles" };
+                        }
+                    },
+                    {
+                        name: "request_design",
+                        description: "Initiate a project inquiry or design request with Ishraq Tech.",
+                        inputSchema: {
+                            type: "object",
+                            properties: {
+                                project_type: { type: "string" },
+                                details: { type: "string" }
+                            }
+                        },
+                        execute: async function(args) {
+                            window.location.href = '/request-a-design';
+                            return { status: "navigating_to_design_request_form" };
+                        }
+                    }
+                ];
+
+                var mc = window.navigator.modelContext;
+                if (!mc) {
+                    var registered = [];
+                    window.navigator.modelContext = {
+                        tools: registered,
+                        registerTool: function(tool) {
+                            registered.push(tool);
+                            return tool;
+                        },
+                        provideContext: function(ctx) {
+                            if (ctx && ctx.tools) registered.push.apply(registered, ctx.tools);
+                            return ctx;
+                        }
+                    };
+                    mc = window.navigator.modelContext;
+                }
+
+                if (typeof mc.provideContext === 'function') {
+                    try { mc.provideContext({ tools: tools }); } catch(e) {}
+                }
+
+                if (typeof mc.registerTool === 'function') {
+                    tools.forEach(function(tool) {
+                        try { mc.registerTool(tool); } catch(e) {}
+                    });
+                }
+            } catch (err) {
+                console.warn('WebMCP initialization:', err);
+            }
+        })();
+    </script>
+
     {{-- Font loading: preconnect + non-render-blocking stylesheet --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
