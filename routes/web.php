@@ -58,6 +58,7 @@ Route::get('/.well-known/ai-catalog.json', [AgentDiscoveryController::class, 'ai
 Route::get('/.well-known/mcp/server-card.json', [AgentDiscoveryController::class, 'mcpServerCard'])->name('agent.mcp-server-card');
 Route::get('/.well-known/mcp/server-cards.json', [AgentDiscoveryController::class, 'mcpServerCard']);
 Route::get('/.well-known/mcp.json', [AgentDiscoveryController::class, 'mcpServerCard']);
+Route::get('/.well-known/agent-card.json', [AgentDiscoveryController::class, 'agentCard'])->name('agent.card');
 Route::get('/.well-known/agent-skills/index.json', [AgentDiscoveryController::class, 'agentSkillsIndex'])->name('agent.skills.index');
 Route::get('/.well-known/skills/index.json', [AgentDiscoveryController::class, 'agentSkillsIndex']);
 Route::get('/.well-known/agent-skills/{skill}/SKILL.md', [AgentDiscoveryController::class, 'agentSkillFile'])->name('agent.skill.file');

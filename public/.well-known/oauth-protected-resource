@@ -1,5 +1,5 @@
 {
-    "resource": "https://ishraq.tech/api",
+    "resource": "https://ishraq.tech",
     "authorization_servers": [
         "https://ishraq.tech"
     ],

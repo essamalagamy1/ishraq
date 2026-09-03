@@ -1,0 +1,30 @@
+{
+    "$schema": "https://a2a-protocol.org/schemas/agent-card-v1.json",
+    "name": "Ishraq Tech Agent",
+    "version": "1.0.0",
+    "description": "Autonomous digital agency agent for Ishraq Tech - services inquiry, portfolio exploration, and design request management.",
+    "url": "https://ishraq.tech",
+    "supportedInterfaces": [
+        {
+            "url": "https://ishraq.tech/api/a2a",
+            "transport": "HTTP-JSON",
+            "protocol": "a2a-v1"
+        }
+    ],
+    "capabilities": {
+        "streaming": false,
+        "pushNotifications": false
+    },
+    "skills": [
+        {
+            "id": "services-inquiry",
+            "name": "Services Inquiry",
+            "description": "Discover and query software engineering, mobile development, and UI/UX design offerings."
+        },
+        {
+            "id": "design-request",
+            "name": "Submit Design Request",
+            "description": "Submit specifications for new web, mobile, or branding projects."
+        }
+    ]
+}

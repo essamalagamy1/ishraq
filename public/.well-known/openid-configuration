@@ -23,7 +23,7 @@
         "agent:execute"
     ],
     "agent_auth": {
-        "skill": "https://ishraq.tech/.well-known/agent-skills/auth/SKILL.md",
+        "skill": "https://ishraq.tech/auth.md",
         "register_uri": "https://ishraq.tech/agent/register",
         "identity_types_supported": [
             "anonymous",

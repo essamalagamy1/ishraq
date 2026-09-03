@@ -189,7 +189,7 @@ class AgentDiscoveryController extends Controller
     public function oauthProtectedResource(): JsonResponse
     {
         $metadata = [
-            'resource' => 'https://ishraq.tech/api',
+            'resource' => 'https://ishraq.tech',
             'authorization_servers' => [
                 'https://ishraq.tech',
             ],
@@ -238,7 +238,7 @@ class AgentDiscoveryController extends Controller
                 'agent:execute',
             ],
             'agent_auth' => [
-                'skill' => 'https://ishraq.tech/.well-known/agent-skills/auth/SKILL.md',
+                'skill' => 'https://ishraq.tech/auth.md',
                 'register_uri' => 'https://ishraq.tech/agent/register',
                 'identity_types_supported' => [
                     'anonymous',
@@ -290,33 +290,76 @@ Welcome AI agents and autonomous crawlers. Ishraq Tech provides machine-readable
 This document is intended for autonomous AI agents, LLM tool executors, and MCP clients interacting with Ishraq Tech services.
 
 ## Discovery & Authentication Metadata
-- **OAuth Protected Resource Metadata:** `https://ishraq.tech/.well-known/oauth-protected-resource`
-- **OAuth Authorization Server:** `https://ishraq.tech/.well-known/oauth-authorization-server`
-- **OpenID Configuration:** `https://ishraq.tech/.well-known/openid-configuration`
-- **API Catalog (RFC 9727):** `https://ishraq.tech/.well-known/api-catalog`
-- **MCP Server Card:** `https://ishraq.tech/.well-known/mcp/server-card.json`
-- **Agent Skills Discovery:** `https://ishraq.tech/.well-known/agent-skills/index.json`
-- **Agent Registration URI:** `https://ishraq.tech/agent/register`
+- OAuth Protected Resource Metadata: https://ishraq.tech/.well-known/oauth-protected-resource
+- OAuth Authorization Server: https://ishraq.tech/.well-known/oauth-authorization-server
+- OpenID Configuration: https://ishraq.tech/.well-known/openid-configuration
+- API Catalog (RFC 9727): https://ishraq.tech/.well-known/api-catalog
+- MCP Server Card: https://ishraq.tech/.well-known/mcp/server-card.json
+- Agent Skills Discovery: https://ishraq.tech/.well-known/agent-skills/index.json
+- Agent Registration URI: https://ishraq.tech/agent/register
 
 ## Supported Registration & Auth Methods
 1. **Public Read (Anonymous):**
    Agents may query public content (articles, services, portfolio) without credentials using standard HTTP GET requests or MCP read tools.
 2. **Bearer Token Authentication:**
    For write actions (such as submitting design requests or contact messages), agents can present a bearer token obtained via client credentials or identity assertion:
-   `Authorization: Bearer <token>`
+   Authorization: Bearer <token>
 3. **Identity Assertions:**
    Supported assertion types:
-   - ID-JAG: `urn:ietf:params:oauth:token-type:id-jag`
+   - ID-JAG: urn:ietf:params:oauth:token-type:id-jag
    - Verified Email assertions
 
 ## Contact
-For agent developer integration inquiries, contact `info@ishraq.tech`.
+For agent developer integration inquiries, contact info@ishraq.tech.
 MARKDOWN;
 
         return response($md, 200, [
             'Content-Type' => 'text/markdown; charset=utf-8',
             'Access-Control-Allow-Origin' => '*',
         ]);
+    }
+
+    /**
+     * A2A Protocol Agent Card per A2A Specification
+     * Returns /.well-known/agent-card.json
+     */
+    public function agentCard(): JsonResponse
+    {
+        $card = [
+            '$schema' => 'https://a2a-protocol.org/schemas/agent-card-v1.json',
+            'name' => 'Ishraq Tech Agent',
+            'version' => '1.0.0',
+            'description' => 'Autonomous digital agency agent for Ishraq Tech - services inquiry, portfolio exploration, and design request management.',
+            'url' => 'https://ishraq.tech',
+            'supportedInterfaces' => [
+                [
+                    'url' => 'https://ishraq.tech/api/a2a',
+                    'transport' => 'HTTP-JSON',
+                    'protocol' => 'a2a-v1',
+                ],
+            ],
+            'capabilities' => [
+                'streaming' => false,
+                'pushNotifications' => false,
+            ],
+            'skills' => [
+                [
+                    'id' => 'services-inquiry',
+                    'name' => 'Services Inquiry',
+                    'description' => 'Discover and query software engineering, mobile development, and UI/UX design offerings.',
+                ],
+                [
+                    'id' => 'design-request',
+                    'name' => 'Submit Design Request',
+                    'description' => 'Submit specifications for new web, mobile, or branding projects.',
+                ],
+            ],
+        ];
+
+        return response()->json($card, 200, [
+            'Access-Control-Allow-Origin' => '*',
+            'Content-Type' => 'application/json; charset=utf-8',
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
 
     /**
