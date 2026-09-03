@@ -26,8 +26,8 @@
         "skill": "https://ishraq.tech/auth.md",
         "register_uri": "https://ishraq.tech/agent/register",
         "identity_types_supported": [
-            "anonymous",
-            "identity_assertion"
+            "identity_assertion",
+            "anonymous"
         ],
         "anonymous": {
             "credential_types_supported": [
@@ -42,7 +42,13 @@
             ],
             "credential_types_supported": [
                 "bearer"
-            ]
+            ],
+            "claim_uri": "https://ishraq.tech/agent/claim",
+            "revocation_uri": "https://ishraq.tech/oauth/revoke"
         }
-    }
+    },
+    "events_supported": [
+        "https://schemas.openid.net/secevent/oauth/event-type/token-revocation"
+    ],
+    "revocation_endpoint": "https://ishraq.tech/oauth/revoke"
 }

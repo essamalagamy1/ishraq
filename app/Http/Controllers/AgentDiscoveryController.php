@@ -241,8 +241,8 @@ class AgentDiscoveryController extends Controller
                 'skill' => 'https://ishraq.tech/auth.md',
                 'register_uri' => 'https://ishraq.tech/agent/register',
                 'identity_types_supported' => [
-                    'anonymous',
                     'identity_assertion',
+                    'anonymous',
                 ],
                 'anonymous' => [
                     'credential_types_supported' => ['bearer'],
@@ -254,8 +254,14 @@ class AgentDiscoveryController extends Controller
                         'verified_email',
                     ],
                     'credential_types_supported' => ['bearer'],
+                    'claim_uri' => 'https://ishraq.tech/agent/claim',
+                    'revocation_uri' => 'https://ishraq.tech/oauth/revoke',
                 ],
             ],
+            'events_supported' => [
+                'https://schemas.openid.net/secevent/oauth/event-type/token-revocation',
+            ],
+            'revocation_endpoint' => 'https://ishraq.tech/oauth/revoke',
         ];
 
         return response()->json($discovery, 200, [
@@ -289,6 +295,17 @@ Welcome AI agents and autonomous crawlers. Ishraq Tech provides machine-readable
 ## Agent Audience
 This document is intended for autonomous AI agents, LLM tool executors, and MCP clients interacting with Ishraq Tech services.
 
+## Registration & Provisioning Flow
+- Registration Endpoint: https://ishraq.tech/agent/register
+- Claim Endpoint: https://ishraq.tech/agent/claim
+- Revocation Endpoint: https://ishraq.tech/oauth/revoke
+- Token Endpoint: https://ishraq.tech/oauth/token
+
+To register an autonomous agent:
+1. Submit agent identity to `POST https://ishraq.tech/agent/register` to receive client credentials.
+2. Exchange credentials at `POST https://ishraq.tech/oauth/token` with `grant_type=client_credentials` for an access token.
+3. For anonymous agents, request temporary access at `POST https://ishraq.tech/agent/claim`.
+
 ## Discovery & Authentication Metadata
 - OAuth Protected Resource Metadata: https://ishraq.tech/.well-known/oauth-protected-resource
 - OAuth Authorization Server: https://ishraq.tech/.well-known/oauth-authorization-server
@@ -299,12 +316,12 @@ This document is intended for autonomous AI agents, LLM tool executors, and MCP 
 - Agent Registration URI: https://ishraq.tech/agent/register
 
 ## Supported Registration & Auth Methods
-1. **Public Read (Anonymous):**
+1. Public Read (Anonymous):
    Agents may query public content (articles, services, portfolio) without credentials using standard HTTP GET requests or MCP read tools.
-2. **Bearer Token Authentication:**
-   For write actions (such as submitting design requests or contact messages), agents can present a bearer token obtained via client credentials or identity assertion:
+2. Bearer Token Authentication:
+   For write actions, agents present a bearer token:
    Authorization: Bearer <token>
-3. **Identity Assertions:**
+3. Identity Assertions:
    Supported assertion types:
    - ID-JAG: urn:ietf:params:oauth:token-type:id-jag
    - Verified Email assertions
