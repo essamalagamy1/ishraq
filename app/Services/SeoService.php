@@ -18,11 +18,11 @@ class SeoService
         $analytics = \App\Models\AnalyticsSetting::first();
 
         $defaults = [
-            'meta_title' => 'إشراق تك | شركة تصميم وتطوير الحلول البرمجية والمنتجات الرقمية',
-            'meta_description' => 'إشراق تك (Ishraq Tech) - شريكك الرائد في التحول الرقمي وتطوير الحلول البرمجية. تصميم مواقع ويب، تطبيقات جوال iOS وAndroid، واجهات UI/UX، ومتاجر إلكترونية وحلول SaaS متطورة.',
-            'meta_keywords' => 'إشراق, إشراق تك, Ishraq Tech, ishraq.tech, شركة إشراق, شركة برمجة السعودية, تصميم مواقع السعودية, برمجة تطبيقات الرياض, تصميم واجهات UI UX الرياض, تطوير متاجر إلكترونية سلة زد, شركة حلول رقمية, التحول الرقمي السعودية, أفضل شركة تصميم مواقع في الرياض جدة, برمجة حلول SaaS السعودية',
-            'og_title' => 'إشراق تك | حلول رقمية وبرمجية مبتكرة تصنع الفارق',
-            'og_description' => 'إشراق تك - شريكك التقني الموثوق لبناء وتطوير المنتجات الرقمية الحديثة والتطبيقات الذكية بالمملكة العربية السعودية والخليج.',
+            'meta_title' => 'إشراق تك | شركة برمجة وتصميم مواقع وتطبيقات | دمياط الجديدة والسعودية',
+            'meta_description' => 'إشراق تك (Ishraq Tech) - أفضل شركة برمجة وتصميم مواقع وتطوير تطبيقات جوال في دمياط الجديدة والمملكة العربية السعودية. حلول برمجية متطورة، متاجر إلكترونية، واجهات UI/UX، وأنظمة SaaS رقمية متكاملة.',
+            'meta_keywords' => 'شركة برمجة في دمياط الجديدة, شركة تصميم مواقع دمياط الجديدة, شركة برمجة تطبيقات دمياط, شركة برمجة دمياط, أفضل شركة برمجة في دمياط الجديدة, شركة برمجة السعودية, تصميم مواقع في الرياض, برمجة تطبيقات السعودية, تصميم مواقع السعودية, شركة حلول برمجية مصر والسعودية, إشراق تك, Ishraq Tech, ishraq.tech',
+            'og_title' => 'إشراق تك | شركة برمجة وتصميم مواقع وتطبيقات في دمياط الجديدة والسعودية',
+            'og_description' => 'شريكك التقني الموثوق لتطوير المنتجات الرقمية الحديثة وتطبيقات الجوال والمواقع في دمياط الجديدة، جمهورية مصر العربية والمملكة العربية السعودية.',
             'og_type' => 'website',
             'og_image' => $company?->logo_path ? asset('storage/'.$company->logo_path) : null,
             'twitter_card' => 'summary_large_image',
@@ -57,7 +57,7 @@ class SeoService
     }
 
     /**
-     * Generate Organization & LocalBusiness Schema for Saudi Arabia & International
+     * Generate Organization & Multi-Location LocalBusiness Schema for Egypt (New Damietta) and Saudi Arabia
      */
     public function getOrganizationSchema(): array
     {
@@ -69,17 +69,17 @@ class SeoService
             '@type' => ['Organization', 'Corporation', 'ProfessionalService', 'LocalBusiness'],
             '@id' => url('/#organization'),
             'name' => 'إشراق تك | Ishraq Tech',
-            'legalName' => 'شركة إشراق للحلول الرقمية والبرمجية',
+            'legalName' => 'شركة إشراق للحلول البرمجية والمنتجات الرقمية',
             'alternateName' => [
                 'إشراق تك',
                 'Ishraq Tech',
                 'إشراق',
                 'ishraq.tech',
                 'شركة إشراق',
-                'شركة إشراق للتقنية',
+                'شركة برمجة في دمياط الجديدة',
+                'شركة برمجة السعودية',
                 'إشراق للحلول الرقمية',
-                'Ishraq Digital Company',
-                'Ishraq Software Solutions',
+                'Ishraq Digital Solutions',
             ],
             'url' => url('/'),
             'logo' => [
@@ -89,24 +89,96 @@ class SeoService
                 'height' => 512,
             ],
             'image' => $company?->logo_path ? asset('storage/'.$company->logo_path) : null,
-            'description' => $company?->about_short ?? 'إشراق تك - شركة متخصصة في تطوير البرمجيات، تصميم وتطوير المواقع الإلكترونية، تطبيقات الجوال iOS وAndroid، وحلول التحول الرقمي الحديثة.',
+            'description' => 'إشراق تك - أفضل شركة برمجة وتطوير مواقع وتطبيقات جوال في دمياط الجديدة والمملكة العربية السعودية. نقدم حلولاً برمجية متكاملة، متاجر إلكترونية، واجهات UI/UX، وأنظمة SaaS للشركات.',
             'priceRange' => '$$$',
-            'currenciesAccepted' => 'SAR, USD, AED, EGP',
-            'paymentAccepted' => 'Mada, Apple Pay, Visa, Mastercard, Bank Transfer',
+            'currenciesAccepted' => 'EGP, SAR, USD, AED',
+            'paymentAccepted' => 'Bank Transfer, Cash, Visa, Mastercard, Mada, Vodafone Cash, InstaPay',
             'address' => [
                 '@type' => 'PostalAddress',
-                'streetAddress' => 'طريق الملك فهد',
-                'addressLocality' => 'الرياض',
-                'addressRegion' => 'منطقة الرياض',
-                'postalCode' => '12211',
-                'addressCountry' => 'SA',
+                'streetAddress' => $company?->location_text ?? 'دمياط الجديدة',
+                'addressLocality' => 'دمياط الجديدة',
+                'addressRegion' => 'محافظة دمياط',
+                'postalCode' => '34517',
+                'addressCountry' => 'EG',
             ],
             'geo' => [
                 '@type' => 'GeoCoordinates',
-                'latitude' => 24.7136,
-                'longitude' => 46.6753,
+                'latitude' => 31.4397,
+                'longitude' => 31.6644,
+            ],
+            'department' => [
+                [
+                    '@type' => ['LocalBusiness', 'ProfessionalService'],
+                    '@id' => url('/#branch-damietta'),
+                    'name' => 'إشراق تك - المقر الرئيسي (دمياط الجديدة، مصر)',
+                    'description' => 'شركة برمجة وتصميم مواقع وتطبيقات الهواتف الذكية في دمياط الجديدة ومحافظة دمياط.',
+                    'telephone' => $company?->phone_primary ?? '+201554468657',
+                    'email' => $company?->main_email ?? 'info@ishraq.tech',
+                    'address' => [
+                        '@type' => 'PostalAddress',
+                        'streetAddress' => $company?->location_text ?? 'دمياط الجديدة',
+                        'addressLocality' => 'دمياط الجديدة',
+                        'addressRegion' => 'محافظة دمياط',
+                        'postalCode' => '34517',
+                        'addressCountry' => 'EG',
+                    ],
+                    'geo' => [
+                        '@type' => 'GeoCoordinates',
+                        'latitude' => 31.4397,
+                        'longitude' => 31.6644,
+                    ],
+                    'areaServed' => [
+                        ['@type' => 'City', 'name' => 'دمياط الجديدة', 'alternateName' => 'New Damietta'],
+                        ['@type' => 'City', 'name' => 'دمياط', 'alternateName' => 'Damietta'],
+                        ['@type' => 'City', 'name' => 'المنصورة', 'alternateName' => 'Mansoura'],
+                        ['@type' => 'Country', 'name' => 'مصر', 'alternateName' => 'Egypt'],
+                    ],
+                ],
+                [
+                    '@type' => ['LocalBusiness', 'ProfessionalService'],
+                    '@id' => url('/#branch-saudi'),
+                    'name' => 'إشراق تك - فرع المملكة العربية السعودية',
+                    'description' => 'خدمات تصميم وتطوير الحلول البرمجية وتطبيقات الجوال والمتاجر الإلكترونية للشركات في المملكة العربية السعودية.',
+                    'telephone' => $company?->phone_secondary ?? ($company?->phone_primary ?? '+966500000000'),
+                    'email' => $company?->main_email ?? 'info@ishraq.tech',
+                    'address' => [
+                        '@type' => 'PostalAddress',
+                        'streetAddress' => $company?->location_secondary ?? 'طريق الملك فهد، الرياض',
+                        'addressLocality' => 'الرياض',
+                        'addressRegion' => 'منطقة الرياض',
+                        'postalCode' => '12211',
+                        'addressCountry' => 'SA',
+                    ],
+                    'geo' => [
+                        '@type' => 'GeoCoordinates',
+                        'latitude' => 24.7136,
+                        'longitude' => 46.6753,
+                    ],
+                    'areaServed' => [
+                        ['@type' => 'Country', 'name' => 'المملكة العربية السعودية', 'alternateName' => 'Saudi Arabia'],
+                        ['@type' => 'City', 'name' => 'الرياض', 'alternateName' => 'Riyadh'],
+                        ['@type' => 'City', 'name' => 'جدة', 'alternateName' => 'Jeddah'],
+                        ['@type' => 'City', 'name' => 'الدمام', 'alternateName' => 'Dammam'],
+                        ['@type' => 'City', 'name' => 'الخبر', 'alternateName' => 'Khobar'],
+                    ],
+                ],
             ],
             'areaServed' => [
+                [
+                    '@type' => 'City',
+                    'name' => 'دمياط الجديدة',
+                    'alternateName' => 'New Damietta',
+                ],
+                [
+                    '@type' => 'City',
+                    'name' => 'دمياط',
+                    'alternateName' => 'Damietta',
+                ],
+                [
+                    '@type' => 'Country',
+                    'name' => 'مصر',
+                    'alternateName' => 'Egypt',
+                ],
                 [
                     '@type' => 'Country',
                     'name' => 'المملكة العربية السعودية',
@@ -128,42 +200,41 @@ class SeoService
                     'alternateName' => 'Dammam',
                 ],
                 [
-                    '@type' => 'City',
-                    'name' => 'الخبر',
-                    'alternateName' => 'Khobar',
-                ],
-                [
-                    '@type' => 'City',
-                    'name' => 'مكة المكرمة',
-                    'alternateName' => 'Makkah',
-                ],
-                [
-                    '@type' => 'City',
-                    'name' => 'المدينة المنورة',
-                    'alternateName' => 'Madinah',
-                ],
-                [
                     '@type' => 'AdministrativeArea',
                     'name' => 'دول مجلس التعاون الخليجي',
                     'alternateName' => 'GCC Countries',
                 ],
             ],
             'contactPoint' => [
-                '@type' => 'ContactPoint',
-                'telephone' => $company?->phone_primary ?? '+201554468657',
-                'contactType' => 'customer support and sales',
-                'email' => $company?->main_email ?? 'info@ishraq.tech',
-                'areaServed' => ['SA', 'EG', 'AE', 'GCC'],
-                'availableLanguage' => ['Arabic', 'English'],
+                [
+                    '@type' => 'ContactPoint',
+                    'telephone' => $company?->phone_primary ?? '+201554468657',
+                    'contactType' => 'customer support - Egypt',
+                    'email' => $company?->main_email ?? 'info@ishraq.tech',
+                    'areaServed' => ['EG', 'دمياط الجديدة'],
+                    'availableLanguage' => ['Arabic', 'English'],
+                ],
+                [
+                    '@type' => 'ContactPoint',
+                    'telephone' => $company?->phone_secondary ?? ($company?->phone_primary ?? '+966500000000'),
+                    'contactType' => 'customer support - Saudi Arabia',
+                    'email' => $company?->main_email ?? 'info@ishraq.tech',
+                    'areaServed' => ['SA', 'GCC'],
+                    'availableLanguage' => ['Arabic', 'English'],
+                ],
             ],
             'knowsAbout' => [
-                'تصميم المواقع الإلكترونية',
+                'شركة برمجة في دمياط الجديدة',
+                'تصميم مواقع في دمياط الجديدة',
+                'برمجة تطبيقات الجوال في دمياط',
+                'أفضل شركة برمجة في دمياط ومصر',
+                'شركة برمجة السعودية',
+                'تصميم مواقع الرياض والسعودية',
                 'تطوير تطبيقات الجوال iOS و Android',
-                'تصميم تجربة وواجهة المستخدم UI/UX Design',
+                'تصميم واجهات وتجربة المستخدم UI/UX Design',
                 'بناء المتاجر الإلكترونية وحلول التجارة الرقمية',
-                'الأنظمة الإدارية والسحابية SaaS',
-                'التحول الرقمي للشركات',
-                'رؤية السعودية 2030 للتحول الرقمي',
+                'الأنظمة السحابية وإدارة المؤسسات SaaS',
+                'التحول الرقمي للشركات في مصر والسعودية',
             ],
             'sameAs' => array_values(array_filter([
                 'https://twitter.com/ishraq_tech',
@@ -265,6 +336,18 @@ class SeoService
                 [
                     'q' => 'ما هي الخدمات التي تقدمها شركة إشراق تك (Ishraq Tech)؟',
                     'a' => 'تقدم شركة إشراق تك حلولاً رقمية وبرمجية متكاملة تشمل: تطوير مواقع الويب والمنصات السحابية SaaS، تصميم وبرمجة تطبيقات الجوال لأنظمة iOS وAndroid، تصميم واجهات وتجربة المستخدم UI/UX، وبناء المتاجر الإلكترونية وحلول التحول الرقمي.',
+                ],
+                [
+                    'q' => 'هل تقدم شركة إشراق خدمات البرمجة وتصميم المواقع في دمياط الجديدة ومصر؟',
+                    'a' => 'نعم، يقع المقر الرئيسي لشركة إشراق في دمياط الجديدة (محافظة دمياط، مصر)، ونقدم خدمات تصميم المواقع، برمجة التطبيقات، والأنظمة الإدارية المتطورة للشركات والمؤسسات في دمياط الجديدة ومحافظة دمياط وكافة محافظات مصر.',
+                ],
+                [
+                    'q' => 'هل تقدم إشراق تك خدمات البرمجيات وتطبيقات الجوال في المملكة العربية السعودية؟',
+                    'a' => 'نعم، تقدم إشراق تك خدماتها البرمجية المتكاملة في جميع مدن المملكة العربية السعودية (الرياض، جدة، الدمام، الخبر، مكة والمدينة) مع الربط مع بوابات الدفع السعودية (مدى، Apple Pay) وأنظمة التجارة والفوترة الإلكترونية.',
+                ],
+                [
+                    'q' => 'أين توجد مقرات شركة إشراق تك وكيف يمكن التواصل؟',
+                    'a' => 'تتواجد مقرات شركة إشراق في دمياط الجديدة (مصر) وفي المملكة العربية السعودية، ويمكن التواصل المباشر عبر الهاتف (+201554468657) أو محادثة واتساب الفورية أو البريد info@ishraq.tech.',
                 ],
                 [
                     'q' => 'كيف أبدأ مشروعي الرقمي مع إشراق تك؟',

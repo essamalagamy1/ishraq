@@ -63,23 +63,24 @@
 <link rel="canonical" href="{{ $seoData['canonical_url'] ?? $currentUrl }}">
 
 {{-- ================================================================
-     2. GEO & SAUDI ARABIA REGIONAL TARGETING
+     2. GEO & MULTI-REGIONAL TARGETING (دمياط الجديدة، مصر & السعودية)
      ================================================================ --}}
-<meta name="geo.region" content="SA-01">
-<meta name="geo.placename" content="Riyadh, Saudi Arabia">
-<meta name="geo.position" content="24.7136;46.6753">
-<meta name="ICBM" content="24.7136, 46.6753">
-<meta name="country" content="SA">
-<meta name="geo.country" content="Saudi Arabia">
-<meta name="coverage" content="Saudi Arabia, GCC">
+<meta name="geo.region" content="EG-DT, SA-01">
+<meta name="geo.placename" content="New Damietta, Damietta, Riyadh, Egypt, Saudi Arabia">
+<meta name="geo.position" content="31.4397;31.6644">
+<meta name="ICBM" content="31.4397, 31.6644">
+<meta name="country" content="EG, SA">
+<meta name="geo.country" content="Egypt, Saudi Arabia">
+<meta name="coverage" content="Egypt, New Damietta, Saudi Arabia, Riyadh, Jeddah, GCC">
 <meta name="target" content="all">
 <meta name="audience" content="all">
 <meta name="language" content="Arabic">
 <meta name="distribution" content="Global">
 <meta name="rating" content="General">
-<meta http-equiv="content-language" content="ar-SA">
+<meta http-equiv="content-language" content="ar-EG, ar-SA, ar">
 
 {{-- Language & Alternate Links --}}
+<link rel="alternate" hreflang="ar-EG" href="{{ $currentUrl }}">
 <link rel="alternate" hreflang="ar-SA" href="{{ $currentUrl }}">
 <link rel="alternate" hreflang="ar" href="{{ $currentUrl }}">
 <link rel="alternate" hreflang="x-default" href="{{ $currentUrl }}">
