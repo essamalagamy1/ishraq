@@ -1,0 +1,15 @@
+{
+    "resource": "https://ishraq.tech/api",
+    "authorization_servers": [
+        "https://ishraq.tech"
+    ],
+    "scopes_supported": [
+        "read",
+        "write",
+        "agent:execute"
+    ],
+    "bearer_methods_supported": [
+        "header"
+    ],
+    "resource_documentation": "https://ishraq.tech/docs/api"
+}
