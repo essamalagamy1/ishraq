@@ -77,10 +77,47 @@
                             </a>
                         @endif
 
+                        @if($companySettings && $companySettings->phone_primary)
+                            <a href="tel:{{ preg_replace('/[^0-9+]/', '', $companySettings->phone_primary) }}"
+                               class="surface-card p-6 rounded-2xl flex items-center justify-between group hover:border-[color:var(--color-accent-ring)] transition-all duration-300 block">
+                                <div>
+                                    <div class="font-mono text-xs text-[color:var(--color-ink-subtle)] uppercase tracking-wider mb-1">{{ __('رقم الهاتف الأول') }}</div>
+                                    <div class="type-body font-medium text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent)] transition-colors" dir="ltr">
+                                        {{ $companySettings->phone_primary }}
+                                    </div>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-[color:var(--color-surface-raised)] border border-[color:var(--color-line)] flex items-center justify-center text-[color:var(--color-ink-muted)] group-hover:bg-[color:var(--color-accent)] group-hover:text-black transition-all">
+                                    ↗
+                                </div>
+                            </a>
+                        @endif
+
+                        @if($companySettings && $companySettings->phone_secondary)
+                            <a href="tel:{{ preg_replace('/[^0-9+]/', '', $companySettings->phone_secondary) }}"
+                               class="surface-card p-6 rounded-2xl flex items-center justify-between group hover:border-[color:var(--color-accent-ring)] transition-all duration-300 block">
+                                <div>
+                                    <div class="font-mono text-xs text-[color:var(--color-ink-subtle)] uppercase tracking-wider mb-1">{{ __('رقم الهاتف الثاني') }}</div>
+                                    <div class="type-body font-medium text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent)] transition-colors" dir="ltr">
+                                        {{ $companySettings->phone_secondary }}
+                                    </div>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-[color:var(--color-surface-raised)] border border-[color:var(--color-line)] flex items-center justify-center text-[color:var(--color-ink-muted)] group-hover:bg-[color:var(--color-accent)] group-hover:text-black transition-all">
+                                    ↗
+                                </div>
+                            </a>
+                        @endif
+
                         @if($companySettings && $companySettings->location_text)
                             <div class="surface-card p-6 rounded-2xl">
-                                <div class="font-mono text-xs text-[color:var(--color-ink-subtle)] uppercase tracking-wider mb-1">{{ __('المقر والموقع') }}</div>
+                                <div class="font-mono text-xs text-[color:var(--color-ink-subtle)] uppercase tracking-wider mb-1">{{ __('المقر الأول') }}</div>
                                 <div class="type-body font-medium text-[color:var(--color-ink)]">{{ $companySettings->location_text }}</div>
+                            </div>
+                        @endif
+
+                        @if($companySettings && $companySettings->location_secondary)
+                            <div class="surface-card p-6 rounded-2xl">
+                                <div class="font-mono text-xs text-[color:var(--color-ink-subtle)] uppercase tracking-wider mb-1">{{ __('المقر الثاني') }}</div>
+                                <div class="type-body font-medium text-[color:var(--color-ink)]">{{ $companySettings->location_secondary }}</div>
                             </div>
                         @endif
                     </div>

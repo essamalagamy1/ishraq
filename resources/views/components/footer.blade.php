@@ -88,8 +88,18 @@
                             </a>
                         </li>
                     @endif
+                    @if($companySettings && $companySettings->phone_secondary)
+                        <li>
+                            <a href="tel:{{ preg_replace('/[^0-9+]/', '', $companySettings->phone_secondary) }}" class="type-body hover:text-[color:var(--color-ink)] transition-colors" dir="ltr">
+                                {{ $companySettings->phone_secondary }}
+                            </a>
+                        </li>
+                    @endif
                     @if($companySettings && $companySettings->location_text)
                         <li class="type-body">{{ $companySettings->location_text }}</li>
+                    @endif
+                    @if($companySettings && $companySettings->location_secondary)
+                        <li class="type-body">{{ $companySettings->location_secondary }}</li>
                     @endif
                 </ul>
             </div>

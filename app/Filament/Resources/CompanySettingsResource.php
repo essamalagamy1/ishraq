@@ -29,10 +29,11 @@ class CompanySettingsResource extends Resource
             Forms\Components\TextInput::make('company_name')->label('اسم الشركة')->required()->maxLength(255),
             Forms\Components\TextInput::make('main_email')->label('البريد الرئيسي')->email()->required()->maxLength(255),
             Forms\Components\TextInput::make('secondary_email')->label('بريد بديل')->email()->maxLength(255),
-            Forms\Components\TextInput::make('phone_primary')->label('الهاتف الرئيسي')->tel()->maxLength(255),
-            Forms\Components\TextInput::make('phone_secondary')->label('هاتف بديل')->tel()->maxLength(255),
+            Forms\Components\TextInput::make('phone_primary')->label('رقم الهاتف الأول')->tel()->maxLength(255),
+            Forms\Components\TextInput::make('phone_secondary')->label('رقم الهاتف الثاني')->tel()->maxLength(255),
             Forms\Components\TextInput::make('whatsapp_number')->label('واتساب')->tel()->maxLength(255),
-            Forms\Components\TextInput::make('location_text')->label('الموقع')->maxLength(255),
+            Forms\Components\TextInput::make('location_text')->label('الموقع الأول / المقر الرئيسي')->maxLength(255),
+            Forms\Components\TextInput::make('location_secondary')->label('الموقع الثاني / الفرع الإضافي')->maxLength(255),
             Forms\Components\Textarea::make('about_short')->label('وصف مختصر')->columnSpanFull(),
 
             // الشعارات

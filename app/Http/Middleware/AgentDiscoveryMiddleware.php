@@ -221,10 +221,22 @@ class AgentDiscoveryMiddleware
     {
         $company = CompanySetting::first();
         $md = "# Contact Ishraq Tech (تواصل معنا)\n\n";
-        $md .= "- Email: " . ($company?->email ?? 'info@ishraq.tech') . "\n";
-        $md .= "- Phone: " . ($company?->phone ?? '') . "\n";
-        $md .= "- WhatsApp: " . ($company?->whatsapp_number ?? '') . "\n";
-        $md .= "- Address: " . ($company?->address ?? 'المملكة العربية السعودية / جمهورية مصر العربية') . "\n";
+        $md .= "- Email: " . ($company?->main_email ?? 'info@ishraq.tech') . "\n";
+        if ($company?->phone_primary) {
+            $md .= "- Primary Phone: " . $company->phone_primary . "\n";
+        }
+        if ($company?->phone_secondary) {
+            $md .= "- Secondary Phone: " . $company->phone_secondary . "\n";
+        }
+        if ($company?->whatsapp_number) {
+            $md .= "- WhatsApp: " . $company->whatsapp_number . "\n";
+        }
+        if ($company?->location_text) {
+            $md .= "- Primary Location: " . $company->location_text . "\n";
+        }
+        if ($company?->location_secondary) {
+            $md .= "- Secondary Location: " . $company->location_secondary . "\n";
+        }
         return $md;
     }
 

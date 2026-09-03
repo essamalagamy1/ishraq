@@ -17,6 +17,7 @@ class CompanySetting extends Model
         'phone_secondary',
         'whatsapp_number',
         'location_text',
+        'location_secondary',
         'about_short',
         'logo_path',
         'logo_2_path',
