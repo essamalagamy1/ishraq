@@ -13,6 +13,8 @@ class Testimonial extends Model
         'client_avatar',
         'rating',
         'testimonial',
+        'source',
+        'review_url',
         'badge_text',
         'badge_color_from',
         'badge_color_to',

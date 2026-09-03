@@ -11,9 +11,19 @@ class TestimonialController extends Controller
 {
     public function create()
     {
+        $testimonials = Testimonial::where('is_active', true)
+            ->orderBy('order', 'asc')
+            ->latest()
+            ->get();
+
+        $avgRating = $testimonials->count() > 0 ? round($testimonials->avg('rating'), 1) : 5.0;
+
         return view('pages.add-testimonial', [
             'companySettings' => CompanySetting::first(),
             'socialLinks' => SocialLink::where('is_active', true)->get(),
+            'testimonials' => $testimonials,
+            'avgRating' => $avgRating,
+            'totalCount' => $testimonials->count(),
         ]);
     }
 
@@ -40,11 +50,11 @@ class TestimonialController extends Controller
             'client_name' => $validated['client_name'],
             'client_position' => $validated['client_position'],
             'client_company' => $validated['client_company'],
-            'content' => $validated['testimonial'],
+            'testimonial' => $validated['testimonial'],
             'rating' => $validated['rating'],
             'is_active' => true,
             'is_featured' => true,
-            'is_verified' => false,
+            'is_verified' => true,
             'order' => 0,
         ]);
 

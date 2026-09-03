@@ -32,6 +32,18 @@ class TestimonialForm
                     ->label('الشهادة')
                     ->required()
                     ->columnSpanFull(),
+                \Filament\Forms\Components\Select::make('source')
+                    ->label('مصدر التقييم')
+                    ->options([
+                        'google' => 'خرائط Google (Google Maps Review)',
+                        'site' => 'الموقع مباشرة (Direct Customer)',
+                    ])
+                    ->default('google')
+                    ->required(),
+                TextInput::make('review_url')
+                    ->label('رابط المراجعة على جوجل (اختياري)')
+                    ->url()
+                    ->placeholder('https://maps.app.goo.gl/...'),
                 TextInput::make('badge_text')
                     ->label('نص الشارة'),
                 TextInput::make('badge_color_from')

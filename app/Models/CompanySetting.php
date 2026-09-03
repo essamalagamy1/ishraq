@@ -16,6 +16,7 @@ class CompanySetting extends Model
         'phone_primary',
         'phone_secondary',
         'whatsapp_number',
+        'google_review_url',
         'location_text',
         'location_secondary',
         'about_short',
