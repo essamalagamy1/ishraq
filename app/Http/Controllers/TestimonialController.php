@@ -11,6 +11,15 @@ class TestimonialController extends Controller
 {
     public function create()
     {
+        // مزامنة تلقائية من جوجل كل ساعتين في الخلفية
+        if (cache()->add('google_reviews_sync_lock', true, now()->addHours(2))) {
+            try {
+                app(\App\Services\GoogleReviewsService::class)->syncReviews();
+            } catch (\Throwable $e) {
+                // تلافي أي توقف في حال عدم توفر اتصال
+            }
+        }
+
         $testimonials = Testimonial::where('is_active', true)
             ->orderBy('order', 'asc')
             ->latest()
