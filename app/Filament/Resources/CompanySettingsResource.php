@@ -33,6 +33,8 @@ class CompanySettingsResource extends Resource
             Forms\Components\TextInput::make('phone_secondary')->label('رقم الهاتف الثاني')->tel()->maxLength(255),
             Forms\Components\TextInput::make('whatsapp_number')->label('واتساب')->tel()->maxLength(255),
             Forms\Components\TextInput::make('google_review_url')->label('رابط تقييم جوجل المباشر (Google Review Link)')->placeholder('https://g.page/r/.../review')->url()->maxLength(500),
+            Forms\Components\TextInput::make('google_place_id')->label('Google Place ID')->placeholder('ChIJaZWC9s-eqaMRIK6tEKGwZlA')->maxLength(255),
+            Forms\Components\TextInput::make('google_places_api_key')->label('Google Places API Key (لجلب التقييمات تلقائياً)')->password()->revealable()->maxLength(255),
             Forms\Components\TextInput::make('location_text')->label('الموقع الأول / المقر الرئيسي')->maxLength(255),
             Forms\Components\TextInput::make('location_secondary')->label('الموقع الثاني / الفرع الإضافي')->maxLength(255),
             Forms\Components\Textarea::make('about_short')->label('وصف مختصر')->columnSpanFull(),

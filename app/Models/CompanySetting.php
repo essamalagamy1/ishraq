@@ -17,6 +17,8 @@ class CompanySetting extends Model
         'phone_secondary',
         'whatsapp_number',
         'google_review_url',
+        'google_place_id',
+        'google_places_api_key',
         'location_text',
         'location_secondary',
         'about_short',

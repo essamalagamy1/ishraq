@@ -12,6 +12,13 @@ Schedule::job(new FetchAnalyticsData)
     ->name('fetch-analytics-data')
     ->onOneServer();
 
+// Schedule Google Reviews auto-sync twice daily
+Schedule::command('google:sync-reviews')
+    ->twiceDaily(1, 13)
+    ->withoutOverlapping()
+    ->name('sync-google-reviews')
+    ->onOneServer();
+
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
