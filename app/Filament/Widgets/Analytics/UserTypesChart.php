@@ -47,7 +47,7 @@ class UserTypesChart extends ChartWidget
                         ],
                     ],
                 ],
-                'labels' => ['زوار جدد (' . $newUsers . ')', 'زوار عائدون (' . $returningUsers . ')'],
+                'labels' => ['زوار جدد ('.$newUsers.')', 'زوار عائدون ('.$returningUsers.')'],
             ];
 
         } catch (\Exception $e) {

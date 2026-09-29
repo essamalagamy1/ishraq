@@ -4,7 +4,6 @@ namespace App\Filament\Widgets\Analytics;
 
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Illuminate\Support\Facades\Cache;
 use Spatie\Analytics\Period;
 
 class OverviewStats extends BaseWidget
@@ -29,7 +28,7 @@ class OverviewStats extends BaseWidget
 
             $period = $this->getPeriod();
             $service = app(\App\Services\AnalyticsService::class);
-            
+
             // Get stats, realtime users, and engagement
             $stats = $service->getOverviewStats($period);
             $realtimeUsers = $service->getRealtimeUsers();
@@ -37,9 +36,9 @@ class OverviewStats extends BaseWidget
 
             // Format duration
             $avgDurationSeconds = (int) ($engagement['avg_duration'] ?? 0);
-            $durationFormatted = $avgDurationSeconds >= 60 
-                ? floor($avgDurationSeconds / 60) . 'د ' . ($avgDurationSeconds % 60) . 'ث'
-                : $avgDurationSeconds . ' ثانية';
+            $durationFormatted = $avgDurationSeconds >= 60
+                ? floor($avgDurationSeconds / 60).'د '.($avgDurationSeconds % 60).'ث'
+                : $avgDurationSeconds.' ثانية';
 
             $engagementRate = round($engagement['engagement_rate'] ?? 0, 1);
 
@@ -69,7 +68,7 @@ class OverviewStats extends BaseWidget
                     ->descriptionIcon(\Filament\Support\Icons\Heroicon::OutlinedClock)
                     ->color('warning'),
 
-                Stat::make('معدل التفاعل', $engagementRate . '%')
+                Stat::make('معدل التفاعل', $engagementRate.'%')
                     ->description('نسبة الجلسات ذات التفاعل')
                     ->descriptionIcon(\Filament\Support\Icons\Heroicon::OutlinedBolt)
                     ->color($engagementRate > 50 ? 'success' : 'warning'),

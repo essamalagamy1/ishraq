@@ -40,7 +40,7 @@
                     <div>
                         <x-ui.eyebrow number="02">{{ __('قنوات الاتصال') }}</x-ui.eyebrow>
                         <h2 class="type-h1 mt-6">{{ __('نحن هنا لمساعدتك.') }}</h2>
-                        <p class="type-body mt-4 text-[color:var(--color-ink-muted)]">
+                        <p class="type-body mt-4 text-ink-muted">
                             {{ __('اختر القناة الأنسب لك، أو املأ النموذج وسيتولى فريقنا متابعة طلبك فورًا.') }}
                         </p>
                     </div>
@@ -48,14 +48,14 @@
                     <div class="space-y-4">
                         @if($companySettings && $companySettings->main_email)
                             <a href="mailto:{{ $companySettings->main_email }}"
-                               class="surface-card p-6 rounded-2xl flex items-center justify-between group hover:border-[color:var(--color-accent-ring)] transition-all duration-300 block">
+                               class="surface-card p-6 rounded-2xl flex items-center justify-between group hover:border-accent-ring transition-all duration-300">
                                 <div>
-                                    <div class="font-mono text-xs text-[color:var(--color-ink-subtle)] uppercase tracking-wider mb-1">{{ __('البريد الإلكتروني') }}</div>
-                                    <div class="type-body font-medium text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent)] transition-colors">
+                                    <div class="font-mono text-xs text-ink-subtle uppercase tracking-wider mb-1">{{ __('البريد الإلكتروني') }}</div>
+                                    <div class="type-body font-medium text-ink group-hover:text-accent transition-colors">
                                         {{ $companySettings->main_email }}
                                     </div>
                                 </div>
-                                <div class="w-8 h-8 rounded-full bg-[color:var(--color-surface-raised)] border border-[color:var(--color-line)] flex items-center justify-center text-[color:var(--color-ink-muted)] group-hover:bg-[color:var(--color-accent)] group-hover:text-black transition-all">
+                                <div class="w-8 h-8 rounded-full bg-surface-raised border border-line flex items-center justify-center text-ink-muted group-hover:bg-accent group-hover:text-black transition-all">
                                     ↗
                                 </div>
                             </a>
@@ -64,14 +64,14 @@
                         @if($companySettings && $companySettings->whatsapp_number)
                             <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companySettings->whatsapp_number) }}"
                                target="_blank"
-                               class="surface-card p-6 rounded-2xl flex items-center justify-between group hover:border-[color:var(--color-accent-ring)] transition-all duration-300 block">
+                               class="surface-card p-6 rounded-2xl flex items-center justify-between group hover:border-accent-ring transition-all duration-300">
                                 <div>
-                                    <div class="font-mono text-xs text-[color:var(--color-ink-subtle)] uppercase tracking-wider mb-1">{{ __('محادثة واتساب سريعة') }}</div>
-                                    <div class="type-body font-medium text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent)] transition-colors" dir="ltr">
+                                    <div class="font-mono text-xs text-ink-subtle uppercase tracking-wider mb-1">{{ __('محادثة واتساب سريعة') }}</div>
+                                    <div class="type-body font-medium text-ink group-hover:text-accent transition-colors" dir="ltr">
                                         {{ $companySettings->whatsapp_number }}
                                     </div>
                                 </div>
-                                <div class="w-8 h-8 rounded-full bg-[color:var(--color-surface-raised)] border border-[color:var(--color-line)] flex items-center justify-center text-[color:var(--color-ink-muted)] group-hover:bg-[color:var(--color-accent)] group-hover:text-black transition-all">
+                                <div class="w-8 h-8 rounded-full bg-surface-raised border border-line flex items-center justify-center text-ink-muted group-hover:bg-accent group-hover:text-black transition-all">
                                     ↗
                                 </div>
                             </a>
@@ -79,14 +79,14 @@
 
                         @if($companySettings && $companySettings->phone_primary)
                             <a href="tel:{{ preg_replace('/[^0-9+]/', '', $companySettings->phone_primary) }}"
-                               class="surface-card p-6 rounded-2xl flex items-center justify-between group hover:border-[color:var(--color-accent-ring)] transition-all duration-300 block">
+                               class="surface-card p-6 rounded-2xl flex items-center justify-between group hover:border-accent-ring transition-all duration-300">
                                 <div>
-                                    <div class="font-mono text-xs text-[color:var(--color-ink-subtle)] uppercase tracking-wider mb-1">{{ __('رقم الهاتف الأول') }}</div>
-                                    <div class="type-body font-medium text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent)] transition-colors" dir="ltr">
+                                    <div class="font-mono text-xs text-ink-subtle uppercase tracking-wider mb-1">{{ __('رقم الهاتف الأول') }}</div>
+                                    <div class="type-body font-medium text-ink group-hover:text-accent transition-colors" dir="ltr">
                                         {{ $companySettings->phone_primary }}
                                     </div>
                                 </div>
-                                <div class="w-8 h-8 rounded-full bg-[color:var(--color-surface-raised)] border border-[color:var(--color-line)] flex items-center justify-center text-[color:var(--color-ink-muted)] group-hover:bg-[color:var(--color-accent)] group-hover:text-black transition-all">
+                                <div class="w-8 h-8 rounded-full bg-surface-raised border border-line flex items-center justify-center text-ink-muted group-hover:bg-accent group-hover:text-black transition-all">
                                     ↗
                                 </div>
                             </a>
@@ -94,14 +94,14 @@
 
                         @if($companySettings && $companySettings->phone_secondary)
                             <a href="tel:{{ preg_replace('/[^0-9+]/', '', $companySettings->phone_secondary) }}"
-                               class="surface-card p-6 rounded-2xl flex items-center justify-between group hover:border-[color:var(--color-accent-ring)] transition-all duration-300 block">
+                               class="surface-card p-6 rounded-2xl flex items-center justify-between group hover:border-accent-ring transition-all duration-300">
                                 <div>
-                                    <div class="font-mono text-xs text-[color:var(--color-ink-subtle)] uppercase tracking-wider mb-1">{{ __('رقم الهاتف الثاني') }}</div>
-                                    <div class="type-body font-medium text-[color:var(--color-ink)] group-hover:text-[color:var(--color-accent)] transition-colors" dir="ltr">
+                                    <div class="font-mono text-xs text-ink-subtle uppercase tracking-wider mb-1">{{ __('رقم الهاتف الثاني') }}</div>
+                                    <div class="type-body font-medium text-ink group-hover:text-accent transition-colors" dir="ltr">
                                         {{ $companySettings->phone_secondary }}
                                     </div>
                                 </div>
-                                <div class="w-8 h-8 rounded-full bg-[color:var(--color-surface-raised)] border border-[color:var(--color-line)] flex items-center justify-center text-[color:var(--color-ink-muted)] group-hover:bg-[color:var(--color-accent)] group-hover:text-black transition-all">
+                                <div class="w-8 h-8 rounded-full bg-surface-raised border border-line flex items-center justify-center text-ink-muted group-hover:bg-accent group-hover:text-black transition-all">
                                     ↗
                                 </div>
                             </a>
@@ -109,26 +109,26 @@
 
                         @if($companySettings && $companySettings->location_text)
                             <div class="surface-card p-6 rounded-2xl">
-                                <div class="font-mono text-xs text-[color:var(--color-ink-subtle)] uppercase tracking-wider mb-1">{{ __('المقر الأول') }}</div>
-                                <div class="type-body font-medium text-[color:var(--color-ink)]">{{ $companySettings->location_text }}</div>
+                                <div class="font-mono text-xs text-ink-subtle uppercase tracking-wider mb-1">{{ __('المقر الأول') }}</div>
+                                <div class="type-body font-medium text-ink">{{ $companySettings->location_text }}</div>
                             </div>
                         @endif
 
                         @if($companySettings && $companySettings->location_secondary)
                             <div class="surface-card p-6 rounded-2xl">
-                                <div class="font-mono text-xs text-[color:var(--color-ink-subtle)] uppercase tracking-wider mb-1">{{ __('المقر الثاني') }}</div>
-                                <div class="type-body font-medium text-[color:var(--color-ink)]">{{ $companySettings->location_secondary }}</div>
+                                <div class="font-mono text-xs text-ink-subtle uppercase tracking-wider mb-1">{{ __('المقر الثاني') }}</div>
+                                <div class="type-body font-medium text-ink">{{ $companySettings->location_secondary }}</div>
                             </div>
                         @endif
                     </div>
 
                     @if($socialLinks && $socialLinks->count())
-                        <div class="pt-6 border-t border-[color:var(--color-line)]">
-                            <div class="font-mono text-xs text-[color:var(--color-ink-subtle)] uppercase tracking-widest mb-4">{{ __('منصات التواصل') }}</div>
+                        <div class="pt-6 border-t border-line">
+                            <div class="font-mono text-xs text-ink-subtle uppercase tracking-widest mb-4">{{ __('منصات التواصل') }}</div>
                             <div class="flex items-center gap-3">
                                 @foreach($socialLinks as $link)
                                     <a href="{{ $link->url }}" target="_blank" rel="noopener noreferrer"
-                                       class="w-11 h-11 inline-flex items-center justify-center rounded-full border border-[color:var(--color-line-strong)] text-[color:var(--color-ink-muted)] hover:text-[color:var(--color-ink)] hover:border-[color:var(--color-accent)] hover:bg-[color:var(--color-accent-soft)] transition-all duration-300"
+                                       class="w-11 h-11 inline-flex items-center justify-center rounded-full border border-line-strong text-ink-muted hover:text-ink hover:border-accent hover:bg-accent-soft transition-all duration-300"
                                        aria-label="{{ $link->platform }}">
                                         <x-ui.social-icon :platform="$link->platform" />
                                     </a>
@@ -141,18 +141,18 @@
                 {{-- Right Form Column --}}
                 <div class="lg:col-span-7" data-reveal data-reveal-stagger="120">
                     @if(session('success'))
-                        <div class="surface-card p-6 mb-8 rounded-2xl border border-[color:var(--color-accent)] bg-[color:var(--color-accent-soft)]">
-                            <div class="type-body text-[color:var(--color-ink)] font-medium text-center">
+                        <div class="surface-card p-6 mb-8 rounded-2xl border border-accent bg-accent-soft">
+                            <div class="type-body text-ink font-medium text-center">
                                 ✦ {{ session('success') }}
                             </div>
                         </div>
                     @endif
 
                     <form action="{{ route('contact.store') }}" method="POST"
-                          class="surface-card p-8 md:p-12 rounded-3xl border border-[color:var(--color-line-strong)] shadow-2xl relative">
+                          class="surface-card p-8 md:p-12 rounded-3xl border border-line-strong shadow-2xl relative">
                         @csrf
                         <h3 class="type-h2 mb-2 leading-snug">{{ __('أرسل رسالتك') }}</h3>
-                        <p class="type-small text-[color:var(--color-ink-muted)] mb-8">{{ __('املأ الحقول التالية وسنتواصل معك خلال 24 ساعة.') }}</p>
+                        <p class="type-small text-ink-muted mb-8">{{ __('املأ الحقول التالية وسنتواصل معك خلال 24 ساعة.') }}</p>
 
                         <div class="space-y-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

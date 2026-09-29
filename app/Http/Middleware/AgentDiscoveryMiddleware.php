@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Article;
+use App\Models\CompanySetting;
+use App\Models\Project;
+use App\Models\Service;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\Article;
-use App\Models\Project;
-use App\Models\CompanySetting;
-use App\Models\Service;
 
 class AgentDiscoveryMiddleware
 {
@@ -75,6 +75,7 @@ class AgentDiscoveryMiddleware
 
         if (str_starts_with($path, 'projects/')) {
             $slug = substr($path, strlen('projects/'));
+
             return $this->generateProjectMarkdown($slug);
         }
 
@@ -84,6 +85,7 @@ class AgentDiscoveryMiddleware
 
         if (str_starts_with($path, 'articles/')) {
             $slug = substr($path, strlen('articles/'));
+
             return $this->generateArticleMarkdown($slug);
         }
 
@@ -115,20 +117,20 @@ class AgentDiscoveryMiddleware
         $md .= "## Services Offered\n\n";
 
         foreach ($services as $service) {
-            $md .= "- **{$service->title}**: " . strip_tags($service->short_description ?? $service->description) . "\n";
+            $md .= "- **{$service->title}**: ".strip_tags($service->short_description ?? $service->description)."\n";
         }
 
         if ($projects->isNotEmpty()) {
             $md .= "\n## Featured Projects\n\n";
             foreach ($projects as $proj) {
-                $md .= "- [{$proj->title}](https://ishraq.tech/projects/{$proj->slug}): " . strip_tags($proj->short_description) . "\n";
+                $md .= "- [{$proj->title}](https://ishraq.tech/projects/{$proj->slug}): ".strip_tags($proj->short_description)."\n";
             }
         }
 
         if ($articles->isNotEmpty()) {
             $md .= "\n## Latest Articles\n\n";
             foreach ($articles as $art) {
-                $md .= "- [{$art->title}](https://ishraq.tech/articles/{$art->slug}) - " . ($art->published_at?->format('Y-m-d') ?? '') . "\n";
+                $md .= "- [{$art->title}](https://ishraq.tech/articles/{$art->slug}) - ".($art->published_at?->format('Y-m-d') ?? '')."\n";
             }
         }
 
@@ -147,9 +149,10 @@ class AgentDiscoveryMiddleware
         $md = "# About Ishraq Tech (من نحن)\n\n";
         $md .= "إشراق تك هي وكالة حلول رقمية متكاملة تقدم خدمات هندسة البرمجيات، وتطبيقات الويب والموبايل، وتصميم الهويات المؤسسية وتجارب المستخدم الاحترافية.\n\n";
         if ($company?->about_us) {
-            $md .= strip_tags($company->about_us) . "\n\n";
+            $md .= strip_tags($company->about_us)."\n\n";
         }
         $md .= "Learn more at: https://ishraq.tech/about-us\n";
+
         return $md;
     }
 
@@ -159,8 +162,9 @@ class AgentDiscoveryMiddleware
         $md = "# Ishraq Services (خدمات إشراق)\n\n";
         foreach ($services as $service) {
             $md .= "### {$service->title}\n\n";
-            $md .= strip_tags($service->description ?? $service->short_description) . "\n\n";
+            $md .= strip_tags($service->description ?? $service->short_description)."\n\n";
         }
+
         return $md;
     }
 
@@ -170,8 +174,9 @@ class AgentDiscoveryMiddleware
         $md = "# Ishraq Portfolio (معرض أعمالنا)\n\n";
         foreach ($projects as $p) {
             $md .= "### [{$p->title}](https://ishraq.tech/projects/{$p->slug})\n\n";
-            $md .= strip_tags($p->short_description ?? '') . "\n\n";
+            $md .= strip_tags($p->short_description ?? '')."\n\n";
         }
+
         return $md;
     }
 
@@ -186,10 +191,11 @@ class AgentDiscoveryMiddleware
         if ($proj->category) {
             $md .= "**Category:** {$proj->category}\n\n";
         }
-        $md .= strip_tags($proj->description ?? $proj->short_description) . "\n\n";
+        $md .= strip_tags($proj->description ?? $proj->short_description)."\n\n";
         if ($proj->project_url) {
             $md .= "Live Demo: {$proj->project_url}\n\n";
         }
+
         return $md;
     }
 
@@ -199,8 +205,9 @@ class AgentDiscoveryMiddleware
         $md = "# Ishraq Tech Blog (المدونة والمقالات)\n\n";
         foreach ($articles as $a) {
             $md .= "### [{$a->title}](https://ishraq.tech/articles/{$a->slug})\n";
-            $md .= strip_tags($a->excerpt ?? '') . "\n\n";
+            $md .= strip_tags($a->excerpt ?? '')."\n\n";
         }
+
         return $md;
     }
 
@@ -212,8 +219,9 @@ class AgentDiscoveryMiddleware
         }
 
         $md = "# {$art->title}\n\n";
-        $md .= "**Published:** " . ($art->published_at?->format('Y-m-d') ?? '') . "\n\n";
-        $md .= strip_tags($art->content) . "\n\n";
+        $md .= '**Published:** '.($art->published_at?->format('Y-m-d') ?? '')."\n\n";
+        $md .= strip_tags($art->content)."\n\n";
+
         return $md;
     }
 
@@ -221,22 +229,23 @@ class AgentDiscoveryMiddleware
     {
         $company = CompanySetting::first();
         $md = "# Contact Ishraq Tech (تواصل معنا)\n\n";
-        $md .= "- Email: " . ($company?->main_email ?? 'info@ishraq.tech') . "\n";
+        $md .= '- Email: '.($company?->main_email ?? 'info@ishraq.tech')."\n";
         if ($company?->phone_primary) {
-            $md .= "- Primary Phone: " . $company->phone_primary . "\n";
+            $md .= '- Primary Phone: '.$company->phone_primary."\n";
         }
         if ($company?->phone_secondary) {
-            $md .= "- Secondary Phone: " . $company->phone_secondary . "\n";
+            $md .= '- Secondary Phone: '.$company->phone_secondary."\n";
         }
         if ($company?->whatsapp_number) {
-            $md .= "- WhatsApp: " . $company->whatsapp_number . "\n";
+            $md .= '- WhatsApp: '.$company->whatsapp_number."\n";
         }
         if ($company?->location_text) {
-            $md .= "- Primary Location: " . $company->location_text . "\n";
+            $md .= '- Primary Location: '.$company->location_text."\n";
         }
         if ($company?->location_secondary) {
-            $md .= "- Secondary Location: " . $company->location_secondary . "\n";
+            $md .= '- Secondary Location: '.$company->location_secondary."\n";
         }
+
         return $md;
     }
 

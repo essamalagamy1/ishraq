@@ -32,10 +32,12 @@ class SyncGoogleReviewsCommand extends Command
 
         if ($result['success']) {
             $this->info($result['message']);
+
             return Command::SUCCESS;
         }
 
         $this->warn($result['message']);
+
         return Command::FAILURE;
     }
 }

@@ -157,7 +157,7 @@
                         </div>
                         <a href="{{ route('portfolio') }}" class="btn btn--ghost self-start lg:self-auto group" id="work-archive-btn">
                             <span>الأرشيف الكامل</span>
-                            <span class="font-mono text-[color:var(--color-accent)] text-xs" dir="ltr">{{ str_pad($featuredProjects->count(), 2, '0', STR_PAD_LEFT) }}</span>
+                            <span class="font-mono text-accent text-xs" dir="ltr">{{ str_pad($featuredProjects->count(), 2, '0', STR_PAD_LEFT) }}</span>
                             <svg class="btn-arrow" width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
                                 <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -515,7 +515,7 @@
                         @if($article->excerpt)
                             <p class="type-body mt-3 line-clamp-2">{{ \Illuminate\Support\Str::limit(strip_tags($article->excerpt), 120) }}</p>
                         @endif
-                        <div class="flex items-center gap-2 mt-4 text-xs font-mono text-[color:var(--color-ink-subtle)] group-hover:text-[color:var(--color-accent)] transition-colors">
+                        <div class="flex items-center gap-2 mt-4 text-xs font-mono text-ink-subtle group-hover:text-accent transition-colors">
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M10 6H2M4 3L1 6l3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             <span>اقرأ المقال</span>
                         </div>

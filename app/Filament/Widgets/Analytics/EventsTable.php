@@ -5,7 +5,6 @@ namespace App\Filament\Widgets\Analytics;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-use Illuminate\Support\Facades\Cache;
 use Spatie\Analytics\Period;
 
 class EventsTable extends BaseWidget

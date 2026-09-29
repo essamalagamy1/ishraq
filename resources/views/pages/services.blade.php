@@ -56,7 +56,7 @@
                     <x-ui.eyebrow number="01">{{ __('ما نقدّمه') }}</x-ui.eyebrow>
                     <h2 class="type-h1 mt-6">{{ __('حلول متكاملة تخدم غايتك.') }}</h2>
                 </div>
-                <p class="type-body max-w-md text-[color:var(--color-ink-muted)]">
+                <p class="type-body max-w-md text-ink-muted">
                     {{ __('كل مسار خدمة يبدأ بفهم عميق لسياق عملك، وينتهي بمنتج ملموس وقابل للتطوير.') }}
                 </p>
             </div>
@@ -174,7 +174,7 @@
                         @endphp
                         <div class="stat-3d" data-reveal data-reveal-stagger="{{ $idx * 100 }}">
                             <div class="stat-3d__number">
-                                <div class="type-numeral text-[clamp(3rem,7vw,5rem)] leading-none text-[color:var(--color-ink)]"
+                                <div class="type-numeral text-[clamp(3rem,7vw,5rem)] leading-none text-ink"
                                      data-count="{{ $value }}"
                                      data-count-format="{{ $suffix }}"
                                      data-count-decimals="{{ $decimals }}"
@@ -183,7 +183,7 @@
                                 </div>
                                 <div class="stat-3d__glow" aria-hidden="true"></div>
                             </div>
-                            <div class="type-eyebrow mt-5 text-[color:var(--color-ink-muted)]">{{ $stat->label }}</div>
+                            <div class="type-eyebrow mt-5 text-ink-muted">{{ $stat->label }}</div>
                             @if($stat->description)
                                 <p class="type-small mt-3 max-w-[16rem]">{{ $stat->description }}</p>
                             @endif
@@ -206,7 +206,7 @@
                     {{ __('فلنبدأ خطة واضحة') }}
                     <em class="type-display-serif text-gradient" style="font-size: inherit;">{{ __('لمشروعك') }}</em>
                 </h2>
-                <p class="type-body-lg mt-8 max-w-xl text-[color:var(--color-ink-muted)]">
+                <p class="type-body-lg mt-8 max-w-xl text-ink-muted">
                     {{ __('أرسل متطلبات مشروعك وسنقترح المسار الأنسب مع تقدير دقيق للمراحل والتكلفة خلال يوم عمل واحد.') }}
                 </p>
                 <div class="mt-12 flex flex-wrap items-center gap-5">

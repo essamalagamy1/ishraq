@@ -38,20 +38,20 @@
                                class="article-card group h-full flex flex-col justify-between"
                                wire:navigate>
                                 <div>
-                                    <div class="article-card__cover relative overflow-hidden rounded-2xl aspect-[16/10] bg-[color:var(--color-surface-raised)] border border-[color:var(--color-line)] mb-6">
+                                    <div class="article-card__cover relative overflow-hidden rounded-2xl aspect-16/10 bg-surface-raised border border-line mb-6">
                                         @if($article->featured_image)
                                             <img src="{{ Storage::url($article->featured_image) }}"
                                                  alt="{{ $article->title }}"
                                                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                                  loading="lazy" />
                                         @else
-                                            <div class="w-full h-full flex items-center justify-center bg-[color:var(--color-surface-inset)] text-[color:var(--color-ink-subtle)] font-serif italic text-xl">
+                                            <div class="w-full h-full flex items-center justify-center bg-surface-inset text-ink-subtle font-serif italic text-xl">
                                                 {{ __('إشراق') }}
                                             </div>
                                         @endif
                                     </div>
 
-                                    <div class="article-card__eyebrow flex items-center justify-between mb-3 text-xs font-mono text-[color:var(--color-ink-subtle)]">
+                                    <div class="article-card__eyebrow flex items-center justify-between mb-3 text-xs font-mono text-ink-subtle">
                                         @if($article->published_at)
                                             <time datetime="{{ $article->published_at->toIso8601String() }}">
                                                 {{ $article->published_at->translatedFormat('j F Y') }}
@@ -62,18 +62,18 @@
                                         @endif
                                     </div>
 
-                                    <h2 class="article-card__title type-h3 leading-snug group-hover:text-[color:var(--color-accent)] transition-colors mb-3">
+                                    <h2 class="article-card__title type-h3 leading-snug group-hover:text-accent transition-colors mb-3">
                                         {{ $article->title }}
                                     </h2>
 
                                     @if($article->excerpt)
-                                        <p class="type-body text-[color:var(--color-ink-muted)] text-sm line-clamp-2 leading-relaxed">
+                                        <p class="type-body text-ink-muted text-sm line-clamp-2 leading-relaxed">
                                             {{ $article->excerpt }}
                                         </p>
                                     @endif
                                 </div>
 
-                                <div class="pt-5 mt-6 border-t border-[color:var(--color-line)] flex items-center gap-2 text-xs font-mono text-[color:var(--color-ink-muted)] group-hover:text-[color:var(--color-accent)] transition-colors">
+                                <div class="pt-5 mt-6 border-t border-line flex items-center gap-2 text-xs font-mono text-ink-muted group-hover:text-accent transition-colors">
                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                                         <path d="M10 6H2M4 3L1 6l3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -85,17 +85,17 @@
                 </div>
 
                 @if($articles->hasPages())
-                    <div class="mt-16 pt-8 border-t border-[color:var(--color-line)] flex justify-center">
+                    <div class="mt-16 pt-8 border-t border-line flex justify-center">
                         {{ $articles->links() }}
                     </div>
                 @endif
             @else
-                <div class="surface-card p-16 text-center max-w-xl mx-auto rounded-3xl border border-[color:var(--color-line-strong)]">
-                    <div class="w-12 h-12 rounded-full bg-[color:var(--color-surface-raised)] border border-[color:var(--color-line)] flex items-center justify-center mx-auto mb-6 text-[color:var(--color-accent)] font-mono">
+                <div class="surface-card p-16 text-center max-w-xl mx-auto rounded-3xl border border-line-strong">
+                    <div class="w-12 h-12 rounded-full bg-surface-raised border border-line flex items-center justify-center mx-auto mb-6 text-accent font-mono">
                         ✦
                     </div>
                     <h3 class="type-h3 mb-3">{{ __('لا توجد مقالات منشورة حالياً') }}</h3>
-                    <p class="type-body text-[color:var(--color-ink-muted)]">{{ __('عد قريبًا لقراءة مقالات جديدة ورؤى متخصصة.') }}</p>
+                    <p class="type-body text-ink-muted">{{ __('عد قريبًا لقراءة مقالات جديدة ورؤى متخصصة.') }}</p>
                 </div>
             @endif
         </div>
@@ -111,7 +111,7 @@
                 <h2 class="cta-ed__heading mt-6">
                     {{ __('هل تحتاج استشارة') }} <em>{{ __('لمشروعك؟') }}</em>
                 </h2>
-                <p class="type-body-lg mt-6 max-w-xl text-[color:var(--color-ink-muted)]">
+                <p class="type-body-lg mt-6 max-w-xl text-ink-muted">
                     {{ __('فريقنا مستعد لمناقشة أفكارك وتحدياتك الرقمية وتقديم رؤية تقنية وتصميمية واضحة.') }}
                 </p>
                 <div class="cta-ed__actions">

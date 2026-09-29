@@ -40,7 +40,7 @@
             <div class="max-w-5xl pt-20 pb-12 md:pt-24 md:pb-16">
 
                 {{-- Eyebrow badge --}}
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[color:var(--color-line-strong)] bg-[color:var(--color-surface-raised)] text-xs font-mono text-[color:var(--color-ink-muted)] mb-6" data-reveal>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line-strong bg-surface-raised text-xs font-mono text-ink-muted mb-6" data-reveal>
                     <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                         <path d="M9 12l2 2 4-4"/>
@@ -53,12 +53,12 @@
                     <span class="block text-gradient mt-2">{{ __('وشهادات تدفعنا للقمة دائماً.') }}</span>
                 </h1>
 
-                <p class="type-body-lg mt-8 max-w-2xl leading-relaxed text-[color:var(--color-ink-muted)]" data-reveal data-reveal-stagger="200">
+                <p class="type-body-lg mt-8 max-w-2xl leading-relaxed text-ink-muted" data-reveal data-reveal-stagger="200">
                     {{ __('كل شراكة نخوضها هي قصة نجاح مشتركة. نفتخر بثقة عملائنا في مصر والسعودية، ورأيكم الصادق هو بوصلتنا الدائمة للابتكار والتميز.') }}
                 </p>
 
                 {{-- Google Live Scorecard Banner --}}
-                <div class="mt-12 p-6 md:p-8 rounded-3xl border border-[color:var(--color-line-strong)] bg-gradient-to-r from-[color:var(--color-surface-raised)] via-[color:var(--color-surface)] to-[color:var(--color-surface-raised)] shadow-2xl backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6" data-reveal data-reveal-stagger="300">
+                <div class="mt-12 p-6 md:p-8 rounded-3xl border border-line-strong bg-linear-to-r from-surface-raised via-surface to-surface-raised shadow-2xl backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6" data-reveal data-reveal-stagger="300">
                     
                     {{-- Left side: Google Branding & Stars --}}
                     <div class="flex items-center gap-5">
@@ -73,14 +73,14 @@
                         </div>
                         <div>
                             <div class="flex items-center gap-2">
-                                <span class="text-3xl font-extrabold tracking-tight font-mono text-[color:var(--color-ink)]">{{ $displayRating }}</span>
+                                <span class="text-3xl font-extrabold tracking-tight font-mono text-ink">{{ $displayRating }}</span>
                                 <div class="flex items-center text-amber-400 text-lg leading-none" aria-label="5 نجوم">
                                     ★★★★★
                                 </div>
                             </div>
-                            <div class="text-xs text-[color:var(--color-ink-muted)] mt-1 flex items-center gap-2">
+                            <div class="text-xs text-ink-muted mt-1 flex items-center gap-2">
                                 <span>{{ __('تقييم ممتاز على خرائط Google') }}</span>
-                                <span class="w-1 h-1 rounded-full bg-[color:var(--color-line-strong)]"></span>
+                                <span class="w-1 h-1 rounded-full bg-line-strong"></span>
                                 <span class="text-emerald-400 font-medium font-mono">100% {{ __('رضا العملاء') }}</span>
                             </div>
                         </div>
@@ -100,11 +100,11 @@
                                 <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
                             </svg>
                             <span class="font-medium text-sm">{{ __('قيّم تجربتك على Google') }}</span>
-                            <span class="text-xs group-hover:translate-x-[-2px] transition-transform">↗</span>
+                            <span class="text-xs group-hover:-translate-x-0.5 transition-transform">↗</span>
                         </a>
 
                         <a href="#submit-form"
-                           class="btn btn--ghost text-xs py-3.5 px-5 text-[color:var(--color-ink-muted)] hover:text-[color:var(--color-ink)]">
+                           class="btn btn--ghost text-xs py-3.5 px-5 text-ink-muted hover:text-ink">
                             <span>{{ __('أو شاركنا تقييمك هنا') }} ↓</span>
                         </a>
                     </div>
@@ -120,8 +120,8 @@
     <section class="section-pad hairline-t relative overflow-hidden" style="background: var(--color-surface);">
         <div class="container-page">
             
-            <div class="p-8 md:p-12 rounded-3xl border border-[color:var(--color-accent-ring)] bg-[color:var(--color-surface-raised)] relative overflow-hidden shadow-2xl" data-reveal>
-                <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-[color:var(--color-accent-soft)] blur-3xl pointer-events-none" aria-hidden="true"></div>
+            <div class="p-8 md:p-12 rounded-3xl border border-accent-ring bg-surface-raised relative overflow-hidden shadow-2xl" data-reveal>
+                <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-accent-soft blur-3xl pointer-events-none" aria-hidden="true"></div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
                     <div class="lg:col-span-8">
@@ -132,30 +132,30 @@
                         <h2 class="type-h2 mb-4 leading-snug">
                             {{ __('لماذا نطلب رأيك الصادق وكيف يُساعدنا؟') }}
                         </h2>
-                        <p class="type-body text-[color:var(--color-ink-muted)] leading-relaxed mb-4">
+                        <p class="type-body text-ink-muted leading-relaxed mb-4">
                             {{ __('في إشراق تك، نعتبر كل مشروع شرفاً ومسؤولية. تقييمك لخدمتنا على جوجل لا يستغرق سوى دقيقة واحدة، لكنه يعني الكثير لفريقنا:') }}
                         </p>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 pt-6 border-t border-[color:var(--color-line)]">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 pt-6 border-t border-line">
                             <div class="flex items-start gap-3">
-                                <span class="w-7 h-7 rounded-lg bg-[color:var(--color-surface)] border border-[color:var(--color-line)] flex items-center justify-center text-amber-400 shrink-0 text-sm font-bold">1</span>
+                                <span class="w-7 h-7 rounded-lg bg-surface border border-line flex items-center justify-center text-amber-400 shrink-0 text-sm font-bold">1</span>
                                 <div>
-                                    <div class="font-medium text-sm text-[color:var(--color-ink)]">{{ __('تطوير مستمر') }}</div>
-                                    <div class="text-xs text-[color:var(--color-ink-subtle)] mt-1">{{ __('نستفيد من ملاحظاتك لتحسين جودة أكوادنا وخدماتنا.') }}</div>
+                                    <div class="font-medium text-sm text-ink">{{ __('تطوير مستمر') }}</div>
+                                    <div class="text-xs text-ink-subtle mt-1">{{ __('نستفيد من ملاحظاتك لتحسين جودة أكوادنا وخدماتنا.') }}</div>
                                 </div>
                             </div>
                             <div class="flex items-start gap-3">
-                                <span class="w-7 h-7 rounded-lg bg-[color:var(--color-surface)] border border-[color:var(--color-line)] flex items-center justify-center text-amber-400 shrink-0 text-sm font-bold">2</span>
+                                <span class="w-7 h-7 rounded-lg bg-surface border border-line flex items-center justify-center text-amber-400 shrink-0 text-sm font-bold">2</span>
                                 <div>
-                                    <div class="font-medium text-sm text-[color:var(--color-ink)]">{{ __('مساعدة الآخرين') }}</div>
-                                    <div class="text-xs text-[color:var(--color-ink-subtle)] mt-1">{{ __('تمنح رواد الأعمال والشركات الثقة في اختيارنا.') }}</div>
+                                    <div class="font-medium text-sm text-ink">{{ __('مساعدة الآخرين') }}</div>
+                                    <div class="text-xs text-ink-subtle mt-1">{{ __('تمنح رواد الأعمال والشركات الثقة في اختيارنا.') }}</div>
                                 </div>
                             </div>
                             <div class="flex items-start gap-3">
-                                <span class="w-7 h-7 rounded-lg bg-[color:var(--color-surface)] border border-[color:var(--color-line)] flex items-center justify-center text-amber-400 shrink-0 text-sm font-bold">3</span>
+                                <span class="w-7 h-7 rounded-lg bg-surface border border-line flex items-center justify-center text-amber-400 shrink-0 text-sm font-bold">3</span>
                                 <div>
-                                    <div class="font-medium text-sm text-[color:var(--color-ink)]">{{ __('دعم فريق المطورين') }}</div>
-                                    <div class="text-xs text-[color:var(--color-ink-subtle)] mt-1">{{ __('كلماتك الإيجابية تلهم مهندسينا لتقديم أقصى طاقاتهم.') }}</div>
+                                    <div class="font-medium text-sm text-ink">{{ __('دعم فريق المطورين') }}</div>
+                                    <div class="text-xs text-ink-subtle mt-1">{{ __('كلماتك الإيجابية تلهم مهندسينا لتقديم أقصى طاقاتهم.') }}</div>
                                 </div>
                             </div>
                         </div>
@@ -163,10 +163,10 @@
 
                     {{-- Quick Action Callout --}}
                     <div class="lg:col-span-4 text-center lg:text-end">
-                        <div class="p-6 rounded-2xl bg-[color:var(--color-surface)] border border-[color:var(--color-line-strong)] inline-block w-full max-w-sm text-center">
+                        <div class="p-6 rounded-2xl bg-surface border border-line-strong inline-block w-full max-w-sm text-center">
                             <div class="text-4xl mb-3">💬</div>
                             <div class="font-semibold text-base mb-1">{{ __('شارك تجربتك الآن') }}</div>
-                            <div class="text-xs text-[color:var(--color-ink-muted)] mb-5">{{ __('أقل من 60 ثانية تمنحنا دعماً يدوم طويلاً.') }}</div>
+                            <div class="text-xs text-ink-muted mb-5">{{ __('أقل من 60 ثانية تمنحنا دعماً يدوم طويلاً.') }}</div>
                             <a href="{{ $googleReviewUrl }}"
                                target="_blank"
                                rel="noopener noreferrer"
@@ -193,7 +193,7 @@
                     <x-ui.eyebrow number="01">{{ __('مراجعات العملاء') }}</x-ui.eyebrow>
                     <h2 class="type-h1 mt-4">{{ __('تجارب حقيقية من شركاء مسيرتنا') }}</h2>
                 </div>
-                <div class="text-xs text-[color:var(--color-ink-subtle)] font-mono flex items-center gap-2">
+                <div class="text-xs text-ink-subtle font-mono flex items-center gap-2">
                     <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                     <span>{{ __('معروض') }} {{ $testimonials->count() }} {{ __('تقييم موثق') }}</span>
                 </div>
@@ -202,7 +202,7 @@
             {{-- Testimonial Cards Grid --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 @forelse($testimonials as $idx => $t)
-                    <div class="surface-card p-8 rounded-3xl border border-[color:var(--color-line-strong)] hover:border-[color:var(--color-accent-ring)] transition-all duration-300 flex flex-col justify-between group shadow-xl relative overflow-hidden"
+                    <div class="surface-card p-8 rounded-3xl border border-line-strong hover:border-accent-ring transition-all duration-300 flex flex-col justify-between group shadow-xl relative overflow-hidden"
                          data-reveal data-reveal-stagger="{{ ($idx % 3) * 120 }}">
 
                         {{-- Card Header: Author info & Google verified badge --}}
@@ -215,13 +215,13 @@
                                              class="w-12 h-12 rounded-full object-cover border border-white/10 shrink-0" />
                                     @else
                                         {{-- Elegant Initials Avatar --}}
-                                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 border border-amber-500/30 text-amber-300 flex items-center justify-center font-bold text-base font-mono shrink-0 shadow-inner">
+                                        <div class="w-12 h-12 rounded-2xl bg-linear-to-br from-amber-500/20 to-orange-500/20 border border-amber-500/30 text-amber-300 flex items-center justify-center font-bold text-base font-mono shrink-0 shadow-inner">
                                             {{ mb_substr($t->client_name, 0, 1) }}
                                         </div>
                                     @endif
 
                                     <div>
-                                        <div class="font-medium text-base text-[color:var(--color-ink)] flex items-center gap-2">
+                                        <div class="font-medium text-base text-ink flex items-center gap-2">
                                             <span>{{ $t->client_name }}</span>
                                             @if($t->is_verified)
                                                 <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 20 20" fill="currentColor" title="{{ __('مراجعة موثقة') }}">
@@ -229,7 +229,7 @@
                                                 </svg>
                                             @endif
                                         </div>
-                                        <div class="text-xs text-[color:var(--color-ink-muted)] mt-0.5 font-mono">
+                                        <div class="text-xs text-ink-muted mt-0.5 font-mono">
                                             {{ trim(($t->client_position ?? '') . ($t->client_company ? ' — ' . $t->client_company : '')) ?: __('عميل معتمد') }}
                                         </div>
                                     </div>
@@ -254,14 +254,14 @@
                             </div>
 
                             {{-- Quote Content --}}
-                            <blockquote class="type-body text-[color:var(--color-ink)] leading-relaxed relative">
-                                <span class="text-3xl text-[color:var(--color-line-strong)] font-serif leading-none select-none -top-2 relative">“</span>
+                            <blockquote class="type-body text-ink leading-relaxed relative">
+                                <span class="text-3xl text-line-strong font-serif leading-none select-none -top-2 relative">“</span>
                                 {{ $t->testimonial }}
                             </blockquote>
                         </div>
 
                         {{-- Card Footer: Verified Chip & Date --}}
-                        <div class="mt-8 pt-4 border-t border-[color:var(--color-line)] flex items-center justify-between text-xs text-[color:var(--color-ink-subtle)] font-mono">
+                        <div class="mt-8 pt-4 border-t border-line flex items-center justify-between text-xs text-ink-subtle font-mono">
                             <a href="{{ $t->review_url ?: $googleReviewUrl }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-emerald-400/90 hover:text-emerald-300 transition-colors">
                                 <span>✦</span>
                                 <span>{{ $t->badge_text ?? __('مراجعة Google موثقة') }}</span>
@@ -271,7 +271,7 @@
                         </div>
                     </div>
                 @empty
-                    <div class="col-span-full py-12 text-center text-[color:var(--color-ink-muted)]">
+                    <div class="col-span-full py-12 text-center text-ink-muted">
                         {{ __('كن أول من يشاركنا تقييمه ويضيء لوحة شركائنا!') }}
                     </div>
                 @endforelse
@@ -291,7 +291,7 @@
                 <div class="text-center mb-10">
                     <x-ui.eyebrow number="02">{{ __('أضف تقييمك') }}</x-ui.eyebrow>
                     <h2 class="type-h2 mt-4">{{ __('شاركنا رأيك مباشرة على الموقع') }}</h2>
-                    <p class="type-body mt-2 text-[color:var(--color-ink-muted)]">
+                    <p class="type-body mt-2 text-ink-muted">
                         {{ __('إذا كنت تفضل كتابة تقييمك هنا دون الحاجة لحساب جوجل، يمكنك تعبئة النموذج التالي وسيتم نشره بعد المراجعة.') }}
                     </p>
                 </div>
@@ -301,18 +301,18 @@
                         <div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto mb-4 font-bold text-lg">
                             ✓
                         </div>
-                        <h3 class="type-h3 mb-2 text-[color:var(--color-ink)]">{{ __('شكرًا جزيلاً لمشاركتك!') }}</h3>
-                        <p class="type-body text-[color:var(--color-ink-muted)]">{{ session('success') }}</p>
+                        <h3 class="type-h3 mb-2 text-ink">{{ __('شكرًا جزيلاً لمشاركتك!') }}</h3>
+                        <p class="type-body text-ink-muted">{{ session('success') }}</p>
                     </div>
                 @endif
 
                 <form action="{{ route('testimonial.store') }}" method="POST"
-                      class="surface-card p-8 md:p-12 rounded-3xl border border-[color:var(--color-line-strong)] space-y-8 shadow-2xl relative">
+                      class="surface-card p-8 md:p-12 rounded-3xl border border-line-strong space-y-8 shadow-2xl relative">
                     @csrf
 
                     {{-- Rating Widget --}}
-                    <div class="p-6 rounded-2xl bg-[color:var(--color-surface-raised)] border border-[color:var(--color-line)] text-center">
-                        <label class="form-label font-medium text-xs font-mono uppercase tracking-wider mb-3 block text-[color:var(--color-ink-muted)]">{{ __('اختر التقييم من 1 إلى 5 نجوم *') }}</label>
+                    <div class="p-6 rounded-2xl bg-surface-raised border border-line text-center">
+                        <label class="form-label font-medium text-xs font-mono uppercase tracking-wider mb-3 block text-ink-muted">{{ __('اختر التقييم من 1 إلى 5 نجوم *') }}</label>
                         <div class="flex items-center justify-center gap-3" id="rating-stars">
                             @for($i = 1; $i <= 5; $i++)
                                 <button type="button"

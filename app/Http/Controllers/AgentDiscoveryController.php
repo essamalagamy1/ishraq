@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
@@ -151,14 +150,14 @@ class AgentDiscoveryController extends Controller
                     'type' => 'skill-md',
                     'description' => 'Explore Ishraq Tech digital solutions, software engineering, mobile app development, and UI/UX design services.',
                     'url' => 'https://ishraq.tech/.well-known/agent-skills/ishraq-services/SKILL.md',
-                    'digest' => 'sha256:' . hash('sha256', $servicesSkill),
+                    'digest' => 'sha256:'.hash('sha256', $servicesSkill),
                 ],
                 [
                     'name' => 'design-request',
                     'type' => 'skill-md',
                     'description' => 'Autonomous agent guide to submit project requirements, custom design requests, and quote inquiries to Ishraq Tech.',
                     'url' => 'https://ishraq.tech/.well-known/agent-skills/design-request/SKILL.md',
-                    'digest' => 'sha256:' . hash('sha256', $designSkill),
+                    'digest' => 'sha256:'.hash('sha256', $designSkill),
                 ],
             ],
         ];

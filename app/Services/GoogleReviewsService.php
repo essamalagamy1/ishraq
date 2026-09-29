@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 class GoogleReviewsService
 {
     protected ?string $placeId;
+
     protected ?string $apiKey;
 
     public function __construct()
@@ -44,7 +45,7 @@ class GoogleReviewsService
 
         try {
             // Using Google Places API (New v1)
-            $url = 'https://places.googleapis.com/v1/places/' . $this->placeId;
+            $url = 'https://places.googleapis.com/v1/places/'.$this->placeId;
             $response = Http::timeout(12)->withHeaders([
                 'X-Goog-Api-Key' => $this->apiKey,
                 'X-Goog-FieldMask' => 'displayName,rating,reviews,userRatingCount',
@@ -63,7 +64,7 @@ class GoogleReviewsService
             $reviews = $data['reviews'] ?? [];
             $syncedCount = 0;
 
-            if (!empty($reviews)) {
+            if (! empty($reviews)) {
                 foreach ($reviews as $rev) {
                     $authorAttr = $rev['authorAttribution'] ?? [];
                     $authorName = $authorAttr['displayName'] ?? 'عميل من Google';
@@ -133,11 +134,12 @@ class GoogleReviewsService
                 'message' => "تم الاتصال بنجاح بـ Google Places API! التقييم الكلي: {$rating} من أصل {$totalCount} تقييم.",
             ];
         } catch (\Throwable $e) {
-            Log::error('Google Reviews Sync Error: ' . $e->getMessage());
+            Log::error('Google Reviews Sync Error: '.$e->getMessage());
+
             return [
                 'success' => false,
                 'synced' => 0,
-                'message' => 'حدث استثناء أثناء المزامنة: ' . $e->getMessage(),
+                'message' => 'حدث استثناء أثناء المزامنة: '.$e->getMessage(),
             ];
         }
     }
@@ -165,7 +167,7 @@ class GoogleReviewsService
             return [
                 'success' => false,
                 'synced' => 0,
-                'message' => 'خطأ من Google API: ' . ($data['error_message'] ?? $data['status']),
+                'message' => 'خطأ من Google API: '.($data['error_message'] ?? $data['status']),
             ];
         }
 

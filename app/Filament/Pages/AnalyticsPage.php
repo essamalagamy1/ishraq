@@ -49,7 +49,7 @@ class AnalyticsPage extends Page
     public function getViewData(): array
     {
         $setting = AnalyticsSetting::first();
-        
+
         return [
             'setting' => $setting,
             'gaPropertyId' => config('analytics.property_id') ?: $setting?->ga_property_id,
@@ -70,13 +70,13 @@ class AnalyticsPage extends Page
                 ->label('فتح Google Tag Manager')
                 ->icon(Heroicon::OutlinedTag)
                 ->color('warning')
-                ->url("https://tagmanager.google.com/#/container/accounts", shouldOpenInNewTab: true),
+                ->url('https://tagmanager.google.com/#/container/accounts', shouldOpenInNewTab: true),
 
             Action::make('openGa')
                 ->label('فتح Google Analytics')
                 ->icon(Heroicon::OutlinedArrowTopRightOnSquare)
                 ->color('info')
-                ->url("https://analytics.google.com/analytics/web/", shouldOpenInNewTab: true),
+                ->url('https://analytics.google.com/analytics/web/', shouldOpenInNewTab: true),
 
             Action::make('checkConnection')
                 ->label('فحص الاتصال')
@@ -103,7 +103,7 @@ class AnalyticsPage extends Page
                     } catch (\Exception $e) {
                         Notification::make()
                             ->title('❌ فشل الاتصال')
-                            ->body('خطأ أثناء الاتصال: ' . $e->getMessage())
+                            ->body('خطأ أثناء الاتصال: '.$e->getMessage())
                             ->danger()
                             ->duration(10000)
                             ->send();
@@ -138,7 +138,7 @@ class AnalyticsPage extends Page
                     } catch (\Exception $e) {
                         Notification::make()
                             ->title('❌ فشل التحديث')
-                            ->body('خطأ: ' . $e->getMessage())
+                            ->body('خطأ: '.$e->getMessage())
                             ->danger()
                             ->duration(8000)
                             ->send();
@@ -190,5 +190,3 @@ class AnalyticsPage extends Page
         ];
     }
 }
-
-

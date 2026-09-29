@@ -11,8 +11,8 @@
         'default' => 'bg-white border border-gray-200 shadow-lg',
         'glass' => 'bg-white/10 backdrop-blur-xl border border-white/20',
         'glass-dark' => 'bg-navy-600/80 backdrop-blur-xl border border-white/10',
-        'gradient' => 'bg-gradient-to-br from-white to-gray-50 border border-gray-100',
-        'accent' => 'bg-gradient-to-br from-accent-50 to-teal-50 border border-accent-100',
+        'gradient' => 'bg-linear-to-br from-white to-gray-50 border border-gray-100',
+        'accent' => 'bg-linear-to-br from-accent-50 to-teal-50 border border-accent-100',
         'dark' => 'bg-navy-600 border border-navy-500',
     ];
     

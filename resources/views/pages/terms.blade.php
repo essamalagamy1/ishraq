@@ -13,7 +13,7 @@
                     <span class="block text-gradient mt-2">{{ __('وضوح وثقة في كل تعامل.') }}</span>
                 </h1>
 
-                <p class="type-small mt-8 text-[color:var(--color-ink-subtle)] font-mono" data-reveal data-reveal-stagger="200">
+                <p class="type-small mt-8 text-ink-subtle font-mono" data-reveal data-reveal-stagger="200">
                     {{ __('آخر تحديث وتدقيق:') }} {{ date('Y/m/d') }}
                 </p>
             </div>
@@ -26,7 +26,7 @@
     <section class="section-pad hairline-t" style="background: var(--color-surface);">
         <div class="container-page">
             <div class="max-w-3xl mx-auto" data-reveal>
-                <div class="surface-card p-8 md:p-14 rounded-3xl border border-[color:var(--color-line-strong)] shadow-2xl">
+                <div class="surface-card p-8 md:p-14 rounded-3xl border border-line-strong shadow-2xl">
                     @if($companySettings?->terms_conditions)
                         <div class="prose-article text-lg leading-relaxed">
                             {!! $companySettings->terms_conditions !!}
@@ -40,7 +40,7 @@
                             <p>{{ __('نقدم خدمات تصميم وتطوير المواقع والتطبيقات والحلول البرمجية وفق نطاق العمل (Scope of Work) والمواصفات الفنية المعتمدة في عرض السعر الرسمي.') }}</p>
 
                             <h3 class="type-h3 text-xl font-semibold mt-8 mb-4">{{ __('آلية الدفع ومراحل الاستحقاق المالي') }}</h3>
-                            <ul class="list-disc pr-6 space-y-2 text-[color:var(--color-ink-muted)]">
+                            <ul class="list-disc pr-6 space-y-2 text-ink-muted">
                                 <li>{{ __('الدفعة الأولى (30%): دفعة مقدمة غير مستردة لتأكيد الحجز وبدء مرحلة التخطيط والتصميم.') }}</li>
                                 <li>{{ __('الدفعة الثانية (50%): عند اكتمال مرحلة التصميم وبدء التطوير البرمجي الفعلي.') }}</li>
                                 <li>{{ __('الدفعة النهائية (20%): عند التسليم النهائي للمشروع ورفعه على الخوادم الإنتاجية.') }}</li>
@@ -52,7 +52,7 @@
                             <h3 class="type-h3 text-xl font-semibold mt-8 mb-4">{{ __('التواصل والاستفسارات') }}</h3>
                             <p>
                                 {{ __('لأي استفسارات قانونية أو توضيحات تعاقدية، يرجى التواصل معنا عبر صفحة') }}
-                                <a href="{{ route('contact') }}" class="text-[color:var(--color-accent)] underline hover:text-[color:var(--color-accent-hover)]" wire:navigate>{{ __('اتصل بنا') }}</a>.
+                                <a href="{{ route('contact') }}" class="text-accent underline hover:text-accent-hover" wire:navigate>{{ __('اتصل بنا') }}</a>.
                             </p>
                         </div>
                     @endif

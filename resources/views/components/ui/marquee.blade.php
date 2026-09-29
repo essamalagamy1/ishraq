@@ -4,7 +4,7 @@
 ])
 
 @php
-    $textClass = $muted ? 'text-[color:var(--color-ink-subtle)]' : 'text-[color:var(--color-ink)]';
+    $textClass = $muted ? 'text-ink-subtle' : 'text-ink';
 @endphp
 
 <div class="marquee" {{ $attributes }}>
@@ -12,7 +12,7 @@
         @foreach($items as $item)
             <span class="type-eyebrow {{ $textClass }} flex items-center gap-12">
                 {{ $item }}
-                <span class="w-1 h-1 rounded-full bg-[color:var(--color-line-bold)]"></span>
+                <span class="w-1 h-1 rounded-full bg-line-bold"></span>
             </span>
         @endforeach
     </div>
@@ -20,7 +20,7 @@
         @foreach($items as $item)
             <span class="type-eyebrow {{ $textClass }} flex items-center gap-12">
                 {{ $item }}
-                <span class="w-1 h-1 rounded-full bg-[color:var(--color-line-bold)]"></span>
+                <span class="w-1 h-1 rounded-full bg-line-bold"></span>
             </span>
         @endforeach
     </div>

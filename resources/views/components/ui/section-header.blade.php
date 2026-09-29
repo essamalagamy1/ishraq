@@ -16,8 +16,8 @@
     $titleColor = $dark ? 'text-white' : 'text-gray-900';
     $subtitleColor = $dark ? 'text-gray-300' : 'text-gray-600';
     $badgeStyle = $dark 
-        ? 'bg-gradient-to-r from-accent-400 to-teal-400 text-navy-600' 
-        : 'bg-gradient-to-r from-accent-500 to-teal-500 text-white';
+        ? 'bg-linear-to-r from-accent-400 to-teal-400 text-navy-600' 
+        : 'bg-linear-to-r from-accent-500 to-teal-500 text-white';
 @endphp
 
 <div class="{{ $alignClasses[$align] ?? $alignClasses['center'] }} mb-16">

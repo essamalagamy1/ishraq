@@ -29,9 +29,9 @@
                 @if($stats && $stats->count())
                     <div class="flex items-center gap-8 pt-4 lg:pt-0" data-reveal data-reveal-stagger="300">
                         @foreach($stats->take(2) as $stat)
-                            <div class="border-r border-[color:var(--color-line)] pr-8 first:border-none first:pr-0">
-                                <div class="type-numeral text-4xl text-[color:var(--color-ink)]" dir="ltr">{{ $stat->number }}</div>
-                                <div class="type-eyebrow mt-1 text-[color:var(--color-ink-subtle)]">{{ $stat->label }}</div>
+                            <div class="border-r border-line pr-8 first:border-none first:pr-0">
+                                <div class="type-numeral text-4xl text-ink" dir="ltr">{{ $stat->number }}</div>
+                                <div class="type-eyebrow mt-1 text-ink-subtle">{{ $stat->label }}</div>
                             </div>
                         @endforeach
                     </div>
@@ -44,7 +44,7 @@
          2. STICKY CATEGORY FILTER BAR
          ================================================================ --}}
     @if(isset($projectTypes) && $projectTypes->count())
-        <section class="py-5 sticky top-16 lg:top-18 z-40 backdrop-blur-xl border-y border-[color:var(--color-line)]"
+        <section class="py-5 sticky top-16 lg:top-18 z-40 backdrop-blur-xl border-y border-line"
                  style="background: rgba(11, 10, 8, 0.85);">
             <div class="container-page">
                 <div class="flex items-center gap-2.5 overflow-x-auto py-1 scrollbar-none">
@@ -103,20 +103,20 @@
                                 </div>
 
                                 {{-- Card Body --}}
-                                <div class="featured-card__body p-6 lg:p-8 flex flex-col justify-between flex-grow">
+                                <div class="featured-card__body p-6 lg:p-8 flex flex-col justify-between grow">
                                     <div>
-                                        <h3 class="featured-card__title text-xl mb-3 group-hover:text-[color:var(--color-accent)] transition-colors">
+                                        <h3 class="featured-card__title text-xl mb-3 group-hover:text-accent transition-colors">
                                             {{ $project->title }}
                                         </h3>
                                         @if($project->short_description)
-                                            <p class="type-body text-[color:var(--color-ink-muted)] text-sm line-clamp-2 leading-relaxed">
+                                            <p class="type-body text-ink-muted text-sm line-clamp-2 leading-relaxed">
                                                 {{ $project->short_description }}
                                             </p>
                                         @endif
                                     </div>
 
-                                    <div class="mt-6 pt-5 border-t border-[color:var(--color-line)] flex items-center justify-between">
-                                        <span class="type-small font-medium text-[color:var(--color-ink-muted)] group-hover:text-[color:var(--color-ink)] transition-colors">
+                                    <div class="mt-6 pt-5 border-t border-line flex items-center justify-between">
+                                        <span class="type-small font-medium text-ink-muted group-hover:text-ink transition-colors">
                                             {{ __('استكشف المشروع') }}
                                         </span>
                                         <div class="featured-card__arrow-btn">
@@ -133,17 +133,17 @@
 
                 {{-- Pagination --}}
                 @if($projects->hasPages())
-                    <div class="mt-16 pt-8 border-t border-[color:var(--color-line)] flex justify-center">
+                    <div class="mt-16 pt-8 border-t border-line flex justify-center">
                         {{ $projects->appends(request()->query())->links() }}
                     </div>
                 @endif
             @else
-                <div class="surface-card p-16 text-center max-w-xl mx-auto rounded-3xl border border-[color:var(--color-line-strong)]">
-                    <div class="w-12 h-12 rounded-full bg-[color:var(--color-surface-raised)] border border-[color:var(--color-line)] flex items-center justify-center mx-auto mb-6 text-[color:var(--color-accent)] font-mono">
+                <div class="surface-card p-16 text-center max-w-xl mx-auto rounded-3xl border border-line-strong">
+                    <div class="w-12 h-12 rounded-full bg-surface-raised border border-line flex items-center justify-center mx-auto mb-6 text-accent font-mono">
                         ✦
                     </div>
                     <h3 class="type-h3 mb-3">{{ __('لا توجد مشاريع في هذا التصنيف حالياً') }}</h3>
-                    <p class="type-body text-[color:var(--color-ink-muted)] mb-8">{{ __('يمكنك تصفح باقي التصنيفات أو التواصل معنا لطلب مشروع مخصص.') }}</p>
+                    <p class="type-body text-ink-muted mb-8">{{ __('يمكنك تصفح باقي التصنيفات أو التواصل معنا لطلب مشروع مخصص.') }}</p>
                     <a href="{{ route('portfolio') }}" class="btn btn--ghost" wire:navigate>{{ __('عرض جميع المشاريع') }}</a>
                 </div>
             @endif
@@ -160,7 +160,7 @@
                 <h2 class="cta-ed__heading mt-6">
                     {{ __('هل لديك فكرة تريد') }} <em>{{ __('إطلاقها؟') }}</em>
                 </h2>
-                <p class="type-body-lg mt-6 max-w-xl text-[color:var(--color-ink-muted)]">
+                <p class="type-body-lg mt-6 max-w-xl text-ink-muted">
                     {{ __('نساعدك في تحويل الفكرة إلى منتج رقمي متكامل يحقق أهدافك ويترك انطباعًا لا يُنسى.') }}
                 </p>
                 <div class="cta-ed__actions">

@@ -470,12 +470,14 @@ class AnalyticsService
 
                     return $total;
                 } catch (\Throwable $e) {
-                    Log::warning('Analytics getRealtimeUsers runRealtimeReport: ' . $e->getMessage());
+                    Log::warning('Analytics getRealtimeUsers runRealtimeReport: '.$e->getMessage());
+
                     return 0;
                 }
             });
         } catch (\Throwable $e) {
-            Log::warning('Analytics getRealtimeUsers: ' . $e->getMessage());
+            Log::warning('Analytics getRealtimeUsers: '.$e->getMessage());
+
             return 0;
         }
     }
@@ -499,6 +501,7 @@ class AnalyticsService
                         $result['returning'] += (int) ($row['activeUsers'] ?? 0);
                     }
                 }
+
                 return $result;
             });
         } catch (\Throwable $e) {
@@ -518,12 +521,14 @@ class AnalyticsService
                 $data = Analytics::get($period, ['averageSessionDuration', 'engagementRate', 'screenPageViewsPerSession'], [], 1);
                 if ($data instanceof \Illuminate\Support\Collection && $data->isNotEmpty()) {
                     $first = $data->first();
+
                     return [
                         'avg_duration' => (float) ($first['averageSessionDuration'] ?? 0),
                         'engagement_rate' => (float) ($first['engagementRate'] ?? 0) * 100,
                         'views_per_session' => (float) ($first['screenPageViewsPerSession'] ?? 0),
                     ];
                 }
+
                 return ['avg_duration' => 0, 'engagement_rate' => 0, 'views_per_session' => 0];
             });
         } catch (\Throwable $e) {
@@ -557,6 +562,7 @@ class AnalyticsService
         try {
             return Cache::remember($cacheKey, $this->cacheMinutes * 60, function () use ($period, $max) {
                 $data = Analytics::get($period, ['activeUsers', 'screenPageViews'], ['country', 'city'], $max);
+
                 return $data->toArray();
             });
         } catch (\Throwable $e) {

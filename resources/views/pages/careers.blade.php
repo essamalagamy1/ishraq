@@ -29,24 +29,24 @@
                 
                 {{-- Perks Strip --}}
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-reveal>
-                    <div class="surface-card p-6 rounded-2xl border border-[color:var(--color-line)] group hover:border-[color:var(--color-accent-ring)] transition-all">
-                        <span class="font-mono text-xs text-[color:var(--color-accent)] font-semibold mb-3 block">01. {{ __('الثقافة') }}</span>
-                        <h3 class="type-h3 text-lg mb-2 text-[color:var(--color-ink)]">{{ __('بيئة نخبويّة') }}</h3>
-                        <p class="type-body text-xs text-[color:var(--color-ink-muted)] leading-relaxed">
+                    <div class="surface-card p-6 rounded-2xl border border-line group hover:border-accent-ring transition-all">
+                        <span class="font-mono text-xs text-accent font-semibold mb-3 block">01. {{ __('الثقافة') }}</span>
+                        <h3 class="type-h3 text-lg mb-2 text-ink">{{ __('بيئة نخبويّة') }}</h3>
+                        <p class="type-body text-xs text-ink-muted leading-relaxed">
                             {{ __('اعمل بجانب محترفين شغوفين يركزون على جودة العمل والقيمة الحقيقية.') }}
                         </p>
                     </div>
-                    <div class="surface-card p-6 rounded-2xl border border-[color:var(--color-line)] group hover:border-[color:var(--color-accent-ring)] transition-all">
-                        <span class="font-mono text-xs text-[color:var(--color-accent)] font-semibold mb-3 block">02. {{ __('التحدي') }}</span>
-                        <h3 class="type-h3 text-lg mb-2 text-[color:var(--color-ink)]">{{ __('مشاريع واعدة') }}</h3>
-                        <p class="type-body text-xs text-[color:var(--color-ink-muted)] leading-relaxed">
+                    <div class="surface-card p-6 rounded-2xl border border-line group hover:border-accent-ring transition-all">
+                        <span class="font-mono text-xs text-accent font-semibold mb-3 block">02. {{ __('التحدي') }}</span>
+                        <h3 class="type-h3 text-lg mb-2 text-ink">{{ __('مشاريع واعدة') }}</h3>
+                        <p class="type-body text-xs text-ink-muted leading-relaxed">
                             {{ __('تحديات تقنية وتصميمية مثرية في بناء منتجات لشركات ناشئة ومؤسسات رائدة.') }}
                         </p>
                     </div>
-                    <div class="surface-card p-6 rounded-2xl border border-[color:var(--color-line)] group hover:border-[color:var(--color-accent-ring)] transition-all">
-                        <span class="font-mono text-xs text-[color:var(--color-accent)] font-semibold mb-3 block">03. {{ __('النمو') }}</span>
-                        <h3 class="type-h3 text-lg mb-2 text-[color:var(--color-ink)]">{{ __('تطوير متواصل') }}</h3>
-                        <p class="type-body text-xs text-[color:var(--color-ink-muted)] leading-relaxed">
+                    <div class="surface-card p-6 rounded-2xl border border-line group hover:border-accent-ring transition-all">
+                        <span class="font-mono text-xs text-accent font-semibold mb-3 block">03. {{ __('النمو') }}</span>
+                        <h3 class="type-h3 text-lg mb-2 text-ink">{{ __('تطوير متواصل') }}</h3>
+                        <p class="type-body text-xs text-ink-muted leading-relaxed">
                             {{ __('مساحة كاملة للابتكار والتجربة واستخدام أحدث التقنيات وأدوات الذكاء الاصطناعي.') }}
                         </p>
                     </div>
@@ -55,22 +55,22 @@
                 {{-- Application Form --}}
                 <div data-reveal data-reveal-stagger="150">
                     @if(session('success'))
-                        <div class="surface-card p-8 mb-10 rounded-3xl border border-[color:var(--color-accent)] bg-[color:var(--color-accent-soft)] text-center">
-                            <div class="w-12 h-12 rounded-full bg-[color:var(--color-accent)] text-black flex items-center justify-center mx-auto mb-4 font-bold text-lg">
+                        <div class="surface-card p-8 mb-10 rounded-3xl border border-accent bg-accent-soft text-center">
+                            <div class="w-12 h-12 rounded-full bg-accent text-black flex items-center justify-center mx-auto mb-4 font-bold text-lg">
                                 ✓
                             </div>
-                            <h3 class="type-h3 mb-2 text-[color:var(--color-ink)]">{{ __('تم استلام طلبك بنجاح!') }}</h3>
-                            <p class="type-body text-[color:var(--color-ink-muted)]">{{ session('success') }}</p>
+                            <h3 class="type-h3 mb-2 text-ink">{{ __('تم استلام طلبك بنجاح!') }}</h3>
+                            <p class="type-body text-ink-muted">{{ session('success') }}</p>
                         </div>
                     @endif
 
                     <form action="{{ route('careers.store') }}" method="POST" enctype="multipart/form-data"
-                          class="surface-card p-8 md:p-14 rounded-3xl border border-[color:var(--color-line-strong)] space-y-8 shadow-2xl">
+                          class="surface-card p-8 md:p-14 rounded-3xl border border-line-strong space-y-8 shadow-2xl">
                         @csrf
 
                         <div>
                             <h2 class="type-h2 mb-2 leading-snug">{{ __('قدّم طلب الانضمام') }}</h2>
-                            <p class="type-small text-[color:var(--color-ink-muted)] mb-8">{{ __('شاركنا سيرتك الذاتية وخبرتك وسنتواصل معك فور توفر فرصة مناسبة.') }}</p>
+                            <p class="type-small text-ink-muted mb-8">{{ __('شاركنا سيرتك الذاتية وخبرتك وسنتواصل معك فور توفر فرصة مناسبة.') }}</p>
                         </div>
 
                         <div class="grid md:grid-cols-2 gap-6">
@@ -107,20 +107,20 @@
 
                         <div>
                             <label class="form-label font-medium text-xs font-mono uppercase tracking-wider">{{ __('السيرة الذاتية (CV / Resume) *') }}</label>
-                            <div class="surface-card--raised p-6 rounded-2xl border border-dashed border-[color:var(--color-line-bold)] text-center hover:border-[color:var(--color-accent)] transition-colors">
+                            <div class="surface-card--raised p-6 rounded-2xl border border-dashed border-line-bold text-center hover:border-accent transition-colors">
                                 <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" class="hidden @error('cv') border-red-500 @enderror" required>
                                 <label for="cv" class="cursor-pointer flex flex-col items-center justify-center gap-2">
-                                    <div class="w-10 h-10 rounded-full bg-[color:var(--color-surface)] flex items-center justify-center text-[color:var(--color-accent)] font-mono text-lg">
+                                    <div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-accent font-mono text-lg">
                                         ↑
                                     </div>
-                                    <span class="type-small font-medium text-[color:var(--color-ink)]">{{ __('اضغط هنا لاختيار ملف السيرة الذاتية') }}</span>
-                                    <span class="type-small text-[color:var(--color-ink-subtle)] text-xs">{{ __('الصيغ المقبولة: PDF, DOC, DOCX (الحد الأقصى: 20 ميجابايت)') }}</span>
+                                    <span class="type-small font-medium text-ink">{{ __('اضغط هنا لاختيار ملف السيرة الذاتية') }}</span>
+                                    <span class="type-small text-ink-subtle text-xs">{{ __('الصيغ المقبولة: PDF, DOC, DOCX (الحد الأقصى: 20 ميجابايت)') }}</span>
                                 </label>
                             </div>
                             @error('cv')<p class="form-help text-red-400 mt-2">{{ $message }}</p>@enderror
                         </div>
 
-                        <div class="pt-4 border-t border-[color:var(--color-line)]">
+                        <div class="pt-4 border-t border-line">
                             <button type="submit" class="btn btn--primary w-full justify-center py-4 text-sm font-medium">
                                 <span>{{ __('إرسال طلب الانضمام') }}</span>
                                 <svg class="btn-arrow" width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">

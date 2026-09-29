@@ -187,7 +187,7 @@
     @endif
 </head>
 <body>
-    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:right-4 focus:z-[200] focus:btn focus:btn--primary">تخطي إلى المحتوى</a>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:right-4 focus:z-200 focus:btn focus:btn--primary">تخطي إلى المحتوى</a>
 
     <x-navbar :companySettings="$companySettings" />
 

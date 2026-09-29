@@ -3,7 +3,6 @@
 namespace App\Filament\Widgets\Analytics;
 
 use Filament\Widgets\ChartWidget;
-use Illuminate\Support\Facades\Cache;
 use Spatie\Analytics\Period;
 
 class TrafficSourcesChart extends ChartWidget

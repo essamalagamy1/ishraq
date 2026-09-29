@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class ArticleSeoSeeder extends Seeder
 {
