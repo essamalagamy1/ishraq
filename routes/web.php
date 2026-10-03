@@ -45,7 +45,7 @@ Route::get('/robots.txt', function () {
     $content .= "Disallow: /admin\n";
     $content .= "Disallow: /api\n\n";
     $content .= 'Sitemap: '.route('sitemap.index')."\n";
-    $content .= "Agentmap: https://ishraq.tech/.well-known/ai-catalog.json\n";
+    $content .= "# AI Agent Catalog: https://ishraq.tech/.well-known/ai-catalog.json\n";
 
     return response($content)->header('Content-Type', 'text/plain');
 })->name('robots');
