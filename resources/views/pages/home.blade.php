@@ -192,7 +192,7 @@
                                      class="work-bento__img"
                                      width="800" height="600"
                                      decoding="async"
-                                     loading="eager" />
+                                     loading="lazy" />
                             @else
                                 <div class="work-bento__fallback">
                                     <span>{{ $firstProject->title }}</span>
@@ -457,7 +457,10 @@
                             @if($t->avatar_url)
                                 <img src="{{ $t->avatar_url }}"
                                      alt="{{ $t->client_name }}"
-                                     class="testimonial-ed__avatar" />
+                                     class="testimonial-ed__avatar"
+                                     width="48" height="48"
+                                     decoding="async"
+                                     loading="lazy" />
                             @endif
                             <div>
                                 <div class="testimonial-ed__name">{{ $t->client_name }}</div>

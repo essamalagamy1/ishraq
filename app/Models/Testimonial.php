@@ -42,6 +42,10 @@ class Testimonial extends Model
         }
 
         if (str_starts_with($this->client_avatar, 'http://') || str_starts_with($this->client_avatar, 'https://')) {
+            // Resize Google avatar URLs to 80px to optimize download size
+            if (str_contains($this->client_avatar, 'googleusercontent.com') && str_contains($this->client_avatar, '=s128')) {
+                return str_replace('=s128', '=s80', $this->client_avatar);
+            }
             return $this->client_avatar;
         }
 
