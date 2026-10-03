@@ -7,13 +7,19 @@ use App\Models\CompanySetting;
 use App\Models\ContactMessage;
 use App\Models\User;
 use App\Notifications\NewContactMessage;
+use App\Services\SpamProtectionService;
 use Filament\Notifications\Notification as FilamentNotification;
 use Illuminate\Support\Facades\Notification;
 
 class ContactController extends Controller
 {
-    public function store(StoreContactMessageRequest $request)
+    public function store(StoreContactMessageRequest $request, SpamProtectionService $spamService)
     {
+        // Anti-bot & spam check: silently discard bot submissions without sending notifications/emails
+        if ($spamService->isSpam($request)) {
+            return redirect()->back()->with('success', 'تم إرسال رسالتك بنجاح');
+        }
+
         $message = ContactMessage::create($request->validated());
 
         // إرسال إشعار Filament لجميع المسؤولين
@@ -37,3 +43,4 @@ class ContactController extends Controller
         return redirect()->back()->with('success', 'تم إرسال رسالتك بنجاح');
     }
 }
+

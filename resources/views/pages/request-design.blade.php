@@ -39,6 +39,7 @@
                 <form action="{{ route('request-design.store') }}" method="POST" enctype="multipart/form-data"
                       class="surface-card p-8 md:p-14 rounded-3xl border border-line-strong space-y-10 shadow-2xl">
                     @csrf
+                    <x-ui.anti-bot />
 
                     {{-- SECTION 1: Personal & Organization Info --}}
                     <div class="space-y-6">

@@ -18,13 +18,13 @@ Route::get('/services', [PageController::class, 'services'])->name('services');
 Route::get('/portfolio', [ProjectController::class, 'index'])->name('portfolio');
 Route::get('/projects/{project:slug}', [ProjectController::class, 'show'])->name('projects.show');
 Route::get('/request-a-design', [DesignRequestController::class, 'create'])->name('request-design.create');
-Route::post('/request-a-design', [DesignRequestController::class, 'store'])->name('request-design.store');
+Route::post('/request-a-design', [DesignRequestController::class, 'store'])->name('request-design.store')->middleware('throttle:5,1');
 Route::get('/contact-us', [PageController::class, 'contact'])->name('contact');
-Route::post('/contact-us', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact-us', [ContactController::class, 'store'])->name('contact.store')->middleware('throttle:5,1');
 Route::get('/privacy-policy', [PageController::class, 'privacy'])->name('privacy');
 Route::get('/terms-conditions', [PageController::class, 'terms'])->name('terms');
 Route::get('/add-testimonial', [TestimonialController::class, 'create'])->name('testimonial.create');
-Route::post('/add-testimonial', [TestimonialController::class, 'store'])->name('testimonial.store');
+Route::post('/add-testimonial', [TestimonialController::class, 'store'])->name('testimonial.store')->middleware('throttle:5,1');
 
 // Articles/Blog Routes
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
@@ -32,7 +32,7 @@ Route::get('/articles/{article:slug}', [ArticleController::class, 'show'])->name
 
 // Careers/Jobs Routes
 Route::get('/careers', [JobApplicationController::class, 'index'])->name('careers');
-Route::post('/careers', [JobApplicationController::class, 'store'])->name('careers.store');
+Route::post('/careers', [JobApplicationController::class, 'store'])->name('careers.store')->middleware('throttle:5,1');
 
 // SEO Routes
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.index');

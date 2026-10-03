@@ -6,6 +6,7 @@ use App\Http\Requests\StoreJobApplicationRequest;
 use App\Models\CompanySetting;
 use App\Models\JobApplication;
 use App\Models\SocialLink;
+use App\Services\SpamProtectionService;
 
 class JobApplicationController extends Controller
 {
@@ -17,8 +18,12 @@ class JobApplicationController extends Controller
         ]);
     }
 
-    public function store(StoreJobApplicationRequest $request)
+    public function store(StoreJobApplicationRequest $request, SpamProtectionService $spamService)
     {
+        if ($spamService->isSpam($request)) {
+            return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح. سنتواصل معك قريباً');
+        }
+
         $cvPath = $request->file('cv')->store('cvs', 'public');
 
         $application = JobApplication::create([
@@ -44,3 +49,4 @@ class JobApplicationController extends Controller
         return redirect()->back()->with('success', 'تم إرسال طلبك بنجاح. سنتواصل معك قريباً');
     }
 }
+

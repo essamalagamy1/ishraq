@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDesignRequest;
 use App\Models\DesignRequest;
 use App\Models\SeoSetting;
+use App\Services\SpamProtectionService;
 
 class DesignRequestController extends Controller
 {
@@ -15,8 +16,12 @@ class DesignRequestController extends Controller
         return view('pages.request-design', compact('seo'));
     }
 
-    public function store(StoreDesignRequest $request)
+    public function store(StoreDesignRequest $request, SpamProtectionService $spamService)
     {
+        if ($spamService->isSpam($request)) {
+            return redirect()->back()->with('success', 'Your request has been submitted successfully!');
+        }
+
         $data = $request->validated();
 
         if ($request->hasFile('attachment')) {
@@ -40,3 +45,4 @@ class DesignRequestController extends Controller
         return redirect()->back()->with('success', 'Your request has been submitted successfully!');
     }
 }
+

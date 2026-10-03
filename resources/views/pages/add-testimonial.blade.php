@@ -309,6 +309,7 @@
                 <form action="{{ route('testimonial.store') }}" method="POST"
                       class="surface-card p-8 md:p-12 rounded-3xl border border-line-strong space-y-8 shadow-2xl relative">
                     @csrf
+                    <x-ui.anti-bot />
 
                     {{-- Rating Widget --}}
                     <div class="p-6 rounded-2xl bg-surface-raised border border-line text-center">

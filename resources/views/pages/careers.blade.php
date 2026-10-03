@@ -67,6 +67,7 @@
                     <form action="{{ route('careers.store') }}" method="POST" enctype="multipart/form-data"
                           class="surface-card p-8 md:p-14 rounded-3xl border border-line-strong space-y-8 shadow-2xl">
                         @csrf
+                        <x-ui.anti-bot />
 
                         <div>
                             <h2 class="type-h2 mb-2 leading-snug">{{ __('قدّم طلب الانضمام') }}</h2>

@@ -151,6 +151,7 @@
                     <form action="{{ route('contact.store') }}" method="POST"
                           class="surface-card p-8 md:p-12 rounded-3xl border border-line-strong shadow-2xl relative">
                         @csrf
+                        <x-ui.anti-bot />
                         <h3 class="type-h2 mb-2 leading-snug">{{ __('أرسل رسالتك') }}</h3>
                         <p class="type-small text-ink-muted mb-8">{{ __('املأ الحقول التالية وسنتواصل معك خلال 24 ساعة.') }}</p>
 

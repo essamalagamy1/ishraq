@@ -36,8 +36,12 @@ class TestimonialController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, \App\Services\SpamProtectionService $spamService)
     {
+        if ($spamService->isSpam($request)) {
+            return redirect()->route('testimonial.create')->with('success', 'شكراً لك! تم إرسال تقييمك بنجاح. سيتم مراجعته ونشره قريباً.');
+        }
+
         $validated = $request->validate([
             'client_name' => 'required|string|max:255',
             'client_position' => 'nullable|string|max:255',
