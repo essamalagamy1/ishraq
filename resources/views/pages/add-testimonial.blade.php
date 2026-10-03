@@ -209,8 +209,8 @@
                         <div>
                             <div class="flex items-start justify-between gap-4 mb-6">
                                 <div class="flex items-center gap-3.5">
-                                    @if($t->client_avatar)
-                                        <img src="{{ Storage::url($t->client_avatar) }}"
+                                    @if($t->avatar_url)
+                                        <img src="{{ $t->avatar_url }}"
                                              alt="{{ $t->client_name }}"
                                              class="w-12 h-12 rounded-full object-cover border border-white/10 shrink-0" />
                                     @else

@@ -454,8 +454,8 @@
                             {{ $t->testimonial }}
                         </blockquote>
                         <figcaption class="testimonial-ed__author">
-                            @if($t->client_avatar)
-                                <img src="{{ Storage::url($t->client_avatar) }}"
+                            @if($t->avatar_url)
+                                <img src="{{ $t->avatar_url }}"
                                      alt="{{ $t->client_name }}"
                                      class="testimonial-ed__avatar" />
                             @endif
