@@ -591,5 +591,8 @@ class AnalyticsService
     public function clearCache(): void
     {
         Cache::flush();
+        if (config('analytics.cache.store')) {
+            Cache::store(config('analytics.cache.store'))->flush();
+        }
     }
 }

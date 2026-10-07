@@ -122,6 +122,9 @@ class AnalyticsPage extends Page
                     try {
                         // Clear analytics cache tags/keys
                         Cache::flush();
+                        if (config('analytics.cache.store')) {
+                            Cache::store(config('analytics.cache.store'))->flush();
+                        }
 
                         // Fetch data
                         app(\App\Services\AnalyticsService::class)->getOverviewStats(Period::days(7));
