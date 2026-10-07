@@ -118,7 +118,13 @@ class AnalyticsService
         try {
             return Cache::remember($cacheKey, $this->cacheMinutes * 60, function () use ($period, $maxResults) {
                 try {
-                    return Analytics::fetchMostVisitedPages($period, $maxResults)->toArray();
+                    $result = Analytics::get(
+                        $period,
+                        ['screenPageViews'],
+                        ['pageTitle', 'pagePath'],
+                        $maxResults
+                    );
+                    return $result->sortByDesc('screenPageViews')->values()->toArray();
                 } catch (\Exception $e) {
                     Log::error('Analytics getMostVisitedPages error', ['message' => $e->getMessage()]);
 
@@ -389,7 +395,12 @@ class AnalyticsService
         try {
             return Cache::remember($cacheKey, 60 * 15, function () use ($period, $maxResults) {
                 try {
-                    $pages = Analytics::fetchMostVisitedPages($period, 100);
+                    $pages = Analytics::get(
+                        $period,
+                        ['screenPageViews'],
+                        ['pageTitle', 'pagePath'],
+                        100
+                    )->sortByDesc('screenPageViews')->values();
                     $allProjects = Project::where('status', 'published')->get();
                     $projectData = [];
 
@@ -397,7 +408,7 @@ class AnalyticsService
                         $views = 0;
 
                         foreach ($pages as $page) {
-                            $url = $page['fullPageUrl'] ?? '';
+                            $url = $page['pagePath'] ?? '';
                             $title = $page['pageTitle'] ?? '';
                             if (str_contains($url, $project->slug) || str_contains($url, '/projects/') || str_contains($title, $project->title)) {
                                 if (str_contains($url, $project->slug) || str_contains($title, $project->title)) {
