@@ -1,7 +1,8 @@
 @php
     $heroTitle = $heroSection?->title_line1 ?? __('نصنع تجارب رقمية');
     $heroTitle2 = $heroSection?->title_line2 ?? __('تترك أثرًا وتعيش طويلاً.');
-    $heroSubtitle = $heroSection?->subtitle ?? __('شريك تصميم وتطوير منتجات رقمية يقود التحول ويصنع أثرًا ملموسًا وقابلًا للقياس.');
+    $heroSubtitle =
+        $heroSection?->subtitle ?? __('شريك تصميم وتطوير منتجات رقمية يقود التحول ويصنع أثرًا ملموسًا وقابلًا للقياس.');
 @endphp
 
 <x-layouts.app>
@@ -16,7 +17,7 @@
 
                 <h1 class="type-display leading-[1.1]" data-reveal>
                     <span class="block">{{ $heroTitle }}</span>
-                    @if($heroTitle2)
+                    @if ($heroTitle2)
                         <span class="block text-gradient mt-2">{{ $heroTitle2 }}</span>
                     @endif
                 </h1>
@@ -40,32 +41,42 @@
                         <x-ui.eyebrow number="02">{{ __('قصتنا') }}</x-ui.eyebrow>
                         <h2 class="type-h1 mt-6">{{ __('نصمم بعين فنان، ونبني بعقل مهندس.') }}</h2>
                         <div class="type-body mt-8 space-y-6 text-lg leading-relaxed text-ink-muted">
-                            <p>{{ __('بدأت إشراق من شغف بالتقنية وتحويل الأفكار إلى منتجات متقنة تعمل بكفاءة استثنائية وتعيش طويلاً.') }}</p>
-                            <p>{{ __('اليوم، نعمل كفريق نخبوي عالي الحرفة، نؤمن بأن الجودة لا تأتي من التسرع، بل من وضوح الرؤية والعمق في فهم احتياج المستخدم والنشاط التجاري.') }}</p>
-                            <p>{{ __('نقيس نجاحنا بما يتحقق لعملائنا من نتائج حقيقية ونمو ملموس، لا بالوعود النظرية.') }}</p>
+                            <p>{{ __('بدأت إشراق من شغف بالتقنية وتحويل الأفكار إلى منتجات متقنة تعمل بكفاءة استثنائية وتعيش طويلاً.') }}
+                            </p>
+                            <p>{{ __('اليوم، نعمل كفريق نخبوي عالي الحرفة، نؤمن بأن الجودة لا تأتي من التسرع، بل من وضوح الرؤية والعمق في فهم احتياج المستخدم والنشاط التجاري.') }}
+                            </p>
+                            <p>{{ __('نقيس نجاحنا بما يتحقق لعملائنا من نتائج حقيقية ونمو ملموس، لا بالوعود النظرية.') }}
+                            </p>
                         </div>
                     </div>
 
                     <div class="mt-10 pt-8 border-t border-line flex items-center gap-8">
                         <div>
-                            <div class="font-mono text-xs uppercase tracking-widest text-ink-subtle">{{ __('المقر') }}</div>
-                            <div class="type-body font-medium mt-1 text-ink">{{ __('المملكة العربية السعودية') }}</div>
+                            <div class="font-mono text-xs uppercase tracking-widest text-ink-subtle">{{ __('المقر') }}
+                            </div>
+                            <div class="type-body font-medium mt-1 text-ink">مصر , دمياط الجديدة</div>
                         </div>
                         <div class="w-px h-8 bg-line"></div>
                         <div>
-                            <div class="font-mono text-xs uppercase tracking-widest text-ink-subtle">{{ __('مجال التركيز') }}</div>
-                            <div class="type-body font-medium mt-1 text-accent">{{ __('المنتجات والحلول الرقمية المتطورة') }}</div>
+                            <div class="font-mono text-xs uppercase tracking-widest text-ink-subtle">
+                                {{ __('مجال التركيز') }}</div>
+                            <div class="type-body font-medium mt-1 text-accent">
+                                {{ __('المنتجات والحلول الرقمية المتطورة') }}</div>
                         </div>
                     </div>
                 </div>
 
                 {{-- Right: Manifesto Highlight Card --}}
                 <div class="lg:col-span-5" data-reveal data-reveal-stagger="150">
-                    <div class="surface-card p-8 lg:p-12 rounded-3xl h-full flex flex-col justify-between relative overflow-hidden border border-line-strong">
-                        <div class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-accent-soft blur-3xl pointer-events-none"></div>
+                    <div
+                        class="surface-card p-8 lg:p-12 rounded-3xl h-full flex flex-col justify-between relative overflow-hidden border border-line-strong">
+                        <div
+                            class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-accent-soft blur-3xl pointer-events-none">
+                        </div>
 
                         <div>
-                            <span class="font-mono text-xs text-accent tracking-widest uppercase mb-4 block">{{ __('منهج العمل') }}</span>
+                            <span
+                                class="font-mono text-xs text-accent tracking-widest uppercase mb-4 block">{{ __('منهج العمل') }}</span>
                             <h3 class="type-h2 mb-6 leading-snug">{{ __('حرفة رقمية متقنة تسبق المعايير.') }}</h3>
                             <p class="type-body text-ink-muted leading-relaxed">
                                 {{ __('نوازن بدقة بين الجماليات البصرية الفاخرة والبنية التقنية المتينة، لنبني حلولًا مهيأة للتوسع والنمو السلس منذ اليوم الأول.') }}
@@ -74,10 +85,12 @@
 
                         <div class="mt-10 pt-6 border-t border-line">
                             <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-full bg-accent-soft flex items-center justify-center text-accent font-mono text-sm font-semibold">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-accent-soft flex items-center justify-center text-accent font-mono text-sm font-semibold">
                                     ✦
                                 </div>
-                                <span class="type-small font-medium text-ink">{{ __('التزام كامل بالجودة العالية والأداء الفائق') }}</span>
+                                <span
+                                    class="type-small font-medium text-ink">{{ __('التزام كامل بالجودة العالية والأداء الفائق') }}</span>
                             </div>
                         </div>
                     </div>
@@ -89,34 +102,33 @@
     {{-- ================================================================
          3. STATS — 3D Counters
          ================================================================ --}}
-    @if($stats && $stats->count())
+    @if ($stats && $stats->count())
         <section class="section-pad" style="background: var(--color-canvas);">
             <div class="container-page">
                 <div class="max-w-3xl mb-16" data-reveal>
                     <x-ui.eyebrow number="03">{{ __('بالأرقام') }}</x-ui.eyebrow>
                     <h2 class="type-h1 mt-6">{{ __('مؤشرات تدل على الأثر.') }}</h2>
-                    <p class="type-body-lg mt-4 text-ink-muted">{{ __('إحصائيات تلخص مسيرتنا وشراكاتنا الناجحة.') }}</p>
+                    <p class="type-body-lg mt-4 text-ink-muted">{{ __('إحصائيات تلخص مسيرتنا وشراكاتنا الناجحة.') }}
+                    </p>
                 </div>
 
                 <div class="stats-grid">
-                    @foreach($stats->take(4) as $idx => $stat)
+                    @foreach ($stats->take(4) as $idx => $stat)
                         @php
                             $raw = (string) ($stat->number ?? '');
                             preg_match('/(\d+(?:\.\d+)?)\s*(\D*)/u', $raw, $m);
                             $value = isset($m[1]) ? (float) $m[1] : 0;
                             $suffix = $m[2] ?? '';
-                            $decimals = (strpos($raw, '.') !== false) ? 1 : 0;
+                            $decimals = strpos($raw, '.') !== false ? 1 : 0;
                         @endphp
                         <div class="stats-grid__item stat-3d" data-reveal data-reveal-stagger="{{ $idx * 100 }}">
-                            <div class="stats-grid__num"
-                                 data-count="{{ $value }}"
-                                 data-count-format="{{ $suffix }}"
-                                 data-count-decimals="{{ $decimals }}"
-                                 dir="ltr">
+                            <div class="stats-grid__num" data-count="{{ $value }}"
+                                data-count-format="{{ $suffix }}" data-count-decimals="{{ $decimals }}"
+                                dir="ltr">
                                 0{{ $suffix }}
                             </div>
                             <div class="stats-grid__label">{{ $stat->label }}</div>
-                            @if($stat->description)
+                            @if ($stat->description)
                                 <p class="stats-grid__desc">{{ $stat->description }}</p>
                             @endif
                         </div>
@@ -143,34 +155,44 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 @php
-                    $valuesList = ($features && $features->count()) ? $features->take(4) : collect([
-                        (object)[
-                            'title' => __('الدقة والحرفة'),
-                            'description' => __('نراجع كل سطر كود وكل بكسل حتى تصل النتيجة إلى المستوى الذي نفتخر به ونرضى عنه.')
-                        ],
-                        (object)[
-                            'title' => __('الشفافية الكاملة'),
-                            'description' => __('نشاركك السياق الكامل والقرارات التقنية أولاً بأول، ونعمل كامتداد مباشر لفريقك.')
-                        ],
-                        (object)[
-                            'title' => __('التحسين المستمر'),
-                            'description' => __('نقيس ونختبر بناءً على بيانات وتجارب حقيقية لضمان نمو المنتج وتعظيم عائده.')
-                        ],
-                        (object)[
-                            'title' => __('الالتزام بالمسار'),
-                            'description' => __('نحترم الجداول الزمنية ونفي بالوعود بدقة وانضباط مهني صارم.')
-                        ],
-                    ]);
+                    $valuesList =
+                        $features && $features->count()
+                            ? $features->take(4)
+                            : collect([
+                                (object) [
+                                    'title' => __('الدقة والحرفة'),
+                                    'description' => __(
+                                        'نراجع كل سطر كود وكل بكسل حتى تصل النتيجة إلى المستوى الذي نفتخر به ونرضى عنه.',
+                                    ),
+                                ],
+                                (object) [
+                                    'title' => __('الشفافية الكاملة'),
+                                    'description' => __(
+                                        'نشاركك السياق الكامل والقرارات التقنية أولاً بأول، ونعمل كامتداد مباشر لفريقك.',
+                                    ),
+                                ],
+                                (object) [
+                                    'title' => __('التحسين المستمر'),
+                                    'description' => __(
+                                        'نقيس ونختبر بناءً على بيانات وتجارب حقيقية لضمان نمو المنتج وتعظيم عائده.',
+                                    ),
+                                ],
+                                (object) [
+                                    'title' => __('الالتزام بالمسار'),
+                                    'description' => __('نحترم الجداول الزمنية ونفي بالوعود بدقة وانضباط مهني صارم.'),
+                                ],
+                            ]);
                 @endphp
 
-                @foreach($valuesList as $idx => $feature)
+                @foreach ($valuesList as $idx => $feature)
                     <div class="surface-card p-8 rounded-2xl flex flex-col justify-between group hover:border-accent-ring transition-all duration-300 relative overflow-hidden"
-                         data-reveal data-reveal-stagger="{{ $idx * 120 }}">
+                        data-reveal data-reveal-stagger="{{ $idx * 120 }}">
                         <div class="flex items-center justify-between mb-8">
                             <span class="font-mono text-xs text-accent font-semibold tracking-wider" dir="ltr">
                                 0{{ $idx + 1 }}
                             </span>
-                            <span class="w-2 h-2 rounded-full bg-line-strong group-hover:bg-accent transition-colors"></span>
+                            <span
+                                class="w-2 h-2 rounded-full bg-line-strong group-hover:bg-accent transition-colors"></span>
                         </div>
                         <div>
                             <h3 class="type-h3 mb-4 text-ink group-hover:text-accent transition-colors">
@@ -200,10 +222,13 @@
                     {{ __('احكِ لنا عن فكرتك أو مشروعك، وسنعود إليك بخطة واضحة ومقترح مدروس خلال يوم عمل واحد.') }}
                 </p>
                 <div class="cta-ed__actions">
-                    <a href="{{ route('request-design.create') }}" class="btn btn--primary" id="about-cta-primary" wire:navigate>
+                    <a href="{{ route('request-design.create') }}" class="btn btn--primary" id="about-cta-primary"
+                        wire:navigate>
                         <span>{{ __('ابدأ مشروعك الآن') }}</span>
-                        <svg class="btn-arrow" width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
-                            <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <svg class="btn-arrow" width="14" height="10" viewBox="0 0 16 10" fill="none"
+                            aria-hidden="true">
+                            <path d="M14.5 5H1M6 .5 1 5l5 4.5" stroke="currentColor" stroke-width="1.4"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </a>
                     <a href="{{ route('contact') }}" class="btn btn--ghost" id="about-cta-secondary" wire:navigate>
@@ -214,4 +239,3 @@
         </div>
     </section>
 </x-layouts.app>
-
